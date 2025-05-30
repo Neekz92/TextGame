@@ -38,46 +38,30 @@ public class Shop {
     public void rollShop() {
 
         displayShop();
-        isShopping = true;
-        for (int i = 0; i < itemArray.length; i++) {
-            while (isShopping) {
+        boolean isShopping = true;
+        while (isShopping) {
+            boolean itemIsAvailable = false;
+            try {
                 int input = scanner.nextInt();
-
-                if (input == 0) {
-                    isShopping = false;                     //
-                    amountOfItems = 0;                     //  Previously, during Player 2's turn, it would keep the items that it added if Player 1
-                    itemArray = new Item[amountOfItems];  //   visited the shop, since that occurs in the Scenario class. I needed to clear the array, so this
-                    addItem(exitShop);                   //    clears the array, and adds the exitShop object back into it.
-                    break;
-                }
-
-
-
-                for (int j = 0; j < itemArray.length; j++) {   //
-                    if (input == itemArray[i].ID) {           //  I need to check if the item that the player inputted is available. If they typed in a bogus number,
-                        isAvailable = true;                  //   tell them they typed an invalid thing.
+                scanner.nextLine();
+                for (int i = 0; i < itemArray.length; i++) {
+                    if (input == itemArray[i].ID) {
+                        itemIsAvailable = true;
+                        if (player.getGold() >= itemArray[i].getPrice()) {
+                            System.out.println("Purchased " + itemArray[i].getName());
+                        }
+                        else {
+                            System.out.println("Not enough gold.");
+                        }
                     }
                 }
-
-
-
-
-                if (isAvailable && input == itemArray[i].ID) {
-                    if (player.getGold() >= itemArray[i].getPrice()) {
-                        player.setGold(player.getGold() - itemArray[i].getPrice());
-                        System.out.println("You purchased " + itemArray[i].getName() + " for " + itemArray[i].getPrice() + " gold");
-                        isShopping = false;
-                    }
-                    else if (isAvailable && player.getGold() < itemArray[i].getPrice()) {
-                        System.out.println("You don't have enough gold.");
-                        scanner.nextLine();
-                        displayShop();
-                    }
+                if (itemIsAvailable == false) {
+                    System.out.println("This item is not available.");
                 }
-
-
-
-
+            }
+            catch (Exception e) {
+                System.out.println("Enter a valid number.");
+                scanner.nextLine();
             }
         }
     }
