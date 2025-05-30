@@ -21,6 +21,8 @@ public class Player {
         positionX = 0;
         positionY = 0;
         location = null;
+
+        gold = 1;
     }
 
     public Player() {
