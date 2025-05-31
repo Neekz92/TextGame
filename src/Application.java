@@ -81,9 +81,10 @@ public class Application {
                 System.out.println("Turn: " + turnCount + "\n" + playerArray[i] + "'s turn \n");
                 playerArray[i].setLocation(map.findLocation(playerArray[i].getX(), playerArray[i].getY()));  //  Stores the location the current player is at inside the current player's file.
                 map.describeLocation(playerArray[i]);  //  Print the description of the location for the current player.
-                Encounter currentEncounter = playerArray[i].getLocation().encounter;  //  Setting the current player's encounter to a variable, so I don't have to keep typing it.
-                currentEncounter.add(playerArray[i]);  //  Add the current player to the encounter at this tile.
-                currentEncounter.scenario.rollScenario();
+                //Encounter currentEncounter = playerArray[i].getLocation().encounter;  //  Setting the current player's encounter to a variable, so I don't have to keep typing it.
+                //currentEncounter.add(playerArray[i]);  //  Add the current player to the encounter at this tile.
+                //currentEncounter.scenario.rollScenario();
+                playerArray[i].movementPhase();
 
 
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

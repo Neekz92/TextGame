@@ -8,8 +8,6 @@ public class Shop {
     ExitShop exitShop;
     Scanner scanner = new Scanner(System.in);
     Player player;
-    boolean isShopping = false;
-    boolean isAvailable;
 
 
     public Shop() {
