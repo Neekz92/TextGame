@@ -8,6 +8,7 @@ public class Player {
     private int positionY;
     private int gold;
     private Location location;
+    private Encounter encounter;
     Scanner scanner = new Scanner(System.in);
 
     int attack;
@@ -163,6 +164,13 @@ public class Player {
 
     public void encounterPhase() {
 
+        boolean encounterPhase = true;
+        System.out.println("*** Encounter Phase ***");
+        location.rollEncounter();
+        System.out.println(location.encounter.description);
+        encounter = location.encounter;
+        encounter.add(this);
+        System.out.println(encounter.playerArray[0].name);
     }
 
 
