@@ -4,7 +4,7 @@ public class CryingChild extends Encounter {
 
         int input;
 
-        this.description = "A crying child approaches you. What do you do?";
+        this.description = "A crying child approaches you. Sobbing, they ask, \"I'm lost. Will you help me find my parents?\" \nWhat do you do?";
         addOptions("[1] Search the crowd for a couple, specifically a couple desperately searching for a missing child.");
         addOptions("[2] Ignore the kid. You've got bigger fish to fry.");
     }
@@ -19,19 +19,20 @@ public class CryingChild extends Encounter {
 
                 if (input == 1) {
                     if (player.rollLuck() > 12) {
-                        System.out.println("Success");
+                        System.out.println("\"AYYO! Anybody lose a KID!?\"");
+                        System.out.println("Success! You find the irresponsible ass parents! You are awarded with 8 gold.");
                         waitingDecision = false;
-                        scanner.nextLine();
+                        player.setGold(player.getGold() + 8);
                     }
                     else {
                         System.out.println("Failure!");
                         waitingDecision = false;
-                        scanner.nextLine();
                     }
                 }
 
                 if (input == 2) {
-                    System.out.println("Fuck off kid, I'm an adventurer not a social worker.");
+                    System.out.println("Fuck off kid. I'm an adventurer, not a social worker.");
+                    waitingDecision = false;
                 }
             } catch (Exception e) {
                 System.out.println("Invalid option.");

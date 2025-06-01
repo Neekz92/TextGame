@@ -26,6 +26,7 @@ public class Encounter {
         }
         playerArrayClone[amountOfParticipants - 1] = player;
         playerArray = playerArrayClone;
+        this.player = player;
     }
 
 
