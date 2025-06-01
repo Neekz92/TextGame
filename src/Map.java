@@ -14,7 +14,7 @@ public class Map {
         vera = new Location(0, 0);
         locationArray[0] = vera;
         vera.add(cryingChild);
-        vera.add(guardsLookingForBandit);
+        //vera.add(guardsLookingForBandit);
 
         veraLimitsNorth = new Location(0,1);
         locationArray[1] = veraLimitsNorth;

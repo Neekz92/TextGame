@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
@@ -10,6 +11,7 @@ public class Player {
     private Location location;
     private Encounter encounter;
     Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
 
     int attack;
     int defense;
@@ -162,15 +164,31 @@ public class Player {
 
 
 
+    public void rollAttack() {
+
+    }
+
+    public int rollLuck() {
+        int rng = random.nextInt(21);
+        System.out.println("You rolled " + rng + " + " + luck);
+        return rng + luck;
+    }
+
+
+
     public void encounterPhase() {
 
         boolean encounterPhase = true;
-        System.out.println("*** Encounter Phase ***");
-        location.rollEncounter();
-        System.out.println(location.encounter.description);
-        encounter = location.encounter;
-        encounter.add(this);
-        System.out.println(encounter.playerArray[0].name);
+        while (encounterPhase) {
+            System.out.println("*** Encounter Phase ***");
+            location.rollEncounter();
+            System.out.println(location.encounter.description);
+            encounter = location.encounter;
+            encounter.add(this);
+            encounter.showOptions();
+            encounter.waitingDecision();
+            encounterPhase = false;
+        }
     }
 
 
