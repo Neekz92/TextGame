@@ -9,6 +9,7 @@ public class CryingChild extends Encounter {
         addOptions("[2] Ignore the kid. You've got bigger fish to fry.");
     }
 
+    @Override
     public void waitingDecision() {
         boolean waitingDecision = true;
         while (waitingDecision) {
@@ -23,16 +24,19 @@ public class CryingChild extends Encounter {
                         System.out.println("Success! You find the irresponsible ass parents! You are awarded with 8 gold.");
                         waitingDecision = false;
                         player.setGold(player.getGold() + 8);
+                        location.hasEncounter = false;
                     }
                     else {
                         System.out.println("Failure!");
                         waitingDecision = false;
+                        location.hasEncounter = false;
                     }
                 }
 
                 if (input == 2) {
                     System.out.println("Fuck off kid. I'm an adventurer, not a social worker.");
                     waitingDecision = false;
+                    location.hasEncounter = false;
                 }
             } catch (Exception e) {
                 System.out.println("Invalid option.");

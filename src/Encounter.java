@@ -6,6 +6,7 @@ public class Encounter {
     int amountOfParticipants = 0;
     Player[] playerArray = new Player[amountOfParticipants];  //  Player objects are referenced in the encounter object. The encounter object is created inside the location object.
     Player player;
+    Location location;
     String description;
     String options;
     int amountOfOptions;
@@ -47,9 +48,20 @@ public class Encounter {
         }
     }
 
+
+    public void showParticipants() {
+        String returnMe = "";
+        for (int i = 0; i < playerArray.length; i++) {
+            returnMe += playerArray[i].getName() + " ";
+        }
+        System.out.println("Entities involved in this encounter: " + returnMe);
+    }
+
+
     public Encounter() {
 
     }
 
     public void waitingDecision() {}
+
 }

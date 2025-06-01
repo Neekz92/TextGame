@@ -90,7 +90,7 @@ public class Application {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 turnCount++;
 
-                if (turnCount == 5) {
+                if (turnCount == 10) {
                     gameOver = true;
                 }
             }

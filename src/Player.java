@@ -181,10 +181,19 @@ public class Player {
         boolean encounterPhase = true;
         while (encounterPhase) {
             System.out.println("*** Encounter Phase ***");
-            location.rollEncounter();
+            if (!location.hasEncounter) {
+
+
+                location.rollEncounter();
+                location.hasEncounter = true;
+            }
             System.out.println(location.encounter.description);
             encounter = location.encounter;
             encounter.add(this);
+
+            //location.debugShowEncounters();
+
+            encounter.showParticipants();
             encounter.showOptions();
             encounter.waitingDecision();
             encounterPhase = false;

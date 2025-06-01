@@ -32,12 +32,14 @@ public class Location {
         }
         possibleEncountersClone[amountOfEncounters - 1] = encounter;
         possibleEncounters = possibleEncountersClone;
+        encounter.location = this;
     }
 
 
     public void rollEncounter() {
 
         int randomEncounter = random.nextInt(0, amountOfEncounters);
+        System.out.println(randomEncounter);
         encounter = possibleEncounters[randomEncounter];
     }
 
@@ -48,5 +50,11 @@ public class Location {
             returnMe += possibleEncounters[i].description;
         }
         return returnMe;
+    }
+
+    public void debugShowEncounters() {
+        for (int i = 0; i < possibleEncounters.length; i++) {
+            System.out.println(possibleEncounters[i]);
+        }
     }
 }

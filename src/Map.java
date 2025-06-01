@@ -4,6 +4,7 @@ public class Map {
     Location veraLimitsNorth;
     Encounter cryingChild = new CryingChild();
     Encounter guardsLookingForBandit = new GuardsLookingForBandit();
+    Encounter veraBanditAmbush = new VeraBanditAmbush();
 
     Location[] locationArray;
     static int size = 0;
@@ -15,6 +16,7 @@ public class Map {
         locationArray[0] = vera;
         vera.add(cryingChild);
         //vera.add(guardsLookingForBandit);
+        vera.add(veraBanditAmbush);
 
         veraLimitsNorth = new Location(0,1);
         locationArray[1] = veraLimitsNorth;
