@@ -15,7 +15,6 @@ public class CryingChild extends Encounter {
         while (waitingDecision) {
             try {
                 int input = scanner.nextInt();
-                System.out.println("Debug: Input = " + input);
                 scanner.nextLine();
 
                 if (input == 1) {
@@ -25,11 +24,13 @@ public class CryingChild extends Encounter {
                         waitingDecision = false;
                         player.setGold(player.getGold() + 8);
                         location.hasEncounter = false;
+
                     }
                     else {
                         System.out.println("Failure!");
                         waitingDecision = false;
                         location.hasEncounter = false;
+
                     }
                 }
 
@@ -37,9 +38,12 @@ public class CryingChild extends Encounter {
                     System.out.println("Fuck off kid. I'm an adventurer, not a social worker.");
                     waitingDecision = false;
                     location.hasEncounter = false;
+                    cityOptions.player = player;
+                    cityOptions.cityOptions();
+
                 }
             } catch (Exception e) {
-                System.out.println("Invalid option.");
+                System.out.println("Invalid option." + e);
                 scanner.nextLine();
             }
         }

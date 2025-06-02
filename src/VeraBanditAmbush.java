@@ -8,6 +8,8 @@ public class VeraBanditAmbush extends Encounter {
                            "\n\"Gimme all 'yer coin. I know you 'ave a purse on you. Give it 'ere, or I'll spill your guts where you stand." +
                            "\nWhat do you do?";
 
+        this.ongoingDescription = "A battle is being fought at this location, you are thrust into combat! ";
+
         addOptions("[1] Draw your weapon, this chump doesn't know who he's messing with.");
         addOptions("[2] Hand over half your gold, you don't have time for this.");
     }
@@ -30,7 +32,10 @@ public class VeraBanditAmbush extends Encounter {
                     player.setGold(player.getGold() - (player.getGold() / 2));
                     System.out.println("You gave half of your gold to the bandit");
                     waitingDecision = false;
+                    player.setEncounter(null);
+                    location.encounter = null;
                     location.hasEncounter = false;
+
                 }
             }
             catch(Exception e) {

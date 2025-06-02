@@ -39,8 +39,9 @@ public class Location {
     public void rollEncounter() {
 
         int randomEncounter = random.nextInt(0, amountOfEncounters);
-        System.out.println(randomEncounter);
+        System.out.println("Debug: From location.rollEncounter() = " + randomEncounter);
         encounter = possibleEncounters[randomEncounter];
+        hasEncounter = true;
     }
 
 

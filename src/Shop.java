@@ -31,6 +31,13 @@ public class Shop {
         itemArray = itemArrayClone;
     }
 
+    public void resetShop() {
+
+        amountOfItems = 0;
+        itemArray = new Item[amountOfItems];
+        addItem(exitShop);
+    }
+
 
 
     public void rollShop() {
@@ -47,6 +54,8 @@ public class Shop {
                         itemIsAvailable = true;
                         if (player.getGold() >= itemArray[i].getPrice()) {
                             System.out.println("Purchased " + itemArray[i].getName());
+                            isShopping = false;
+                            resetShop();
                         }
                         else {
                             System.out.println("Not enough gold.");

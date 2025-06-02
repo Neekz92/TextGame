@@ -8,12 +8,14 @@ public class Encounter {
     Player player;
     Location location;
     String description;
+    String ongoingDescription;
     String options;
     int amountOfOptions;
     String[] optionsArray = new String[amountOfOptions];
     Scanner scanner = new Scanner(System.in);
     Random random;
     int playerInput;
+    CityOptions cityOptions = new CityOptions();
 
 
 
@@ -64,4 +66,21 @@ public class Encounter {
 
     public void waitingDecision() {}
 
+    public String getPlayersInvolved() {
+
+        String returnMe = "";
+
+        for (int i = 0; i < playerArray.length; i++) {
+            returnMe += playerArray[i].getName() + " ";
+        }
+        return returnMe;
+    }
+
+    public void showDescription() {
+        System.out.println(description);
+    }
+
+    public void showOngoingDescription() {
+        System.out.println(ongoingDescription);
+    }
 }

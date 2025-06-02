@@ -12,7 +12,8 @@ public class Player {
     private Encounter encounter;
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
-
+    boolean isAnEnemy = false;
+    boolean hasEncounter = false;
     int attack;
     int defense;
     int luck;
@@ -43,7 +44,6 @@ public class Player {
         location = null;
 
     }
-
 
 
     public String getName() {
@@ -95,10 +95,10 @@ public class Player {
     }
 
 
-
     public void movementPhase() {
 
         boolean movementPhase = true;
+        System.out.println(location.x + ", " + location.y);
         System.out.println("*** Movement Phase ***");
         System.out.println("What do you do?");
         System.out.println("[1] Travel North");
@@ -130,8 +130,7 @@ public class Player {
                     movementPhase = false;
                     System.out.println("Moved South. New map position is: " + getX() + " ," + getY());
                     break;
-                }
-                else if (input == 3 && getY() <= 0) {
+                } else if (input == 3 && getY() <= 0) {
                     System.out.println("You can't go any further south.");
                 }
 
@@ -140,8 +139,7 @@ public class Player {
                     movementPhase = false;
                     System.out.println("Moved West. New map position is: " + getX() + " ," + getY());
                     break;
-                }
-                else if (input == 4 && getX() <= 0) {
+                } else if (input == 4 && getX() <= 0) {
                     System.out.println("You can't go any further West.");
                 }
 
@@ -149,19 +147,15 @@ public class Player {
                     movementPhase = false;
                     System.out.println("I must not yet leave. My business is left unfinished");
                     break;
-                }
-
-                else {
+                } else {
                     System.out.println("Invalid option.");
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Invalid option");
                 scanner.nextLine();
             }
         }
     }
-
 
 
     public void rollAttack() {
@@ -175,29 +169,51 @@ public class Player {
     }
 
 
-
     public void encounterPhase() {
 
         boolean encounterPhase = true;
-        while (encounterPhase) {
-            System.out.println("*** Encounter Phase ***");
-            if (!location.hasEncounter) {
+        while (encounterPhase) {                             //  This is a bit messy, but the while loop is here because if the player
+            System.out.println("*** Encounter Phase ***");   //  enters an invalid option, it needs to repeat and ask the player for input again.
+            System.out.println("Location object: " + location);
+            System.out.println("hasEncounter: " + location.hasEncounter);
 
-
+            if (!location.hasEncounter) {                    //  .rollEncounter() is randomly selecting an encounter to play, and then it sets the Location's encounter.
+                System.out.println("The if blocks is executing.");
                 location.rollEncounter();
-                location.hasEncounter = true;
+                encounter = location.encounter;              //  This stores a reference to the current Encounter for the Player. Without it, the Player would have no idea what Encounter it is.
+                encounter.player = this;                     //  This stores the Player in the Encounter object. Without it, the Encounter doesn't know how to interact with the Player.
+                hasEncounter = true;
+                encounter.add(this);
+                location.encounter.showDescription();        //  Print out the basic description of the rolled Encounter.
+                location.encounter.showOptions();            //  Print out the choices the player has for this Encounter.
+                location.encounter.waitingDecision();      //  Enter the decision loop where the Player decides what action to take during the Encounter.
+                encounterPhase = false;
+            } else if (location.hasEncounter) {
+                System.out.println("Debug: else block is executing.");
+                encounter = location.encounter;
+                encounter.player = this;
+                if (hasEncounter == false) {
+                    encounter.add(this);
+                }
+                location.encounter.showOngoingDescription();
+                location.encounter.showParticipants();
+                location.encounter.showOptions();
+                location.encounter.waitingDecision();
+                encounterPhase = false;
             }
-            System.out.println(location.encounter.description);
-            encounter = location.encounter;
-            encounter.add(this);
-
-            //location.debugShowEncounters();
-
-            encounter.showParticipants();
-            encounter.showOptions();
-            encounter.waitingDecision();
-            encounterPhase = false;
         }
+        encounterPhase = false;                          // When encounterPhase is false, the loop ends.
+    }
+
+
+
+
+    public Encounter getEncounter() {
+        return encounter;
+    }
+
+    public void setEncounter(Encounter encounter) {
+        this.encounter = encounter;
     }
 
 

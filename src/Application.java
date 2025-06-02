@@ -80,9 +80,9 @@ public class Application {
             for (int i = 0; i < playerArray.length; i++) {
                 System.out.println("Turn: " + turnCount + "\n" + playerArray[i] + "'s turn \n");
                 playerArray[i].setLocation(map.findLocation(playerArray[i].getX(), playerArray[i].getY()));  //  Stores the location the current player is at inside the current player's file.
-                map.describeLocation(playerArray[i]);  //  Print the description of the location for the current player.
-
-                playerArray[i].movementPhase();
+                if (!playerArray[i].getLocation().hasEncounter) {
+                    playerArray[i].movementPhase();
+                }
                 playerArray[i].setLocation(map.findLocation(playerArray[i].getX(), playerArray[i].getY()));
                 playerArray[i].encounterPhase();
 
@@ -90,7 +90,7 @@ public class Application {
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 turnCount++;
 
-                if (turnCount == 10) {
+                if (turnCount == 50) {
                     gameOver = true;
                 }
             }

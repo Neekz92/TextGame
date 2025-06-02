@@ -1,4 +1,4 @@
-public class Archer extends Player{
+public class Archer extends Player {
 
     public Archer(String name) {
         super(name);
