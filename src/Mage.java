@@ -6,6 +6,11 @@ public class Mage extends Player {
     }
 
     @Override
+    public void combat() {
+
+        System.out.println(name + " launches a bolt of magic!");
+    }
+    @Override
     public String toString() {
         return super.toString() + " the Mage";
     }

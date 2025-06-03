@@ -3,20 +3,23 @@ import java.util.Scanner;
 
 public class Player {
 
+    Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+    GameEngine gameEngine;
+
     protected String name;
     private int hp;
     private int positionX;
     private int positionY;
     private int gold;
-    private Location location;
-    private Encounter encounter;
-    Scanner scanner = new Scanner(System.in);
-    Random random = new Random();
-    boolean isAnEnemy = false;
-    boolean hasEncounter = false;
+
     int attack;
     int defense;
     int luck;
+
+    private Location location;
+    Encounter encounter;
+
 
     public Player(String name) {
         this.name = name;
@@ -90,12 +93,17 @@ public class Player {
         return location;
     }
 
+    public Encounter getEncounter() {return encounter;}
+
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    public void setEncounter(Encounter encounter) {this.encounter = encounter;}
 
     public void movementPhase() {
+
+
 
         boolean movementPhase = true;
         System.out.println(location.x + ", " + location.y);
@@ -157,65 +165,21 @@ public class Player {
         }
     }
 
-
-    public void rollAttack() {
-
-    }
-
     public int rollLuck() {
         int rng = random.nextInt(21);
         System.out.println("You rolled " + rng + " + " + luck);
         return rng + luck;
     }
 
-
     public void encounterPhase() {
 
-        boolean encounterPhase = true;
-        while (encounterPhase) {                             //  This is a bit messy, but the while loop is here because if the player
-            System.out.println("*** Encounter Phase ***");   //  enters an invalid option, it needs to repeat and ask the player for input again.
-            System.out.println("Location object: " + location);
-            System.out.println("hasEncounter: " + location.hasEncounter);
-
-            if (!location.hasEncounter) {                    //  .rollEncounter() is randomly selecting an encounter to play, and then it sets the Location's encounter.
-                System.out.println("The if blocks is executing.");
-                location.rollEncounter();
-                encounter = location.encounter;              //  This stores a reference to the current Encounter for the Player. Without it, the Player would have no idea what Encounter it is.
-                encounter.player = this;                     //  This stores the Player in the Encounter object. Without it, the Encounter doesn't know how to interact with the Player.
-                hasEncounter = true;
-                encounter.add(this);
-                location.encounter.showDescription();        //  Print out the basic description of the rolled Encounter.
-                location.encounter.showOptions();            //  Print out the choices the player has for this Encounter.
-                location.encounter.waitingDecision();      //  Enter the decision loop where the Player decides what action to take during the Encounter.
-                encounterPhase = false;
-            } else if (location.hasEncounter) {
-                System.out.println("Debug: else block is executing.");
-                encounter = location.encounter;
-                encounter.player = this;
-                if (hasEncounter == false) {
-                    encounter.add(this);
-                }
-                location.encounter.showOngoingDescription();
-                location.encounter.showParticipants();
-                location.encounter.showOptions();
-                location.encounter.waitingDecision();
-                encounterPhase = false;
-            }
-        }
-        encounterPhase = false;                          // When encounterPhase is false, the loop ends.
+        System.out.println("*** Encounter Phase ***");
+        combat();
     }
 
+    public void combat() {
 
-
-
-    public Encounter getEncounter() {
-        return encounter;
     }
-
-    public void setEncounter(Encounter encounter) {
-        this.encounter = encounter;
-    }
-
 
     @Override
     public String toString() {

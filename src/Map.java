@@ -1,25 +1,15 @@
 public class Map {
 
-    Location vera;
-    Location veraLimitsNorth;
-    Encounter cryingChild = new CryingChild();
-    Encounter guardsLookingForBandit = new GuardsLookingForBandit();
-    Encounter veraBanditAmbush = new VeraBanditAmbush();
-
+    GameEngine gameEngine;
+    Location cityOne = new CityOne();
     Location[] locationArray;
-    static int size = 0;
 
-    public Map() {
+    public Map(GameEngine gameEngine) {
         locationArray = new Location[20];
 
-        vera = new Location(0, 0);
-        locationArray[0] = vera;
-        vera.add(cryingChild);
-        //vera.add(guardsLookingForBandit);
-        vera.add(veraBanditAmbush);
-
-        veraLimitsNorth = new Location(0,1);
-        locationArray[1] = veraLimitsNorth;
+        cityOne = new Location(0, 0);
+        cityOne.add(new BanditAttack());
+        locationArray[0] = cityOne;
 
     }
 
@@ -32,13 +22,4 @@ public class Map {
         return null;
     }
 
-    public void describeLocation(Player player) {
-
-        for (int i = 0; i < size; i++) {
-            if (locationArray[i].x == player.getX() && locationArray[i].y == player.getY()) {
-                System.out.println("Map location: " + locationArray[i].x + " , " + locationArray[i].y);
-            }
-
-        }
-    }
 }

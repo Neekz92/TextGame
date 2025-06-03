@@ -6,6 +6,12 @@ public class Warrior extends Player {
     }
 
     @Override
+    public void combat() {
+
+        System.out.println(name + " swings his sword!");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " the Warrior";
     }

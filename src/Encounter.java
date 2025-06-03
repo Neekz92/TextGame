@@ -3,84 +3,27 @@ import java.util.Scanner;
 
 public class Encounter {
 
-    int amountOfParticipants = 0;
-    Player[] playerArray = new Player[amountOfParticipants];  //  Player objects are referenced in the encounter object. The encounter object is created inside the location object.
-    Player player;
-    Location location;
-    String description;
-    String ongoingDescription;
-    String options;
-    int amountOfOptions;
-    String[] optionsArray = new String[amountOfOptions];
-    Scanner scanner = new Scanner(System.in);
+    GameEngine gameEngine;
     Random random;
-    int playerInput;
-    CityOptions cityOptions = new CityOptions();
+    String description;
+    int amountOfPlayers = 0;
+    Player[] playerArray = new Player[amountOfPlayers];
 
+    public Encounter() {
+        random = new Random();
+    }
 
+    public void setup() {}
 
-
-    public void add(Player player) {
-        amountOfParticipants ++;
-        Player[] playerArrayClone = new Player[amountOfParticipants];
-
+    public void addPlayer(Player player) {
+        amountOfPlayers ++;
+        Player[] playerArrayClone = new Player[amountOfPlayers];
         for (int i = 0; i < playerArray.length; i++) {
             playerArrayClone[i] = playerArray[i];
         }
-        playerArrayClone[amountOfParticipants - 1] = player;
+        playerArrayClone[amountOfPlayers - 1] = player;
         playerArray = playerArrayClone;
-        this.player = player;
-    }
-
-
-
-    public void addOptions(String option) {
-        amountOfOptions++;
-        String[] optionsArrayClone = new String[amountOfOptions];
-        for (int i = 0; i < optionsArray.length; i++) {
-            optionsArrayClone[i] = optionsArray[i];
-        }
-        optionsArrayClone[amountOfOptions - 1] = option;
-        optionsArray = optionsArrayClone;
-    }
-
-    public void showOptions() {
-        for (int i = 0; i < amountOfOptions; i++) {
-            System.out.println(optionsArray[i]);
-        }
-    }
-
-
-    public void showParticipants() {
-        String returnMe = "";
-        for (int i = 0; i < playerArray.length; i++) {
-            returnMe += playerArray[i].getName() + " ";
-        }
-        System.out.println("Entities involved in this encounter: " + returnMe);
-    }
-
-
-    public Encounter() {
 
     }
 
-    public void waitingDecision() {}
-
-    public String getPlayersInvolved() {
-
-        String returnMe = "";
-
-        for (int i = 0; i < playerArray.length; i++) {
-            returnMe += playerArray[i].getName() + " ";
-        }
-        return returnMe;
-    }
-
-    public void showDescription() {
-        System.out.println(description);
-    }
-
-    public void showOngoingDescription() {
-        System.out.println(ongoingDescription);
-    }
 }
