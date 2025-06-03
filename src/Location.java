@@ -15,6 +15,8 @@ public class Location {
     public Location(int x, int y) {
 
         random = new Random();
+        this.x = x;
+        this.y = y;
         encounterArray = new Encounter[amountOfEncounters];
 
     }

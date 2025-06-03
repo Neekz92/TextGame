@@ -1,6 +1,6 @@
 public class BanditAttack extends Encounter {
 
-    Player bandit = new Bandit();
+    Enemy bandit;
     public BanditAttack() {
 
     }
@@ -8,10 +8,10 @@ public class BanditAttack extends Encounter {
     @Override
     public void setup() {
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length) + 5;
+        int rng = random.nextInt(0, gameEngine.playerArray.length) + 1;
         System.out.println("You are ambushed by " + (rng) + " bandits!");
         for (int i = 0; i < rng; i++) {
-            gameEngine.addPlayer(bandit);
+            gameEngine.addPlayer(bandit = new Bandit());
         }
     }
 }

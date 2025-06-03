@@ -8,6 +8,14 @@ public class Enemy extends Player {
 
     }
 
+    @Override
+    public void encounterPhase() {
+    }
+
+    @Override
+    public void movementPhase() {
+    }
+
     public Player[] findEnemies() {
 
         int amountOfEnemies = 0;

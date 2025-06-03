@@ -122,21 +122,21 @@ public class Player {
                 if (input == 1) {
                     setY(getY() + 1);
                     movementPhase = false;
-                    System.out.println("Moved North. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved North. New map position is: " + getX() + " ," + getY());
                     break;
                 }
 
                 if (input == 2) {
                     setX(getX() + 1);
                     movementPhase = false;
-                    System.out.println("Moved East. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved East. New map position is: " + getX() + " ," + getY());
                     break;
                 }
 
                 if (input == 3 && getY() > 0) {
                     setY(getY() - 1);
                     movementPhase = false;
-                    System.out.println("Moved South. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved South. New map position is: " + getX() + " ," + getY());
                     break;
                 } else if (input == 3 && getY() <= 0) {
                     System.out.println("You can't go any further south.");
@@ -145,7 +145,7 @@ public class Player {
                 if (input == 4 && getX() > 0) {
                     setX(getX() - 1);
                     movementPhase = false;
-                    System.out.println("Moved West. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved West. New map position is: " + getX() + " ," + getY());
                     break;
                 } else if (input == 4 && getX() <= 0) {
                     System.out.println("You can't go any further West.");

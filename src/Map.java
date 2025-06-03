@@ -1,7 +1,8 @@
 public class Map {
 
     GameEngine gameEngine;
-    Location cityOne = new CityOne();
+    Location cityOne;
+    Location cityOneNorth;
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
@@ -11,6 +12,9 @@ public class Map {
         cityOne.add(new BanditAttack());
         locationArray[0] = cityOne;
 
+        cityOneNorth = new Location(0, 1);
+        cityOneNorth.add(new WolfAttack());
+        locationArray[1] = cityOneNorth;
     }
 
     public Location findLocation(int x, int y) {
