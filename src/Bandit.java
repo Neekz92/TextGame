@@ -1,7 +1,8 @@
 public class Bandit extends Enemy {
 
-    public Bandit() {
+    public Bandit(int x, int y) {
 
+        super(x, y);
         this.name = "Bandit";
         this.attack = 3;
         this.defense = 5;

@@ -145,7 +145,7 @@ public class Player {
                 if (input == 4 && getX() > 0) {
                     setX(getX() - 1);
                     movementPhase = false;
-                    System.out.println(this + " moved West. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved West. New map position is: (" + getX() + ", " + getY() + ")");
                     break;
                 } else if (input == 4 && getX() <= 0) {
                     System.out.println("You can't go any further West.");

@@ -14,6 +14,7 @@ public class Map {
 
         cityOneNorth = new Location(0, 1);
         cityOneNorth.add(new WolfAttack());
+        cityOneNorth.add(new BanditAttack());
         locationArray[1] = cityOneNorth;
     }
 

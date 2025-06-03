@@ -51,7 +51,7 @@ public class GameEngine {
                     System.out.println("You have selected the Warrior class.");
                     player = new Warrior(name);
                     addPlayer(player);
-                    System.out.println("Debug from character creation: " + name);
+                    //System.out.println("Debug from character creation: " + name);
                     break;
 
                 case 2:
@@ -119,11 +119,10 @@ public class GameEngine {
                     player.encounterPhase();
                     System.out.println("*************************************");
                 }
-                else {
+                else {  //  This entire else block is connected to the if block from earlier that checks if the current player is an Enemy. It's responsible for adding Enemy instances to the turn order, and all the junk that comes with it.
 
-                    System.out.println("Debug: name = " + player.getName());
-                    System.out.println("Debug: x, y = " + player.getX() + ", " + player.getY());
                     player.setLocation(map.findLocation(playerArray[i].getX(), playerArray[i].getY()));
+                    player.setEncounter(player.getLocation().encounter);
                     player.encounter = player.getLocation().encounter;
                     player.encounter.addPlayer(player);
                     player.combat();

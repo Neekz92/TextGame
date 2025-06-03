@@ -1,7 +1,9 @@
 public class Enemy extends Player {
 
-    public Enemy() {
+    public Enemy(int x, int y) {
 
+        setX(x);
+        setY(y);
     }
 
     public void combat() {
