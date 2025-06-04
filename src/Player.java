@@ -184,6 +184,26 @@ public class Player {
 
     }
 
+    public void showTargetOptions() {
+
+        boolean targetSelect = true;
+        while (targetSelect) {
+            for (int i = 0; i < encounter.playerArray.length; i++) {
+                System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].getHp() + " HP");
+            }
+            targetSelect = false;
+        }
+    }
+
+    public Player targetSelect() {
+
+        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+        scanner.nextLine();
+
+        return encounter.playerArray[input];
+    }
+
+
     @Override
     public String toString() {
 

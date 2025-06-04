@@ -8,7 +8,10 @@ public class Mage extends Player {
     @Override
     public void combat() {
 
-        System.out.println(name + " launches a bolt of magic!");
+        System.out.println("[ 1 ] Basic Attack");
+        System.out.println("[ 2 ] Cast a Spell");
+        System.out.println("[ 3 ] Inventory");
+        System.out.println("[ 4 ] Run Away");
     }
     @Override
     public String toString() {

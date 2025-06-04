@@ -8,7 +8,36 @@ public class Warrior extends Player {
     @Override
     public void combat() {
 
-        System.out.println(name + " swings his sword!");
+        System.out.println("[ 1 ] Basic Attack");
+        System.out.println("[ 2 ] Taunt");
+        System.out.println("[ 3 ] Inventory");
+        System.out.println("[ 4 ] Run Away");
+
+        int input = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean selectMove = true;
+        while (selectMove) {
+            switch (input) {
+                case 1:
+                    System.out.println("Select a Target");
+                    showTargetOptions();
+                    System.out.println(this + " swings their sword at " + targetSelect());
+                    selectMove = false;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+        }
     }
 
     @Override
