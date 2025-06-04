@@ -86,7 +86,7 @@ public class GameEngine {
         while (roundManager) {
             System.out.println("Round: " + round);
             round++;
-            if (round == 3) {
+            if (round == 10) {
                 roundManager = false;
             }
 
@@ -115,7 +115,7 @@ public class GameEngine {
                     player.getLocation().rollEncounter();  //  Randomly roll an encounter
                     player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
                     player.getLocation().encounter.gameEngine = this; // Set the Encounter's game engine
-                    System.out.println("DEBUG: If this appears twice, chatGPT was right! Count them");
+                    //System.out.println("DEBUG: If this appears twice, chatGPT was right! Count them");
                     player.encounter.setup();
                     if (player.hasEncounter == false) {
                         player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.

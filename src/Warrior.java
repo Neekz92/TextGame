@@ -22,7 +22,7 @@ public class Warrior extends Player {
                 case 1:
                     System.out.println("Select a Target");
                     showTargetOptions();
-                    System.out.println(this + " swings their sword at " + targetSelect());
+                    basicAttack();
                     selectMove = false;
             }
 
@@ -43,5 +43,12 @@ public class Warrior extends Player {
     @Override
     public String toString() {
         return super.toString() + " the Warrior";
+    }
+
+
+
+    @Override
+    public void basicAttackDescription() {
+        System.out.println(this + " swings their sword at " + targetSelect());
     }
 }

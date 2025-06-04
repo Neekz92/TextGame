@@ -13,6 +13,17 @@ public class Wolf extends Enemy {
     public void combat() {
 
         int rng = random.nextInt(0, findEnemies().length);
-        System.out.println("The wolf bites " + findEnemies()[rng] + "!");
+        targetedEnemy = findEnemies()[rng];
+        basicAttack();
+
+
     }
+
+    @Override
+    public void basicAttackDescription() {
+        System.out.println("The wolf tries to bite " + targetedEnemy + "!");
+    }
+
+
+
 }

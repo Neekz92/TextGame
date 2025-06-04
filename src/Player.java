@@ -6,6 +6,7 @@ public class Player {
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     GameEngine gameEngine;
+    Player targetedEnemy;  //  targetSelct() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
 
     protected String name;
     private int hp;
@@ -107,7 +108,7 @@ public class Player {
 
 
         boolean movementPhase = true;
-        System.out.println(location.x + ", " + location.y);
+        System.out.println("(" +location.x + "," + location.y + ")");
         System.out.println("*** Movement Phase ***");
         System.out.println("What do you do?");
         System.out.println("[1] Travel North");
@@ -123,21 +124,21 @@ public class Player {
                 if (input == 1) {
                     setY(getY() + 1);
                     movementPhase = false;
-                    System.out.println(this + " moved North. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved North. New map position is: (" + getX() + "," + getY() + ")");
                     break;
                 }
 
                 if (input == 2) {
                     setX(getX() + 1);
                     movementPhase = false;
-                    System.out.println(this + " moved East. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved East. New map position is: (" + getX() + "," + getY() + ")");
                     break;
                 }
 
                 if (input == 3 && getY() > 0) {
                     setY(getY() - 1);
                     movementPhase = false;
-                    System.out.println(this + " moved South. New map position is: " + getX() + " ," + getY());
+                    System.out.println(this + " moved South. New map position is: (" + getX() + "," + getY() + ")");
                     break;
                 } else if (input == 3 && getY() <= 0) {
                     System.out.println("You can't go any further south.");
@@ -172,6 +173,26 @@ public class Player {
         return rng + luck;
     }
 
+    public boolean rollAttack() {
+
+        int rng = random.nextInt(1,21);
+        if (rng + attack >= 10 + targetedEnemy.defense) {
+            System.out.println("Success! Rolled a " + rng + " + " + attack + " to hit " + targetedEnemy);
+            return true;
+        }
+        else {
+            System.out.println("Failure! Rolled a " + rng + " + " + defense + " to hit " + targetedEnemy);
+            return false;
+        }
+    }
+
+    public void deathCheck() {
+        if (hp <= 0) {
+            System.out.println(this + " has been slain!");
+            System.out.println("TODO: Add a method of removing the dead entity from the encounter");
+        }
+    }
+
     public void encounterPhase() {
 
         System.out.println("*** Encounter Phase ***");
@@ -200,8 +221,30 @@ public class Player {
         int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
         scanner.nextLine();
 
+        targetedEnemy = encounter.playerArray[input];
         return encounter.playerArray[input];
     }
+
+
+
+    public void basicAttack() {
+        //System.out.println("DEBUG: Player.basicAttack() being called");
+        //System.out.println(this + " swings their sword at " + targetSelect());
+        basicAttackDescription();
+        if (rollAttack()) {
+            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
+                damage = 1;
+            }
+            targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+            System.out.println(targetedEnemy + " took " + damage + " damage!");
+            targetedEnemy.deathCheck();
+        }
+    }
+
+
+
+    public void basicAttackDescription() {}
 
 
     @Override
