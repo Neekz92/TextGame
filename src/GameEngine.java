@@ -24,6 +24,7 @@ public class GameEngine {
         map.gameEngine = this;
 
     }
+
     public void addPlayer(Player player) {
 
         amountOfCharacters++;
@@ -34,6 +35,7 @@ public class GameEngine {
         playerArrayClone[amountOfCharacters - 1] = player;
         playerArray = playerArrayClone;
     }
+
     public void characterCreation() {
 
         System.out.println("How many players?");
@@ -76,6 +78,7 @@ public class GameEngine {
             System.out.println(playerArray[i]);
         }
     }
+
     public void turnOrder() {
 
         boolean roundManager = true;
@@ -92,42 +95,36 @@ public class GameEngine {
                 player = playerArray[i];     //  Set 'player' to the current player
                 player.gameEngine = this;   //  Set current player's GameEngine.
 
-                if (!(playerArray[i] instanceof Enemy)) {  // *** Encounters add Enemies to the turn order, but I don't want them having a movement or encounter phase, so it checks if they're enemies first
-                    player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
-                    player.getLocation().gameEngine = this;  // Set the location's game engine
+                player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
+                player.getLocation().gameEngine = this;  // Set the location's game engine
 
-                    if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
-                        //System.out.println("DEBUG: GAME ENGINE ~ player.getLocation().encounter is NULL");
-                        player.movementPhase();  //  Allow the player to move
-                        player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location after moving
-                        player.getLocation().gameEngine = this;  // Set the location's game engine after moving
-                    }
+                if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
+                    player.movementPhase();  //  Allow the player to move
+                    player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location after moving
+                    player.getLocation().gameEngine = this;  // Set the location's game engine after moving
+                }
 
-                    if (player.getLocation().encounter != null) {  //  If the location the player gets to has an encounter,
-                        //System.out.println("DEBUG: GAME ENGINE ~ player.getLocation.encounter is NOT null");
-                        player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is
+                if (player.getLocation().encounter != null) {  //  If the location the player gets to has an encounter,
+                    player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is
+                    if (player.hasEncounter == false) {
                         player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array.
-                    } else {  //  If the location has no encounter
-                        //System.out.println("DEBUG: GameEngine ~ The location has no encounter.");
-                        player.getLocation().rollEncounter();  //  Randomly roll an encounter
-                        player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
-                        player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
-                        player.getLocation().encounter.gameEngine = this; // Set the Encounter's game engine
-                        player.encounter.setup();
+                        player.hasEncounter = true;
                     }
-
-                    player.encounterPhase();
-                    System.out.println("*************************************");
                 }
-                else {  //  This entire else block is connected to the if block from earlier that checks if the current player is an Enemy. It's responsible for adding Enemy instances to the turn order, and all the junk that comes with it.
-
-                    player.setLocation(map.findLocation(playerArray[i].getX(), playerArray[i].getY()));
-                    player.setEncounter(player.getLocation().encounter);
-                    player.encounter = player.getLocation().encounter;
-                    player.encounter.addPlayer(player);
-                    player.combat();
-                    System.out.println("*************************************");
+                else {  //  If the location has no encounter
+                    player.getLocation().rollEncounter();  //  Randomly roll an encounter
+                    player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
+                    player.getLocation().encounter.gameEngine = this; // Set the Encounter's game engine
+                    System.out.println("DEBUG: If this appears twice, chatGPT was right! Count them");
+                    player.encounter.setup();
+                    if (player.hasEncounter == false) {
+                        player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
+                        player.hasEncounter = true;
+                    }
                 }
+                player.encounterPhase();
+                player.combat();
+                System.out.println("*************************************");
             }
         }
     }

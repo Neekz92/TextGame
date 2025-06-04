@@ -13,7 +13,16 @@ public class Encounter {
         random = new Random();
     }
 
-    public void setup() {}
+    public void displayParticipants() {
+
+        for (int i = 0; i < playerArray.length; i++) {
+            System.out.println(playerArray[i].getName() + " === " + playerArray[i].getHp() + " HP");
+        }
+    }
+
+    public void setup() {
+
+    }
 
     public void addPlayer(Player player) {
         amountOfPlayers ++;
