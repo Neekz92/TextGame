@@ -2,9 +2,13 @@ public class Map {
 
     GameEngine gameEngine;
 
+
     Location cityOne;
     Location southWestPlains;
     Location westernPlains;
+
+    Location bloodFlowerMeadows;
+    Location kingsRiver;
 
     Location[] locationArray;
 
@@ -27,6 +31,21 @@ public class Map {
         westernPlains.add(new BanditAttack());
         westernPlains.name = "Western Plains";
         locationArray[2] = westernPlains;
+
+
+        bloodFlowerMeadows = new Location(1, 0);
+        bloodFlowerMeadows.add(new WolfAttack());
+        bloodFlowerMeadows.add(new BanditAttack());
+        bloodFlowerMeadows.name = "Bloodflower Meadows";
+        locationArray[3] = bloodFlowerMeadows;
+
+        kingsRiver = new Location(2,0);
+        kingsRiver.add(new WolfAttack());
+        kingsRiver.add(new BanditAttack());
+        kingsRiver.name = "King's River";
+        locationArray[4] = kingsRiver;
+
+
 
 
 
