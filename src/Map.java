@@ -1,8 +1,11 @@
 public class Map {
 
     GameEngine gameEngine;
+
     Location cityOne;
-    Location cityOneNorth;
+    Location southWestPlains;
+    Location westernPlains;
+
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
@@ -13,11 +16,21 @@ public class Map {
         cityOne.name = "City One";
         locationArray[0] = cityOne;
 
-        cityOneNorth = new Location(0, 1);
-        cityOneNorth.add(new WolfAttack());
-        cityOneNorth.add(new BanditAttack());
-        cityOneNorth.name = "City One North";
-        locationArray[1] = cityOneNorth;
+        southWestPlains = new Location(0, 1);
+        southWestPlains.add(new WolfAttack());
+        southWestPlains.add(new BanditAttack());
+        southWestPlains.name = "South-West Plains";
+        locationArray[1] = southWestPlains;
+
+        westernPlains = new Location(0, 2);
+        westernPlains.add(new WolfAttack());
+        westernPlains.add(new BanditAttack());
+        westernPlains.name = "Western Plains";
+        locationArray[2] = westernPlains;
+
+
+
+
     }
 
     public Location findLocation(int x, int y) {

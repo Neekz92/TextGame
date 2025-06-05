@@ -11,7 +11,7 @@ public class BanditAttack extends Encounter {
         addItem(potion);  //  Adding a potion to this encounter's loot pool
 
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length) + 3;
+        int rng = random.nextInt(0, gameEngine.playerArray.length) + 1;
         System.out.println("You are ambushed by " + (rng) + " bandits at " + gameEngine.player.getLocation() + "!");
 
         int nameCounter = 1;  //  This will increase each time a mob gets added, to help label them.
