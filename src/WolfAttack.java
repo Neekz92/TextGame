@@ -14,11 +14,15 @@ public class WolfAttack extends Encounter {
 
         for (int i = 0; i < rng; i++) {
             Enemy wolf;
-            gameEngine.addPlayer(wolf = new Wolf(gameEngine.player.getX(), gameEngine.player.getY()));
+            System.out.println("DEBUG: WolfAttack.java: gameEngine.player refers to: " + gameEngine.player + " at location: " + gameEngine.player.getLocation());
+            gameEngine.addPlayer(wolf = new Wolf(gameEngine.player.getX(), gameEngine.player.getY(), gameEngine));
             wolf.setName("Wolf # " + nameCounter);
             nameCounter ++;
             addPlayer(wolf);
+            wolf.encounter = this;
             wolf.hasEncounter = true;
+            wolf.gameEngine = gameEngine;
+            wolf.setLocation(playerArray[0].getLocation());
         }
     }
 }

@@ -15,11 +15,15 @@ public class BanditAttack extends Encounter {
         for (int i = 0; i < rng; i++) {
 
             Enemy bandit;
-            gameEngine.addPlayer(bandit = new Bandit(gameEngine.player.getX(), gameEngine.player.getY()));
+            System.out.println("DEBUG: BanditAttack.java: gameEngine.player refers to: " + gameEngine.player + " at location: " + gameEngine.player.getLocation());
+            gameEngine.addPlayer(bandit = new Bandit(gameEngine));
             bandit.setName("Bandit #" + nameCounter);  //  Correctly labels each enemy spawned for the encounter.
             nameCounter++;
             addPlayer(bandit);
+            bandit.encounter = this;
             bandit.hasEncounter = true;
+            bandit.gameEngine = gameEngine;
+            bandit.setLocation(playerArray[0].getLocation());
         }
     }
 }

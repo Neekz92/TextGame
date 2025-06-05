@@ -10,11 +10,13 @@ public class Map {
 
         cityOne = new Location(0, 0);
         cityOne.add(new BanditAttack());
+        cityOne.name = "City One";
         locationArray[0] = cityOne;
 
         cityOneNorth = new Location(0, 1);
         cityOneNorth.add(new WolfAttack());
         cityOneNorth.add(new BanditAttack());
+        cityOneNorth.name = "City One North";
         locationArray[1] = cityOneNorth;
     }
 

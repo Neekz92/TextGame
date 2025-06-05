@@ -7,6 +7,7 @@ public class Player {
     Random random = new Random();
     GameEngine gameEngine;
     Player targetedEnemy;  //  targetSelct() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
+    boolean isAlive = true;
 
     protected String name;
     private int hp;
@@ -23,30 +24,34 @@ public class Player {
     boolean hasEncounter = false;
 
 
-    public Player(String name) {
+    public Player(String name, GameEngine gameEngine) {
         this.name = name;
 
+        this.gameEngine = gameEngine;
+
+        isAlive = true;
         attack = 5;
         defense = 5;
         luck = 10;
 
         positionX = 0;
         positionY = 0;
-        location = null;
+        location = gameEngine.map.findLocation(getX(), getY());
 
         gold = 1;
     }
 
-    public Player() {
-        this("No name");
+    public Player(GameEngine gameEngine) {
+        this("No name", gameEngine);
 
         attack = 5;
         defense = 5;
         luck = 10;
 
-        positionX = 0;
-        positionY = 0;
-        location = null;
+        location = gameEngine.map.findLocation(getX(), getY());
+
+        positionX = location.x;
+        positionY = location.y;
 
     }
 
@@ -188,8 +193,17 @@ public class Player {
 
     public void deathCheck() {
         if (hp <= 0) {
+            isAlive = false;
             System.out.println(this + " has been slain!");
-            System.out.println("TODO: Add a method of removing the dead entity from the encounter");
+            encounter.removePlayer(this);
+            gameEngine.removePlayer(this);
+            encounter.amountOfPlayers = 0;
+            //encounter.playerArray = new Player[encounter.amountOfPlayers];
+            setX(-1);
+            setY(-1);
+            System.out.println("DEBUG: Player.deathCheck: " + this + " " + location);
+            //location.endEncounter();
+            //location.encounter = null;
         }
     }
 
@@ -202,7 +216,7 @@ public class Player {
     }
 
     public void combat() {
-
+        System.out.println("DEBUG Player.java.combat()");
     }
 
     public void showTargetOptions() {
@@ -225,11 +239,8 @@ public class Player {
         return encounter.playerArray[input];
     }
 
-
-
     public void basicAttack() {
-        //System.out.println("DEBUG: Player.basicAttack() being called");
-        //System.out.println(this + " swings their sword at " + targetSelect());
+
         basicAttackDescription();
         if (rollAttack()) {
             int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
@@ -242,10 +253,7 @@ public class Player {
         }
     }
 
-
-
     public void basicAttackDescription() {}
-
 
     @Override
     public String toString() {

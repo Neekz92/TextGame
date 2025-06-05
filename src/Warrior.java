@@ -1,7 +1,7 @@
 public class Warrior extends Player {
 
-    public Warrior(String name) {
-        super(name);
+    public Warrior(String name, GameEngine gameEngine) {
+        super(name, gameEngine);
         setHp(15);
     }
 
@@ -25,18 +25,6 @@ public class Warrior extends Player {
                     basicAttack();
                     selectMove = false;
             }
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 
