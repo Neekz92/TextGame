@@ -176,15 +176,13 @@ public class Player {
         if (hp <= 0) {
             isAlive = false;
             System.out.println(this + " has been slain!");
+            //System.out.println("DEBUG Player.deathCheck(): Removing " + this + " from Encounter");
             encounter.removePlayer(this);
+            //System.out.println("DEBUG Player.deathCheck(): Removing " + this + " from gameEngine");
             gameEngine.removePlayer(this);
-            //encounter.amountOfPlayers = 0;
-            //encounter.playerArray = new Player[encounter.amountOfPlayers];
-            setX(-1);
-            setY(-1);
-            //System.out.println("DEBUG: Player.deathCheck: " + this + " " + location);
+            //System.out.println("DEBUG: BEFORE: " + gameEngine.toString());
             location.endEncounter();
-            //location.encounter = null;
+            //System.out.println("DEBUG: AFTER: " + gameEngine.toString());
         }
     }
 

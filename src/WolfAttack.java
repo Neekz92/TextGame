@@ -15,13 +15,13 @@ public class WolfAttack extends Encounter {
         for (int i = 0; i < rng; i++) {
             Enemy wolf;
             gameEngine.addPlayer(wolf = new Wolf(gameEngine));
-            wolf.setName("Wolf # " + nameCounter);
+            wolf.setName("Wolf # " + nameCounter + " (" + gameEngine.player.getLocation() + ")");
             nameCounter ++;
             addPlayer(wolf);
             wolf.encounter = this;
             wolf.hasEncounter = true;
             wolf.setLocation(gameEngine.player.getLocation());
-            wolf.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesnt mean i assign X,Y coordinates!
+            wolf.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
             wolf.setY(gameEngine.player.getY());
         }
     }

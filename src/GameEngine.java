@@ -60,6 +60,18 @@ public class GameEngine {
         playerArray = playerArrayClone;
     }
 
+
+    @Override
+    public String toString() {
+        String returnMe = "";
+        for (int i = 0; i < playerArray.length; i++) {
+            returnMe += playerArray[i].getName() + " ";
+        }
+        return returnMe;
+    }
+
+
+
     public void characterCreation() {
 
         System.out.println("How many players?");
@@ -114,7 +126,6 @@ public class GameEngine {
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
-                if (player.isAlive) {
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
                     player = playerArray[i];     //  Set 'player' to the current player
                     player.gameEngine = this;   //  Set current player's GameEngine.
@@ -136,22 +147,24 @@ public class GameEngine {
                             player.hasEncounter = true;
                         }
                     } else {  //  If the location has no encounter
-                        //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());
-                        player.getLocation().rollEncounter();  //  Randomly roll an encounter
-                        player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
-                        player.encounter.gameEngine = this; // Set the Encounter's game engine
-                        //System.out.println("DEBUG: If this appears twice, chatGPT was right! Count them");
-                        player.encounter.setup();
-                        if (player.hasEncounter == false) {
-                            player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
-                            player.hasEncounter = true;
+                        if (!(player instanceof Enemy)) {  // Bugs appeared that caused mobs to roll new encounters... I'm thinking this might fix it
+                            //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());
+                            player.getLocation().rollEncounter();  //  Randomly roll an encounter
+                            player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
+                            player.encounter.gameEngine = this; // Set the Encounter's game engine
+                            //System.out.println("DEBUG: If this appears twice, chatGPT was right! Count them");
+                            player.encounter.setup();
+                            if (player.hasEncounter == false) {
+                                player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
+                                player.hasEncounter = true;
+                            }
                         }
                     }
                     //System.out.println("DEBUG GameEngine.java: " + player.getName());
                     player.encounterPhase();
                     player.combat();
                     System.out.println("*************************************");
-                }
+
             }
         }
     }

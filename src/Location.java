@@ -67,12 +67,16 @@ public class Location {
 
          else if (!encounter.areHostilesDead() && encounter.arePlayersDead()) {
             System.out.println("The battle is lost!");
-            for (int i = 0; i < encounter.playerArray.length; i++) {
-                encounter.playerArray[i].gameEngine.removePlayer(encounter.playerArray[i]);
-                encounter.playerArray[i].setEncounter(null);
-                encounter.playerArray[i].hasEncounter = false;
-                encounter.playerArray[i].isAlive = false;
+            for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
+                encounter.playerArray[i].gameEngine.removePlayer(encounter.playerArray[i]);  // Remove all entities from the gameEngine playerArray
+                encounter.playerArray[i].setEncounter(null);  //  Set all entities in encounter playerArray to have encounter = null
+                encounter.playerArray[i].hasEncounter = false;  //  Set all entities in encounter playerArray to have hasEncounter = false
+                encounter.playerArray[i].isAlive = false;   //  Set all entities in encounter playerArray to have isAlive = false, it prevents them from taking turns. might not be needed but who knows?
+
+                //System.out.println("DEBUG Location.endEncounter(): Removing " + encounter.playerArray[i]);
+                encounter.removePlayer(encounter.playerArray[i]);  // Remove all entities from the encounter's playerArray
             }
+            encounter = null;
         }
     }
 }

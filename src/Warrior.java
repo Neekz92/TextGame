@@ -4,7 +4,7 @@ public class Warrior extends Player {
         super(gameEngine, name);
         setHp(15);
         attack = 25;
-        defense = 5;
+        defense = 500;
     }
 
     @Override

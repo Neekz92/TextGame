@@ -7,7 +7,7 @@ public class BanditAttack extends Encounter {
     @Override
     public void setup() {
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length) + 1;
+        int rng = random.nextInt(0, gameEngine.playerArray.length) + 3;
         System.out.println("You are ambushed by " + (rng) + " bandits at " + gameEngine.player.getLocation() + "!");
 
         int nameCounter = 1;  //  This will increase each time a mob gets added, to help label them.
@@ -16,7 +16,7 @@ public class BanditAttack extends Encounter {
 
             Enemy bandit;
             gameEngine.addPlayer(bandit = new Bandit(gameEngine));
-            bandit.setName("Bandit #" + nameCounter);  //  Correctly labels each enemy spawned for the encounter.
+            bandit.setName("Bandit #" + nameCounter + " (" + gameEngine.player.getLocation() + ")");  //  Correctly labels each enemy spawned for the encounter.
             nameCounter++;
 
             addPlayer(bandit);
