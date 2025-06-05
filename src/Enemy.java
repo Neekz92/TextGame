@@ -5,9 +5,6 @@ public class Enemy extends Player {
         super(gameEngine);
     }
 
-    public Enemy() {
-        super();
-    }
 
     public void combat() {
         //System.out.println("DEBUG Enemy.java.combat()");

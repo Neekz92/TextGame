@@ -24,35 +24,15 @@ public class Player {
     boolean hasEncounter = false;
 
 
-    public Player(String name, GameEngine gameEngine) {
-        this.name = name;
-
+    public Player(GameEngine gameEngine, String name) {
         this.gameEngine = gameEngine;
+        this.name = name;
+        this.location = gameEngine.map.findLocation(getX(), getY());
 
-        isAlive = true;
-        attack = 5;
-        defense = 5;
-        luck = 10;
-
-        positionX = 0;
-        positionY = 0;
-        location = gameEngine.map.findLocation(getX(), getY());
-
-        gold = 1;
     }
 
     public Player(GameEngine gameEngine) {
-        this("No name", gameEngine);
-
-        attack = 5;
-        defense = 5;
-        luck = 10;
-
-        location = gameEngine.map.findLocation(getX(), getY());
-
-        positionX = location.x;
-        positionY = location.y;
-
+        this(gameEngine, "Default");
     }
 
 
@@ -181,6 +161,7 @@ public class Player {
     public boolean rollAttack() {
 
         int rng = random.nextInt(1,21);
+
         if (rng + attack >= 10 + targetedEnemy.defense) {
             System.out.println("Success! Rolled a " + rng + " + " + attack + " to hit " + targetedEnemy);
             return true;
@@ -197,12 +178,12 @@ public class Player {
             System.out.println(this + " has been slain!");
             encounter.removePlayer(this);
             gameEngine.removePlayer(this);
-            encounter.amountOfPlayers = 0;
+            //encounter.amountOfPlayers = 0;
             //encounter.playerArray = new Player[encounter.amountOfPlayers];
             setX(-1);
             setY(-1);
-            System.out.println("DEBUG: Player.deathCheck: " + this + " " + location);
-            //location.endEncounter();
+            //System.out.println("DEBUG: Player.deathCheck: " + this + " " + location);
+            location.endEncounter();
             //location.encounter = null;
         }
     }
@@ -243,7 +224,7 @@ public class Player {
 
         basicAttackDescription();
         if (rollAttack()) {
-            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }

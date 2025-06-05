@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Encounter {
 
@@ -46,17 +45,19 @@ public class Encounter {
         }
 
 
-        amountOfPlayers--;
-        Player[] playerArrayClone = new Player[amountOfPlayers];
-        for (int i = index; i < playerArray.length - 1; i++) {
-            playerArrayClone[i] = playerArray[i + 1];
-        }
+        if (amountOfPlayers > 0) {
+            amountOfPlayers--;
+            Player[] playerArrayClone = new Player[amountOfPlayers];
+            for (int i = index; i < playerArray.length - 1; i++) {
+                playerArrayClone[i] = playerArray[i + 1];
+            }
 
-        for (int i = 0; i < index; i++) {
-            playerArrayClone[i] = playerArray[i];
-        }
+            for (int i = 0; i < index; i++) {
+                playerArrayClone[i] = playerArray[i];
+            }
 
-        playerArray = playerArrayClone;
+            playerArray = playerArrayClone;
+        }
     }
 
     public boolean areHostilesDead() {

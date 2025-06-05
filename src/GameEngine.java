@@ -75,20 +75,20 @@ public class GameEngine {
             switch (spec) {
                 case 1:
                     System.out.println("You have selected the Warrior class.");
-                    player = new Warrior(name, this);
+                    player = new Warrior(this, name);
                     addPlayer(player);
                     //System.out.println("Debug from character creation: " + name);
                     break;
 
                 case 2:
                     System.out.println("You have selected the Mage class.");
-                    player = new Mage(name, this);
+                    player = new Mage(this, name);
                     addPlayer(player);
                     break;
 
                 case 3:
                     System.out.println("You have selected the Archer class.");
-                    player = new Archer(name, this);
+                    player = new Archer(this, name);
                     addPlayer(player);
                     break;
 
@@ -119,9 +119,8 @@ public class GameEngine {
                     player = playerArray[i];     //  Set 'player' to the current player
                     player.gameEngine = this;   //  Set current player's GameEngine.
 
-                    //player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
-                    // System.out.println("DEBUG 1: " + player + "'s location has been assigned to " + player.getLocation());
-                    //player.getLocation().gameEngine = this;  // Set the location's game engine
+                    player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
+                    player.getLocation().gameEngine = this;  // Set the location's game engine
 
                     if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
                         player.movementPhase();  //  Allow the player to move
@@ -137,7 +136,7 @@ public class GameEngine {
                             player.hasEncounter = true;
                         }
                     } else {  //  If the location has no encounter
-                        System.out.println("DEBUG: " + player + " is rolling an encounter at " + player.getLocation().name);
+                        //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());
                         player.getLocation().rollEncounter();  //  Randomly roll an encounter
                         player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
                         player.encounter.gameEngine = this; // Set the Encounter's game engine

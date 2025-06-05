@@ -1,8 +1,10 @@
 public class Warrior extends Player {
 
-    public Warrior(String name, GameEngine gameEngine) {
-        super(name, gameEngine);
+    public Warrior(GameEngine gameEngine, String name) {
+        super(gameEngine, name);
         setHp(15);
+        attack = 25;
+        defense = 5;
     }
 
     @Override

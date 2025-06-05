@@ -1,12 +1,11 @@
 public class Bandit extends Enemy {
 
-    public Bandit(int x, int y, GameEngine gameEngine) {
+    public Bandit(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.name = "Bandit";
-        this.attack = 3;
-        this.defense = 1;
-        this.setHp(10);
+        this.attack = 5;
+        this.defense = 5;
+        this.setHp(3);
 
         setGold(5);
     }

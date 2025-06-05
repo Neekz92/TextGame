@@ -1,11 +1,10 @@
 public class Wolf extends Enemy {
 
-    public Wolf(int x, int y, GameEngine gameEngine) {
+    public Wolf(GameEngine gameEngine) {
 
-        super(x, y, gameEngine);
-        this.name = "Wolf";
+        super(gameEngine);
         this.attack = 5;
-        this.defense = 2;
+        this.defense = 5;
         this.setHp(10);
 
     }

@@ -1,8 +1,10 @@
 public class Mage extends Player {
 
-    public Mage(String name, GameEngine gameEngine) {
-        super(name, gameEngine);
+    public Mage(GameEngine gameEngine, String name) {
+        super(gameEngine, name);
         setHp(1);
+        attack = 5;
+        defense = 5;
     }
 
     @Override

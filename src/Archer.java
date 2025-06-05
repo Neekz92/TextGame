@@ -1,8 +1,10 @@
 public class Archer extends Player {
 
-    public Archer(String name, GameEngine gameEngine) {
-        super(name, gameEngine);
+    public Archer(GameEngine gameEngine, String name) {
+        super(gameEngine, name);
         setHp(10);
+        attack = 5;
+        defense = 5;
     }
 
     @Override
