@@ -14,6 +14,7 @@ public class Player {
     private int positionX;
     private int positionY;
     private int gold;
+    private int xp;
 
     int attack;
     int defense;
@@ -74,6 +75,14 @@ public class Player {
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
     public Location getLocation() {

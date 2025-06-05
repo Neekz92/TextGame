@@ -7,6 +7,10 @@ public class BanditAttack extends Encounter {
     @Override
     public void setup() {
 
+        distributedRewards = false;
+        addItem(potion);  //  Adding a potion to this encounter's loot pool
+
+
         int rng = random.nextInt(0, gameEngine.playerArray.length) + 3;
         System.out.println("You are ambushed by " + (rng) + " bandits at " + gameEngine.player.getLocation() + "!");
 
@@ -14,6 +18,7 @@ public class BanditAttack extends Encounter {
 
         for (int i = 0; i < rng; i++) {
 
+            amountOfMobs++;
             Enemy bandit;
             gameEngine.addPlayer(bandit = new Bandit(gameEngine));
             bandit.setName("Bandit #" + nameCounter + " (" + gameEngine.player.getLocation() + ")");  //  Correctly labels each enemy spawned for the encounter.

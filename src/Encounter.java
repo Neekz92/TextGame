@@ -8,6 +8,13 @@ public class Encounter {
     int amountOfPlayers = 0;
     Player[] playerArray = new Player[amountOfPlayers];
 
+    boolean distributedRewards = false;
+    int amountOfItems = 0;
+    Item[] itemArray = new Item[amountOfItems];
+    Item potion = new Potion();
+
+    int amountOfMobs = 0;
+
     public Encounter() {
         random = new Random();
     }
@@ -31,6 +38,16 @@ public class Encounter {
         }
         playerArrayClone[amountOfPlayers - 1] = player;
         playerArray = playerArrayClone;
+    }
+
+    public void addItem(Item item) {
+        amountOfItems++;
+        Item[] itemArrayClone = new Item[amountOfItems];
+        for (int i = 0; i < itemArray.length; i++) {
+            itemArrayClone[i] = itemArray[i];
+        }
+        itemArrayClone[amountOfItems - 1] = item;
+        itemArray = itemArrayClone;
     }
 
 
@@ -105,5 +122,34 @@ public class Encounter {
 
 
 
+    public void distributeRewards() {
 
+        for (int i = 0; i < amountOfPlayers; i++) {
+            int xp = amountOfMobs / amountOfPlayers;
+
+            if (xp <= 0) {
+                xp = 1;
+            }
+            //System.out.println("DEBUG Encounter.java: " + amountOfMobs + " amount of mobs" + " " + amountOfPlayers + " amount of players");
+            System.out.println(playerArray[i] + " recieved " + xp + " XP!");
+            playerArray[i].setXp(playerArray[i].getXp() + xp);
+
+
+
+            int rng = random.nextInt(1,6);  //  There's a 1 in 5 chance the current player will recieve an item drop.
+            if (rng % 5 == 0) {
+
+                int randomDrop;
+                if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it wont work if its 0, 0
+                    randomDrop = random.nextInt(0, amountOfItems); //  Roll a random number from 0 to amountOfItems. that will be the index of the item in the itemArray the player gets.
+                }
+                else {
+                    randomDrop = 0;
+                }
+                System.out.println(playerArray[i] + " looted: " + itemArray[randomDrop]);
+
+            }
+        }
+        amountOfMobs = 0;
+    }
 }

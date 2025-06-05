@@ -33,7 +33,7 @@ public abstract class Item {
     @Override
     public String toString() {
         String returnMe = "";
-        returnMe += name + " = " + price + " gold" + " ***~~~*** Type [ " + ID + " ] to purchase";
+        returnMe += name;
         return returnMe;
     }
 }
