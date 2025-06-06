@@ -49,7 +49,7 @@ public class Archer extends Player {
 
 
 
-            else if (roll > 10) {
+            else if (roll + attack > 10) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
                     int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)

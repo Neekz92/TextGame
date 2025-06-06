@@ -15,6 +15,8 @@ public class Player {
     private int positionY;
     private int gold;
     private int xp;
+    int chosenStat = 0;
+    String chosenStatName = "";
 
     int attack;
     int defense;
@@ -30,6 +32,7 @@ public class Player {
         this.gameEngine = gameEngine;
         this.name = name;
         this.location = gameEngine.map.findLocation(getX(), getY());
+        this.xp = 8;
 
     }
 
@@ -97,19 +100,24 @@ public class Player {
 
     public void setEncounter(Encounter encounter) {this.encounter = encounter;}
 
-    public void movementPhase() {
+    public void movementPhaseOptions() {
 
-
-
-        boolean movementPhase = true;
         System.out.println("(" +location.x + "," + location.y + ")");
         System.out.println("*** Movement Phase ***");
         System.out.println("What do you do?");
-        System.out.println("[1] Travel North");
-        System.out.println("[2] Travel East");
-        System.out.println("[3] Travel South");
-        System.out.println("[4] Travel West");
-        System.out.println("[5] Stay here");
+        System.out.println("[ 1 ] Travel North");
+        System.out.println("[ 2 ] Travel East");
+        System.out.println("[ 3 ] Travel South");
+        System.out.println("[ 4 ] Travel West");
+        System.out.println("[ 5 ] Stay here");
+        System.out.println("[ 6 ] Display Stats");
+        System.out.println("[ 7 ] Spend XP");
+        System.out.println("[ 8 ] Inventory");
+    }
+    public void movementPhase() {
+
+        boolean movementPhase = true;
+        movementPhaseOptions();
 
         while (movementPhase) {
             try {
@@ -151,15 +159,106 @@ public class Player {
                     movementPhase = false;
                     System.out.println("I must not yet leave. My business is left unfinished");
                     break;
-                } else {
+                }
+
+                if (input == 6) {
+                    System.out.println(this);
+                    System.out.println("Attack: " + attack);
+                    System.out.println("Defense: " + defense);
+                    System.out.println("Luck: " + luck);
+                    System.out.println("Current HP: " + hp);
+                    System.out.println("Stamina: SoonTM");
+                    System.out.println("");
+                    movementPhaseOptions();
+                }
+
+                if (input == 7) {
+                    if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
+                        System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
+                        spendXp();
+                    }
+                }
+
+                else {
                     System.out.println("Invalid option.");
                 }
-            } catch (Exception e) {
+
+            }
+            catch (Exception e) {
                 System.out.println("Invalid option");
                 scanner.nextLine();
             }
         }
     }
+
+    public boolean youHaveXpToSpend() {
+
+        if (xp <= 0) {
+            System.out.println("You have no XP to spend.");
+            movementPhaseOptions();
+            return false;
+        }
+        return true;
+    }
+
+    public void spendXp() {
+
+        boolean chooseStat = true;
+        while (chooseStat) {
+            System.out.println("You have " + xp + " XP to spend. Choose a stat to upgrade.");
+            System.out.println("[ 1 ] Attack");
+            System.out.println("[ 2 ] Defense");
+            System.out.println("[ 3 ] Luck");
+            System.out.println("[ 4 ] HP");
+            System.out.println("[ 5 ] Stamina");
+
+            int input = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (input) {  //  If the user selects 1 - the targeted stat that is upgraded gets set. The string gets set to let the user know in the next step.
+                case 1: chosenStat = attack; chosenStatName = "Attack"; chooseStat = false; upgradeStat(); break;
+                case 2: chosenStat = defense; chosenStatName = "Defense"; chooseStat = false; upgradeStat(); break;
+                case 3: chosenStat = luck; chosenStatName = "Luck"; chooseStat = false; upgradeStat(); break;
+                case 4: chosenStat = hp; chosenStatName = "HP"; chooseStat = false; upgradeStat(); break;
+                default: System.out.println("Invalid option.");
+            }
+        }
+    }
+
+
+    public void upgradeStat() {
+
+        boolean inputAmountOfStatPoints = true;
+        while (inputAmountOfStatPoints) {
+            System.out.println(xp + " XP available. How many points would you like to add to " + chosenStatName);
+
+            int input = scanner.nextInt();
+            scanner.nextLine();
+
+            if (input > xp) {
+                System.out.println("You don't have that much XP.");
+            }
+            else {
+                chosenStat += input;
+
+                switch (chosenStatName) {
+                    case "Attack": attack = chosenStat; break;
+                    case "Defense": defense = chosenStat; break;
+                    case "Luck": luck = chosenStat; break;
+                    case "HP": hp = chosenStat; break;
+                }
+                System.out.println("You upgraded your " + chosenStatName + " by " + input + " points! Your " + chosenStatName + " is now " + chosenStat);
+                xp -= input;
+                inputAmountOfStatPoints = false;
+                movementPhaseOptions();
+                break;
+            }
+        }
+    }
+
+
+
+
 
     public int rollLuck() {
         int rng = random.nextInt(21);
@@ -242,7 +341,7 @@ public class Player {
         }
 
 
-        else if (roll > 10) {
+        if (roll + attack > 10) {
             int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;

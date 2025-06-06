@@ -14,6 +14,7 @@ public class Encounter {
     Item potion = new Potion();
 
     int amountOfMobs = 0;
+    int xpBonus = 0;
 
     public Encounter() {
         random = new Random();
@@ -125,7 +126,7 @@ public class Encounter {
     public void distributeRewards() {
 
         for (int i = 0; i < amountOfPlayers; i++) {
-            int xp = amountOfMobs / amountOfPlayers;
+            int xp = (amountOfMobs / amountOfPlayers) + xpBonus;  //  I made this variable to slip into the actual xp formula so I don't have to rewrite the entire formula, I can just add this to the xp and give each mob a different xp bonus!
 
             if (xp <= 0) {
                 xp = 1;
@@ -135,19 +136,20 @@ public class Encounter {
             playerArray[i].setXp(playerArray[i].getXp() + xp);
 
 
+            for (int j = 0; j < (playerArray[i].luck / 12) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
-            int rng = random.nextInt(1,6);  //  There's a 1 in 5 chance the current player will recieve an item drop.
-            if (rng % 5 == 0) {
+                //System.out.println("DEBUG Encounter.distributeRewards() ~ Iteration = " + j + " Luck = " + playerArray[i].luck);
+                int rng = random.nextInt(1, 6);  //  There's a 1 in 5 chance the current player will recieve an item drop.
+                if (rng == 5) {
 
-                int randomDrop;
-                if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it wont work if its 0, 0
-                    randomDrop = random.nextInt(0, amountOfItems); //  Roll a random number from 0 to amountOfItems. that will be the index of the item in the itemArray the player gets.
+                    int randomDrop;
+                    if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it wont work if its 0, 0
+                        randomDrop = random.nextInt(0, amountOfItems); //  Roll a random number from 0 to amountOfItems. that will be the index of the item in the itemArray the player gets.
+                    } else {
+                        randomDrop = 0;
+                    }
+                    System.out.println(playerArray[i] + " looted: " + itemArray[randomDrop]);
                 }
-                else {
-                    randomDrop = 0;
-                }
-                System.out.println(playerArray[i] + " looted: " + itemArray[randomDrop]);
-
             }
         }
         amountOfMobs = 0;
