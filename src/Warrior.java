@@ -3,7 +3,7 @@ public class Warrior extends Player {
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(15);
-        attack = 25;
+        attack = 5;
         defense = 5;
     }
 

@@ -7,6 +7,42 @@ public class Archer extends Player {
         defense = 5;
     }
 
+
+
+    public void criticalShot() {
+
+        System.out.println("Steady your aim.");
+        System.out.println("[ 1 ] Aim high");
+        System.out.println("[ 2 ] Aim center");
+        System.out.println("[ 3 ] Aim low");
+
+        int input = scanner.nextInt();
+        scanner.nextLine();
+
+        boolean selectAim = true;
+        int rng = random.nextInt(1,4);
+
+        while (selectAim) {
+            if (rollAttack()) {
+                if (input == rng) {
+                    System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
+                    int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+                    System.out.println(targetedEnemy + " took " + damage + " damage!");
+                    targetedEnemy.deathCheck();
+                    selectAim = false;
+                    break;
+                }
+                System.out.println("Damn! " + this + " couldn't maintain focus on the critical shot.");
+                int damage = random.nextInt(1, attack) + (attack / 4);
+                targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+                System.out.println(targetedEnemy + " took " + damage + " damage!");
+                targetedEnemy.deathCheck();
+                selectAim = false;
+            }
+        }
+    }
+
     @Override
     public void combat() {
 
@@ -26,6 +62,14 @@ public class Archer extends Player {
                     showTargetOptions();
                     basicAttack();
                     selectMove = false;
+                    break;
+                case 2:
+                    System.out.println("Select a Target");
+                    showTargetOptions();
+                    targetSelect();
+                    criticalShot();
+                    selectMove = false;
+                    break;
             }
         }
     }

@@ -52,7 +52,7 @@ public class Mage extends Player {
 
     public void chainLightning() {
         if (rollAttack()) {
-            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 5000;
+            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);
             if (damage <= 1) {
                 damage = 1;
             }
