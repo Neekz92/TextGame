@@ -11,7 +11,7 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(8);
-        attack = 25;
+        attack = 5;
         defense = 5;
         Spell chainLightning = new ChainLightning();
         addSpell(chainLightning);
@@ -51,11 +51,24 @@ public class Mage extends Player {
 
 
     public void chainLightning() {
-        if (rollAttack()) {
-            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);
+
+        int roll = rollAttack();
+
+        if (roll == 20) {
+            System.out.println("NATURAL 20!");
+            int damage = (random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 4) * 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
+                damage = 1;
+            }
+        }
+
+        else if (roll > 10) {
+            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 4;
             if (damage <= 1) {
                 damage = 1;
             }
+
+
             targetedEnemy.setHp(targetedEnemy.getHp() - damage);
             System.out.println(targetedEnemy + " is struck by Chain Lightning and took " + damage + " damage!");
             targetedEnemy.deathCheck();

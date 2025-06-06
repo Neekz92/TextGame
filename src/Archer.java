@@ -23,7 +23,33 @@ public class Archer extends Player {
         int rng = random.nextInt(1,4);
 
         while (selectAim) {
-            if (rollAttack()) {
+
+            int roll = rollAttack();
+            if (roll == 20) {
+                if (input == rng) {
+                    System.out.println("NATURAL 20");
+                    System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
+                    int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+                    System.out.println(targetedEnemy + " took " + damage + " damage!");
+                    targetedEnemy.deathCheck();
+                    selectAim = false;
+                    return;
+                }
+                System.out.println("Damn! " + this + " couldn't maintain focus on the critical shot.");
+                int damage = random.nextInt(1, attack) + (attack / 4);
+                targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+                System.out.println(targetedEnemy + " took " + damage + " damage!");
+                targetedEnemy.deathCheck();
+                selectAim = false;
+                return;
+            }
+
+
+
+
+
+            else if (roll > 10) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
                     int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
@@ -31,7 +57,7 @@ public class Archer extends Player {
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
                     targetedEnemy.deathCheck();
                     selectAim = false;
-                    break;
+                    return;
                 }
                 System.out.println("Damn! " + this + " couldn't maintain focus on the critical shot.");
                 int damage = random.nextInt(1, attack) + (attack / 4);

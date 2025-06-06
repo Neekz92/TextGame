@@ -59,7 +59,7 @@ public class Warrior extends Player {
         shieldBashTarget1 = targetSelect();
         if (encounter.countAmountOfEnemies() <= 1) {  //  Only need 1 target if there is only 1 enemy present
             System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
-            if (rollAttack()) {
+            if (rollAttack() > 10) {
                 shieldBashTarget1.isStunned = true;
             }
         }
@@ -73,10 +73,10 @@ public class Warrior extends Player {
                     System.out.println("Must choose a different target.");
                 } else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
-                    if (rollAttack()) {
+                    if (rollAttack() > 10) {
                         shieldBashTarget1.isStunned = true;
                     }
-                    if (rollAttack()) {
+                    if (rollAttack() > 10) {
                         shieldBashTarget2.isStunned = true;
                     }
                     mustChooseADifferentTarget = false;

@@ -5,7 +5,7 @@ public class Bandit extends Enemy {
         super(gameEngine);
         this.attack = 5;
         this.defense = 5;
-        this.setHp(3);
+        this.setHp(8);
 
         setGold(5);
     }
