@@ -11,6 +11,7 @@ public class Player {
 
     protected String name;
     private int hp;
+    int currentHp;
     private int positionX;
     private int positionY;
     private int gold;
@@ -166,7 +167,8 @@ public class Player {
                     System.out.println("Attack: " + attack);
                     System.out.println("Defense: " + defense);
                     System.out.println("Luck: " + luck);
-                    System.out.println("Current HP: " + hp);
+                    System.out.println("Max HP: " + hp);
+                    System.out.println("Current HP: " + currentHp);
                     System.out.println("Stamina: SoonTM");
                     System.out.println("");
                     movementPhaseOptions();
@@ -209,7 +211,7 @@ public class Player {
             System.out.println("[ 1 ] Attack");
             System.out.println("[ 2 ] Defense");
             System.out.println("[ 3 ] Luck");
-            System.out.println("[ 4 ] HP");
+            System.out.println("[ 4 ] Max HP");
             System.out.println("[ 5 ] Stamina");
 
             int input = scanner.nextInt();
@@ -219,7 +221,7 @@ public class Player {
                 case 1: chosenStat = attack; chosenStatName = "Attack"; chooseStat = false; upgradeStat(); break;
                 case 2: chosenStat = defense; chosenStatName = "Defense"; chooseStat = false; upgradeStat(); break;
                 case 3: chosenStat = luck; chosenStatName = "Luck"; chooseStat = false; upgradeStat(); break;
-                case 4: chosenStat = hp; chosenStatName = "HP"; chooseStat = false; upgradeStat(); break;
+                case 4: chosenStat = hp; chosenStatName = "Max HP"; chooseStat = false; upgradeStat(); break;
                 default: System.out.println("Invalid option.");
             }
         }
@@ -245,7 +247,7 @@ public class Player {
                     case "Attack": attack = chosenStat; break;
                     case "Defense": defense = chosenStat; break;
                     case "Luck": luck = chosenStat; break;
-                    case "HP": hp = chosenStat; break;
+                    case "Max HP": hp = chosenStat; break;
                 }
                 System.out.println("You upgraded your " + chosenStatName + " by " + input + " points! Your " + chosenStatName + " is now " + chosenStat);
                 xp -= input;
@@ -282,7 +284,7 @@ public class Player {
 
 
     public void deathCheck() {
-        if (hp <= 0) {
+        if (currentHp <= 0) {
             isAlive = false;
             System.out.println(this + " has been slain!");
             //System.out.println("DEBUG Player.deathCheck(): Removing " + this + " from Encounter");
@@ -341,12 +343,13 @@ public class Player {
         }
 
 
-        if (roll + attack > 10) {
+        if (roll + attack > 10 + targetedEnemy.defense) {
             int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
-            targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+            // targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+            targetedEnemy.currentHp -= damage;
             System.out.println(targetedEnemy + " took " + damage + " damage!");
             targetedEnemy.deathCheck();
         }

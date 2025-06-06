@@ -11,7 +11,8 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(8);
-        attack = 5000;
+        currentHp = getHp();
+        attack = 5;
         defense = 5;
         Spell chainLightning = new ChainLightning();
         addSpell(chainLightning);
@@ -62,16 +63,17 @@ public class Mage extends Player {
             }
         }
 
-        if (roll + attack > 10) {
+        if (roll + attack > 10 + targetedEnemy.defense) {
             int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 4;
             if (damage <= 1) {
                 damage = 1;
             }
-            targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+            //targetedEnemy.setHp(targetedEnemy.getHp() - damage);
+            targetedEnemy.currentHp -= damage;
             System.out.println(targetedEnemy + " is struck by Chain Lightning and took " + damage + " damage!");
             targetedEnemy.deathCheck();
         }
-        else if (roll <= 10){
+        else if (roll <= 10 + targetedEnemy.defense){
             System.out.println(targetedEnemy + " managed to dodge the bolt of Chain Lightning!");
             System.out.println("DEBUG: Mage.chainLightning() ~ roll = " + roll);
 

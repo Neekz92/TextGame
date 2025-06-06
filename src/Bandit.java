@@ -6,6 +6,7 @@ public class Bandit extends Enemy {
         this.attack = 5;
         this.defense = 5;
         this.setHp(8);
+        currentHp = getHp();
 
         setGold(5);
     }

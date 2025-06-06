@@ -23,7 +23,7 @@ public class Encounter {
     public void displayParticipants() {
 
         for (int i = 0; i < playerArray.length; i++) {
-            System.out.println(playerArray[i].getName() + " === " + playerArray[i].getHp() + " HP");
+            System.out.println(playerArray[i].getName() + " === " + playerArray[i].currentHp + " HP");
         }
     }
 

@@ -3,6 +3,7 @@ public class Warrior extends Player {
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(15);
+        currentHp = getHp();
         attack = 5;
         defense = 5;
     }
@@ -11,7 +12,7 @@ public class Warrior extends Player {
     public void combat() {
 
         System.out.println("[ 1 ] Basic Attack");
-        System.out.println("[ 2 ] Shield Bash");
+        System.out.println("[ 2 ] Shield Bash Combo");
         System.out.println("[ 3 ] Inventory");
         System.out.println("[ 4 ] Run Away");
 
@@ -28,7 +29,7 @@ public class Warrior extends Player {
                     selectMove = false;
                     break;
                 case 2:
-                    System.out.println("Shield Bash");
+                    System.out.println("Shield Bash Combo");
                     showTargetOptions();
                     shieldBash();
                     selectMove = false;
@@ -73,10 +74,10 @@ public class Warrior extends Player {
                     System.out.println("Must choose a different target.");
                 } else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
-                    if (rollAttack() > 10) {
+                    if (rollAttack() > 10 + targetedEnemy.defense) {
                         shieldBashTarget1.isStunned = true;
                     }
-                    if (rollAttack() > 10) {
+                    if (rollAttack() > 10 + targetedEnemy.defense) {
                         shieldBashTarget2.isStunned = true;
                     }
                     mustChooseADifferentTarget = false;

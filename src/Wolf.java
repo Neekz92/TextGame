@@ -6,6 +6,7 @@ public class Wolf extends Enemy {
         this.attack = 5;
         this.defense = 5;
         this.setHp(10);
+        currentHp = getHp();
 
     }
 
