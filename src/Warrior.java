@@ -4,7 +4,7 @@ public class Warrior extends Player {
         super(gameEngine, name);
         setHp(15);
         attack = 25;
-        defense = 500;
+        defense = 5;
     }
 
     @Override
@@ -57,8 +57,11 @@ public class Warrior extends Player {
 
         System.out.println("Select first target");
         shieldBashTarget1 = targetSelect();
-        if (encounter.amountOfMobs <= 1) {  //  Only need 1 target if there is only 1 enemy present
+        if (encounter.countAmountOfEnemies() <= 1) {  //  Only need 1 target if there is only 1 enemy present
             System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
+            if (rollAttack()) {
+                shieldBashTarget1.isStunned = true;
+            }
         }
 
         else {
@@ -70,6 +73,12 @@ public class Warrior extends Player {
                     System.out.println("Must choose a different target.");
                 } else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
+                    if (rollAttack()) {
+                        shieldBashTarget1.isStunned = true;
+                    }
+                    if (rollAttack()) {
+                        shieldBashTarget2.isStunned = true;
+                    }
                     mustChooseADifferentTarget = false;
                 }
             }

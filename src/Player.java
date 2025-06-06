@@ -23,6 +23,7 @@ public class Player {
     private Location location;
     Encounter encounter;
     boolean hasEncounter = false;
+    boolean isStunned = false;
 
 
     public Player(GameEngine gameEngine, String name) {
@@ -35,7 +36,6 @@ public class Player {
     public Player(GameEngine gameEngine) {
         this(gameEngine, "Default");
     }
-
 
     public String getName() {
         return name;
@@ -231,7 +231,7 @@ public class Player {
 
         basicAttackDescription();
         if (rollAttack()) {
-            int damage = random.nextInt(0, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
