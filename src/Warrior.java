@@ -58,27 +58,37 @@ public class Warrior extends Player {
 
         System.out.println("Select first target");
         shieldBashTarget1 = targetSelect();
-        if (encounter.countAmountOfEnemies() <= 1) {  //  Only need 1 target if there is only 1 enemy present
+
+
+        if (encounter.countAmountOfEnemies() == 1) { //  Only need 1 target if there is only 1 enemy present
             System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
             if (rollAttack() > 10) {
                 shieldBashTarget1.isStunned = true;
+                return;
             }
         }
 
-        else {
+        else {  //  Encounter has more than 1 enemy
             System.out.println("Select second target");
             boolean mustChooseADifferentTarget = true;
             while (mustChooseADifferentTarget) {
                 shieldBashTarget2 = targetSelect();
+
                 if (shieldBashTarget1.equals(shieldBashTarget2)) {
                     System.out.println("Must choose a different target.");
-                } else {
+
+                }
+                else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
-                    if (rollAttack() > 10 + targetedEnemy.defense) {
+                    targetedEnemy = shieldBashTarget1;
+                    if (rollAttack() + attack >= 10 + shieldBashTarget1.defense) {
                         shieldBashTarget1.isStunned = true;
+                        System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");
                     }
-                    if (rollAttack() > 10 + targetedEnemy.defense) {
+                    targetedEnemy = shieldBashTarget2;
+                    if (rollAttack() + attack >= 10 + shieldBashTarget2.defense) {
                         shieldBashTarget2.isStunned = true;
+                        System.out.println(shieldBashTarget2 + " is dazed from the shield bash!");
                     }
                     mustChooseADifferentTarget = false;
                 }

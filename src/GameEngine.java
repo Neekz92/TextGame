@@ -122,7 +122,7 @@ public class GameEngine {
         while (roundManager) {
             System.out.println("Round: " + round);
             round++;
-            if (round == 10) {
+            if (round == 40){
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {

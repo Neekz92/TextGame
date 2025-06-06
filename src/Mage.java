@@ -57,14 +57,20 @@ public class Mage extends Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 4) * 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = (random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4) + 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
+            damage *= 2;
+
+            targetedEnemy.currentHp -= damage;
+            System.out.println(targetedEnemy + " is struck by Chain Lightning and took " + damage + " damage!");
+            targetedEnemy.deathCheck();
+            return;
         }
 
-        if (roll + attack > 10 + targetedEnemy.defense) {
-            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4) + 4;
+        if (roll + attack >= 10 + targetedEnemy.defense) {
+            int damage = random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4) + 4;
             if (damage <= 1) {
                 damage = 1;
             }
@@ -73,10 +79,8 @@ public class Mage extends Player {
             System.out.println(targetedEnemy + " is struck by Chain Lightning and took " + damage + " damage!");
             targetedEnemy.deathCheck();
         }
-        else if (roll <= 10 + targetedEnemy.defense){
+        else {
             System.out.println(targetedEnemy + " managed to dodge the bolt of Chain Lightning!");
-            System.out.println("DEBUG: Mage.chainLightning() ~ roll = " + roll);
-
         }
     }
 

@@ -164,7 +164,6 @@ public class Encounter {
                 amountOfEnemies++;
             }
         }
-        System.out.println("DEBUG: Encounter.countAmountOfEnemies = " + amountOfEnemies);
         return amountOfEnemies;
     }
 }

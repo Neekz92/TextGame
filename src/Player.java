@@ -314,7 +314,7 @@ public class Player {
         boolean targetSelect = true;
         while (targetSelect) {
             for (int i = 0; i < encounter.playerArray.length; i++) {
-                System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].getHp() + " HP");
+                System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP");
             }
             targetSelect = false;
         }
@@ -336,15 +336,19 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4)) * 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = (random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4));  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
+            damage *= 2;
+            targetedEnemy.currentHp -= damage;
+            System.out.println(targetedEnemy + " took " + damage + " damage!");
+            targetedEnemy.deathCheck();
         }
 
 
-        if (roll + attack > 10 + targetedEnemy.defense) {
-            int damage = random.nextInt(1, attack) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+        else if (roll + attack >= 10 + targetedEnemy.defense) {
+            int damage = random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }

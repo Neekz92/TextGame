@@ -26,47 +26,49 @@ public class Archer extends Player {
         while (selectAim) {
 
             int roll = rollAttack();
+
             if (roll == 20) {
                 if (input == rng) {
                     System.out.println("NATURAL 20");
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
-                    // targetedEnemy.setHp(targetedEnemy.getHp() - damage);
-                    targetedEnemy.currentHp -= damage;
+                    int damage = (random.nextInt(1, attack + 1) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    damage *= 2;
+                    targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
                     targetedEnemy.deathCheck();
                     selectAim = false;
                     return;
                 }
-                System.out.println("Damn! " + this + " couldn't maintain focus on the critical shot.");
-                int damage = random.nextInt(1, attack) + (attack / 4);
-                //targetedEnemy.setHp(targetedEnemy.getHp() - damage);
-                targetedEnemy.currentHp -= damage;
+                System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
+                int damage = random.nextInt(1, attack + 1) + (attack / 4);
+                targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
                 targetedEnemy.deathCheck();
                 selectAim = false;
                 return;
             }
 
-            else if (roll + attack > 10 + targetedEnemy.defense) {
+
+
+
+
+            else if (roll + attack >= 10 + targetedEnemy.defense) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = (random.nextInt(1, attack) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
-                    //targetedEnemy.setHp(targetedEnemy.getHp() - damage);
-                    targetedEnemy.currentHp -= damage;
+                    int damage = (random.nextInt(1, attack + 1) + (attack / 4)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
                     targetedEnemy.deathCheck();
                     selectAim = false;
                     return;
                 }
-                System.out.println("Damn! " + this + " couldn't maintain focus on the critical shot.");
-                int damage = random.nextInt(1, attack) + (attack / 4);
-                //targetedEnemy.setHp(targetedEnemy.getHp() - damage);
-                targetedEnemy.currentHp -= damage;
+                System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
+                int damage = random.nextInt(1, attack + 1) + (attack / 4);
+                targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
                 targetedEnemy.deathCheck();
                 selectAim = false;
-            }
+                }
             return;
         }
     }
