@@ -152,4 +152,17 @@ public class Encounter {
         }
         amountOfMobs = 0;
     }
+
+
+
+    public int countAmountOfEnemies() {
+        int amountOfEnemies = 0;
+        for (int i = 0; i < playerArray.length; i++) {
+            if (playerArray[i] instanceof Enemy) {
+                amountOfEnemies++;
+            }
+        }
+        System.out.println("DEBUG: Encounter.countAmountOfEnemies = " + amountOfEnemies);
+        return amountOfEnemies;
+    }
 }

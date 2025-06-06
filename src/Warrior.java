@@ -11,7 +11,7 @@ public class Warrior extends Player {
     public void combat() {
 
         System.out.println("[ 1 ] Basic Attack");
-        System.out.println("[ 2 ] Taunt");
+        System.out.println("[ 2 ] Shield Bash");
         System.out.println("[ 3 ] Inventory");
         System.out.println("[ 4 ] Run Away");
 
@@ -26,6 +26,13 @@ public class Warrior extends Player {
                     showTargetOptions();
                     basicAttack();
                     selectMove = false;
+                    break;
+                case 2:
+                    System.out.println("Shield Bash");
+                    showTargetOptions();
+                    shieldBash();
+                    selectMove = false;
+                    break;
             }
         }
     }
@@ -36,9 +43,37 @@ public class Warrior extends Player {
     }
 
 
-
     @Override
     public void basicAttackDescription() {
         System.out.println(this + " swings their sword at " + targetSelect());
+    }
+
+
+    public void shieldBash() {
+
+        Player[] shieldBashTargets = new Player[2];
+        Player shieldBashTarget1 = null;
+        Player shieldBashTarget2 = null;
+
+        System.out.println("Select first target");
+        shieldBashTarget1 = targetSelect();
+        if (encounter.amountOfMobs <= 1) {  //  Only need 1 target if there is only 1 enemy present
+            System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
+        }
+
+        else {
+            System.out.println("Select second target");
+            boolean mustChooseADifferentTarget = true;
+            while (mustChooseADifferentTarget) {
+                shieldBashTarget2 = targetSelect();
+                if (shieldBashTarget1.equals(shieldBashTarget2)) {
+                    System.out.println("Must choose a different target.");
+                } else {
+                    System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
+                    mustChooseADifferentTarget = false;
+                }
+            }
+
+        }
     }
 }
