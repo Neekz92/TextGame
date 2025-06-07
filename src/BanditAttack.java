@@ -8,9 +8,9 @@ public class BanditAttack extends Encounter {
     public void setup() {
 
         distributedRewards = false;
-        addItem(potion);  //  Adding a potion to this encounter's loot pool
-        addItem(sword);
-        addItem(armor);
+        addItem(commonPotion);  //  Adding a potion to this encounter's loot pool
+        addItem(commonSword);
+        addItem(commonArmor);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 5;

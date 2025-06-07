@@ -4,7 +4,7 @@ public class Shop {
 
     Item[] itemArray;
     int amountOfItems;
-    Potion potion;
+    Potion commonPotion;
     ExitShop exitShop;
     Scanner scanner = new Scanner(System.in);
     Player player;
@@ -16,7 +16,7 @@ public class Shop {
         itemArray = new Item[amountOfItems];
         exitShop = new ExitShop();
         addItem(exitShop);
-        potion = new Potion();
+        commonPotion = new Potion("Common");
         player = null;
     }
 

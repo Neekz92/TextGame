@@ -1,8 +1,9 @@
 public class Potion extends Item {
 
-    public Potion() {
+    public Potion(String rarity) {
 
         setName("Potion");
+        this.rarity = rarity;
         setPrice(8);
         ID = 1;
     }

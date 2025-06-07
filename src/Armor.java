@@ -1,10 +1,9 @@
 public class Armor extends Item {
 
-    public Armor() {
+    public Armor(String rarity) {
+
 
         name = "Armor";
-        rarity = "Common";
-        modifier = random.nextInt(1,6);
-        price = random.nextInt(1, 11);
+        this.rarity = rarity;
     }
 }

@@ -6,7 +6,7 @@ public class CityOptions {
     Scanner scanner = new Scanner(System.in);
     String[] optionsArray = { "[1] Visit the marketplace", "[2] Rest and recover"};
     Shop shop = new Shop();
-    Item potion = new Potion();
+    Item commonPotion = new Potion("Common");
 
     public void cityOptions() {
 
@@ -21,7 +21,7 @@ public class CityOptions {
                 scanner.nextLine();
                 if (input == 1) {
                     shop.player = player;
-                    shop.addItem(potion);
+                    shop.addItem(commonPotion);
                     shop.rollShop();
                     cityOptionsDecision = false;
                 }

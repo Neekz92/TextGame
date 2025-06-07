@@ -1,5 +1,8 @@
 public class Warrior extends Player {
 
+    Sword sword;
+    String shield;
+
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(15);

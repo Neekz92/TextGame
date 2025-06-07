@@ -1,5 +1,7 @@
 public class Archer extends Player {
 
+    String bow;
+    String quiver;
     public Archer(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(10);

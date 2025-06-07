@@ -3,6 +3,9 @@ public class Mage extends Player {
     Spell spell;
     Spell selectedSpell;
 
+    String staff;
+    String grimoire;
+
     int amountOfSpells;
     Spell[] spellBook = new Spell[amountOfSpells];
 
@@ -12,7 +15,7 @@ public class Mage extends Player {
         super(gameEngine, name);
         setHp(8);
         currentHp = getHp();
-        attack = 5;
+        attack = 50000;
         defense = 5;
         luck = 0;
         Spell chainLightning = new ChainLightning();

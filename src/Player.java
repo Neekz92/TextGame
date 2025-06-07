@@ -9,6 +9,10 @@ public class Player {
     Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
+    String armor;
+    int amountOfItems;
+    Item[] inventory = new Item[amountOfItems];
+
     protected String name;
     private int hp;
     int currentHp;
@@ -87,6 +91,18 @@ public class Player {
 
     public void setXp(int xp) {
         this.xp = xp;
+    }
+
+    public void addItem(Item item) {
+
+        amountOfItems ++;
+        Item[] inventoryClone = new Item[amountOfItems];
+
+        for (int i = 0; i < inventory.length; i++) {
+            inventoryClone[i] = inventory[i];
+        }
+        inventoryClone[amountOfItems - 1] = item;
+        inventory = inventoryClone;
     }
 
     public Location getLocation() {
@@ -178,6 +194,17 @@ public class Player {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
                         System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
                         spendXp();
+                    }
+                }
+
+                if (input == 8) {
+                    for (int i = 0; i < inventory.length; i++) {
+                        if (!(inventory[i] instanceof Potion)) {
+                            System.out.println("[ 1 ] " + inventory[i].name + " === " + inventory[i].stat1 + ": " + inventory[i].modifier1 + " ||| " + inventory[i].stat2 + ": " + inventory[i].modifier2 + " ||| " + inventory[i].stat3 + ": " + inventory[i].modifier3);
+                        }
+                        else {
+                            System.out.println(inventory[i]);
+                        }
                     }
                 }
 

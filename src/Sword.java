@@ -1,10 +1,9 @@
 public class Sword extends Item {
 
-    Sword() {
+    Sword(String rarity) {
 
+        super(rarity);
         name = "Sword";
-        rarity = 
-
     }
 
     @Override
