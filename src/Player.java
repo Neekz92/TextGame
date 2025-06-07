@@ -147,14 +147,14 @@ public class Player {
                     break;
                 }
 
-                if (input == 2) {
+                else if (input == 2) {
                     setX(getX() + 1);
                     movementPhase = false;
                     System.out.println(this + " moved East. New map position is: (" + getX() + "," + getY() + ")");
                     break;
                 }
 
-                if (input == 3 && getY() > 0) {
+                else if (input == 3 && getY() > 0) {
                     setY(getY() - 1);
                     movementPhase = false;
                     System.out.println(this + " moved South. New map position is: (" + getX() + "," + getY() + ")");
@@ -163,22 +163,23 @@ public class Player {
                     System.out.println("You can't go any further south.");
                 }
 
-                if (input == 4 && getX() > 0) {
+                else if (input == 4 && getX() > 0) {
                     setX(getX() - 1);
                     movementPhase = false;
                     System.out.println(this + " moved West. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                } else if (input == 4 && getX() <= 0) {
+                }
+                else if (input == 4 && getX() <= 0) {
                     System.out.println("You can't go any further West.");
                 }
 
-                if (input == 5) {
+                else if (input == 5) {
                     movementPhase = false;
                     System.out.println("I must not yet leave. My business is left unfinished");
                     break;
                 }
 
-                if (input == 6) {
+                else if (input == 6) {
                     System.out.println(this);
                     System.out.println("Attack: " + attack);
                     System.out.println("Defense: " + defense);
@@ -190,14 +191,14 @@ public class Player {
                     movementPhaseOptions();
                 }
 
-                if (input == 7) {
+                else if (input == 7) {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
-                        System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
+                        //System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
                         spendXp();
                     }
                 }
 
-                if (input == 8) {
+                else if (input == 8) {
 
                     if (inventory.length == 0) {
                         System.out.println("Your Inventory is empty.");
@@ -220,12 +221,12 @@ public class Player {
                 }
 
                 else {
-                    System.out.println("Invalid option.");
+                    System.out.println("Invalid option." + input + " = input");
                 }
 
             }
             catch (Exception e) {
-                System.out.println("Invalid option");
+                System.out.println("Invalid option" + e);
                 scanner.nextLine();
             }
         }
