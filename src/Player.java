@@ -198,14 +198,25 @@ public class Player {
                 }
 
                 if (input == 8) {
-                    for (int i = 0; i < inventory.length; i++) {
-                        if (!(inventory[i] instanceof Potion)) {
-                            System.out.println("[ 1 ] " + inventory[i].name + " === " + inventory[i].stat1 + ": " + inventory[i].modifier1 + " ||| " + inventory[i].stat2 + ": " + inventory[i].modifier2 + " ||| " + inventory[i].stat3 + ": " + inventory[i].modifier3);
-                        }
-                        else {
-                            System.out.println(inventory[i]);
+
+                    if (inventory.length == 0) {
+                        System.out.println("Your Inventory is empty.");
+                    }
+
+                    else {
+                        System.out.println(this + "'s Inventory:");
+                        for (int i = 0; i < inventory.length; i++) {
+                            Item currentItem = inventory[i];
+                            if (!(currentItem instanceof Potion)) {
+                                System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + currentItem.stat1 + " + " + currentItem.mod1 + " | " + currentItem.stat2 + " + " + currentItem.mod2 + " | " + currentItem.stat3 + " + " + currentItem.mod3);
+                            }
+                            else {
+                                System.out.println("[ " + (i + 1) + " ] " + currentItem);
+                            }
                         }
                     }
+                    System.out.println("########################");
+                    movementPhaseOptions();
                 }
 
                 else {

@@ -12,14 +12,9 @@ public class Encounter {
     int amountOfItems = 0;
     Item[] itemArray = new Item[amountOfItems];
 
-    Item commonPotion = new Potion("Common");
-
-    Item commonSword = new Sword("Common");
-    Item uncommonSword = new Sword("Uncommon");
-    Item rareSword = new Sword("Rare");
-    Item legendarySword = new Sword("Legendary");
-
-    Item commonArmor = new Armor("Common");
+    Item potion = new Potion();
+    Item sword = new Sword();
+    Item armor = new Armor();
 
     int amountOfMobs = 0;
     int xpBonus = 0;
@@ -139,14 +134,12 @@ public class Encounter {
             if (xp <= 0) {
                 xp = 1;
             }
-            //System.out.println("DEBUG Encounter.java: " + amountOfMobs + " amount of mobs" + " " + amountOfPlayers + " amount of players");
             System.out.println(playerArray[i] + " received " + xp + " XP!");
             playerArray[i].setXp(playerArray[i].getXp() + xp);
 
 
             for (int j = 0; j < (playerArray[i].luck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
-                //System.out.println("DEBUG Encounter.distributeRewards() ~ Iteration = " + j + " Luck = " + playerArray[i].luck);
                 int rng = random.nextInt(1, 2);  //  There's a 1 in 5 chance the current player will receive an item drop.
                 if (rng == 1) {
 
@@ -156,8 +149,11 @@ public class Encounter {
                     } else {
                         randomDrop = 0;
                     }
-                    System.out.println(playerArray[i] + " looted: " + itemArray[randomDrop]);
-                    playerArray[i].addItem(itemArray[randomDrop]);
+                    System.out.println("DEBUG: " + itemArray[randomDrop]);
+                    Item itemCopy = itemArray[randomDrop].copy();   //   I made a itemCopy() method that creates a new instance of the Item, so that duplicates aren't created. Before I was looting the exact same swords and armors over and over.
+                    System.out.println(playerArray[i] + " looted: " + itemCopy);
+                    itemCopy.assignStats();
+                    playerArray[i].addItem(itemCopy);
                 }
             }
         }

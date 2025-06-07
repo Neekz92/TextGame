@@ -6,7 +6,7 @@ public class CityOptions {
     Scanner scanner = new Scanner(System.in);
     String[] optionsArray = { "[1] Visit the marketplace", "[2] Rest and recover"};
     Shop shop = new Shop();
-    Item commonPotion = new Potion("Common");
+    Item commonPotion = new Potion();
 
     public void cityOptions() {
 

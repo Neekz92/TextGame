@@ -16,7 +16,7 @@ public class Shop {
         itemArray = new Item[amountOfItems];
         exitShop = new ExitShop();
         addItem(exitShop);
-        commonPotion = new Potion("Common");
+        Item potion = new Potion();
         player = null;
     }
 

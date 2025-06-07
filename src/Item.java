@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Item {
+public class Item {
 
     Random random = new Random();
 
@@ -14,46 +14,64 @@ public abstract class Item {
     String stat3;
     String[] statArray = new String[3];
 
-    int modifier1;
-    int modifier2;
-    int modifier3;
-    int[] modifierArray = new int[3];
+    int mod1;
+    int mod2;
+    int mod3;
 
     public Item(String rarity) {
 
-        name = "";
         this.rarity = rarity;
-        price = 0;
+    }
 
-        statArray[0] = stat1;
-        statArray[1] = stat2;
-        statArray[2] = stat3;
+    public Item() {
 
-        modifierArray[0] = modifier1;
-        modifierArray[1] = modifier2;
-        modifierArray[2] = modifier3;
+        this("Common");
+    }
+
+    public void assignStats() {  //  Previously, this logic was inside the constructor. But it was allowing duplicates of the same item to be dropped, so I'm trying it with a seperate method and calling it each time an item is distributed in Encounter.distributeRewards().
 
         for (int i = 0; i < statArray.length; i++) {
-            int rng = random.nextInt(1, 5);
-            switch (rng) {
+            int rngStat = random.nextInt(1,5);
+
+            switch (rngStat) {
                 case 1: statArray[i] = "Attack"; break;
                 case 2: statArray[i] = "Defense"; break;
                 case 3: statArray[i] = "Luck"; break;
                 case 4: statArray[i] = "Max HP"; break;
+                default: statArray[i] = "NO STAT"; break;
             }
+
+            stat1 = statArray[0];
+            stat2 = statArray[1];
+            stat3 = statArray[2];
         }
 
-        for (int i = 0; i < modifierArray.length; i++) {
-            switch (rarity) {
-                case "Common": modifierArray[i] = random.nextInt(1,11); break;
-                case "Uncommon": modifierArray[i] = random.nextInt(5,21); break;
-                case "Rare": modifierArray[i] = random.nextInt(10,31); break;
-                case "Legendary": modifierArray[i] = random.nextInt(15, 41); break;
-            }
+        switch (rarity) {
+            case "Common":
+                mod1 = random.nextInt(1,11);
+                mod2 = random.nextInt(1,11);
+                mod3 = random.nextInt(1,11);
+                break;
+            case "Uncommon":
+                mod1 = random.nextInt(5,21);
+                mod2 = random.nextInt(5,21);
+                mod3 = random.nextInt(5,21);
+                break;
+            case "Rare":
+                mod1 = random.nextInt(10,31);
+                mod2 = random.nextInt(10,31);
+                mod3 = random.nextInt(10,31);
+                break;
+            case "Legendary":
+                mod1 = random.nextInt(15,41);
+                mod2 = random.nextInt(15,41);
+                mod3 = random.nextInt(15,41);
         }
     }
 
-    public Item() {}
+    public Item copy() {
+        return new Item(this.rarity);
+    }
 
     public int getPrice() {
         return price;

@@ -1,9 +1,19 @@
 public class Armor extends Item {
 
-    public Armor(String rarity) {
+    public Armor() {
 
-
+        super();
         name = "Armor";
-        this.rarity = rarity;
+    }
+
+    public Armor(String rarity) {
+        super(rarity);
+    }
+
+    @Override
+    public Item copy() {
+        Item armor = new Armor(this.rarity);
+        armor.name = "Armor";
+        return armor;
     }
 }

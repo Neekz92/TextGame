@@ -1,17 +1,18 @@
 public class Sword extends Item {
 
-    Sword(String rarity) {
-
-        super(rarity);
+    Sword() {
+        super();
         name = "Sword";
     }
 
+    Sword(String rarity) {
+        super(rarity);
+    }
+
     @Override
-    public String toString() {
-
-        String returnMe = "";
-
-        returnMe += rarity + " " + name + "\n";
-        return  returnMe;
+    public Item copy() {
+        Item sword = new Sword(this.rarity);
+        sword.name = "Sword";
+        return sword;
     }
 }

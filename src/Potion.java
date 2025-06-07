@@ -1,10 +1,19 @@
 public class Potion extends Item {
 
-    public Potion(String rarity) {
+    public Potion() {
 
+        super();
         setName("Potion");
-        this.rarity = rarity;
-        setPrice(8);
-        ID = 1;
+    }
+
+    public Potion(String rarity) {
+        super(rarity);
+    }
+
+    @Override
+    public Item copy() {
+        Item potion = new Potion(this.rarity);
+        potion.name = "Potion";
+        return potion;
     }
 }
