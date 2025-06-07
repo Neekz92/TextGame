@@ -14,12 +14,6 @@ public class Bandit extends Enemy {
     @Override
     public void combat() {
 
-//        int rng = random.nextInt(0, findEnemies().length);
-//        System.out.println("The bandit stabs " + findEnemies()[rng] + " with his dagger!");
-
-
-        //System.out.println("DEBUG Bandit.java: combat() is running");
-        //System.out.println("DEBUG Bandit.java: " + encounter.toString());
         if (findEnemies().length > 0) {
             int rng = random.nextInt(0, findEnemies().length);
             targetedEnemy = findEnemies()[rng];

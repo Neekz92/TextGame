@@ -9,9 +9,11 @@ public class WolfAttack extends Encounter {
 
         distributedRewards = false;
         addItem(potion);  //  Adding a potion to this encounter's loot pool
+        addItem(sword);
+        addItem(armor);
 
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length) + 6;
+        int rng = random.nextInt(0, gameEngine.playerArray.length + 2) + 1;
         System.out.println("You are surrounded by " + (rng) + " wolves at " + gameEngine.player.getLocation());
 
         int nameCounter = 1; //  This is the counter for each Wolf spawned. it will help identify them when players need to see them in the list of enemies.

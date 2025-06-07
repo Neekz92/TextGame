@@ -6,7 +6,7 @@ public class Player {
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     GameEngine gameEngine;
-    Player targetedEnemy;  //  targetSelct() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
+    Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
     protected String name;
@@ -33,7 +33,7 @@ public class Player {
         this.gameEngine = gameEngine;
         this.name = name;
         this.location = gameEngine.map.findLocation(getX(), getY());
-        this.xp = 8;
+        this.xp = 15;
 
     }
 
@@ -272,12 +272,12 @@ public class Player {
 
         int rng = random.nextInt(1,21);
 
-        if (rng + attack >= 10 + targetedEnemy.defense) {
-            System.out.println("Success! Rolled a " + rng + " + " + attack + " to hit " + targetedEnemy);
+        if (rng + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
+            System.out.println("Success! Rolled a " + rng + " + " + (attack / 5) + " to hit " + targetedEnemy);
             return rng;
         }
         else {
-            System.out.println("Failure! Rolled a " + rng + " + " + defense + " to hit " + targetedEnemy);
+            System.out.println("Failure! Rolled a " + rng + " + " + (attack / 5) + " to hit " + targetedEnemy);
             return rng;
         }
     }
@@ -336,7 +336,7 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4));  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = (random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5));  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -347,8 +347,8 @@ public class Player {
         }
 
 
-        else if (roll + attack >= 10 + targetedEnemy.defense) {
-            int damage = random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+        else if (roll + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
+            int damage = random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }

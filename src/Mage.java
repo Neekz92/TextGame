@@ -14,6 +14,7 @@ public class Mage extends Player {
         currentHp = getHp();
         attack = 5;
         defense = 5;
+        luck = 0;
         Spell chainLightning = new ChainLightning();
         addSpell(chainLightning);
     }
@@ -57,7 +58,7 @@ public class Mage extends Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4) + 4);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = (random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5) + 3);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -69,8 +70,8 @@ public class Mage extends Player {
             return;
         }
 
-        if (roll + attack >= 10 + targetedEnemy.defense) {
-            int damage = random.nextInt(1, attack + 1) + (attack / 4) - (targetedEnemy.defense / 4) + 4;
+        if (roll + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
+            int damage = random.nextInt(1, (attack / 5) + 1) + (attack / 5) - (targetedEnemy.defense / 5) + 3;
             if (damage <= 1) {
                 damage = 1;
             }
@@ -110,7 +111,7 @@ public class Mage extends Player {
                     System.out.println("Select a spell.");
                     showSpells();
                     spellSelect();
-                    System.out.println("Crackling lightning erupts from " + this + " 's mouth!");
+                    System.out.println("Crackling lightning erupts from " + this + "!");
                     for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                         if (encounter.playerArray[i] instanceof Enemy) {
                             targetedEnemy = encounter.playerArray[i];

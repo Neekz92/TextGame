@@ -12,6 +12,8 @@ public class Encounter {
     int amountOfItems = 0;
     Item[] itemArray = new Item[amountOfItems];
     Item potion = new Potion();
+    Item sword = new Sword();
+    Item armor = new Armor();
 
     int amountOfMobs = 0;
     int xpBonus = 0;
@@ -132,18 +134,18 @@ public class Encounter {
                 xp = 1;
             }
             //System.out.println("DEBUG Encounter.java: " + amountOfMobs + " amount of mobs" + " " + amountOfPlayers + " amount of players");
-            System.out.println(playerArray[i] + " recieved " + xp + " XP!");
+            System.out.println(playerArray[i] + " received " + xp + " XP!");
             playerArray[i].setXp(playerArray[i].getXp() + xp);
 
 
-            for (int j = 0; j < (playerArray[i].luck / 12) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
+            for (int j = 0; j < (playerArray[i].luck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
                 //System.out.println("DEBUG Encounter.distributeRewards() ~ Iteration = " + j + " Luck = " + playerArray[i].luck);
-                int rng = random.nextInt(1, 6);  //  There's a 1 in 5 chance the current player will recieve an item drop.
+                int rng = random.nextInt(1, 6);  //  There's a 1 in 5 chance the current player will receive an item drop.
                 if (rng == 5) {
 
                     int randomDrop;
-                    if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it wont work if its 0, 0
+                    if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it won't work if its 0, 0
                         randomDrop = random.nextInt(0, amountOfItems); //  Roll a random number from 0 to amountOfItems. that will be the index of the item in the itemArray the player gets.
                     } else {
                         randomDrop = 0;
