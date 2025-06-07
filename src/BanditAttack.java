@@ -10,6 +10,8 @@ public class BanditAttack extends Encounter {
         distributedRewards = false;
         addItem(potion);  //  Adding a potion to this encounter's loot pool
         addItem(sword);
+        addItem(staff);
+        addItem(bow);
         addItem(armor);
 
 

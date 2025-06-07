@@ -1,11 +1,11 @@
 public class Sword extends Item {
 
-    Sword() {
+    public Sword() {
         super();
         name = "Sword";
     }
 
-    Sword(String rarity) {
+    public Sword(String rarity) {
         super(rarity);
     }
 

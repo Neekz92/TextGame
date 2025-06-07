@@ -13,7 +13,11 @@ public class Encounter {
     Item[] itemArray = new Item[amountOfItems];
 
     Item potion = new Potion();
+
     Item sword = new Sword();
+    Item staff = new Staff();
+    Item bow = new Bow();
+
     Item armor = new Armor();
 
     int amountOfMobs = 0;

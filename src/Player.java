@@ -9,7 +9,8 @@ public class Player {
     Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
-    String armor;
+    Armor armor;
+
     int amountOfItems;
     Item[] inventory = new Item[amountOfItems];
 
@@ -26,6 +27,7 @@ public class Player {
     int attack;
     int defense;
     int luck;
+
 
     private Location location;
     Encounter encounter;
@@ -95,7 +97,7 @@ public class Player {
 
     public void addItem(Item item) {
 
-        amountOfItems ++;
+        amountOfItems++;
         Item[] inventoryClone = new Item[amountOfItems];
 
         for (int i = 0; i < inventory.length; i++) {
@@ -109,17 +111,21 @@ public class Player {
         return location;
     }
 
-    public Encounter getEncounter() {return encounter;}
+    public Encounter getEncounter() {
+        return encounter;
+    }
 
     public void setLocation(Location location) {
         this.location = location;
     }
 
-    public void setEncounter(Encounter encounter) {this.encounter = encounter;}
+    public void setEncounter(Encounter encounter) {
+        this.encounter = encounter;
+    }
 
     public void movementPhaseOptions() {
 
-        System.out.println("(" +location.x + "," + location.y + ")");
+        System.out.println("(" + location.x + "," + location.y + ")");
         System.out.println("*** Movement Phase ***");
         System.out.println("What do you do?");
         System.out.println("[ 1 ] Travel North");
@@ -131,6 +137,7 @@ public class Player {
         System.out.println("[ 7 ] Spend XP");
         System.out.println("[ 8 ] Inventory");
     }
+
     public void movementPhase() {
 
         boolean movementPhase = true;
@@ -145,41 +152,30 @@ public class Player {
                     movementPhase = false;
                     System.out.println(this + " moved North. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                }
-
-                else if (input == 2) {
+                } else if (input == 2) {
                     setX(getX() + 1);
                     movementPhase = false;
                     System.out.println(this + " moved East. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                }
-
-                else if (input == 3 && getY() > 0) {
+                } else if (input == 3 && getY() > 0) {
                     setY(getY() - 1);
                     movementPhase = false;
                     System.out.println(this + " moved South. New map position is: (" + getX() + "," + getY() + ")");
                     break;
                 } else if (input == 3 && getY() <= 0) {
                     System.out.println("You can't go any further south.");
-                }
-
-                else if (input == 4 && getX() > 0) {
+                } else if (input == 4 && getX() > 0) {
                     setX(getX() - 1);
                     movementPhase = false;
                     System.out.println(this + " moved West. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                }
-                else if (input == 4 && getX() <= 0) {
+                } else if (input == 4 && getX() <= 0) {
                     System.out.println("You can't go any further West.");
-                }
-
-                else if (input == 5) {
+                } else if (input == 5) {
                     movementPhase = false;
                     System.out.println("I must not yet leave. My business is left unfinished");
                     break;
-                }
-
-                else if (input == 6) {
+                } else if (input == 6) {
                     System.out.println(this);
                     System.out.println("Attack: " + attack);
                     System.out.println("Defense: " + defense);
@@ -189,32 +185,68 @@ public class Player {
                     System.out.println("Stamina: SoonTM");
                     System.out.println("");
                     movementPhaseOptions();
-                }
-
-                else if (input == 7) {
+                } else if (input == 7) {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
                         //System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
                         spendXp();
                     }
-                }
-
-                else if (input == 8) {
+                } else if (input == 8) {
 
                     if (inventory.length == 0) {
                         System.out.println("Your Inventory is empty.");
-                    }
-
-                    else {
+                    } else {
                         System.out.println(this + "'s Inventory:");
                         for (int i = 0; i < inventory.length; i++) {
                             Item currentItem = inventory[i];
                             if (!(currentItem instanceof Potion)) {
                                 System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + currentItem.stat1 + " + " + currentItem.mod1 + " | " + currentItem.stat2 + " + " + currentItem.mod2 + " | " + currentItem.stat3 + " + " + currentItem.mod3);
-                            }
-                            else {
+                            } else {
                                 System.out.println("[ " + (i + 1) + " ] " + currentItem);
                             }
                         }
+
+                        int itemSelect = scanner.nextInt();
+                        scanner.nextLine();
+
+                        Item selectedItem = inventory[itemSelect - 1];
+
+                        System.out.println("What would you like to do with " + selectedItem + "?");
+                        System.out.println("[ 1 ] Use");
+                        System.out.println("[ 2 ] Trade");
+                        System.out.println("[ 3 ] Exit");
+
+                        int itemInteraction = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (itemInteraction) {
+                            case 1:
+                            if (selectedItem instanceof Armor) {
+                                if (armor == null) {
+                                    armor = (Armor) selectedItem;
+                                    System.out.println("You equipped " + armor);
+                                    // TODO: remove armor from inventory
+                                    break;
+                                }
+                                else {
+                                    System.out.println("Do you want to swap these two armors?");
+                                    System.out.println("[ 1 ] Yes");
+                                    System.out.println("[ 2 ] No");
+                                    int wantToSwapItem = scanner.nextInt();
+                                    switch (wantToSwapItem) {
+                                        case 1:
+                                            Item tempItem = armor;
+                                            armor = (Armor) selectedItem;
+                                            System.out.println("You equipped " + armor);
+                                            inventory[itemSelect - 1] = tempItem;
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
                     }
                     System.out.println("########################");
                     movementPhaseOptions();
@@ -297,7 +329,9 @@ public class Player {
         }
     }
 
+    public void itemUpdateStats() {
 
+    }
 
 
 

@@ -9,6 +9,10 @@ public class WolfAttack extends Encounter {
 
         distributedRewards = false;
         addItem(potion);  //  Adding a potion to this encounter's loot pool
+        addItem(sword);
+        addItem(staff);
+        addItem(bow);
+        addItem(armor);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 2) + 1;
