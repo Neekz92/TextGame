@@ -142,7 +142,7 @@ public class Encounter {
             playerArray[i].setXp(playerArray[i].getXp() + xp);
 
 
-            for (int j = 0; j < (playerArray[i].luck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
+            for (int j = 0; j < (playerArray[i].finalLuck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
                 int rng = random.nextInt(1, 2);  //  There's a 1 in 5 chance the current player will receive an item drop.
                 if (rng == 1) {
@@ -156,7 +156,7 @@ public class Encounter {
                     System.out.println("DEBUG: " + itemArray[randomDrop]);
                     Item itemCopy = itemArray[randomDrop].copy();   //   I made a itemCopy() method that creates a new instance of the Item, so that duplicates aren't created. Before I was looting the exact same swords and armors over and over.
                     System.out.println(playerArray[i] + " looted: " + itemCopy);
-                    itemCopy.assignStats();
+                    itemCopy.assignStats2();
                     playerArray[i].addItem(itemCopy);
                 }
             }

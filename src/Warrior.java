@@ -1,13 +1,13 @@
 public class Warrior extends Player {
 
-    Sword sword;
-    String shield;
+    Sword sword = new Sword();
+    String shield = null;
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(15);
         currentHp = getHp();
-        attack = 5;
+        attack = 500000;
         defense = 5;
     }
 
@@ -55,6 +55,8 @@ public class Warrior extends Player {
 
     public void shieldBash() {
 
+        updateStats();
+
         Player[] shieldBashTargets = new Player[2];
         Player shieldBashTarget1 = null;
         Player shieldBashTarget2 = null;
@@ -77,6 +79,8 @@ public class Warrior extends Player {
             while (mustChooseADifferentTarget) {
                 shieldBashTarget2 = targetSelect();
 
+                int roll = rollAttack();
+
                 if (shieldBashTarget1.equals(shieldBashTarget2)) {
                     System.out.println("Must choose a different target.");
 
@@ -84,19 +88,20 @@ public class Warrior extends Player {
                 else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
                     targetedEnemy = shieldBashTarget1;
-                    if (rollAttack() + attack >= 10 + shieldBashTarget1.defense) {
+                    if (roll + (finalAttack / 5) >= 10 + (shieldBashTarget1.finalDefense / 5)) {
                         shieldBashTarget1.isStunned = true;
                         System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");
                     }
+
+                    roll = rollAttack();
                     targetedEnemy = shieldBashTarget2;
-                    if (rollAttack() + attack >= 10 + shieldBashTarget2.defense) {
+                    if (roll + (finalAttack / 5)  >= 10 + (shieldBashTarget2.finalDefense / 5)) {
                         shieldBashTarget2.isStunned = true;
                         System.out.println(shieldBashTarget2 + " is dazed from the shield bash!");
                     }
                     mustChooseADifferentTarget = false;
                 }
             }
-
         }
     }
 }

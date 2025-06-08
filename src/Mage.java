@@ -3,19 +3,19 @@ public class Mage extends Player {
     Spell spell;
     Spell selectedSpell;
 
-    String staff;
-    String grimoire;
+    Staff staff = new Staff();
 
     int amountOfSpells;
     Spell[] spellBook = new Spell[amountOfSpells];
-
     Spell[] allSpells = new Spell[2];
+
+
 
     public Mage(GameEngine gameEngine, String name) {
         super(gameEngine, name);
         setHp(8);
         currentHp = getHp();
-        attack = 50000;
+        attack = 500000;
         defense = 5;
         luck = 0;
         Spell chainLightning = new ChainLightning();
@@ -57,11 +57,12 @@ public class Mage extends Player {
 
     public void chainLightning() {
 
+        updateStats();
         int roll = rollAttack();
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5) + 3);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) + 3;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -73,8 +74,8 @@ public class Mage extends Player {
             return;
         }
 
-        if (roll + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
-            int damage = random.nextInt(1, (attack / 5) + 1) + (attack / 5) - (targetedEnemy.defense / 5) + 3;
+        if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
+            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) + 3;
             if (damage <= 1) {
                 damage = 1;
             }

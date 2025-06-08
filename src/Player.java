@@ -9,13 +9,20 @@ public class Player {
     Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
-    Armor armor;
+    Armor defaultArmor = new Armor();
+    Armor armor = defaultArmor;
+
+    Item defaultWeapon = new Item();+
+    Item weapon = defaultWeapon;
+
+
+    Item defaultOffhand = new Item();
+    Item offhand = null;
 
     int amountOfItems;
     Item[] inventory = new Item[amountOfItems];
 
     protected String name;
-    private int hp;
     int currentHp;
     private int positionX;
     private int positionY;
@@ -24,9 +31,18 @@ public class Player {
     int chosenStat = 0;
     String chosenStatName = "";
 
+
     int attack;
+    int finalAttack;
+
     int defense;
+    int finalDefense;
+
     int luck;
+    int finalLuck;
+
+    int hp;
+    int finalHp;
 
 
     private Location location;
@@ -40,7 +56,16 @@ public class Player {
         this.name = name;
         this.location = gameEngine.map.findLocation(getX(), getY());
         this.xp = 15;
+        updateStats();
 
+    }
+
+    public void updateStats() {
+
+        finalAttack = attack + armor.attack + weapon.attack;
+        finalDefense = defense + armor.defense + weapon.defense;
+        finalLuck = luck + armor.luck + weapon.luck;
+        finalHp = hp + weapon.luck;
     }
 
     public Player(GameEngine gameEngine) {
@@ -176,11 +201,12 @@ public class Player {
                     System.out.println("I must not yet leave. My business is left unfinished");
                     break;
                 } else if (input == 6) {
+                    updateStats();
                     System.out.println(this);
-                    System.out.println("Attack: " + attack);
-                    System.out.println("Defense: " + defense);
-                    System.out.println("Luck: " + luck);
-                    System.out.println("Max HP: " + hp);
+                    System.out.println("Attack: " + finalAttack);
+                    System.out.println("Defense: " + finalDefense);
+                    System.out.println("Luck: " + finalLuck);
+                    System.out.println("Max HP: " + finalHp);
                     System.out.println("Current HP: " + currentHp);
                     System.out.println("Stamina: SoonTM");
                     System.out.println("");
@@ -199,7 +225,7 @@ public class Player {
                         for (int i = 0; i < inventory.length; i++) {
                             Item currentItem = inventory[i];
                             if (!(currentItem instanceof Potion)) {
-                                System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + currentItem.stat1 + " + " + currentItem.mod1 + " | " + currentItem.stat2 + " + " + currentItem.mod2 + " | " + currentItem.stat3 + " + " + currentItem.mod3);
+                                System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + "Attack: " + currentItem.attack + " | Defense: " + currentItem.defense + " | " + "Luck: " + currentItem.luck);
                             } else {
                                 System.out.println("[ " + (i + 1) + " ] " + currentItem);
                             }
@@ -223,6 +249,7 @@ public class Player {
                             if (selectedItem instanceof Armor) {
                                 if (armor == null) {
                                     armor = (Armor) selectedItem;
+                                    updateStats();
                                     System.out.println("You equipped " + armor);
                                     // TODO: remove armor from inventory
                                     break;
@@ -236,26 +263,80 @@ public class Player {
                                         case 1:
                                             Item tempItem = armor;
                                             armor = (Armor) selectedItem;
+                                            updateStats();
                                             System.out.println("You equipped " + armor);
                                             inventory[itemSelect - 1] = tempItem;
                                             break;
                                     }
                                 }
                             }
+                            else if (selectedItem instanceof Sword) {
+                                if (this instanceof Warrior) {
+                                    if (weapon == null) {
+                                        weapon = selectedItem;
+                                        updateStats();
+                                        System.out.println("You equipped " + weapon);
+                                        // TODO: remove weapon from inventory
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Do you want to swap these two weapons?");
+                                        System.out.println("[ 1 ] Yes");
+                                        System.out.println("[ 2 ] No");
+                                        int wantToSwapItem = scanner.nextInt();
+                                        switch (wantToSwapItem) {
+                                            case 1:
+                                                Item tempItem = weapon;
+                                                weapon = selectedItem;
+                                                updateStats();
+                                                System.out.println("You equipped " + weapon);
+                                                inventory[itemSelect - 1] = tempItem;
+                                                break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    System.out.println("You are not proficient with this weapon.");
+                                    break;
+                                }
+                            }
+                            else if (selectedItem instanceof Staff) {
+                                if (this instanceof Mage) {
+                                    if (weapon == null) {
+                                        weapon = selectedItem;
+                                        updateStats();
+                                        System.out.println("You equipped " + weapon);
+                                        // TODO: remove weapon from inventory
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Do you want to swap these two weapons?");
+                                        System.out.println("[ 1 ] Yes");
+                                        System.out.println("[ 2 ] No");
+                                        int wantToSwapItem = scanner.nextInt();
+                                        switch (wantToSwapItem) {
+                                            case 1:
+                                                Item tempItem = weapon;
+                                                weapon = selectedItem;
+                                                updateStats();
+                                                System.out.println("You equipped " + weapon);
+                                                inventory[itemSelect - 1] = tempItem;
+                                                break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    System.out.println("You are not proficient with this weapon.");
+                                }
+                            }
                         }
-
-
-
-
                     }
                     System.out.println("########################");
                     movementPhaseOptions();
                 }
-
                 else {
                     System.out.println("Invalid option." + input + " = input");
                 }
-
             }
             catch (Exception e) {
                 System.out.println("Invalid option" + e);
@@ -320,6 +401,7 @@ public class Player {
                     case "Luck": luck = chosenStat; break;
                     case "Max HP": hp = chosenStat; break;
                 }
+                updateStats();
                 System.out.println("You upgraded your " + chosenStatName + " by " + input + " points! Your " + chosenStatName + " is now " + chosenStat);
                 xp -= input;
                 inputAmountOfStatPoints = false;
@@ -360,13 +442,9 @@ public class Player {
         if (currentHp <= 0) {
             isAlive = false;
             System.out.println(this + " has been slain!");
-            //System.out.println("DEBUG Player.deathCheck(): Removing " + this + " from Encounter");
             encounter.removePlayer(this);
-            //System.out.println("DEBUG Player.deathCheck(): Removing " + this + " from gameEngine");
             gameEngine.removePlayer(this);
-            //System.out.println("DEBUG: BEFORE: " + gameEngine.toString());
             location.endEncounter();
-            //System.out.println("DEBUG: AFTER: " + gameEngine.toString());
         }
     }
 
@@ -404,12 +482,13 @@ public class Player {
 
     public void basicAttack() {
 
+        updateStats();
         basicAttackDescription();
         int roll = rollAttack();
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = (random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5));  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -417,11 +496,13 @@ public class Player {
             targetedEnemy.currentHp -= damage;
             System.out.println(targetedEnemy + " took " + damage + " damage!");
             targetedEnemy.deathCheck();
+            return;
         }
 
+        if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
+            System.out.println(finalAttack + " / 5 = " + (finalAttack / 5));
 
-        else if (roll + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
-            int damage = random.nextInt(1, attack + 1) + (attack / 5) - (targetedEnemy.defense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
