@@ -411,16 +411,15 @@ public class Player {
         }
     }
 
-    public void itemUpdateStats() {
-
-    }
-
-
-
     public int rollLuck() {
         int rng = random.nextInt(21);
-        System.out.println("You rolled " + rng + " + " + luck);
-        return rng + luck;
+
+        if (rng + (finalLuck / 5) >= 10) {
+            System.out.println("Success! Rolled a " + rng + " + " + (finalLuck / 5));
+            return rng;
+        }
+        System.out.println("Failure! Rolled a " + rng + " + " + (finalLuck / 5));
+        return rng;
     }
 
     public int rollAttack() {
@@ -454,6 +453,9 @@ public class Player {
         encounter.displayParticipants();
         System.out.println("########################");
         System.out.println("What do you do?");
+        encounter.options();
+
+
     }
 
     public void combat() {
@@ -500,7 +502,6 @@ public class Player {
         }
 
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
-            System.out.println(finalAttack + " / 5 = " + (finalAttack / 5));
 
             int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
@@ -511,6 +512,11 @@ public class Player {
             System.out.println(targetedEnemy + " took " + damage + " damage!");
             targetedEnemy.deathCheck();
         }
+    }
+
+    public void cityOptions() {
+
+
     }
 
     public void basicAttackDescription() {}

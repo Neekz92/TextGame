@@ -71,7 +71,6 @@ public class GameEngine {
     }
 
 
-
     public void characterCreation() {
 
         System.out.println("How many players?");
@@ -122,54 +121,55 @@ public class GameEngine {
         while (roundManager) {
             System.out.println("Round: " + round);
             round++;
-            if (round == 40){
+            if (round == 40) {
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
-                    System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
-                    player = playerArray[i];     //  Set 'player' to the current player
-                    player.gameEngine = this;   //  Set current player's GameEngine.
+                System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
+                player = playerArray[i];     //  Set 'player' to the current player
+                player.gameEngine = this;   //  Set current player's GameEngine.
 
-                    player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
-                    player.getLocation().gameEngine = this;  // Set the location's game engine
+                player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
+                player.getLocation().gameEngine = this;  // Set the location's game engine
 
-                    if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
-                        player.movementPhase();  //  Allow the player to move
-                        player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location after moving
-                        // System.out.println("DEBUG 2: " + player + "'s location has been assigned to " + player.getLocation());
-                        player.getLocation().gameEngine = this;  // Set the location's game engine after moving
+                if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
+                    player.movementPhase();  //  Allow the player to move
+                    player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location after moving
+                    // System.out.println("DEBUG 2: " + player + "'s location has been assigned to " + player.getLocation());
+                    player.getLocation().gameEngine = this;  // Set the location's game engine after moving
+                }
+
+                if (player.getLocation().encounter != null) {  //  If the location the player gets to has an encounter,
+                    player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is
+                    if (player.hasEncounter == false) {
+                        player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array.
+                        player.hasEncounter = true;
                     }
-
-                    if (player.getLocation().encounter != null) {  //  If the location the player gets to has an encounter,
-                        player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is
+                } else {  //  If the location has no encounter
+                    if (!(player instanceof Enemy)) {  // Bugs appeared that caused mobs to roll new encounters... I'm thinking this might fix it
+                        //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());+
+                        player.getLocation().rollEncounter();  //  Randomly roll an encounter
+                        player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
+                        player.encounter.gameEngine = this; // Set the Encounter's game engine
+                        player.encounter.setup();
                         if (player.hasEncounter == false) {
-                            player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array.
+                            player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
                             player.hasEncounter = true;
                         }
-                    } else {  //  If the location has no encounter
-                        if (!(player instanceof Enemy)) {  // Bugs appeared that caused mobs to roll new encounters... I'm thinking this might fix it
-                            //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());+
-                            player.getLocation().rollEncounter();  //  Randomly roll an encounter
-                            player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
-                            player.encounter.gameEngine = this; // Set the Encounter's game engine
-                            player.encounter.setup();
-                            if (player.hasEncounter == false) {
-                                player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array. Just like above.
-                                player.hasEncounter = true;
-                            }
-                        }
                     }
-                    //System.out.println("DEBUG GameEngine.java: " + player.getName());
-                    player.encounterPhase();
+                }
+                //System.out.println("DEBUG GameEngine.java: " + player.getName());
+                player.encounterPhase();
+                if (player.encounter instanceof CombatEncounter) {
                     if (player.isStunned) {  //  If the player is stunned, don't attack.
                         System.out.println(player.getName() + " is stunned!");
                         player.isStunned = false;
-                    }
-                    else {
+                    } else {
                         player.combat();
                     }
                     System.out.println("*************************************");
 
+                }
             }
         }
     }
