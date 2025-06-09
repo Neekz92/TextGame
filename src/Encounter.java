@@ -153,7 +153,6 @@ public class Encounter {
                     } else {
                         randomDrop = 0;
                     }
-                    System.out.println("DEBUG: " + itemArray[randomDrop]);
                     Item itemCopy = itemArray[randomDrop].copy();   //   I made a itemCopy() method that creates a new instance of the Item, so that duplicates aren't created. Before I was looting the exact same swords and armors over and over.
                     System.out.println(playerArray[i] + " looted: " + itemCopy);
                     itemCopy.assignStats2();
