@@ -9,15 +9,16 @@ public class Player {
     Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
+
+
     Armor defaultArmor = new Armor();
     Armor armor = defaultArmor;
 
-    Item defaultWeapon = new Item();+
-    Item weapon = defaultWeapon;
+    Item weapon = new Item();
 
 
-    Item defaultOffhand = new Item();
-    Item offhand = null;
+
+
 
     int amountOfItems;
     Item[] inventory = new Item[amountOfItems];
@@ -230,9 +231,14 @@ public class Player {
                                 System.out.println("[ " + (i + 1) + " ] " + currentItem);
                             }
                         }
+                        System.out.println("[ 0 ] Exit");
 
                         int itemSelect = scanner.nextInt();
                         scanner.nextLine();
+
+                        if (itemSelect == 0) {
+                            movementPhaseOptions();
+                        }
 
                         Item selectedItem = inventory[itemSelect - 1];
 
@@ -246,14 +252,14 @@ public class Player {
 
                         switch (itemInteraction) {
                             case 1:
-                            if (selectedItem instanceof Armor) {
-                                if (armor == null) {
-                                    armor = (Armor) selectedItem;
-                                    updateStats();
-                                    System.out.println("You equipped " + armor);
-                                    // TODO: remove armor from inventory
-                                    break;
-                                }
+                                if (selectedItem instanceof Armor) {
+                                    if (armor == null) {
+                                        armor = (Armor) selectedItem;
+                                        updateStats();
+                                        System.out.println("You equipped " + armor);
+                                        // TODO: remove armor from inventory
+                                        break;
+                                    }
                                 else {
                                     System.out.println("Do you want to swap these two armors?");
                                     System.out.println("[ 1 ] Yes");
@@ -329,17 +335,54 @@ public class Player {
                                     System.out.println("You are not proficient with this weapon.");
                                 }
                             }
+                            else if (selectedItem instanceof Bow) {
+                                if (this instanceof Archer) {
+                                    if (weapon == null) {
+                                        weapon = selectedItem;
+                                        updateStats();
+                                        System.out.println("You equipped " + weapon);
+                                        // TODO: remove weapon from inventory
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Do you want to swap these two weapons?");
+                                        System.out.println("[ 1 ] Yes");
+                                        System.out.println("[ 2 ] No");
+                                        int wantToSwapItem = scanner.nextInt();
+                                        switch (wantToSwapItem) {
+                                            case 1:
+                                                Item tempItem = weapon;
+                                                weapon = selectedItem;
+                                                updateStats();
+                                                System.out.println("You equipped " + weapon);
+                                                inventory[itemSelect - 1] = tempItem;
+                                                break;
+                                            case 2:
+                                                movementPhaseOptions();
+                                                break;
+                                        }
+                                    }
+                                }
+                                else {
+                                    System.out.println("You are not proficient with this weapon.");
+                                    break;
+                                }
+                            }
+                            case 2:
+                                System.out.println("Trade is not yet implemented."); break;
+                            case 3:
+                                break;
                         }
                     }
                     System.out.println("########################");
                     movementPhaseOptions();
                 }
                 else {
-                    System.out.println("Invalid option." + input + " = input");
+                    System.out.println("Invalid option.");
                 }
             }
             catch (Exception e) {
-                System.out.println("Invalid option" + e);
+                System.out.println("Invalid option");
                 scanner.nextLine();
             }
         }

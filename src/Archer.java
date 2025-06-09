@@ -1,6 +1,5 @@
 public class Archer extends Player {
 
-    Bow bow = null;
     String quiver = null;
 
     public Archer(GameEngine gameEngine, String name) {
@@ -9,6 +8,8 @@ public class Archer extends Player {
         currentHp = getHp();
         attack = 5;
         defense = 5;
+
+        weapon = new Bow();
     }
 
 
@@ -31,12 +32,12 @@ public class Archer extends Player {
             int roll = rollAttack();
 
             if (roll == 20) {
+                System.out.println("NATURAL 20");
                 if (input == rng) {
-                    System.out.println("NATURAL 20");
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
-                    if (damage >= 0) {
-                        damage = 1;
+                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    if (damage >= 1) {
+                        damage = 20;
                     }
                     damage *= 2;
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
@@ -47,8 +48,8 @@ public class Archer extends Player {
                 }
                 System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
                 int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);
-                if (damage <= 0) {
-                    damage = 0;
+                if (damage <= 1) {
+                    damage = 2;
                 }
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -56,17 +57,12 @@ public class Archer extends Player {
                 selectAim = false;
                 return;
             }
-
-
-
-
-
-            else if (roll + (finalAttack / 20) >= 10 + (targetedEnemy.defense / 20)) {
+            else if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.defense / 5)) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
-                    if (damage <= 0) {
-                        damage = 0;
+                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    if (damage <= 1) {
+                        damage = 10;
                     }
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -77,7 +73,7 @@ public class Archer extends Player {
                 System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
                 int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) ;
                 if (damage <= 0) {
-                    damage = 0;
+                    damage = 1;
                 }
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -94,8 +90,7 @@ public class Archer extends Player {
         updateStats();
         System.out.println("[ 1 ] Basic Attack");
         System.out.println("[ 2 ] Critical Shot");
-        System.out.println("[ 3 ] Inventory");
-        System.out.println("[ 4 ] Run Away");
+        System.out.println("[ 3 ] Run Away");
 
         int input = scanner.nextInt();
         scanner.nextLine();

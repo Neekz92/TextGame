@@ -6,9 +6,13 @@ public class Map {
     Location cityOne;
     Location southWestPlains;
     Location westernPlains;
+    Location greatneckReach;
+    Location crabgrassHills;
 
     Location bloodFlowerMeadows;
     Location kingsRiver;
+    Location kingsRiverRapids;
+    Location kingsDelta;
 
     Location[] locationArray;
 
@@ -32,6 +36,22 @@ public class Map {
         westernPlains.name = "Western Plains";
         locationArray[2] = westernPlains;
 
+        greatneckReach = new Location(1,1);
+        greatneckReach.add(new WolfAttack());
+        greatneckReach.add(new BanditAttack());
+        greatneckReach.name = "Greatneck Reach";
+        locationArray[5] = greatneckReach;
+
+        crabgrassHills = new Location(1,2);
+        crabgrassHills.add(new WolfAttack());
+        crabgrassHills.add(new BanditAttack());
+        crabgrassHills.name = "Crabgrass Hills";
+        locationArray[6] = crabgrassHills;
+
+
+
+
+
 
         bloodFlowerMeadows = new Location(1, 0);
         bloodFlowerMeadows.add(new WolfAttack());
@@ -44,6 +64,19 @@ public class Map {
         kingsRiver.add(new BanditAttack());
         kingsRiver.name = "King's River";
         locationArray[4] = kingsRiver;
+
+        kingsRiverRapids = new Location(2,1);
+        kingsRiverRapids.add(new WolfAttack());
+        kingsRiverRapids.add(new BanditAttack());
+        kingsRiverRapids.name = "King's River Rapids";
+        locationArray[7] = kingsRiverRapids;
+
+        kingsDelta = new Location(2,2);
+        kingsDelta.add(new WolfAttack());
+        kingsDelta.add(new BanditAttack());
+        kingsDelta.name = "King's Delta";
+        locationArray[8] = kingsDelta;
+
 
 
 

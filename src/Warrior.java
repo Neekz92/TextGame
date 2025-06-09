@@ -1,6 +1,4 @@
 public class Warrior extends Player {
-
-    Sword sword = new Sword();
     String shield = null;
 
     public Warrior(GameEngine gameEngine, String name) {
@@ -9,6 +7,8 @@ public class Warrior extends Player {
         currentHp = getHp();
         attack = 500000;
         defense = 5;
+
+        weapon = new Sword();
     }
 
     @Override
@@ -16,8 +16,7 @@ public class Warrior extends Player {
 
         System.out.println("[ 1 ] Basic Attack");
         System.out.println("[ 2 ] Shield Bash Combo");
-        System.out.println("[ 3 ] Inventory");
-        System.out.println("[ 4 ] Run Away");
+        System.out.println("[ 3 ] Run Away");
 
         int input = scanner.nextInt();
         scanner.nextLine();

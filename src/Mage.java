@@ -3,12 +3,9 @@ public class Mage extends Player {
     Spell spell;
     Spell selectedSpell;
 
-    Staff staff = new Staff();
-
     int amountOfSpells;
     Spell[] spellBook = new Spell[amountOfSpells];
     Spell[] allSpells = new Spell[2];
-
 
 
     public Mage(GameEngine gameEngine, String name) {
@@ -20,6 +17,8 @@ public class Mage extends Player {
         luck = 0;
         Spell chainLightning = new ChainLightning();
         addSpell(chainLightning);
+
+        weapon = new Staff();
     }
 
 
@@ -95,8 +94,7 @@ public class Mage extends Player {
 
         System.out.println("[ 1 ] Basic Attack");
         System.out.println("[ 2 ] Cast a Spell");
-        System.out.println("[ 3 ] Inventory");
-        System.out.println("[ 4 ] Run Away");
+        System.out.println("[ 3 ] Run Away");
 
         int input = scanner.nextInt();
         scanner.nextLine();
