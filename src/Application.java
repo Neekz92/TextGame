@@ -6,5 +6,6 @@ public class Application {
         gameEngine.characterCreation();
         gameEngine.turnOrder();
         // Will it work?
+        // Fuck chatgpt
     }
 }
