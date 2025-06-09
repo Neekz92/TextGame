@@ -12,7 +12,7 @@ public class Mage extends Player {
         super(gameEngine, name);
         setHp(8);
         currentHp = getHp();
-        attack = 500000;
+        attack = 5;
         defense = 5;
         luck = 0;
         Spell chainLightning = new ChainLightning();

@@ -5,7 +5,7 @@ public class Warrior extends Player {
         super(gameEngine, name);
         setHp(15);
         currentHp = getHp();
-        attack = 500000;
+        attack = 5;
         defense = 5;
 
         weapon = new Sword();
