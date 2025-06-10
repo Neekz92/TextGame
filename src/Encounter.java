@@ -1,7 +1,9 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Encounter {
 
+    Scanner scanner = new Scanner(System.in);
     GameEngine gameEngine;
     Random random;
     String description;
@@ -162,6 +164,10 @@ public class Encounter {
         }
         amountOfMobs = 0;
     }
+
+
+
+    public void options() {}
 
 
 

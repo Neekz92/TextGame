@@ -1,4 +1,4 @@
-public class WolfAttack extends Encounter {
+public class WolfAttack extends CombatEncounter {
 
     public WolfAttack() {
 

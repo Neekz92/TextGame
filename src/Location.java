@@ -34,7 +34,7 @@ public class Location {
 
     public void add(Encounter encounter) {
 
-        amountOfEncounters ++;
+        amountOfEncounters++;
         Encounter[] encounterArrayClone = new Encounter[amountOfEncounters];
         for (int i = 0; i < encounterArray.length; i++) {
             encounterArrayClone[i] = encounterArray[i];
@@ -51,9 +51,8 @@ public class Location {
         return encounter;
     }
 
-
-
     public void endEncounter() {
+
         if (encounter.areHostilesDead() && !encounter.arePlayersDead()) {  //  This runs when the players kill all the enemies in an encounter
             for (int i = 0; i < encounter.playerArray.length; i++) {
                 encounter.playerArray[i].setEncounter(null);
@@ -67,9 +66,7 @@ public class Location {
             encounter.playerArray = new Player[encounter.amountOfPlayers];
             encounter = null;
             System.out.println("The battle is won!");
-        }
-
-         else if (!encounter.areHostilesDead() && encounter.arePlayersDead()) {
+        } else if (!encounter.areHostilesDead() && encounter.arePlayersDead()) {
             System.out.println("The battle is lost!");
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                 encounter.playerArray[i].gameEngine.removePlayer(encounter.playerArray[i]);  // Remove all entities from the gameEngine playerArray
@@ -82,5 +79,13 @@ public class Location {
             }
             encounter = null;
         }
+    }
+
+    public void endSocialEncounter() {
+        encounter.playerArray[0].setEncounter(null);
+        encounter.playerArray[0].hasEncounter = false;
+        encounter.amountOfPlayers = 0;
+        encounter.playerArray = new Player[encounter.amountOfPlayers];
+        encounter = null;
     }
 }

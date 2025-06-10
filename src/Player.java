@@ -210,6 +210,7 @@ public class Player {
                     System.out.println("Max HP: " + finalHp);
                     System.out.println("Current HP: " + currentHp);
                     System.out.println("Stamina: SoonTM");
+                    System.out.println("Gold: " + getGold());
                     System.out.println("");
                     movementPhaseOptions();
                 } else if (input == 7) {
@@ -462,8 +463,16 @@ public class Player {
 
     public int rollLuck() {
         int rng = random.nextInt(21);
-        System.out.println("You rolled " + rng + " + " + luck);
-        return rng + luck;
+
+        if (rng + (finalLuck / 5) > 10) {
+            System.out.println("Success! Rolled a " + rng + " + " + (finalLuck / 5));
+            return rng;
+        }
+        else {
+            System.out.println("Failure! Rolled a " + rng + " + " + (finalLuck / 5));
+            return rng;
+        }
+
     }
 
     public int rollAttack() {
@@ -497,6 +506,7 @@ public class Player {
         encounter.displayParticipants();
         System.out.println("########################");
         System.out.println("What do you do?");
+        encounter.options();
     }
 
     public void combat() {
@@ -553,6 +563,38 @@ public class Player {
             System.out.println(targetedEnemy + " took " + damage + " damage!");
             targetedEnemy.deathCheck();
         }
+    }
+
+
+
+    public void cityOptions() {
+
+        System.out.println("[ 1 ] Visit the marketplace");
+        System.out.println("[ 2 ] Rest at the inn");
+        System.out.println("[ 3 ] Proceed to Movement Phase");
+
+        boolean inputSelection = true;
+        while (inputSelection) {
+            try {
+                int input = scanner.nextInt();
+                scanner.nextLine();
+                switch (input) {
+                    case 1: System.out.println("Do stuff,"); inputSelection = false; break;
+                    case 2: currentHp = finalHp; System.out.println("You wounds have healed, and you are fully rested."); inputSelection = false; break;
+                    default: System.out.println("Do other stuff," ); inputSelection = false; break;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Invalid option.");
+            }
+        }
+    }
+
+    public void marketplace() {
+
+        System.out.println("[ 1 ] Buy");
+        System.out.println("[ 2 ] Sell");
+        System.out.println("[ 0 ] Exit");
     }
 
     public void basicAttackDescription() {}

@@ -7,16 +7,11 @@ public class Item {
     String name;
     String rarity;
     int price;
-    int ID;
 
     String stat1;
     String stat2;
     String stat3;
     String[] statArray = new String[3];
-
-    int mod1;
-    int mod2;
-    int mod3;
 
     int attack;
     int defense;
@@ -106,45 +101,8 @@ public class Item {
         }
     }
 
-    public void assignStats() {  //  Previously, this logic was inside the constructor. But it was allowing duplicates of the same item to be dropped, so I'm trying it with a seperate method and calling it each time an item is distributed in Encounter.distributeRewards().
-
-        for (int i = 0; i < statArray.length; i++) {
-            int rngStat = random.nextInt(1, 5);
-
-            switch (rngStat) {
-                case 1:
-                    statArray[i] = "Attack";
-                    break;
-                case 2:
-                    statArray[i] = "Defense";
-                    break;
-                case 3:
-                    statArray[i] = "Luck";
-                    break;
-                case 4:
-                    statArray[i] = "Max HP";
-                    break;
-                default:
-                    statArray[i] = "NO STAT";
-                    break;
-            }
-
-            stat1 = statArray[0];
-            stat2 = statArray[1];
-            stat3 = statArray[2];
-        }
-    }
-
     public Item copy() {
         return new Item(this.rarity);
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public String getName() {
@@ -153,10 +111,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void useItem() {
-
     }
 
     @Override

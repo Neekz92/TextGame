@@ -1,4 +1,4 @@
-public class BanditAttack extends Encounter {
+public class BanditAttack extends CombatEncounter {
 
     public BanditAttack() {
 

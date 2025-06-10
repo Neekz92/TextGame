@@ -166,7 +166,9 @@ public class GameEngine {
                         player.isStunned = false;
                     }
                     else {
-                        player.combat();
+                        if (player.encounter instanceof CombatEncounter) {
+                            player.combat();
+                        }
                     }
                     System.out.println("*************************************");
 

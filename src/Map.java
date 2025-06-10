@@ -20,7 +20,7 @@ public class Map {
         locationArray = new Location[20];
 
         cityOne = new Location(0, 0);
-        cityOne.add(new BanditAttack());
+        cityOne.add(new CryingChild());
         cityOne.name = "City One";
         locationArray[0] = cityOne;
 
