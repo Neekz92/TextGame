@@ -35,7 +35,7 @@ public class Archer extends Player {
                 System.out.println("NATURAL 20");
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    int damage = (random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5)) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
                     if (damage >= 1) {
                         damage = 20;
                     }
@@ -60,7 +60,7 @@ public class Archer extends Player {
             else if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.defense / 5)) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    int damage = (random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5)) * 10;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
                     if (damage <= 1) {
                         damage = 10;
                     }

@@ -88,6 +88,8 @@ public class GameEngine {
                 case 1:
                     System.out.println("You have selected the Warrior class.");
                     player = new Warrior(this, name);
+                    player.inventory = new Inventory();
+                    player.inventory.player = player;
                     addPlayer(player);
                     //System.out.println("Debug from character creation: " + name);
                     break;
@@ -95,12 +97,16 @@ public class GameEngine {
                 case 2:
                     System.out.println("You have selected the Mage class.");
                     player = new Mage(this, name);
+                    player.inventory = new Inventory();
+                    player.inventory.player = player;
                     addPlayer(player);
                     break;
 
                 case 3:
                     System.out.println("You have selected the Archer class.");
                     player = new Archer(this, name);
+                    player.inventory = new Inventory();
+                    player.inventory.player = player;
                     addPlayer(player);
                     break;
 
@@ -129,9 +135,14 @@ public class GameEngine {
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
                     player = playerArray[i];     //  Set 'player' to the current player
                     player.gameEngine = this;   //  Set current player's GameEngine.
+                    player.didASocialEncounterThisturn = false;
 
                     player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location
                     player.getLocation().gameEngine = this;  // Set the location's game engine
+                    player.getLocation().shop.fillShop();
+                    for (int j = 0; j < player.getLocation().shop.itemArray.length; j++) {  //  Reset the rolls on each item in the marketplace
+                        player.getLocation().shop.itemArray[j].assignStats2();  // CURRENT ISSUE, NOTICE ME CHATGPT It should assign stats at the beginning of each turn
+                    }
 
                     if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
                         player.movementPhase();  //  Allow the player to move
@@ -170,8 +181,11 @@ public class GameEngine {
                             player.combat();
                         }
                     }
+                    if (player.didASocialEncounterThisturn == false && player.hasEncounter == false && player.getLocation().isTown) {
+                        boolean rested = player.cityOptions();
+                        if (rested) continue;
+                    }
                     System.out.println("*************************************");
-
             }
         }
     }

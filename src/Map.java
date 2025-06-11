@@ -12,7 +12,7 @@ public class Map {
     Location bloodFlowerMeadows;
     Location kingsRiver;
     Location kingsRiverRapids;
-    Location kingsDelta;
+    Location kingsBasin;
 
     Location[] locationArray;
 
@@ -23,6 +23,7 @@ public class Map {
         cityOne.add(new CryingChild());
         cityOne.name = "City One";
         locationArray[0] = cityOne;
+        cityOne.isTown = true;
 
         southWestPlains = new Location(0, 1);
         southWestPlains.add(new WolfAttack());
@@ -48,11 +49,6 @@ public class Map {
         crabgrassHills.name = "Crabgrass Hills";
         locationArray[6] = crabgrassHills;
 
-
-
-
-
-
         bloodFlowerMeadows = new Location(1, 0);
         bloodFlowerMeadows.add(new WolfAttack());
         bloodFlowerMeadows.add(new BanditAttack());
@@ -71,11 +67,11 @@ public class Map {
         kingsRiverRapids.name = "King's River Rapids";
         locationArray[7] = kingsRiverRapids;
 
-        kingsDelta = new Location(2,2);
-        kingsDelta.add(new WolfAttack());
-        kingsDelta.add(new BanditAttack());
-        kingsDelta.name = "King's Delta";
-        locationArray[8] = kingsDelta;
+        kingsBasin = new Location(2,2);
+        kingsBasin.add(new WolfAttack());
+        kingsBasin.add(new BanditAttack());
+        kingsBasin.name = "King's Delta";
+        locationArray[8] = kingsBasin;
 
 
 

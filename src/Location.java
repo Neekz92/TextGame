@@ -2,6 +2,8 @@ import java.util.Random;
 
 public class Location {
 
+    Shop shop = new Shop();
+
     GameEngine gameEngine;
     Random random;
     int x;
@@ -12,6 +14,7 @@ public class Location {
     int amountOfEncounters = 0;
     String name;
 
+    boolean isTown = false;
 
     public Location(int x, int y) {
 
@@ -19,7 +22,6 @@ public class Location {
         this.x = x;
         this.y = y;
         encounterArray = new Encounter[amountOfEncounters];
-
     }
 
     @Override

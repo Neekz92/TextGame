@@ -3,25 +3,22 @@ import java.util.Scanner;
 
 public class Player {
 
+    Item selectedItem;
     Scanner scanner = new Scanner(System.in);
     Random random = new Random();
     GameEngine gameEngine;
     Player targetedEnemy;  //  targetSelect() sets this variable to the enemy the player is targeting, and this variable is used in rollAttack()
     boolean isAlive = true;
 
-
+    int amountOfItems;
+    Inventory inventory;
 
     Armor defaultArmor = new Armor();
     Armor armor = defaultArmor;
 
     Item weapon = new Item();
 
-
-
-
-
-    int amountOfItems;
-    Item[] inventory = new Item[amountOfItems];
+    Item[] inventory2 = new Item[amountOfItems];
 
     protected String name;
     int currentHp;
@@ -50,6 +47,7 @@ public class Player {
     Encounter encounter;
     boolean hasEncounter = false;
     boolean isStunned = false;
+    boolean didASocialEncounterThisturn = false;
 
 
     public Player(GameEngine gameEngine, String name) {
@@ -61,16 +59,16 @@ public class Player {
 
     }
 
+    public Player(GameEngine gameEngine) {
+        this(gameEngine, "Default");
+    }
+
     public void updateStats() {
 
         finalAttack = attack + armor.attack + weapon.attack;
         finalDefense = defense + armor.defense + weapon.defense;
         finalLuck = luck + armor.luck + weapon.luck;
-        finalHp = hp + weapon.luck;
-    }
-
-    public Player(GameEngine gameEngine) {
-        this(gameEngine, "Default");
+        finalHp = hp + armor.hp + weapon.hp;
     }
 
     public String getName() {
@@ -121,17 +119,40 @@ public class Player {
         this.xp = xp;
     }
 
-    public void addItem(Item item) {
+//    public void addItem(Item item) {
+//
+//        amountOfItems++;
+//        Item[] inventoryClone = new Item[amountOfItems];
+//
+//        for (int i = 0; i < inventory.length; i++) {
+//            inventoryClone[i] = inventory[i];
+//        }
+//        inventoryClone[amountOfItems - 1] = item;
+//        inventory = inventoryClone;
+//    }
 
-        amountOfItems++;
-        Item[] inventoryClone = new Item[amountOfItems];
+//    public int findItemIndex(Item item) {
+//
+//        for (int i = 0; i < inventory.length; i++) {
+//            if (item.equals(inventory[i])) {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
 
-        for (int i = 0; i < inventory.length; i++) {
-            inventoryClone[i] = inventory[i];
-        }
-        inventoryClone[amountOfItems - 1] = item;
-        inventory = inventoryClone;
-    }
+//    public void removeItem(int index) {
+//
+//        amountOfItems --;
+//        Item[] inventoryClone = new Item[amountOfItems];
+//        for (int i = 0; i < findItemIndex(selectedItem); i++) {
+//            inventoryClone[i] = inventory[i];
+//        }
+//        for (int i = findItemIndex(selectedItem); i < inventoryClone.length; i++) {
+//            inventoryClone[i] = inventory[i + 1];
+//        }
+//        inventory = inventoryClone;
+//    }
 
     public Location getLocation() {
         return location;
@@ -203,180 +224,15 @@ public class Player {
                     break;
                 } else if (input == 6) {
                     updateStats();
-                    System.out.println(this);
-                    System.out.println("Attack: " + finalAttack);
-                    System.out.println("Defense: " + finalDefense);
-                    System.out.println("Luck: " + finalLuck);
-                    System.out.println("Max HP: " + finalHp);
-                    System.out.println("Current HP: " + currentHp);
-                    System.out.println("Stamina: SoonTM");
-                    System.out.println("Gold: " + getGold());
-                    System.out.println("");
-                    movementPhaseOptions();
+                    displayStats();
+
                 } else if (input == 7) {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
                         //System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
                         spendXp();
                     }
                 } else if (input == 8) {
-
-                    if (inventory.length == 0) {
-                        System.out.println("Your Inventory is empty.");
-                    } else {
-                        System.out.println(this + "'s Inventory:");
-                        for (int i = 0; i < inventory.length; i++) {
-                            Item currentItem = inventory[i];
-                            if (!(currentItem instanceof Potion)) {
-                                System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + "Attack: " + currentItem.attack + " | Defense: " + currentItem.defense + " | " + "Luck: " + currentItem.luck);
-                            } else {
-                                System.out.println("[ " + (i + 1) + " ] " + currentItem);
-                            }
-                        }
-                        System.out.println("[ 0 ] Exit");
-
-                        int itemSelect = scanner.nextInt();
-                        scanner.nextLine();
-
-                        if (itemSelect == 0) {
-                            movementPhaseOptions();
-                        }
-
-                        Item selectedItem = inventory[itemSelect - 1];
-
-                        System.out.println("What would you like to do with " + selectedItem + "?");
-                        System.out.println("[ 1 ] Use");
-                        System.out.println("[ 2 ] Trade");
-                        System.out.println("[ 3 ] Exit");
-
-                        int itemInteraction = scanner.nextInt();
-                        scanner.nextLine();
-
-                        switch (itemInteraction) {
-                            case 1:
-                                if (selectedItem instanceof Armor) {
-                                    if (armor == null) {
-                                        armor = (Armor) selectedItem;
-                                        updateStats();
-                                        System.out.println("You equipped " + armor);
-                                        // TODO: remove armor from inventory
-                                        break;
-                                    }
-                                else {
-                                    System.out.println("Do you want to swap these two armors?");
-                                    System.out.println("[ 1 ] Yes");
-                                    System.out.println("[ 2 ] No");
-                                    int wantToSwapItem = scanner.nextInt();
-                                    switch (wantToSwapItem) {
-                                        case 1:
-                                            Item tempItem = armor;
-                                            armor = (Armor) selectedItem;
-                                            updateStats();
-                                            System.out.println("You equipped " + armor);
-                                            inventory[itemSelect - 1] = tempItem;
-                                            break;
-                                    }
-                                }
-                            }
-                            else if (selectedItem instanceof Sword) {
-                                if (this instanceof Warrior) {
-                                    if (weapon == null) {
-                                        weapon = selectedItem;
-                                        updateStats();
-                                        System.out.println("You equipped " + weapon);
-                                        // TODO: remove weapon from inventory
-                                        break;
-                                    }
-                                    else {
-                                        System.out.println("Do you want to swap these two weapons?");
-                                        System.out.println("[ 1 ] Yes");
-                                        System.out.println("[ 2 ] No");
-                                        int wantToSwapItem = scanner.nextInt();
-                                        switch (wantToSwapItem) {
-                                            case 1:
-                                                Item tempItem = weapon;
-                                                weapon = selectedItem;
-                                                updateStats();
-                                                System.out.println("You equipped " + weapon);
-                                                inventory[itemSelect - 1] = tempItem;
-                                                break;
-                                        }
-                                    }
-                                }
-                                else {
-                                    System.out.println("You are not proficient with this weapon.");
-                                    break;
-                                }
-                            }
-                            else if (selectedItem instanceof Staff) {
-                                if (this instanceof Mage) {
-                                    if (weapon == null) {
-                                        weapon = selectedItem;
-                                        updateStats();
-                                        System.out.println("You equipped " + weapon);
-                                        // TODO: remove weapon from inventory
-                                        break;
-                                    }
-                                    else {
-                                        System.out.println("Do you want to swap these two weapons?");
-                                        System.out.println("[ 1 ] Yes");
-                                        System.out.println("[ 2 ] No");
-                                        int wantToSwapItem = scanner.nextInt();
-                                        switch (wantToSwapItem) {
-                                            case 1:
-                                                Item tempItem = weapon;
-                                                weapon = selectedItem;
-                                                updateStats();
-                                                System.out.println("You equipped " + weapon);
-                                                inventory[itemSelect - 1] = tempItem;
-                                                break;
-                                        }
-                                    }
-                                }
-                                else {
-                                    System.out.println("You are not proficient with this weapon.");
-                                }
-                            }
-                            else if (selectedItem instanceof Bow) {
-                                if (this instanceof Archer) {
-                                    if (weapon == null) {
-                                        weapon = selectedItem;
-                                        updateStats();
-                                        System.out.println("You equipped " + weapon);
-                                        // TODO: remove weapon from inventory
-                                        break;
-                                    }
-                                    else {
-                                        System.out.println("Do you want to swap these two weapons?");
-                                        System.out.println("[ 1 ] Yes");
-                                        System.out.println("[ 2 ] No");
-                                        int wantToSwapItem = scanner.nextInt();
-                                        switch (wantToSwapItem) {
-                                            case 1:
-                                                Item tempItem = weapon;
-                                                weapon = selectedItem;
-                                                updateStats();
-                                                System.out.println("You equipped " + weapon);
-                                                inventory[itemSelect - 1] = tempItem;
-                                                break;
-                                            case 2:
-                                                movementPhaseOptions();
-                                                break;
-                                        }
-                                    }
-                                }
-                                else {
-                                    System.out.println("You are not proficient with this weapon.");
-                                    break;
-                                }
-                            }
-                            case 2:
-                                System.out.println("Trade is not yet implemented."); break;
-                            case 3:
-                                break;
-                        }
-                    }
-                    System.out.println("########################");
-                    movementPhaseOptions();
+                    inventory.openInventory();
                 }
                 else {
                     System.out.println("Invalid option.");
@@ -423,7 +279,6 @@ public class Player {
         }
     }
 
-
     public void upgradeStat() {
 
         boolean inputAmountOfStatPoints = true;
@@ -455,12 +310,6 @@ public class Player {
         }
     }
 
-    public void itemUpdateStats() {
-
-    }
-
-
-
     public int rollLuck() {
         int rng = random.nextInt(21);
 
@@ -488,7 +337,6 @@ public class Player {
             return rng;
         }
     }
-
 
     public void deathCheck() {
         if (currentHp <= 0) {
@@ -565,13 +413,10 @@ public class Player {
         }
     }
 
-
-
-    public void cityOptions() {
+    public boolean cityOptions() {
 
         System.out.println("[ 1 ] Visit the marketplace");
         System.out.println("[ 2 ] Rest at the inn");
-        System.out.println("[ 3 ] Proceed to Movement Phase");
 
         boolean inputSelection = true;
         while (inputSelection) {
@@ -579,9 +424,71 @@ public class Player {
                 int input = scanner.nextInt();
                 scanner.nextLine();
                 switch (input) {
-                    case 1: System.out.println("Do stuff,"); inputSelection = false; break;
-                    case 2: currentHp = finalHp; System.out.println("You wounds have healed, and you are fully rested."); inputSelection = false; break;
-                    default: System.out.println("Do other stuff," ); inputSelection = false; break;
+                    case 1: inputSelection = false; marketplace(); return false;
+                    case 2: currentHp = finalHp; System.out.println("You wounds have healed, and you are fully rested."); inputSelection = false; return true;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Invalid option.");
+            }
+        }
+        return false;
+    }
+
+    public void marketPlaceOptions() {
+
+        System.out.println("[ 1 ] Buy");
+        System.out.println("[ 2 ] Sell");
+        System.out.println("[ 0 ] Exit");
+    }
+
+    public void marketplace() {
+
+        marketPlaceOptions();
+
+        boolean marketplaceChoice = true;
+        while (marketplaceChoice) {
+            try {
+                int input = scanner.nextInt();
+                scanner.nextLine();
+                switch (input) {
+                    case 1:
+                        System.out.println(this + "'s gold: " + gold);
+                        for (int i = 0; i < location.shop.itemArray.length; i++) {
+                            if (location.shop.itemArray[i] instanceof Potion) {
+                                System.out.println("[ " + (i + 1) + " ] " + location.shop.itemArray[i] + " === " + location.shop.itemArray[i].price + " gold");
+                            }
+                            else {
+                                System.out.println("[ " + (i + 1) + " ] " + location.shop.itemArray[i] + " === Attack: " + location.shop.itemArray[i].attack + " | " + "Defense: " + location.shop.itemArray[i].defense + " | " + "Luck: " + location.shop.itemArray[i].luck + " | " + "HP: " + location.shop.itemArray[i].hp + " === " + location.shop.itemArray[i].price + " gold");
+                            }
+                        }
+                        System.out.println("[ 0 ] Exit");
+                        buyItem();
+                        marketPlaceOptions();
+                        continue;
+                    case 2:
+
+                        if (inventory.itemArray.length < 1) {
+                            System.out.println("You have nothing to sell.");
+                            continue;
+                        }
+
+                        else {
+                            for (int i = 0; i < inventory.itemArray.length; i++) {
+                                if (inventory.itemArray[i] instanceof Potion) {
+                                    System.out.println("[ " + (i + 1) + " ] " + inventory.itemArray[i] + " === " + inventory.itemArray[i].price + " gold");
+                                }
+                                else {
+                                    System.out.println("[ " + (i + 1) + " ] " + inventory.itemArray[i] + " === Attack: " + inventory.itemArray[i].attack + " | " + "Defense: " + inventory.itemArray[i].defense + " | " + "Luck: " + inventory.itemArray[i].luck + " | " + "HP: " + inventory.itemArray[i].hp + " === " + inventory.itemArray[i].price + " gold");
+                                }
+                            }
+                            sellItem();
+                            marketPlaceOptions();
+                            break;
+                        }
+                    case 0:
+                        marketplaceChoice = false;
+                        break;
                 }
             }
             catch (Exception e) {
@@ -590,14 +497,73 @@ public class Player {
         }
     }
 
-    public void marketplace() {
+    public void buyItem() {
 
-        System.out.println("[ 1 ] Buy");
-        System.out.println("[ 2 ] Sell");
-        System.out.println("[ 0 ] Exit");
+        boolean waitingForMarketplaceChoice = true;
+        while (waitingForMarketplaceChoice) {
+            try {
+                int input = scanner.nextInt();
+                scanner.nextLine();
+
+                if (input == 0) {
+                    waitingForMarketplaceChoice = false;
+                    break;
+                }
+
+                selectedItem = location.shop.itemArray[input - 1];
+                Item purchasedItem = selectedItem.copy();  //  CURRENT ISSUE, NOTICE ME CHATGPT. the item should have already had its stats assigned before copy() runs, no?
+                purchasedItem.attack = selectedItem.attack;
+                purchasedItem.defense = selectedItem.defense;
+                purchasedItem.luck = selectedItem.luck;
+                purchasedItem.hp = selectedItem.hp;
+                purchasedItem.price = selectedItem.price;
+
+                if (selectedItem.price > gold) {
+                    System.out.println("You are too broke to afford this item.");
+                    waitingForMarketplaceChoice = false;
+                    return;
+                }
+                else {
+                    System.out.println("You purchased " + selectedItem + " for " + selectedItem.price + " gold!");
+                    getLocation().shop.removeItem(selectedItem);
+                    inventory.addItem(purchasedItem);
+                    waitingForMarketplaceChoice = false;
+                    return;
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Invalid option.");
+            }
+        }
+    }
+
+    public void sellItem() {
+
+        int input = scanner.nextInt();
+        scanner.nextLine();
+
+        selectedItem = inventory.itemArray[input - 1];
+        setGold(getGold() + selectedItem.price);
+        System.out.println("You sold " + selectedItem + " for " + selectedItem.price + " gold!");
+        inventory.removeItem(inventory.findItemIndex(selectedItem));
+
     }
 
     public void basicAttackDescription() {}
+
+    public void displayStats() {
+        updateStats();
+        System.out.println(this);
+        System.out.println("Attack: " + finalAttack);
+        System.out.println("Defense: " + finalDefense);
+        System.out.println("Luck: " + finalLuck);
+        System.out.println("Max HP: " + finalHp);
+        System.out.println("Current HP: " + currentHp);
+        System.out.println("Stamina: SoonTM");
+        System.out.println("Gold: " + getGold());
+        System.out.println("");
+        movementPhaseOptions();
+    }
 
     @Override
     public String toString() {

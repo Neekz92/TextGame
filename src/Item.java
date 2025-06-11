@@ -38,6 +38,13 @@ public class Item {
         statOptions[2] = luck;
         statOptions[3] = hp;
 
+        switch (rarity) {
+            case "Common": price = random.nextInt(1,11); break;
+            case "Uncommon": price = random.nextInt(5,21); break;
+            case "Rare": price = random.nextInt(10,31); break;
+            case "Legendary": price = random.nextInt(15,41); break;
+        }
+
         for (int i = 0; i < 3; i++) {
             int rngStat = random.nextInt(0,4);
             switch (rngStat) {
@@ -99,6 +106,7 @@ public class Item {
                     break;
             }
         }
+
     }
 
     public Item copy() {
