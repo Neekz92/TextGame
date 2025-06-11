@@ -24,7 +24,7 @@ public class Player {
     int currentHp;
     private int positionX;
     private int positionY;
-    private int gold;
+    private int gold = 5;
     private int xp;
     int chosenStat = 0;
     String chosenStatName = "";
@@ -203,11 +203,11 @@ public class Player {
                     inventory.openInventory();
                 }
                 else {
-                    System.out.println("Invalid option.");
+                    System.out.println("Invalid option. DEBUG: player.movementPhase() input is an int, but not 1-8");
                 }
             }
             catch (Exception e) {
-                System.out.println("Invalid option");
+                System.out.println("Invalid option. DEBUG: this is from the catch (Exception) block " + e);
                 scanner.nextLine();
             }
         }
@@ -495,6 +495,7 @@ public class Player {
                 }
                 else {
                     System.out.println("You purchased " + selectedItem + " for " + selectedItem.price + " gold!");
+                    gold -= selectedItem.price;
                     getLocation().shop.removeItem(selectedItem);
                     inventory.addItem(purchasedItem);
                     waitingForMarketplaceChoice = false;
@@ -515,8 +516,7 @@ public class Player {
         selectedItem = inventory.itemArray[input - 1];
         setGold(getGold() + selectedItem.price);
         System.out.println("You sold " + selectedItem + " for " + selectedItem.price + " gold!");
-        inventory.removeItem(inventory.findItemIndex(selectedItem));
-
+        inventory.removeItem(selectedItem);
     }
 
     public void basicAttackDescription() {}

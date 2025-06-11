@@ -32,14 +32,14 @@ public class Inventory {
         return -1;
     }
 
-    public void removeItem(int index) {
+    public void removeItem(Item item) {
 
         amountOfItems--;
         Item[] inventoryClone = new Item[amountOfItems];
-        for (int i = 0; i < findItemIndex(player.selectedItem); i++) {
+        for (int i = 0; i < findItemIndex(item); i++) {
             inventoryClone[i] = itemArray[i];
         }
-        for (int i = findItemIndex(player.selectedItem); i < inventoryClone.length; i++) {
+        for (int i = findItemIndex(item); i < inventoryClone.length; i++) {
             inventoryClone[i] = itemArray[i + 1];
         }
         itemArray = inventoryClone;
@@ -51,7 +51,7 @@ public class Inventory {
             System.out.println("Your Inventory is empty.");
             return;  // CHATGPT NOTICE ME: like this?
         } else {
-            System.out.println(this + "'s Inventory:");
+            System.out.println(player + "'s Inventory:");
             for (int i = 0; i < player.inventory.itemArray.length; i++) {
                 Item currentItem = player.inventory.itemArray[i];
                 if (!(currentItem instanceof Potion)) {
@@ -96,7 +96,7 @@ public class Inventory {
                         player.armor = (Armor) selectedItem;
                         player.updateStats();
                         System.out.println("You equipped " + player.armor);
-                        removeItem(findItemIndex(player.armor));
+                        removeItem(player.armor);
                         player.movementPhaseOptions();
                         return;
                     }
@@ -113,6 +113,7 @@ public class Inventory {
                                 player.updateStats();
                                 System.out.println("You equipped " + player.armor);
                                 player.inventory.itemArray[itemSelect - 1] = tempItem;
+                                player.movementPhaseOptions();
                                 return;
                         }
                     }
@@ -140,6 +141,7 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
+                                    player.movementPhaseOptions();
                                     return;
                             }
                         }
@@ -171,6 +173,7 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
+                                    player.movementPhaseOptions();
                                     return;
                             }
                         }
@@ -202,6 +205,7 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
+                                    player.movementPhaseOptions();
                                     return;
                                 case 2:
                                     player.movementPhaseOptions();
@@ -220,16 +224,17 @@ public class Inventory {
                     if (player.currentHp > player.finalHp) {
                         player.currentHp = player.finalHp;
                     }
-                    removeItem(findItemIndex(selectedItem));
+                    player.movementPhaseOptions();
+                    removeItem(selectedItem);
                     return;
                 }
                 return;
             case 2:
                 System.out.println("Trade is not yet implemented.");
                 return;
-            default: break;
         }
-        System.out.println("########################");
-        player.movementPhaseOptions();
+        return;
+//        System.out.println("########################");
+//      player.movementPhaseOptions();
     }
 }
