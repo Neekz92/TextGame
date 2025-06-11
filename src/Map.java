@@ -6,9 +6,13 @@ public class Map {
     Location cityOne;
     Location southWestPlains;
     Location westernPlains;
-    Location greatneckReach;
-    Location crabgrassHills;
+    Location rockyPlateau;
+    Location stormpeakMountainsSouth;
+    Location stormpeakMountainsSummit;
+    Location stormpeakMountainsNorth;
 
+    Location crabgrassHills;
+    Location greatneckReach;
     Location bloodFlowerMeadows;
     Location kingsRiver;
     Location kingsRiverRapids;
@@ -17,7 +21,7 @@ public class Map {
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[20];
+        locationArray = new Location[20];  //  12
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
@@ -37,6 +41,43 @@ public class Map {
         westernPlains.name = "Western Plains";
         locationArray[2] = westernPlains;
 
+        rockyPlateau = new Location(0,3);
+        rockyPlateau.add(new WolfAttack());
+        rockyPlateau.add(new BanditAttack());
+        rockyPlateau.add(new OrcAttack());
+        rockyPlateau.name = "Rocky Plateau";
+        locationArray[9] = rockyPlateau;
+
+        stormpeakMountainsSouth = new Location(0,4);
+        stormpeakMountainsSouth.add(new WolfAttack());
+        stormpeakMountainsSouth.add(new BanditAttack());
+        stormpeakMountainsSouth.add(new OrcAttack());
+        stormpeakMountainsSouth.name = "Stormpeak Mountains (South)";
+        locationArray[10] = stormpeakMountainsSouth;
+
+        stormpeakMountainsSummit = new Location(0,5);
+        stormpeakMountainsSummit.add(new WolfAttack());
+        stormpeakMountainsSummit.add(new BanditAttack());
+        stormpeakMountainsSummit.add(new OrcAttack());
+        stormpeakMountainsSummit.name = "Stormpeak Mountain Summit";
+        locationArray[11] = stormpeakMountainsSummit;
+
+        stormpeakMountainsNorth = new Location(0,6);
+        stormpeakMountainsNorth.add(new WolfAttack());
+        stormpeakMountainsNorth.add(new BanditAttack());
+        stormpeakMountainsNorth.add(new OrcAttack());
+        stormpeakMountainsNorth.name = "Stormpeak Mountains (North)";
+        locationArray[12] = stormpeakMountainsNorth;
+
+
+
+
+        bloodFlowerMeadows = new Location(1, 0);
+        bloodFlowerMeadows.add(new WolfAttack());
+        bloodFlowerMeadows.add(new BanditAttack());
+        bloodFlowerMeadows.name = "Bloodflower Meadows";
+        locationArray[3] = bloodFlowerMeadows;
+
         greatneckReach = new Location(1,1);
         greatneckReach.add(new WolfAttack());
         greatneckReach.add(new BanditAttack());
@@ -49,11 +90,7 @@ public class Map {
         crabgrassHills.name = "Crabgrass Hills";
         locationArray[6] = crabgrassHills;
 
-        bloodFlowerMeadows = new Location(1, 0);
-        bloodFlowerMeadows.add(new WolfAttack());
-        bloodFlowerMeadows.add(new BanditAttack());
-        bloodFlowerMeadows.name = "Bloodflower Meadows";
-        locationArray[3] = bloodFlowerMeadows;
+
 
         kingsRiver = new Location(2,0);
         kingsRiver.add(new WolfAttack());

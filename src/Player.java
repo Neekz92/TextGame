@@ -42,6 +42,8 @@ public class Player {
     int hp;
     int finalHp;
 
+    int stamina = 5;
+
 
     private Location location;
     Encounter encounter;
@@ -328,12 +330,12 @@ public class Player {
 
         int rng = random.nextInt(1,21);
 
-        if (rng + (attack / 5) >= 10 + (targetedEnemy.defense / 5)) {
-            System.out.println("Success! Rolled a " + rng + " + " + (attack / 5) + " to hit " + targetedEnemy);
+        if (rng + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
+            System.out.println("Success! Rolled a " + rng + " + " + (finalAttack / 5) + " to hit " + targetedEnemy);
             return rng;
         }
         else {
-            System.out.println("Failure! Rolled a " + rng + " + " + (attack / 5) + " to hit " + targetedEnemy);
+            System.out.println("Failure! Rolled a " + rng + " + " + (finalAttack / 5) + " to hit " + targetedEnemy);
             return rng;
         }
     }
@@ -559,7 +561,7 @@ public class Player {
         System.out.println("Luck: " + finalLuck);
         System.out.println("Max HP: " + finalHp);
         System.out.println("Current HP: " + currentHp);
-        System.out.println("Stamina: SoonTM");
+        System.out.println("Stamina: " + stamina);
         System.out.println("Gold: " + getGold());
         System.out.println("");
         movementPhaseOptions();

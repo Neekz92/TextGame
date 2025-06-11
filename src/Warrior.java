@@ -31,11 +31,18 @@ public class Warrior extends Player {
                     selectMove = false;
                     break;
                 case 2:
-                    System.out.println("Shield Bash Combo");
-                    showTargetOptions();
-                    shieldBash();
-                    selectMove = false;
-                    break;
+                    if (stamina >= 1) {
+                        System.out.println("Shield Bash Combo");
+                        showTargetOptions();
+                        shieldBash();
+                        stamina --;
+                        selectMove = false;
+                        break;
+                    }
+                    else {
+                        System.out.println("Not enough stamina.");
+                        break;
+                    }
             }
         }
     }

@@ -12,8 +12,6 @@ public class Wolf extends Enemy {
     @Override
     public void combat() {
 
-        //System.out.println("DEBUG Wolf.java: combat() is running");
-        //System.out.println("DEBUG Wolf.java: " + encounter.toString());
         if (findEnemies().length > 1) {
             int rng = random.nextInt(0, findEnemies().length);
             targetedEnemy = findEnemies()[rng];
@@ -29,7 +27,4 @@ public class Wolf extends Enemy {
     public void basicAttackDescription() {
         System.out.println("The wolf tries to bite " + targetedEnemy + "!");
     }
-
-
-
 }

@@ -1,5 +1,6 @@
 public class Enemy extends Player {
 
+
     public Enemy(GameEngine gameEngine) {
 
         super(gameEngine);

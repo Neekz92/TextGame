@@ -15,12 +15,17 @@ public class Encounter {
     Item[] itemArray = new Item[amountOfItems];
 
     Item potion = new Potion();
+    Item uncommonPotion = new Potion("Uncommon");
 
     Item sword = new Sword();
+    Item uncommonSword = new Sword("Uncommon");
     Item staff = new Staff();
+    Item uncommonStaff = new Staff("Uncommon");
     Item bow = new Bow();
+    Item uncommonBow = new Bow("Uncommon");
 
     Item armor = new Armor();
+    Item uncommonArmor = new Armor("Uncommon");
 
     int amountOfMobs = 0;
     int xpBonus = 0;
