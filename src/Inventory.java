@@ -97,7 +97,8 @@ public class Inventory {
                         player.updateStats();
                         System.out.println("You equipped " + player.armor);
                         removeItem(findItemIndex(player.armor));
-                        break;
+                        player.movementPhaseOptions();
+                        return;
                     }
                     else {
                         System.out.println("Do you want to swap these two armors?");
@@ -112,10 +113,10 @@ public class Inventory {
                                 player.updateStats();
                                 System.out.println("You equipped " + player.armor);
                                 player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                break;
+                                return;
                         }
                     }
-                    break;
+                    return;
                 }
                 else if (selectedItem instanceof Sword) {
                     if (player instanceof Warrior) {
@@ -124,7 +125,7 @@ public class Inventory {
                             player.updateStats();
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
-                            break;
+                            return;
                         }
                         else {
                             System.out.println("Do you want to swap these two weapons?");
@@ -139,14 +140,14 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    break;
+                                    return;
                             }
                         }
-                        break;
+                        return;
                     }
                     else {
                         System.out.println("You are not proficient with this weapon.");
-                        break;
+                        return;
                     }
                 }
                 else if (selectedItem instanceof Staff) {
@@ -156,7 +157,7 @@ public class Inventory {
                             player.updateStats();
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
-                            break;
+                            return;
                         }
                         else {
                             System.out.println("Do you want to swap these two weapons?");
@@ -170,14 +171,14 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    break;
+                                    return;
                             }
                         }
-                        break;
+                        return;
                     }
                     else {
                         System.out.println("You are not proficient with this weapon.");
-                        break;
+                        return;
                     }
                 }
                 else if (selectedItem instanceof Bow) {
@@ -187,7 +188,7 @@ public class Inventory {
                             player.updateStats();
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
-                            break;
+                            return;
                         }
                         else {
                             System.out.println("Do you want to swap these two weapons?");
@@ -201,21 +202,31 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    break;
+                                    return;
                                 case 2:
                                     player.movementPhaseOptions();
-                                    break;
+                                    return;
                             }
                         }
                     }
                     else {
                         System.out.println("You are not proficient with this weapon.");
-                        break;
+                        return;
                     }
                 }
+                else if (selectedItem instanceof Potion) {
+                    System.out.println("You drank a " + selectedItem + " and healed for " + selectedItem.healAmount + " hp!");
+                    player.currentHp = player.currentHp + selectedItem.healAmount;
+                    if (player.currentHp > player.finalHp) {
+                        player.currentHp = player.finalHp;
+                    }
+                    removeItem(findItemIndex(selectedItem));
+                    return;
+                }
+                return;
             case 2:
                 System.out.println("Trade is not yet implemented.");
-                break;
+                return;
             default: break;
         }
         System.out.println("########################");

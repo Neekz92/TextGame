@@ -19,6 +19,8 @@ public class Item {
     int hp;
     int[] statOptions = new int[4];
 
+    int healAmount;
+
     public Item(String rarity) {
 
         this.rarity = rarity;
@@ -37,6 +39,15 @@ public class Item {
         statOptions[1] = defense;
         statOptions[2] = luck;
         statOptions[3] = hp;
+
+        switch (rarity) {
+            case "Common": healAmount = random.nextInt(5,11); break;
+            case "Uncommon": healAmount = random.nextInt(10, 21); break;
+            case "Rare": healAmount = random.nextInt(15,31); break;
+            case "Legendary": healAmount = Integer.MAX_VALUE; break;
+        }
+
+
 
         switch (rarity) {
             case "Common": price = random.nextInt(1,11); break;

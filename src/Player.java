@@ -486,6 +486,7 @@ public class Player {
                 purchasedItem.luck = selectedItem.luck;
                 purchasedItem.hp = selectedItem.hp;
                 purchasedItem.price = selectedItem.price;
+                purchasedItem.healAmount = selectedItem.healAmount;
 
                 if (selectedItem.price > gold) {
                     System.out.println("You are too broke to afford this item.");
