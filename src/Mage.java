@@ -96,11 +96,12 @@ public class Mage extends Player {
         System.out.println("[ 2 ] Cast a Spell");
         System.out.println("[ 3 ] Run Away");
 
-        int input = scanner.nextInt();
-        scanner.nextLine();
 
         boolean selectMove = true;
         while (selectMove) {
+            int input = scanner.nextInt();
+            scanner.nextLine();
+
             switch (input) {
                 case 1:
                     System.out.println("Select a Target");
@@ -110,19 +111,26 @@ public class Mage extends Player {
                     break;
 
                 case 2:
-                    System.out.println("Select a spell.");
-                    showSpells();
-                    spellSelect();
-                    System.out.println("Crackling lightning erupts from " + this + "!");
-                    for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
-                        if (encounter.playerArray[i] instanceof Enemy) {
-                            targetedEnemy = encounter.playerArray[i];
-                            chainLightning();
-                            System.out.println("");
+                    if (stamina >= 1) {
+                        System.out.println("Select a spell.");
+                        showSpells();
+                        stamina--;
+                        spellSelect();
+                        System.out.println("Crackling lightning erupts from " + this + "!");
+                        for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
+                            if (encounter.playerArray[i] instanceof Enemy) {
+                                targetedEnemy = encounter.playerArray[i];
+                                chainLightning();
+                                System.out.println("");
+                            }
                         }
+                        selectMove = false;
+                        break;
                     }
-                    selectMove = false;
-                    break;
+                    else {
+                        System.out.println("Not enough stamina.");
+                        break;
+                    }
             }
         }
     }

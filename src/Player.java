@@ -43,6 +43,7 @@ public class Player {
     int finalHp;
 
     int stamina = 5;
+    int maxStamina = 5;
 
 
     private Location location;
@@ -120,41 +121,6 @@ public class Player {
     public void setXp(int xp) {
         this.xp = xp;
     }
-
-//    public void addItem(Item item) {
-//
-//        amountOfItems++;
-//        Item[] inventoryClone = new Item[amountOfItems];
-//
-//        for (int i = 0; i < inventory.length; i++) {
-//            inventoryClone[i] = inventory[i];
-//        }
-//        inventoryClone[amountOfItems - 1] = item;
-//        inventory = inventoryClone;
-//    }
-
-//    public int findItemIndex(Item item) {
-//
-//        for (int i = 0; i < inventory.length; i++) {
-//            if (item.equals(inventory[i])) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
-
-//    public void removeItem(int index) {
-//
-//        amountOfItems --;
-//        Item[] inventoryClone = new Item[amountOfItems];
-//        for (int i = 0; i < findItemIndex(selectedItem); i++) {
-//            inventoryClone[i] = inventory[i];
-//        }
-//        for (int i = findItemIndex(selectedItem); i < inventoryClone.length; i++) {
-//            inventoryClone[i] = inventory[i + 1];
-//        }
-//        inventory = inventoryClone;
-//    }
 
     public Location getLocation() {
         return location;
@@ -355,6 +321,7 @@ public class Player {
         System.out.println("*** Encounter Phase ***");
         encounter.displayParticipants();
         System.out.println("########################");
+        System.out.println(this + "'s stamina: " + stamina);
         System.out.println("What do you do?");
         encounter.options();
     }
@@ -427,7 +394,7 @@ public class Player {
                 scanner.nextLine();
                 switch (input) {
                     case 1: inputSelection = false; marketplace(); return false;
-                    case 2: currentHp = finalHp; System.out.println("You wounds have healed, and you are fully rested."); inputSelection = false; return true;
+                    case 2: currentHp = finalHp; stamina = maxStamina; System.out.println("You wounds have healed, and you are fully rested."); inputSelection = false; return true;
                 }
             }
             catch (Exception e) {

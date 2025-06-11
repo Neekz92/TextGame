@@ -105,12 +105,18 @@ public class Archer extends Player {
                     selectMove = false;
                     break;
                 case 2:
-                    System.out.println("Select a Target");
-                    showTargetOptions();
-                    targetSelect();
-                    criticalShot();
-                    selectMove = false;
-                    break;
+                    if (stamina >= 1) {
+                        System.out.println("Select a Target");
+                        showTargetOptions();
+                        targetSelect();
+                        criticalShot();
+                        selectMove = false;
+                        break;
+                    }
+                    else {
+                        System.out.println("Not enough stamina.");
+                        break;
+                    }
             }
         }
     }

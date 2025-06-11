@@ -18,11 +18,11 @@ public class Warrior extends Player {
         System.out.println("[ 2 ] Shield Bash Combo");
         System.out.println("[ 3 ] Run Away");
 
-        int input = scanner.nextInt();
-        scanner.nextLine();
 
         boolean selectMove = true;
         while (selectMove) {
+            int input = scanner.nextInt();
+            scanner.nextLine();
             switch (input) {
                 case 1:
                     System.out.println("Select a Target");

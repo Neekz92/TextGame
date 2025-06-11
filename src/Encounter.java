@@ -151,8 +151,8 @@ public class Encounter {
 
             for (int j = 0; j < (playerArray[i].finalLuck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
-                int rng = random.nextInt(1, 2);  //  There's a 1 in 5 chance the current player will receive an item drop.
-                if (rng == 1) {
+                int rng = random.nextInt(1, 6);  //  There's a 1 in 5 chance the current player will receive an item drop.
+                if (rng == 5) {
 
                     int randomDrop;
                     if (amountOfItems > 0) {  //  random.nextInt() won't work unless the first number is LESS THAN the second number. it won't work if its 0, 0
