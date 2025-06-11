@@ -170,11 +170,10 @@ public class GameEngine {
                             }
                         }
                     }
-                    //System.out.println("DEBUG GameEngine.java: " + player.getName());
                     player.encounterPhase();
-                    if (player.isStunned) {  //  If the player is stunned, don't attack.
-                        System.out.println(player.getName() + " is stunned!");
-                        player.isStunned = false;
+                    if (player.stunTimer > 0) {  //  If the player is stunned, don't attack.
+                        System.out.println(player.getName() + " is stunned for " + player.stunTimer + " turns!");
+                        player.stunTimer --;
                     }
                     else {
                         if (player.encounter instanceof CombatEncounter) {

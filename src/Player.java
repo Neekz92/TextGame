@@ -50,6 +50,7 @@ public class Player {
     Encounter encounter;
     boolean hasEncounter = false;
     boolean isStunned = false;
+    int stunTimer = 0;
     boolean didASocialEncounterThisturn = false;
 
 
@@ -289,7 +290,6 @@ public class Player {
             System.out.println("Failure! Rolled a " + rng + " + " + (finalLuck / 5));
             return rng;
         }
-
     }
 
     public int rollAttack() {
@@ -533,6 +533,24 @@ public class Player {
         System.out.println("Gold: " + getGold());
         System.out.println("");
         movementPhaseOptions();
+    }
+
+    public void run() {
+
+        System.out.println(this + " tries to escape the battle!");
+        if (rollLuck() + (finalLuck / 5) > 10) {
+            for (int i = 0; i < encounter.playerArray.length; i++) {
+                if (encounter.playerArray[i] instanceof  Enemy) {
+                    System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
+                    encounter.playerArray[i].targetedEnemy = this;
+                    encounter.playerArray[i].basicAttack();
+                    System.out.println("");
+                }
+            }
+            encounter.removePlayer(this);
+            hasEncounter = false;
+            movementPhase();
+        }
     }
 
     @Override

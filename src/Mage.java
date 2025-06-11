@@ -131,6 +131,10 @@ public class Mage extends Player {
                         System.out.println("Not enough stamina.");
                         break;
                     }
+                case 3:
+                    run();
+                    selectMove = false;
+                    break;
             }
         }
     }
