@@ -1,4 +1,13 @@
 public class Warrior extends Player {
+
+    Skill skill;
+    Skill selectedSkill;
+
+    int amountOfSkills = 0;
+
+    Skill[] skillList = new Skill[amountOfSkills];
+    Skill[] allSkills = new Skill[2];
+
     String shield = null;
 
     public Warrior(GameEngine gameEngine, String name) {
@@ -9,13 +18,16 @@ public class Warrior extends Player {
         defense = 5;
 
         weapon = new Sword();
+
+        Skill shieldBashCombo = new ShieldBashCombo();
+        addSkill(shieldBashCombo);
     }
 
     @Override
     public void combat() {
 
         System.out.println("[ 1 ] Basic Attack");
-        System.out.println("[ 2 ] Shield Bash Combo");
+        System.out.println("[ 2 ] Use a skill");
         System.out.println("[ 3 ] Run Away");
 
 
@@ -32,10 +44,13 @@ public class Warrior extends Player {
                     break;
                 case 2:
                     if (stamina >= 1) {
+                        System.out.println("Select a skill");
+                        showSkills();
+                        stamina--;
+                        skillSelect();
                         System.out.println("Shield Bash Combo");
                         showTargetOptions();
                         shieldBash();
-                        stamina --;
                         selectMove = false;
                         break;
                     }
@@ -49,6 +64,32 @@ public class Warrior extends Player {
                     break;
             }
         }
+    }
+
+    public void showSkills() {
+
+        for (int i = 0; i < amountOfSkills; i++) {
+            System.out.println("[ " + (i + 1) + " ] " + skillList[i].name);
+        }
+    }
+
+    public Skill skillSelect() {
+
+        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+        scanner.nextLine();
+
+        return skillList[input];
+    }
+
+    public void addSkill(Skill skill) {
+
+        amountOfSkills ++;
+        Skill[] skillListClone = new Skill[amountOfSkills];
+        for (int i = 0; i < skillList.length; i++) {
+            skillListClone[i] = skillList[i];
+        }
+        skillListClone[amountOfSkills - 1] = skill;
+        skillList = skillListClone;
     }
 
     @Override

@@ -21,8 +21,6 @@ public class Mage extends Player {
         weapon = new Staff();
     }
 
-
-
     public void addSpell(Spell spell) {
 
         amountOfSpells ++;
@@ -34,15 +32,12 @@ public class Mage extends Player {
         spellBook = spellBookClone;
     }
 
-
     public void showSpells() {
 
         for (int i = 0; i < amountOfSpells; i++) {
             System.out.println("[ 1 ] " + spellBook[i].name);
         }
     }
-
-
 
     public Spell spellSelect() {
 
@@ -51,8 +46,6 @@ public class Mage extends Player {
 
         return spellBook[input];
     }
-
-
 
     public void chainLightning() {
 
@@ -87,7 +80,6 @@ public class Mage extends Player {
             System.out.println(targetedEnemy + " managed to dodge the bolt of Chain Lightning!");
         }
     }
-
 
     @Override
     public void combat() {
@@ -142,8 +134,6 @@ public class Mage extends Player {
     public String toString() {
         return super.toString() + " the Mage";
     }
-
-
 
     public void basicAttackDescription() {
         System.out.println(this + " launches a bolt of magic at " + targetSelect());
