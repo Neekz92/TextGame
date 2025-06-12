@@ -24,7 +24,7 @@ public class Player {
     int currentHp;
     private int positionX;
     private int positionY;
-    private int gold = 5;
+    private int gold = 500;
     private int xp;
     int chosenStat = 0;
     String chosenStatName = "";
@@ -60,7 +60,6 @@ public class Player {
         this.location = gameEngine.map.findLocation(getX(), getY());
         this.xp = 15;
         updateStats();
-
     }
 
     public Player(GameEngine gameEngine) {

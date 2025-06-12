@@ -9,14 +9,20 @@ public class Mage extends Player {
 
 
     public Mage(GameEngine gameEngine, String name) {
+
         super(gameEngine, name);
         setHp(8);
         currentHp = getHp();
         attack = 5;
         defense = 5;
         luck = 0;
+
         Spell chainLightning = new ChainLightning();
-        addSpell(chainLightning);
+        Spell heal = new Heal();
+        allSpells[0] = chainLightning;
+        allSpells[1] = heal;
+
+        addSpell(allSpells[random.nextInt(0,2)]);
 
         weapon = new Staff();
     }
@@ -35,7 +41,7 @@ public class Mage extends Player {
     public void showSpells() {
 
         for (int i = 0; i < amountOfSpells; i++) {
-            System.out.println("[ 1 ] " + spellBook[i].name);
+            System.out.println("[ " + (i + 1) + " ] " + spellBook[i].name);
         }
     }
 
@@ -81,6 +87,19 @@ public class Mage extends Player {
         }
     }
 
+    public void heal() {
+
+        System.out.println("Select a target");
+        showTargetOptions();
+        targetSelect();
+        int restoreAmount = random.nextInt(0, 10 + (finalLuck / 10));
+        System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
+        targetedEnemy.currentHp += restoreAmount;
+        if (targetedEnemy.currentHp > targetedEnemy.finalHp) {
+            targetedEnemy.currentHp = targetedEnemy.finalHp;
+        }
+    }
+
     @Override
     public void combat() {
 
@@ -107,15 +126,23 @@ public class Mage extends Player {
                         System.out.println("Select a spell.");
                         showSpells();
                         stamina--;
-                        spellSelect();
-                        System.out.println("Crackling lightning erupts from " + this + "!");
-                        for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
-                            if (encounter.playerArray[i] instanceof Enemy) {
-                                targetedEnemy = encounter.playerArray[i];
-                                chainLightning();
-                                System.out.println("");
+                        selectedSpell = spellSelect();
+
+                        if (selectedSpell.name == "Chain Lightning") {
+                            System.out.println("Crackling lightning erupts from " + this + "!");
+                            for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
+                                if (encounter.playerArray[i] instanceof Enemy) {
+                                    targetedEnemy = encounter.playerArray[i];
+                                    chainLightning();
+                                    System.out.println("");
+                                }
                             }
                         }
+                        else if (selectedSpell.name == "Heal") {
+                            System.out.println("A warm pulse of wound-mending magic surges from " + this);
+                            heal();
+                        }
+
                         selectMove = false;
                         break;
                     }

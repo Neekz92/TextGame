@@ -107,6 +107,7 @@ public class Archer extends Player {
                 case 2:
                     if (stamina >= 1) {
                         System.out.println("Select a Target");
+                        stamina --;
                         showTargetOptions();
                         targetSelect();
                         criticalShot();

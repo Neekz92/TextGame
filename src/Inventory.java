@@ -7,6 +7,9 @@ public class Inventory {
     Item[] itemArray = new Item[amountOfItems];
     Player player;
 
+    Item selectedItem;
+
+
     public Inventory() {
     }
 
@@ -48,10 +51,15 @@ public class Inventory {
     public void displayInventory() {
 
         if (player.inventory.itemArray.length == 0) {
+            System.out.println("Armor: " + player.armor + " === " + "Attack: " + player.armor.attack + " | Defense: " + player.armor.defense + " | Luck: " + player.armor.luck + " | HP: " + player.armor.hp);
+            System.out.println("Weapon: " + player.weapon + " === " + "Attack: " + player.weapon.attack + " | Defense: " + player.weapon.defense + " | Luck: " + player.weapon.luck + " | HP: " + player.weapon.hp);
+            System.out.println("");
             System.out.println("Your Inventory is empty.");
-            return;  // CHATGPT NOTICE ME: like this?
         } else {
             System.out.println(player + "'s Inventory:");
+            System.out.println("Armor: " + player.armor + " === " + "Attack: " + player.armor.attack + " | Defense: " + player.armor.defense + " | Luck: " + player.armor.luck + " | HP: " + player.armor.hp);
+            System.out.println("Weapon: " + player.weapon + " === " + "Attack: " + player.weapon.attack + " | Defense: " + player.weapon.defense + " | Luck: " + player.weapon.luck + " | HP: " + player.weapon.hp);
+            System.out.println("");
             for (int i = 0; i < player.inventory.itemArray.length; i++) {
                 Item currentItem = player.inventory.itemArray[i];
                 if (!(currentItem instanceof Potion)) {
@@ -79,11 +87,11 @@ public class Inventory {
             return;
         }
 
-        Item selectedItem = player.inventory.itemArray[itemSelect - 1];
+        selectedItem = player.inventory.itemArray[itemSelect - 1];
 
         System.out.println("What would you like to do with " + selectedItem + "?");
         System.out.println("[ 1 ] Use");
-        System.out.println("[ 2 ] Trade");
+        System.out.println("[ 2 ] Gift");
         System.out.println("[ 3 ] Exit");
 
         int itemInteraction = scanner.nextInt();
@@ -99,8 +107,7 @@ public class Inventory {
                         removeItem(player.armor);
                         player.movementPhaseOptions();
                         return;
-                    }
-                    else {
+                    } else {
                         System.out.println("Do you want to swap these two armors?");
                         System.out.println("[ 1 ] Yes");
                         System.out.println("[ 2 ] No");
@@ -118,8 +125,7 @@ public class Inventory {
                         }
                     }
                     return;
-                }
-                else if (selectedItem instanceof Sword) {
+                } else if (selectedItem instanceof Sword) {
                     if (player instanceof Warrior) {
                         if (player.weapon == null) {
                             player.weapon = selectedItem;
@@ -127,8 +133,7 @@ public class Inventory {
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
                             return;
-                        }
-                        else {
+                        } else {
                             System.out.println("Do you want to swap these two weapons?");
                             System.out.println("[ 1 ] Yes");
                             System.out.println("[ 2 ] No");
@@ -146,13 +151,11 @@ public class Inventory {
                             }
                         }
                         return;
-                    }
-                    else {
+                    } else {
                         System.out.println("You are not proficient with this weapon.");
                         return;
                     }
-                }
-                else if (selectedItem instanceof Staff) {
+                } else if (selectedItem instanceof Staff) {
                     if (player instanceof Mage) {
                         if (player.weapon == null) {
                             player.weapon = selectedItem;
@@ -160,8 +163,7 @@ public class Inventory {
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
                             return;
-                        }
-                        else {
+                        } else {
                             System.out.println("Do you want to swap these two weapons?");
                             System.out.println("[ 1 ] Yes");
                             System.out.println("[ 2 ] No");
@@ -178,13 +180,11 @@ public class Inventory {
                             }
                         }
                         return;
-                    }
-                    else {
+                    } else {
                         System.out.println("You are not proficient with this weapon.");
                         return;
                     }
-                }
-                else if (selectedItem instanceof Bow) {
+                } else if (selectedItem instanceof Bow) {
                     if (player instanceof Archer) {
                         if (player.weapon == null) {
                             player.weapon = selectedItem;
@@ -192,8 +192,7 @@ public class Inventory {
                             System.out.println("You equipped " + player.weapon);
                             // TODO: remove weapon from inventory
                             return;
-                        }
-                        else {
+                        } else {
                             System.out.println("Do you want to swap these two weapons?");
                             System.out.println("[ 1 ] Yes");
                             System.out.println("[ 2 ] No");
@@ -212,13 +211,11 @@ public class Inventory {
                                     return;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("You are not proficient with this weapon.");
                         return;
                     }
-                }
-                else if (selectedItem instanceof Potion) {
+                } else if (selectedItem instanceof Potion) {
                     System.out.println("You drank a " + selectedItem + " and healed for " + selectedItem.healAmount + " hp!");
                     player.currentHp = player.currentHp + selectedItem.healAmount;
                     if (player.currentHp > player.finalHp) {
@@ -230,11 +227,53 @@ public class Inventory {
                 }
                 return;
             case 2:
-                System.out.println("Trade is not yet implemented.");
-                return;
+                System.out.println("Who would you like to gift [ " + selectedItem + " ] to?");
+                trade();
         }
-        return;
-//        System.out.println("########################");
-//      player.movementPhaseOptions();
+    }
+
+
+    public Player[] partyArray() {
+
+        int amountOfPartyMembers = 0;
+        for (int i = 0; i < player.gameEngine.playerArray.length; i++) {
+            if (!((player.gameEngine.playerArray[i]) instanceof Enemy)) {
+                amountOfPartyMembers++;
+            }
+        }
+
+        Player[] partyArray = new Player[amountOfPartyMembers];
+        for (int i = 0; i < player.gameEngine.playerArray.length; i++) {
+            if (!(player.gameEngine.playerArray[i] instanceof Enemy)) {
+                partyArray[i] = player.gameEngine.playerArray[i];
+            }
+        }
+        return partyArray;
+    }
+
+
+    public void trade() {
+
+        for (int i = 0; i < partyArray().length; i++) {
+            System.out.println("[ " + (i + 1) + " ] " + partyArray()[i]);
+        }
+
+        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the partyArray which is [0]. It's n - 1
+        scanner.nextLine();
+
+        player.targetedEnemy = partyArray()[input];
+
+        if (player.getLocation().equals(player.targetedEnemy.getLocation())) {
+            System.out.println("You have gifted your " + selectedItem + " to " + player.targetedEnemy);
+            player.targetedEnemy.inventory.addItem(selectedItem);
+            removeItem(selectedItem);
+        } else {
+            System.out.println("You are not in the same location, how are you going to gift them anything?");
+        }
     }
 }
+
+
+//        return;
+//        System.out.println("########################");
+//      player.movementPhaseOptions();

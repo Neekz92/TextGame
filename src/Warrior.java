@@ -47,12 +47,20 @@ public class Warrior extends Player {
                         System.out.println("Select a skill");
                         showSkills();
                         stamina--;
-                        skillSelect();
-                        System.out.println("Shield Bash Combo");
-                        showTargetOptions();
-                        shieldBash();
-                        selectMove = false;
-                        break;
+
+                        if (skillSelect().name == "Shield-Bash Combo") {
+                            System.out.println("Shield Bash Combo");
+                            showTargetOptions();
+                            shieldBash();
+                            selectMove = false;
+                            break;
+                        }
+                        // Add more skills here
+
+
+
+
+
                     }
                     else {
                         System.out.println("Not enough stamina.");

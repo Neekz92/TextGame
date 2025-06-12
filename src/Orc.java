@@ -62,6 +62,7 @@ public class Orc extends Enemy {
         if (rollAttack() + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
             System.out.println(targetedEnemy + " was bashed in the head by the orc!");
             System.out.println(targetedEnemy + " is dazed!");
+            targetedEnemy.stunTimer = 2;
             targetedEnemy.isStunned = true;
             return;
         }
