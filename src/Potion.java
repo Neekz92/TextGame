@@ -16,4 +16,8 @@ public class Potion extends Item {
         potion.name = "Potion";
         return potion;
     }
+
+    public String displayItem() {
+        return rarity + " " + name;
+    }
 }

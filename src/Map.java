@@ -18,13 +18,23 @@ public class Map {
     Location kingsRiverRapids;
     Location kingsBasin;
 
+    Location greentreeWoods;
+    Location greentreeForest;
+    Location templeOfLeaves;
+    Location woodsOfSilence;
+    Location southShore;
+    Location bastardsBay;
+    Location lutewardPort;
+    Location cityThree;
+
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[20];  //  12
+        locationArray = new Location[21];  //  20
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
+        //cityOne.add(new MysteriousWizard());
         cityOne.name = "City One";
         locationArray[0] = cityOne;
         cityOne.isTown = true;
@@ -109,6 +119,69 @@ public class Map {
         kingsBasin.add(new BanditAttack());
         kingsBasin.name = "King's Delta";
         locationArray[8] = kingsBasin;
+
+
+        greentreeWoods = new Location(3,0);
+        greentreeWoods.add(new BanditAttack());
+        greentreeWoods.add(new WolfAttack());
+        greentreeWoods.add(new OrcAttack());
+        greentreeWoods.name = "Greentree Woods";
+        locationArray[13] = greentreeWoods;
+
+
+        greentreeForest = new Location(4,0);
+        greentreeForest.add(new BanditAttack());
+        greentreeForest.add(new WolfAttack());
+        greentreeForest.add(new OrcAttack());
+        greentreeForest.name = "Greentree Forest";
+        locationArray[17] = greentreeForest;
+
+
+        templeOfLeaves = new Location(5,0);
+        templeOfLeaves.add(new BanditAttack());
+        templeOfLeaves.add(new WolfAttack());
+        templeOfLeaves.add(new OrcAttack());
+        templeOfLeaves.name = "Temple of Leaves";
+        locationArray[14] = templeOfLeaves;
+
+
+        woodsOfSilence = new Location(6,0);
+        woodsOfSilence.add(new BanditAttack());
+        woodsOfSilence.add(new WolfAttack());
+        woodsOfSilence.add(new OrcAttack());
+        woodsOfSilence.name = "Woods of Silence";
+        locationArray[15] = woodsOfSilence;
+
+
+        southShore = new Location(7,0);
+        southShore.add(new BanditAttack());
+        southShore.add(new WolfAttack());
+        southShore.add(new OrcAttack());
+        southShore.name = "South Shore";
+        locationArray[16] = southShore;
+
+
+        bastardsBay = new Location(8,0);
+        bastardsBay.add(new BanditAttack());
+        bastardsBay.add(new WolfAttack());
+        bastardsBay.name = "Bastard's Bay";
+        locationArray[18] = bastardsBay;
+
+
+        lutewardPort = new Location(9,0);
+        lutewardPort.add(new BanditAttack());
+        lutewardPort.add(new WolfAttack());
+        lutewardPort.name = "Luteward Port";
+        locationArray[19] = lutewardPort;
+
+
+        cityThree = new Location(10,0);
+        cityThree.add(new CryingChild());
+        cityThree.name = "City Three";
+        cityThree.isTown = true;
+        locationArray[20] = cityThree;
+
+
 
 
 

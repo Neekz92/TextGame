@@ -51,25 +51,23 @@ public class Inventory {
     public void displayInventory() {
 
         if (player.inventory.itemArray.length == 0) {
-            System.out.println("Armor: " + player.armor + " === " + "Attack: " + player.armor.attack + " | Defense: " + player.armor.defense + " | Luck: " + player.armor.luck + " | HP: " + player.armor.hp);
-            System.out.println("Weapon: " + player.weapon + " === " + "Attack: " + player.weapon.attack + " | Defense: " + player.weapon.defense + " | Luck: " + player.weapon.luck + " | HP: " + player.weapon.hp);
-            System.out.println("");
             System.out.println("Your Inventory is empty.");
+            displayCurrentGear();
         } else {
             System.out.println(player + "'s Inventory:");
-            System.out.println("Armor: " + player.armor + " === " + "Attack: " + player.armor.attack + " | Defense: " + player.armor.defense + " | Luck: " + player.armor.luck + " | HP: " + player.armor.hp);
-            System.out.println("Weapon: " + player.weapon + " === " + "Attack: " + player.weapon.attack + " | Defense: " + player.weapon.defense + " | Luck: " + player.weapon.luck + " | HP: " + player.weapon.hp);
-            System.out.println("");
+            displayCurrentGear();
             for (int i = 0; i < player.inventory.itemArray.length; i++) {
                 Item currentItem = player.inventory.itemArray[i];
-                if (!(currentItem instanceof Potion)) {
-                    System.out.println("[ " + (i + 1) + " ] " + currentItem + " === " + "Attack: " + currentItem.attack + " | Defense: " + currentItem.defense + " | " + "Luck: " + currentItem.luck + " | " + "HP: " + currentItem.hp);
-                } else {
-                    System.out.println("[ " + (i + 1) + " ] " + currentItem);
-                }
+                System.out.println("[ " + (i + 1) + " ] " + currentItem.displayItem());
             }
             System.out.println("[ 0 ] Exit");
         }
+    }
+
+    public void displayCurrentGear() {
+        System.out.println("Armor: " + player.armor + " === " + "Attack: " + player.armor.attack + " | Defense: " + player.armor.defense + " | Luck: " + player.armor.luck + " | HP: " + player.armor.hp);
+        System.out.println("Weapon: " + player.weapon + " === " + "Attack: " + player.weapon.attack + " | Defense: " + player.weapon.defense + " | Luck: " + player.weapon.luck + " | HP: " + player.weapon.hp);
+        System.out.println("");;
     }
 
     public void openInventory() {
@@ -92,13 +90,23 @@ public class Inventory {
         System.out.println("What would you like to do with " + selectedItem + "?");
         System.out.println("[ 1 ] Use");
         System.out.println("[ 2 ] Gift");
-        System.out.println("[ 3 ] Exit");
+        System.out.println("[ 0 ] Exit");
 
         int itemInteraction = scanner.nextInt();
         scanner.nextLine();
 
         switch (itemInteraction) {
             case 1:
+
+                if (selectedItem instanceof Spell) {
+                    if (player instanceof Mage) {
+                        ((Mage) player).addSpell((Spell) selectedItem);
+                        selectedItem.name = "Chain-Lightning";
+                        player.inventory.removeItem(selectedItem);
+                        System.out.println(player + " learned how to cast " + selectedItem.name);
+                        player.movementPhaseOptions();
+                    }
+                }
                 if (selectedItem instanceof Armor) {
                     if (player.armor == null) {
                         player.armor = (Armor) selectedItem;
@@ -229,6 +237,7 @@ public class Inventory {
             case 2:
                 System.out.println("Who would you like to gift [ " + selectedItem + " ] to?");
                 trade();
+            case 0: player.movementPhaseOptions();
         }
     }
 

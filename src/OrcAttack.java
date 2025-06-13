@@ -2,6 +2,8 @@ public class OrcAttack extends CombatEncounter {
 
     public OrcAttack() {
 
+        xpBonus = 5;
+
     }
 
     @Override
@@ -10,6 +12,7 @@ public class OrcAttack extends CombatEncounter {
         distributedRewards = false;
         //addItem(potion);  //  Adding a potion to this encounter's loot pool
         addItem(uncommonPotion);
+
 
         addItem(sword);
         addItem(uncommonSword);
@@ -22,6 +25,11 @@ public class OrcAttack extends CombatEncounter {
 
         addItem(armor);
         addItem(uncommonArmor);
+
+
+
+        addItem(chainLightning);
+        addItem(heal);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;

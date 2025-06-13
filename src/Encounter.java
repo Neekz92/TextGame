@@ -27,6 +27,9 @@ public class Encounter {
     Item armor = new Armor();
     Item uncommonArmor = new Armor("Uncommon");
 
+    Item chainLightning = new ChainLightning();
+    Item heal = new Heal();
+
     int amountOfMobs = 0;
     int xpBonus = 0;
 

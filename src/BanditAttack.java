@@ -14,6 +14,9 @@ public class BanditAttack extends CombatEncounter {
         addItem(bow);
         addItem(armor);
 
+        addItem(chainLightning);
+        addItem(heal);
+
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
         System.out.println("You are ambushed by " + (rng) + " bandits at " + gameEngine.player.getLocation() + "!");

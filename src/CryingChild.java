@@ -14,7 +14,6 @@ public class CryingChild extends SocialEncounter {
         System.out.println("[ 1 ] Help the child find his parents");
         System.out.println("[ 2 ] Ignore the child. You have more important things to do.");
 
-
         boolean selectChoice = true;
         while (selectChoice) {
             try {

@@ -24,7 +24,7 @@ public class Player {
     int currentHp;
     private int positionX;
     private int positionY;
-    private int gold = 500;
+    private int gold = 5;
     private int xp;
     int chosenStat = 0;
     String chosenStatName = "";
@@ -193,7 +193,6 @@ public class Player {
                 } else if (input == 6) {
                     updateStats();
                     displayStats();
-
                 } else if (input == 7) {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
                         //System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
@@ -357,7 +356,7 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -370,7 +369,7 @@ public class Player {
 
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
 
-            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(0, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -426,6 +425,9 @@ public class Player {
                             if (location.shop.itemArray[i] instanceof Potion) {
                                 System.out.println("[ " + (i + 1) + " ] " + location.shop.itemArray[i] + " === " + location.shop.itemArray[i].price + " gold");
                             }
+                            else if (location.shop.itemArray[i] instanceof Spell || location.shop.itemArray[i] instanceof Skill) {
+                                System.out.println("[ " + (i + 1) + " ] " + location.shop.itemArray[i].displayItem());
+                            }
                             else {
                                 System.out.println("[ " + (i + 1) + " ] " + location.shop.itemArray[i] + " === Attack: " + location.shop.itemArray[i].attack + " | " + "Defense: " + location.shop.itemArray[i].defense + " | " + "Luck: " + location.shop.itemArray[i].luck + " | " + "HP: " + location.shop.itemArray[i].hp + " === " + location.shop.itemArray[i].price + " gold");
                             }
@@ -443,7 +445,7 @@ public class Player {
 
                         else {
                             for (int i = 0; i < inventory.itemArray.length; i++) {
-                                if (inventory.itemArray[i] instanceof Potion) {
+                                if (inventory.itemArray[i] instanceof Potion || inventory.itemArray[i] instanceof Spell || inventory.itemArray[i] instanceof Skill || inventory.itemArray[i] instanceof Stunt) {
                                     System.out.println("[ " + (i + 1) + " ] " + inventory.itemArray[i] + " === " + inventory.itemArray[i].price + " gold");
                                 }
                                 else {
@@ -520,7 +522,8 @@ public class Player {
 
     public void basicAttackDescription() {}
 
-    public void displayStats() {
+    public void displayStats() {;
+
         updateStats();
         System.out.println(this);
         System.out.println("Attack: " + finalAttack);

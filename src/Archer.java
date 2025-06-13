@@ -1,6 +1,11 @@
 public class Archer extends Player {
 
-    String quiver = null;
+    Stunt selectedStunt;
+
+    Stunt stunt = new Stunt();
+    int amountOfStunts = 0;
+    Stunt[] stuntList = new Stunt[amountOfStunts];
+    Stunt[] allStunts = new Stunt[2];
 
     public Archer(GameEngine gameEngine, String name) {
         super(gameEngine, name);
@@ -10,6 +15,28 @@ public class Archer extends Player {
         defense = 5;
 
         weapon = new Bow();
+
+        Stunt criticalShot = new CriticalShot();
+        addStunt(criticalShot);
+    }
+
+    public void addStunt(Stunt stunt) {
+
+        amountOfStunts ++;
+        Stunt[] stuntListClone = new Stunt[amountOfStunts];
+        for (int i = 0; i < stuntList.length; i++) {
+            stuntListClone[i] = stuntList[i];
+        }
+        stuntListClone[amountOfStunts - 1] = stunt;
+        stuntList = stuntListClone;
+    }
+
+    public Stunt stuntSelect() {
+
+        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+        scanner.nextLine();
+
+        return stuntList[input];
     }
 
 
@@ -84,12 +111,20 @@ public class Archer extends Player {
         }
     }
 
+    public void showStunts() {
+
+        for (int i = 0; i < stuntList.length; i++) {
+            System.out.println("[ " + (i + 1) + " ] " + stuntList[i].name);
+        }
+
+    }
+
     @Override
     public void combat() {
 
         updateStats();
         System.out.println("[ 1 ] Basic Attack");
-        System.out.println("[ 2 ] Critical Shot");
+        System.out.println("[ 2 ] Use a Stunt");
         System.out.println("[ 3 ] Run Away");
 
         int input = scanner.nextInt();
@@ -106,13 +141,18 @@ public class Archer extends Player {
                     break;
                 case 2:
                     if (stamina >= 1) {
-                        System.out.println("Select a Target");
-                        stamina --;
-                        showTargetOptions();
-                        targetSelect();
-                        criticalShot();
-                        selectMove = false;
-                        break;
+                        System.out.println("Select a Stunt");
+                        showStunts();
+
+                        if (stuntSelect().name.equals("Critical-Shot")) {
+                            System.out.println("Select a Target");
+                            stamina--;
+                            showTargetOptions();
+                            targetSelect();
+                            criticalShot();
+                            selectMove = false;
+                            break;
+                        }
                     }
                     else {
                         System.out.println("Not enough stamina.");

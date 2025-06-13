@@ -11,11 +11,11 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
 
         super(gameEngine, name);
-        setHp(8);
+        setHp(800);
         currentHp = getHp();
-        attack = 5;
+        attack = 500000;
         defense = 5;
-        luck = 0;
+        luck = 220;
 
         Spell chainLightning = new ChainLightning();
         Spell heal = new Heal();
@@ -43,12 +43,17 @@ public class Mage extends Player {
         for (int i = 0; i < amountOfSpells; i++) {
             System.out.println("[ " + (i + 1) + " ] " + spellBook[i].name);
         }
+        System.out.println("[ 0 ] Exit");
     }
 
     public Spell spellSelect() {
 
         int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
         scanner.nextLine();
+
+        if (input == -1) {
+            return null;
+        }
 
         return spellBook[input];
     }
@@ -94,18 +99,23 @@ public class Mage extends Player {
         targetSelect();
         int restoreAmount = random.nextInt(0, 10 + (finalLuck / 10));
         System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
+        targetedEnemy.updateStats();
         targetedEnemy.currentHp += restoreAmount;
         if (targetedEnemy.currentHp > targetedEnemy.finalHp) {
             targetedEnemy.currentHp = targetedEnemy.finalHp;
         }
     }
 
-    @Override
-    public void combat() {
-
+    private void combatOptions() {
         System.out.println("[ 1 ] Basic Attack");
         System.out.println("[ 2 ] Cast a Spell");
         System.out.println("[ 3 ] Run Away");
+    }
+
+    @Override
+    public void combat() {
+
+        combatOptions();
 
 
         boolean selectMove = true;
@@ -125,15 +135,19 @@ public class Mage extends Player {
                     if (stamina >= 1) {
                         System.out.println("Select a spell.");
                         showSpells();
-                        stamina--;
                         selectedSpell = spellSelect();
+                        if (selectedSpell == null) {
+                            combatOptions();
+                            continue;
+                        }
 
-                        if (selectedSpell.name == "Chain Lightning") {
+                        if (selectedSpell.name == "Chain-Lightning") {
                             System.out.println("Crackling lightning erupts from " + this + "!");
                             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                                 if (encounter.playerArray[i] instanceof Enemy) {
                                     targetedEnemy = encounter.playerArray[i];
                                     chainLightning();
+                                    stamina--;
                                     System.out.println("");
                                 }
                             }
@@ -141,8 +155,8 @@ public class Mage extends Player {
                         else if (selectedSpell.name == "Heal") {
                             System.out.println("A warm pulse of wound-mending magic surges from " + this);
                             heal();
+                            stamina--;
                         }
-
                         selectMove = false;
                         break;
                     }
