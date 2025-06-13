@@ -34,7 +34,7 @@ public class Map {
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
-        //cityOne.add(new MysteriousWizard());
+        cityOne.add(new MysteriousWizard());
         cityOne.name = "City One";
         locationArray[0] = cityOne;
         cityOne.isTown = true;

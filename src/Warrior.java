@@ -126,7 +126,9 @@ public class Warrior extends Player {
 
         if (encounter.countAmountOfEnemies() == 1) { //  Only need 1 target if there is only 1 enemy present
             System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
-            if (rollAttack() + (finalAttack / 5) > 10 + (shieldBashTarget1.finalDefense / 5)) {
+
+            int roll = rollAttack();
+            if (roll + (finalAttack / 5) > 10 + (shieldBashTarget1.finalDefense / 5)) {
                 shieldBashTarget1.stunTimer = 2;
                 shieldBashTarget1.isStunned = true;
                 System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");

@@ -65,7 +65,7 @@ public class Mage extends Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) + 3;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 2) - (targetedEnemy.finalDefense / 5) + 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -77,8 +77,8 @@ public class Mage extends Player {
             return;
         }
 
-        if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
-            int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) + 3;
+        if (roll + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
+            int damage = random.nextInt(1, (finalAttack / 5) + 2) - (targetedEnemy.finalDefense / 5) + 2;
             if (damage <= 1) {
                 damage = 1;
             }
@@ -97,7 +97,7 @@ public class Mage extends Player {
         System.out.println("Select a target");
         showTargetOptions();
         targetSelect();
-        int restoreAmount = random.nextInt(0, 10 + (finalLuck / 10));
+        int restoreAmount = random.nextInt(1, 10 + (finalLuck / 10));
         System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
         targetedEnemy.updateStats();
         targetedEnemy.currentHp += restoreAmount;

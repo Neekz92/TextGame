@@ -3,8 +3,8 @@ public class Orc extends Enemy {
     public Orc(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.attack = 45;
-        this.defense = 35;
+        this.attack = 25;
+        this.defense = 20;
         this.setHp(55);
         currentHp = getHp();
     }
@@ -62,6 +62,7 @@ public class Orc extends Enemy {
         if (rollAttack() + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
             System.out.println(targetedEnemy + " was bashed in the head by the orc!");
             System.out.println(targetedEnemy + " is dazed!");
+            System.out.println("");
             targetedEnemy.stunTimer = 2;
             targetedEnemy.isStunned = true;
             return;

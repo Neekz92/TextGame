@@ -132,6 +132,7 @@ public class GameEngine {
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
+                    System.out.println("");
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
                     player = playerArray[i];     //  Set 'player' to the current player
                     player.gameEngine = this;   //  Set current player's GameEngine.
