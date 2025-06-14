@@ -80,6 +80,8 @@ public class Player {
         finalDefense = defense + armor.defense + weapon.defense;
         finalLuck = luck + armor.luck + weapon.luck;
         finalHp = hp + armor.hp + weapon.hp;
+
+        adjustHp();
     }
 
     public String getName() {
@@ -324,6 +326,13 @@ public class Player {
                 }
             }
 
+            if (this instanceof Bandit) {  // This is for the Wolf kill quest. I'm not really sure where else to place this logic, it makes sense to me to update it inside the method that controls an entity's death.
+                for (int i = 0; i < encounter.playerArray.length; i++) {
+                    encounter.playerArray[i].banditsToKill --;
+                    encounter.playerArray[i].questReward();
+                }
+            }
+
 
             encounter.removePlayer(this);
             gameEngine.removePlayer(this);
@@ -352,6 +361,28 @@ public class Player {
                     break;
             }
         }
+
+        if (quest.equals("Bandit Quest") && banditsToKill <= 0) {
+            quest = "No Quest";
+
+            int rewardRng = random.nextInt(1,3);
+            switch (rewardRng) {
+                case 1:
+                    int xpReward = random.nextInt(5, 11);
+                    System.out.println(this + " completed their quest and received " + xpReward + " XP!");
+                    xp += xpReward;
+                    break;
+                case 2:
+                    int goldReward = random.nextInt(10,15);
+                    System.out.println(this + " completed their quest and received " + goldReward + " gold!");
+                    setGold(getGold() + goldReward);
+                    break;
+            }
+        }
+
+
+
+
     }
 
 
@@ -364,6 +395,12 @@ public class Player {
         System.out.println(this + "'s stamina: " + stamina);
         System.out.println("What do you do?");
         encounter.options();
+    }
+
+    public void adjustHp() {
+        if (currentHp > finalHp) {
+            currentHp = finalHp;
+        }
     }
 
     public void combat() {

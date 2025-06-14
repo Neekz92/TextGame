@@ -135,9 +135,14 @@ public class GameEngine {
                     System.out.println("");
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
 
-                    if (playerArray[i].quest.equals("Wolf Quest")) {
+                    if (!playerArray[i].quest.equals("No Quest")) {
+
                         if (playerArray[i].wolvesToKill > 0) {
                             System.out.println("Quest: Kill " + playerArray[i].wolvesToKill + " wolves");
+                        }
+
+                        else if (playerArray[i].banditsToKill > 0) {
+                            System.out.println("Quest: Kill " + playerArray[i].banditsToKill + " bandits");
                         }
                     }
 

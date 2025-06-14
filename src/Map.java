@@ -30,16 +30,18 @@ public class Map {
 
     Location whisperingGrove;
     Location brutesWetlands;
+    Location blackMarsh;
 
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[24];  //  23
+        locationArray = new Location[25];  //  24
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
         cityOne.add(new MysteriousWizard());
         cityOne.add(new JobBoardWolf());
+        cityOne.add(new JobBoardBandit());
         cityOne.name = "City One";
         locationArray[0] = cityOne;
         cityOne.isTown = true;
@@ -162,6 +164,14 @@ public class Map {
         brutesWetlands.name = "Brute's Wetlands";
         locationArray[23] = brutesWetlands;
 
+        blackMarsh = new Location(3,3);
+        blackMarsh.add(new BanditAttack());
+        blackMarsh.add(new WolfAttack());
+        blackMarsh.add(new OrcAttack());
+        blackMarsh.add(new StaminaPotionMerchant());
+        blackMarsh.name = "Black Marsh";
+        locationArray[24] = blackMarsh;
+
 
 
 
@@ -199,7 +209,7 @@ public class Map {
         southShore.add(new WolfAttack());
         southShore.add(new OrcAttack());
         southShore.add(new StaminaPotionMerchant());
-        southShore.name = "South Shore";
+        southShore.name = "Southern Shore";
         locationArray[16] = southShore;
 
 

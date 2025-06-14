@@ -273,9 +273,7 @@ public class Inventory {
 
                     System.out.println("You drank a " + selectedItem + " and healed for " + selectedItem.healAmount + " hp!");
                     player.currentHp = player.currentHp + selectedItem.healAmount;
-                    if (player.currentHp > player.finalHp) {
-                        player.currentHp = player.finalHp;
-                    }
+                    player.adjustHp();
                     player.movementPhaseOptions();
                     removeItem(selectedItem);
                     return;

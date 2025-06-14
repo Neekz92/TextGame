@@ -101,9 +101,7 @@ public class Mage extends Player {
         System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
         targetedEnemy.updateStats();
         targetedEnemy.currentHp += restoreAmount;
-        if (targetedEnemy.currentHp > targetedEnemy.finalHp) {
-            targetedEnemy.currentHp = targetedEnemy.finalHp;
-        }
+        targetedEnemy.adjustHp();
     }
 
     private void combatOptions() {
@@ -143,11 +141,11 @@ public class Mage extends Player {
 
                         if (selectedSpell.name == "Chain-Lightning") {
                             System.out.println("Crackling lightning erupts from " + this + "!");
+                            stamina--;
                             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                                 if (encounter.playerArray[i] instanceof Enemy) {
                                     targetedEnemy = encounter.playerArray[i];
                                     chainLightning();
-                                    stamina--;
                                     System.out.println("");
                                 }
                             }
