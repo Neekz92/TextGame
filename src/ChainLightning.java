@@ -9,7 +9,7 @@ public class ChainLightning extends Spell {
     public Item copy() {
         Item chainLightniing = new ChainLightning();
         chainLightniing.name = "Chain-Lightning";
-        chainLightniing.rarity = "Spell:";
+        chainLightniing.rarity = "(Spell)";
         return chainLightniing;
     }
 }

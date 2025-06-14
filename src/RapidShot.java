@@ -9,7 +9,7 @@ public class RapidShot extends Stunt {
     public Item copy() {
         Item rapidShot = new RapidShot();
         rapidShot.name = "Rapid-Shot";
-        rapidShot.rarity = "Stunt: ";
+        rapidShot.rarity = "(Stunt)";
         return rapidShot;
     }
 }

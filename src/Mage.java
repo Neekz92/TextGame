@@ -11,7 +11,7 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
 
         super(gameEngine, name);
-        setHp(8);
+        setHp(12);
         currentHp = getHp();
         attack = 5;
         defense = 5;
@@ -65,7 +65,7 @@ public class Mage extends Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(1, (finalAttack / 5) + 2) - (targetedEnemy.finalDefense / 5) + 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 2) + 2;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -77,8 +77,8 @@ public class Mage extends Player {
             return;
         }
 
-        if (roll + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
-            int damage = random.nextInt(1, (finalAttack / 5) + 2) - (targetedEnemy.finalDefense / 5) + 2;
+        if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
+            int damage = random.nextInt(1, (finalAttack / 5) + 5);
             if (damage <= 1) {
                 damage = 1;
             }

@@ -55,6 +55,12 @@ public class Player {
 
     boolean parryStance = false;  //  This is responsible for the Warrior's perfectParry() logic
 
+    String quest = "No Quest";
+    int wolvesToKill;
+    int banditsToKill;
+
+    int orcsToKill;
+
 
     public Player(GameEngine gameEngine, String name) {
         this.gameEngine = gameEngine;
@@ -296,7 +302,7 @@ public class Player {
 
         int rng = random.nextInt(1,21);
 
-        if (rng + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
+        if (rng + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
             System.out.println("Success! Rolled a " + rng + " + " + (finalAttack / 5) + " to hit " + targetedEnemy);
             return rng;
         }
@@ -310,11 +316,45 @@ public class Player {
         if (currentHp <= 0) {
             isAlive = false;
             System.out.println(this + " has been slain!");
+
+            if (this instanceof Wolf) {  // This is for the Wolf kill quest. I'm not really sure where else to place this logic, it makes sense to me to update it inside the method that controls an entity's death.
+                for (int i = 0; i < encounter.playerArray.length; i++) {
+                    encounter.playerArray[i].wolvesToKill --;
+                    encounter.playerArray[i].questReward();
+                }
+            }
+
+
             encounter.removePlayer(this);
             gameEngine.removePlayer(this);
             location.endEncounter();
         }
     }
+
+
+
+    public void questReward() {
+
+        if (quest.equals("Wolf Quest") && wolvesToKill <= 0) {
+            quest = "No Quest";
+
+            int rewardRng = random.nextInt(1,3);
+            switch (rewardRng) {
+                case 1:
+                    int xpReward = random.nextInt(5, 11);
+                    System.out.println(this + " completed their quest and received " + xpReward + " XP!");
+                    xp += xpReward;
+                    break;
+                case 2:
+                    int goldReward = random.nextInt(10,15);
+                    System.out.println(this + " completed their quest and received " + goldReward + " gold!");
+                    setGold(getGold() + goldReward);
+                    break;
+            }
+        }
+    }
+
+
 
     public void encounterPhase() {
 
@@ -360,7 +400,7 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(1, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -383,9 +423,9 @@ public class Player {
             }
         }
 
-        if (roll + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
+        if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
 
-            int damage = random.nextInt(1, (finalAttack / 5) + 3) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }

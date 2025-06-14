@@ -9,6 +9,6 @@ public class Spell extends Item {
 
     @Override
     public String displayItem() {
-        return "Spell: " + name;
+        return "(Spell) " + name;
     }
 }

@@ -9,7 +9,7 @@ public class CriticalShot extends Stunt {
     public Item copy() {
         Item criticalShot = new CriticalShot();
         criticalShot.name = "Critical-Shot";
-        criticalShot.rarity = "Stunt:";
+        criticalShot.rarity = "(Stunt)";
         return criticalShot;
     }
 }

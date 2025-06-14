@@ -3,8 +3,8 @@ public class Bandit extends Enemy {
     public Bandit(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.attack = 5;
-        this.defense = 5;
+        this.attack = 0;
+        this.defense = 0;
         this.setHp(8);
         currentHp = getHp();
 

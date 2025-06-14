@@ -8,7 +8,7 @@ public class PerfectParry extends Skill {
     public Item copy() {
         Item perfectParry = new PerfectParry();
         perfectParry.name = "Perfect-Parry";
-        perfectParry.rarity = "Skill:";
+        perfectParry.rarity = "(Skill)";
         return perfectParry;
     }
 }

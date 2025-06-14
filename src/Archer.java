@@ -9,7 +9,7 @@ public class Archer extends Player {
 
     public Archer(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(100);
+        setHp(15);
         currentHp = getHp();
         attack = 5;
         defense = 5;
@@ -71,7 +71,7 @@ public class Archer extends Player {
                 System.out.println("NATURAL 20");
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = (random.nextInt(1, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    int damage = (random.nextInt(1, (finalAttack / 5) + 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
                     if (damage >= 1) {
                         damage = 5;
                     }
@@ -83,20 +83,21 @@ public class Archer extends Player {
                     return;
                 }
                 System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
-                int damage = random.nextInt(1, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5);
+                int damage = random.nextInt(1, (finalAttack / 5) + 5);
                 if (damage <= 1) {
                     damage = 2;
                 }
+                damage *= 2;
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
                 targetedEnemy.deathCheck();
                 selectAim = false;
                 return;
             }
-            else if (roll + (finalAttack / 5) > 10 + (targetedEnemy.defense / 5)) {
+            else if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.defense / 5)) {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
-                    int damage = (random.nextInt(1, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+                    int damage = (random.nextInt(1, (finalAttack / 5) + 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
                     if (damage <= 1) {
                         damage = 5;
                     }
@@ -107,7 +108,7 @@ public class Archer extends Player {
                     return;
                 }
                 System.out.println("Damn! " + this + " couldn't land a critical shot, but still managed to strike the target!");
-                int damage = random.nextInt(0, (finalAttack + 1)) + (finalAttack / 5) - (targetedEnemy.finalDefense / 5) ;
+                int damage = random.nextInt(1, (finalAttack / 5) + 5);
                 if (damage <= 0) {
                     damage = 1;
                 }

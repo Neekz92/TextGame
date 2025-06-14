@@ -8,7 +8,7 @@ public class ShieldBashCombo extends Skill {
     public Item copy() {
         Item shieldBashCombo = new ShieldBashCombo();
         shieldBashCombo.name = "Shield-Bash Combo";
-        shieldBashCombo.rarity = "Skill:";
+        shieldBashCombo.rarity = "(Skill)";
         return shieldBashCombo;
     }
 }

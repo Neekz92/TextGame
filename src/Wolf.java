@@ -3,8 +3,8 @@ public class Wolf extends Enemy {
     public Wolf(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.attack = 7;
-        this.defense = 5;
+        this.attack = 0;
+        this.defense = 0;
         this.setHp(7);
         currentHp = getHp();
     }

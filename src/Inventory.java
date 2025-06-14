@@ -258,6 +258,19 @@ public class Inventory {
                         return;
                     }
                 } else if (selectedItem instanceof Potion) {
+
+
+                    if (selectedItem instanceof StaminaPotion) {
+                        System.out.println("You drank a " + selectedItem + " and restored " + ((StaminaPotion) selectedItem).staminaAmount + " stamina!");
+                        player.stamina += ((StaminaPotion) selectedItem).staminaAmount;
+                        if (player.stamina > player.maxStamina) {
+                            player.stamina = player.maxStamina;
+                        }
+                        player.movementPhaseOptions();
+                        removeItem(selectedItem);
+                        return;
+                    }
+
                     System.out.println("You drank a " + selectedItem + " and healed for " + selectedItem.healAmount + " hp!");
                     player.currentHp = player.currentHp + selectedItem.healAmount;
                     if (player.currentHp > player.finalHp) {
@@ -315,8 +328,3 @@ public class Inventory {
         }
     }
 }
-
-
-//        return;
-//        System.out.println("########################");
-//      player.movementPhaseOptions();

@@ -12,7 +12,7 @@ public class Warrior extends Player {
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(15);
+        setHp(20);
         currentHp = getHp();
         attack = 5;
         defense = 5;
@@ -178,7 +178,7 @@ public class Warrior extends Player {
                 else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
                     targetedEnemy = shieldBashTarget1;
-                    if (roll + (finalAttack / 5) > 10 + (shieldBashTarget1.finalDefense / 5)) {
+                    if (roll + (finalAttack / 5) >= 10 + (shieldBashTarget1.finalDefense / 5)) {
                         shieldBashTarget1.stunTimer = 2;
                         shieldBashTarget1.isStunned = true;
                         System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");
@@ -188,7 +188,7 @@ public class Warrior extends Player {
                     roll = rollAttack();
 
                     targetedEnemy = shieldBashTarget2;
-                    if (roll + (finalAttack / 5)  > 10 + (shieldBashTarget2.finalDefense / 5)) {
+                    if (roll + (finalAttack / 5)  >= 10 + (shieldBashTarget2.finalDefense / 5)) {
                         shieldBashTarget2.stunTimer = 2;
                         shieldBashTarget2.isStunned = true;
                         System.out.println(shieldBashTarget2 + " is dazed from the shield bash!");

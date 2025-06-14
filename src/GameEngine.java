@@ -134,6 +134,14 @@ public class GameEngine {
             for (int i = 0; i < amountOfCharacters; i++) {
                     System.out.println("");
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
+
+                    if (playerArray[i].quest.equals("Wolf Quest")) {
+                        if (playerArray[i].wolvesToKill > 0) {
+                            System.out.println("Quest: Kill " + playerArray[i].wolvesToKill + " wolves");
+                        }
+                    }
+
+
                     player = playerArray[i];     //  Set 'player' to the current player
                     player.gameEngine = this;   //  Set current player's GameEngine.
                     player.didASocialEncounterThisturn = false;

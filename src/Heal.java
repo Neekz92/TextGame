@@ -9,7 +9,7 @@ public class Heal extends Spell {
     public Item copy() {
         Item heal = new Heal();
         heal.name = "Heal";
-        heal.rarity = "Spell:";
+        heal.rarity = "(Spell)";
         return heal;
     }
 }
