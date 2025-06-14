@@ -101,12 +101,46 @@ public class Inventory {
                 if (selectedItem instanceof Spell) {
                     if (player instanceof Mage) {
                         ((Mage) player).addSpell((Spell) selectedItem);
-                        selectedItem.name = "Chain-Lightning";
+                        //selectedItem.name = "Chain-Lightning";
                         player.inventory.removeItem(selectedItem);
                         System.out.println(player + " learned how to cast " + selectedItem.name);
                         player.movementPhaseOptions();
                     }
+                    else {
+                        System.out.println("You are no Mage. You don't understand magic.");
+                        player.movementPhaseOptions();
+                    }
                 }
+
+                if (selectedItem instanceof Skill) {
+                    if (player instanceof Warrior) {
+                        ((Warrior) player).addSkill((Skill) selectedItem);
+                        player.inventory.removeItem(selectedItem);
+                        System.out.println(player + " learned how to perform " + selectedItem.name);
+                        player.movementPhaseOptions();
+                    }
+                    else {
+                        System.out.println("You are no Warrior. You don't understand sword skills.");
+                        player.movementPhaseOptions();
+                    }
+                }
+
+                if (selectedItem instanceof Stunt) {
+                    if (player instanceof Archer) {
+                        ((Archer) player).addStunt((Stunt) selectedItem);
+                        player.inventory.removeItem(selectedItem);
+                        System.out.println(player + " learned how to do " + selectedItem.name);
+                        player.movementPhaseOptions();
+                    }
+                    else {
+                        System.out.println("You are no Archer. You don't understand bow stunts.");
+                        player.movementPhaseOptions();
+                    }
+                }
+
+
+
+
                 if (selectedItem instanceof Armor) {
                     if (player.armor == null) {
                         player.armor = (Armor) selectedItem;

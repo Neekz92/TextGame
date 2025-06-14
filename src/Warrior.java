@@ -16,20 +16,29 @@ public class Warrior extends Player {
         currentHp = getHp();
         attack = 5;
         defense = 5;
+        luck = 0;
 
         weapon = new Sword();
 
         Skill shieldBashCombo = new ShieldBashCombo();
-        addSkill(shieldBashCombo);
+        Skill perfectParry = new PerfectParry();
+
+        allSkills[0] = shieldBashCombo;
+        allSkills[1] = perfectParry;
+
+        addSkill(allSkills[random.nextInt(0,2)]);
+    }
+
+    public void combatOptions() {
+        System.out.println("[ 1 ] Basic Attack");
+        System.out.println("[ 2 ] Use a skill");
+        System.out.println("[ 3 ] Run Away");
     }
 
     @Override
     public void combat() {
 
-        System.out.println("[ 1 ] Basic Attack");
-        System.out.println("[ 2 ] Use a skill");
-        System.out.println("[ 3 ] Run Away");
-
+        combatOptions();
 
         boolean selectMove = true;
         while (selectMove) {
@@ -46,11 +55,24 @@ public class Warrior extends Player {
                     if (stamina >= 1) {
                         System.out.println("Select a skill");
                         showSkills();
+                        selectedSkill = skillSelect();
 
-                        if (skillSelect().name == "Shield-Bash Combo") {
+                        if (selectedSkill == null) {
+                            combatOptions();
+                            continue;
+                        }
+
+                        if (selectedSkill.name == "Shield-Bash Combo") {
                             System.out.println("Shield Bash Combo");
                             showTargetOptions();
                             shieldBash();
+                            stamina--;
+                            selectMove = false;
+                            break;
+                        }
+                        else if (selectedSkill.name == "Perfect-Parry") {
+                            System.out.println(this + " takes a defensive stance.");
+                            perfectParry();
                             stamina--;
                             selectMove = false;
                             break;
@@ -79,12 +101,17 @@ public class Warrior extends Player {
         for (int i = 0; i < amountOfSkills; i++) {
             System.out.println("[ " + (i + 1) + " ] " + skillList[i].name);
         }
+        System.out.println("[ 0 ] Exit");
     }
 
     public Skill skillSelect() {
 
         int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
         scanner.nextLine();
+
+        if (input == -1) {
+            return null;
+        }
 
         return skillList[input];
     }
@@ -170,5 +197,10 @@ public class Warrior extends Player {
                 }
             }
         }
+    }
+
+    public void perfectParry() {
+
+        parryStance = true;
     }
 }

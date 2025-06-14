@@ -28,8 +28,15 @@ public class OrcAttack extends CombatEncounter {
 
 
 
+
+        addItem(shieldBashCombo);
+        addItem(perfectParry);
+
         addItem(chainLightning);
         addItem(heal);
+
+        addItem(criticalShot);
+        addItem(rapidShot);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;

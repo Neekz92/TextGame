@@ -17,6 +17,12 @@ public class WolfAttack extends CombatEncounter {
         addItem(chainLightning);
         addItem(heal);
 
+        addItem(shieldBashCombo);
+        addItem(perfectParry);
+
+        addItem(criticalShot);
+        addItem(rapidShot);
+
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
         System.out.println("You are surrounded by " + (rng) + " wolves at " + gameEngine.player.getLocation());
 

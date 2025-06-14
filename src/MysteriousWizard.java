@@ -108,7 +108,7 @@ public class MysteriousWizard extends SocialEncounter {
                         playerArray[0].currentHp = playerArray[0].finalHp;
                     }
 
-                    System.out.println("Heh heh heh! Much gratitude, young one. As promised, here is your payment.");
+                    System.out.println("\"Heh heh heh! Much gratitude, young one. As promised, here is your payment.\"");
                     int goldReward = random.nextInt(0,(playerArray[0].finalLuck / 5) + 5) + 5;
                     playerArray[0].setGold(playerArray[0].getGold() + goldReward);
                     System.out.println(playerArray[0] + " received " + goldReward + " gold!");
@@ -117,7 +117,7 @@ public class MysteriousWizard extends SocialEncounter {
                     selectChoice = false;
                 }
                 else {
-                        System.out.println("Get away from me before I paint the cobblestone with your blood.");
+                        System.out.println("\"Get away from me before I paint the cobblestone with your blood.\"");
                         selectChoice = false;
                         playerArray[0].getLocation().endSocialEncounter();
                 }

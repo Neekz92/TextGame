@@ -128,7 +128,7 @@ public class GameEngine {
         while (roundManager) {
             System.out.println("Round: " + round);
             round++;
-            if (round == 40){
+            if (round == 200){
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
@@ -172,6 +172,7 @@ public class GameEngine {
                         }
                     }
                     player.encounterPhase();
+                    player.parryStance = false;
                     if (player.stunTimer > 0) {  //  If the player is stunned, don't attack.
                         System.out.println(player.getName() + " is stunned for " + player.stunTimer + " turns!");
                         player.stunTimer --;

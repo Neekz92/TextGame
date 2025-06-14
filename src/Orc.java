@@ -4,8 +4,8 @@ public class Orc extends Enemy {
 
         super(gameEngine);
         this.attack = 25;
-        this.defense = 20;
-        this.setHp(55);
+        this.defense = 15;
+        this.setHp(25);
         currentHp = getHp();
     }
 

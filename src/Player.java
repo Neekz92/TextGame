@@ -53,6 +53,8 @@ public class Player {
     int stunTimer = 0;
     boolean didASocialEncounterThisturn = false;
 
+    boolean parryStance = false;  //  This is responsible for the Warrior's perfectParry() logic
+
 
     public Player(GameEngine gameEngine, String name) {
         this.gameEngine = gameEngine;
@@ -354,6 +356,8 @@ public class Player {
         basicAttackDescription();
         int roll = rollAttack();
 
+        int parryDamage;
+
         if (roll == 20) {
             System.out.println("NATURAL 20!");
             int damage = random.nextInt(1, (finalAttack / 5) + 5) - (targetedEnemy.finalDefense / 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
@@ -361,10 +365,22 @@ public class Player {
                 damage = 1;
             }
             damage *= 2;
-            targetedEnemy.currentHp -= damage;
-            System.out.println(targetedEnemy + " took " + damage + " damage!");
-            targetedEnemy.deathCheck();
-            return;
+
+            if (targetedEnemy.parryStance == false) {
+                targetedEnemy.currentHp -= damage;
+                System.out.println(targetedEnemy + " took " + damage + " damage!");
+                targetedEnemy.deathCheck();
+                return;
+            } else {  //  This else block runs if the player warrior used Perfect-Parry
+                parryDamage = targetedEnemy.finalDefense / 5;
+                currentHp -= damage + parryDamage;
+                System.out.println("DEFLECT!!!");
+                System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
+                System.out.println(this + " takes " + damage + " + " + parryDamage +" damage!");
+                deathCheck();
+                targetedEnemy.parryStance = false;
+                return;
+            }
         }
 
         if (roll + (finalAttack / 5) > 10 + (targetedEnemy.finalDefense / 5)) {
@@ -373,11 +389,23 @@ public class Player {
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
-            // targetedEnemy.setHp(targetedEnemy.getHp() - damage);
-            targetedEnemy.currentHp -= damage;
-            System.out.println(targetedEnemy + " took " + damage + " damage!");
-            targetedEnemy.deathCheck();
+
+            if (targetedEnemy.parryStance == false) {
+                targetedEnemy.currentHp -= damage;
+                System.out.println(targetedEnemy + " took " + damage + " damage!");
+                targetedEnemy.deathCheck();
+            }
+            else {
+                parryDamage = targetedEnemy.finalDefense / 5;
+                currentHp -= damage + parryDamage;
+                System.out.println("DEFLECT!!!");
+                System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
+                System.out.println(this + " takes " + damage + " + " + parryDamage +" damage!");
+                deathCheck();
+                targetedEnemy.parryStance = false;
+            }
         }
+
     }
 
     public boolean cityOptions() {

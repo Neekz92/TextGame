@@ -27,8 +27,15 @@ public class Encounter {
     Item armor = new Armor();
     Item uncommonArmor = new Armor("Uncommon");
 
+
+    Item shieldBashCombo = new ShieldBashCombo();
+    Item perfectParry = new PerfectParry();
+
     Item chainLightning = new ChainLightning();
     Item heal = new Heal();
+
+    Item criticalShot = new CriticalShot();
+    Item rapidShot = new RapidShot();
 
     int amountOfMobs = 0;
     int xpBonus = 0;
