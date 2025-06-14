@@ -449,7 +449,7 @@ public class Player {
                 targetedEnemy.deathCheck();
                 return;
             } else {  //  This else block runs if the player warrior used Perfect-Parry
-                parryDamage = targetedEnemy.finalDefense / 5;
+                parryDamage = random.nextInt(targetedEnemy.finalDefense / 5, 2 * (targetedEnemy.finalDefense / 5)+ 1);
                 currentHp -= damage + parryDamage;
                 System.out.println("DEFLECT!!!");
                 System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
@@ -473,7 +473,7 @@ public class Player {
                 targetedEnemy.deathCheck();
             }
             else {
-                parryDamage = targetedEnemy.finalDefense / 5;
+                parryDamage = random.nextInt(targetedEnemy.finalDefense / 5, 2 * (targetedEnemy.finalDefense / 5) + 1);
                 currentHp -= damage + parryDamage;
                 System.out.println("DEFLECT!!!");
                 System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
