@@ -10,7 +10,7 @@ public class OrcAttack extends CombatEncounter {
     public void setup() {
 
         distributedRewards = false;
-        //addItem(potion);  //  Adding a potion to this encounter's loot pool
+        addItem(potion);  //  Adding a potion to this encounter's loot pool
         addItem(uncommonPotion);
 
 

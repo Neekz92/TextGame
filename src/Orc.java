@@ -17,7 +17,7 @@ public class Orc extends Enemy {
             targetedEnemy = findEnemies()[rng];
             Player firstTarget = targetedEnemy;
 
-            int orcChoice = random.nextInt(1,5);
+            int orcChoice = random.nextInt(1,8);
             if (orcChoice == 1) {
                 shieldBash();
                 rng = random.nextInt(0, findEnemies().length);
@@ -63,7 +63,7 @@ public class Orc extends Enemy {
             System.out.println(targetedEnemy + " was bashed in the head by the orc!");
             System.out.println(targetedEnemy + " is dazed!");
             System.out.println("");
-            targetedEnemy.stunTimer = 2;
+            targetedEnemy.stunTimer = 1;
             targetedEnemy.isStunned = true;
             return;
         }

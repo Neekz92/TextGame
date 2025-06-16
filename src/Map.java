@@ -46,14 +46,56 @@ public class Map {
     Location abandonedOrchard;
     Location witchsHut;
     Location slimewoodSwamp;
+    Location fishersPoint;
+    Location ronkomasLakeEast;
+    Location maidensGrave;
     Location rainyGrasslands;
     Location sinksoilMoor;
     Location hagBog;
 
+    Location rollingRivermouth;
+    Location cavernOfCadavers;
+    Location frostleafBrush;
+
+    Location duskmereHollow;
+    Location fieldsOfClover;
+    Location wildfishCrossing;
+    Location ronkomasWhiteWaters;
+    Location cavesOfTermina;
+    Location smashstoneWastes;
+
+    Location seaviewClearing;
+    Location tidebranchFlow;
+    Location slipperyStepstones;
+    Location knicksTriangle;
+    Location valensBurialGrounds;
+    Location sunfireRidge;
+
+    Location bastardsBridge;
+    Location brinepassWaters;
+    Location deerlingSanctuary;
+    Location deadleafSticks;
+    Location sandyHills;
+    Location bonemanOutpost;
+
+    Location drowngrassShore;
+    Location spritesGathering;
+    Location pixiesSticks;
+    Location rockyWasteland;
+    Location dunesOfSunsear;
+    Location abandonedIronmine;
+
+    Location veridianTreeline;
+    Location sandleafBorder;
+    Location barrenSandlands;
+    Location sandwormFeedingGrounds;
+    Location scorpionsPass;
+
+
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[41];  //  40
+        locationArray = new Location[59];  //  58
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
@@ -68,6 +110,7 @@ public class Map {
         southWestPlains.add(new WolfAttack());
         southWestPlains.add(new BanditAttack());
         southWestPlains.add(new StaminaPotionMerchant());
+        southWestPlains.add(new WoundedTraveler());
         southWestPlains.name = "South-West Plains";
         locationArray[1] = southWestPlains;
 
@@ -76,6 +119,7 @@ public class Map {
         westernPlains.add(new BanditAttack());
         westernPlains.name = "Western Plains";
         westernPlains.add(new StaminaPotionMerchant());
+        westernPlains.add(new WoundedTraveler());
         locationArray[2] = westernPlains;
 
         rockyPlateau = new Location(0,3);
@@ -117,6 +161,7 @@ public class Map {
         bloodFlowerMeadows.add(new WolfAttack());
         bloodFlowerMeadows.add(new BanditAttack());
         bloodFlowerMeadows.add(new StaminaPotionMerchant());
+        bloodFlowerMeadows.add(new WoundedTraveler());
         bloodFlowerMeadows.name = "Bloodflower Meadows";
         locationArray[3] = bloodFlowerMeadows;
 
@@ -124,6 +169,7 @@ public class Map {
         greatneckReach.add(new WolfAttack());
         greatneckReach.add(new BanditAttack());
         greatneckReach.add(new StaminaPotionMerchant());
+        greatneckReach.add(new WoundedTraveler());
         greatneckReach.name = "Greatneck Reach";
         locationArray[5] = greatneckReach;
 
@@ -131,6 +177,7 @@ public class Map {
         crabgrassHills.add(new WolfAttack());
         crabgrassHills.add(new BanditAttack());
         crabgrassHills.add(new StaminaPotionMerchant());
+        crabgrassHills.add(new WoundedTraveler());
         crabgrassHills.name = "Crabgrass Hills";
         locationArray[6] = crabgrassHills;
 
@@ -176,6 +223,7 @@ public class Map {
         kingsRiver.add(new WolfAttack());
         kingsRiver.add(new BanditAttack());
         kingsRiver.add(new StaminaPotionMerchant());
+        kingsRiver.add(new WoundedTraveler());
         kingsRiver.name = "King's River";
         locationArray[4] = kingsRiver;
 
@@ -183,6 +231,7 @@ public class Map {
         kingsRiverRapids.add(new WolfAttack());
         kingsRiverRapids.add(new BanditAttack());
         kingsRiverRapids.add(new StaminaPotionMerchant());
+        kingsRiverRapids.add(new WoundedTraveler());
         kingsRiverRapids.name = "King's River Rapids";
         locationArray[7] = kingsRiverRapids;
 
@@ -190,6 +239,7 @@ public class Map {
         kingsBasin.add(new WolfAttack());
         kingsBasin.add(new BanditAttack());
         kingsBasin.add(new StaminaPotionMerchant());
+        kingsBasin.add(new WoundedTraveler());
         kingsBasin.name = "King's Basin";
         locationArray[8] = kingsBasin;
 
@@ -221,7 +271,9 @@ public class Map {
         ronkomasThickBrush.add(new BanditAttack());
         ronkomasThickBrush.add(new OrcAttack());
         ronkomasThickBrush.add(new StaminaPotionMerchant());
+        ronkomasThickBrush.name = "Ronkoma's Thickbrush";
         locationArray[32] = ronkomasThickBrush;
+
 
 
 
@@ -318,6 +370,32 @@ public class Map {
         slimewoodSwamp.name = "Slimewood Swamp";
         locationArray[37] = slimewoodSwamp;
 
+        fishersPoint = new Location(4,4);
+        fishersPoint.add(new BanditAttack());
+        fishersPoint.add(new WolfAttack());
+        fishersPoint.add(new OrcAttack());
+        fishersPoint.add(new StaminaPotionMerchant());
+        fishersPoint.name = "Fisher's Point";
+        locationArray[41] = fishersPoint;
+
+        ronkomasLakeEast = new Location(4,5);
+        ronkomasLakeEast.add(new BanditAttack());
+        ronkomasLakeEast.add(new WolfAttack());
+        ronkomasLakeEast.add(new OrcAttack());
+        ronkomasLakeEast.add(new StaminaPotionMerchant());
+        ronkomasLakeEast.name = "Ronkoma's Lake (East)";
+        locationArray[42] = ronkomasLakeEast;
+
+        maidensGrave = new Location(4,6);
+        maidensGrave.add(new BanditAttack());
+        maidensGrave.add(new WolfAttack());
+        maidensGrave.add(new OrcAttack());
+        maidensGrave.add(new StaminaPotionMerchant());
+        maidensGrave.name = "Maiden's Grave";
+        locationArray[43] = maidensGrave;
+
+
+
 
 
 
@@ -353,6 +431,30 @@ public class Map {
         hagBog.name = "Hag Bog";
         locationArray[40] = hagBog;
 
+        rollingRivermouth = new Location(5,4);
+        rollingRivermouth.add(new WolfAttack());
+        rollingRivermouth.add(new BanditAttack());
+        rollingRivermouth.add(new OrcAttack());
+        rollingRivermouth.add(new StaminaPotionMerchant());
+        rollingRivermouth.name = "Rolling Rivermouth";
+        locationArray[44] = rollingRivermouth;
+
+        cavernOfCadavers = new Location(5,5);
+        cavernOfCadavers.add(new WolfAttack());
+        cavernOfCadavers.add(new BanditAttack());
+        cavernOfCadavers.add(new OrcAttack());
+        cavernOfCadavers.add(new StaminaPotionMerchant());
+        cavernOfCadavers.name = "Cavern of Cadavers";
+        locationArray[45] = cavernOfCadavers;
+
+        frostleafBrush = new Location(5,6);
+        frostleafBrush.add(new WolfAttack());
+        frostleafBrush.add(new BanditAttack());
+        frostleafBrush.add(new OrcAttack());
+        frostleafBrush.add(new StaminaPotionMerchant());
+        frostleafBrush.name = "Frostleaf Brush";
+        locationArray[46] = frostleafBrush;
+
 
 
         woodsOfSilence = new Location(6,0);
@@ -363,6 +465,55 @@ public class Map {
         woodsOfSilence.name = "Woods of Silence";
         locationArray[15] = woodsOfSilence;
 
+        duskmereHollow = new Location(6,1);
+        duskmereHollow.add(new BanditAttack());
+        duskmereHollow.add(new WolfAttack());
+        duskmereHollow.add(new OrcAttack());
+        duskmereHollow.add(new StaminaPotionMerchant());
+        duskmereHollow.name = "Duskmere Hollow";
+        locationArray[47] = duskmereHollow;
+
+        fieldsOfClover = new Location(6,2);
+        fieldsOfClover.add(new BanditAttack());
+        fieldsOfClover.add(new WolfAttack());
+        fieldsOfClover.add(new OrcAttack());
+        fieldsOfClover.add(new StaminaPotionMerchant());
+        fieldsOfClover.name = "Fields of Clover";
+        locationArray[48] = fieldsOfClover;
+
+        wildfishCrossing = new Location(6,3);
+        wildfishCrossing.add(new BanditAttack());
+        wildfishCrossing.add(new WolfAttack());
+        wildfishCrossing.add(new OrcAttack());
+        wildfishCrossing.add(new StaminaPotionMerchant());
+        wildfishCrossing.name = "Wildfish Crossing";
+        locationArray[49] = wildfishCrossing;
+
+        ronkomasWhiteWaters = new Location(6,4);
+        ronkomasWhiteWaters.add(new BanditAttack());
+        ronkomasWhiteWaters.add(new WolfAttack());
+        ronkomasWhiteWaters.add(new OrcAttack());
+        ronkomasWhiteWaters.add(new StaminaPotionMerchant());
+        ronkomasWhiteWaters.name = "Ronkoma's White Waters";
+        locationArray[50] = ronkomasWhiteWaters;
+
+        cavesOfTermina = new Location(6,5);
+        cavesOfTermina.add(new BanditAttack());
+        cavesOfTermina.add(new WolfAttack());
+        cavesOfTermina.add(new OrcAttack());
+        cavesOfTermina.add(new StaminaPotionMerchant());
+        cavesOfTermina.name = "Caves of Termina";
+        locationArray[51] = cavesOfTermina;
+
+        smashstoneWastes = new Location(6,6);
+        smashstoneWastes.add(new BanditAttack());
+        smashstoneWastes.add(new WolfAttack());
+        smashstoneWastes.add(new OrcAttack());
+        smashstoneWastes.add(new StaminaPotionMerchant());
+        smashstoneWastes.name = "Smashstone Wastes";
+        locationArray[52] = smashstoneWastes;
+
+
 
         southShore = new Location(7,0);
         southShore.add(new BanditAttack());
@@ -372,13 +523,112 @@ public class Map {
         southShore.name = "Southern Shore";
         locationArray[16] = southShore;
 
+        seaviewClearing = new Location(7,1);
+        seaviewClearing.add(new BanditAttack());
+        seaviewClearing.add(new WolfAttack());
+        seaviewClearing.add(new OrcAttack());
+        seaviewClearing.add(new StaminaPotionMerchant());
+        seaviewClearing.name = "Seaview Clearing";
+        locationArray[53] = seaviewClearing;
+
+        tidebranchFlow = new Location(7,2);
+        tidebranchFlow.add(new BanditAttack());
+        tidebranchFlow.add(new WolfAttack());
+        tidebranchFlow.add(new OrcAttack());
+        tidebranchFlow.add(new StaminaPotionMerchant());
+        tidebranchFlow.name = "Tidebranch Flow";
+        locationArray[54] = tidebranchFlow;
+
+        slipperyStepstones = new Location(7,3);
+        slipperyStepstones.add(new BanditAttack());
+        slipperyStepstones.add(new WolfAttack());
+        slipperyStepstones.add(new OrcAttack());
+        slipperyStepstones.add(new StaminaPotionMerchant());
+        slipperyStepstones.name = "Slippery Stepstones";
+        locationArray[55] = slipperyStepstones;
+
+        knicksTriangle = new Location(7,4);
+        knicksTriangle.add(new BanditAttack());
+        knicksTriangle.add(new WolfAttack());
+        knicksTriangle.add(new OrcAttack());
+        knicksTriangle.add(new StaminaPotionMerchant());
+        knicksTriangle.name = "Knick's Triangle";
+        locationArray[56] = knicksTriangle;
+
+        valensBurialGrounds = new Location(7,5);
+        valensBurialGrounds.add(new BanditAttack());
+        valensBurialGrounds.add(new WolfAttack());
+        valensBurialGrounds.add(new OrcAttack());
+        valensBurialGrounds.add(new StaminaPotionMerchant());
+        valensBurialGrounds.name = "Valen's Burial Grounds";
+        locationArray[57] = valensBurialGrounds;
+
+        sunfireRidge = new Location(7,6);
+        sunfireRidge.add(new BanditAttack());
+        sunfireRidge.add(new WolfAttack());
+        sunfireRidge.add(new OrcAttack());
+        sunfireRidge.add(new StaminaPotionMerchant());
+        sunfireRidge.name = "Sunfire Ridge";
+        locationArray[58] = sunfireRidge;
+
+
+
 
         bastardsBay = new Location(8,0);
         bastardsBay.add(new BanditAttack());
         bastardsBay.add(new WolfAttack());
         bastardsBay.add(new StaminaPotionMerchant());
+        bastardsBay.add(new WoundedTraveler());
         bastardsBay.name = "Bastard's Bay";
         locationArray[18] = bastardsBay;
+
+        bastardsBridge = new Location(8,1);
+        bastardsBridge.add(new BanditAttack());
+        bastardsBridge.add(new WolfAttack());
+        bastardsBridge.add(new WoundedTraveler());
+        bastardsBridge.add(new StaminaPotionMerchant());
+        bastardsBridge.name = "Bastard's Bridge";
+        locationArray[59] = bastardsBridge;
+
+        brinepassWaters = new Location(8,2);
+        brinepassWaters.add(new BanditAttack());
+        brinepassWaters.add(new WolfAttack());
+        brinepassWaters.add(new WoundedTraveler());
+        brinepassWaters.add(new StaminaPotionMerchant());
+        brinepassWaters.name = "Brinepass Waters";
+        locationArray[60] = brinepassWaters;
+
+        deerlingSanctuary = new Location(8,3);
+        deerlingSanctuary.add(new BanditAttack());
+        deerlingSanctuary.add(new WolfAttack());
+        deerlingSanctuary.add(new OrcAttack());
+        deerlingSanctuary.add(new StaminaPotionMerchant());
+        deerlingSanctuary.name = "Deerling Sanctuary";
+        locationArray[61] = deerlingSanctuary;
+
+        deadleafSticks = new Location(8,4);
+        deadleafSticks.add(new BanditAttack());
+        deadleafSticks.add(new WolfAttack());
+        deadleafSticks.add(new OrcAttack());
+        deadleafSticks.add(new StaminaPotionMerchant());
+        deadleafSticks.name = "Deadleaf Sticks";
+        locationArray[62] = deadleafSticks;
+
+        sandyHills = new Location(8,5);
+        sandyHills.add(new BanditAttack());
+        sandyHills.add(new WolfAttack());
+        sandyHills.add(new OrcAttack());
+        sandyHills.add(new StaminaPotionMerchant());
+        sandyHills.name = "Sandy Hills";
+        locationArray[63] = sandyHills;
+
+        bonemanOutpost = new Location(8,6);
+        bonemanOutpost.add(new BanditAttack());
+        bonemanOutpost.add(new WolfAttack());
+        bonemanOutpost.add(new OrcAttack());
+        bonemanOutpost.add(new StaminaPotionMerchant());
+        bonemanOutpost.name = "Boneman's Outpost";
+        locationArray[64] = bonemanOutpost;
 
 
 
@@ -387,8 +637,59 @@ public class Map {
         lutewardPort.add(new BanditAttack());
         lutewardPort.add(new WolfAttack());
         lutewardPort.add(new StaminaPotionMerchant());
+        lutewardPort.add(new WoundedTraveler());
         lutewardPort.name = "Luteward Port";
         locationArray[19] = lutewardPort;
+
+        drowngrassShore = new Location(9,1);
+        drowngrassShore.add(new BanditAttack());
+        drowngrassShore.add(new WolfAttack());
+        drowngrassShore.add(new WoundedTraveler());
+        drowngrassShore.add(new StaminaPotionMerchant());
+        drowngrassShore.name = "Drowngrass Shore";
+        locationArray[65] = drowngrassShore;
+
+        pixiesSticks = new Location(9,2);
+        pixiesSticks.add(new BanditAttack());
+        pixiesSticks.add(new WolfAttack());
+        pixiesSticks.add(new StaminaPotionMerchant());
+        pixiesSticks.add(new WoundedTraveler());
+        pixiesSticks.name = "Pixie's Sticks";
+        locationArray[66] = pixiesSticks;
+
+        spritesGathering = new Location(9,3);
+        spritesGathering.add(new BanditAttack());
+        spritesGathering.add(new WolfAttack());
+        spritesGathering.add(new OrcAttack());
+        spritesGathering.add(new StaminaPotionMerchant());
+        spritesGathering.name = "Sprite's Gathering";
+        locationArray[67] = spritesGathering;
+
+        rockyWasteland = new Location(9,4);
+        rockyWasteland.add(new BanditAttack());
+        rockyWasteland.add(new WolfAttack());
+        rockyWasteland.add(new OrcAttack());
+        rockyWasteland.add(new StaminaPotionMerchant());
+        rockyWasteland.name = "Rocky Wasteland";
+        locationArray[68] = rockyWasteland;
+
+        dunesOfSunsear = new Location(9,5);
+        dunesOfSunsear.add(new BanditAttack());
+        dunesOfSunsear.add(new WolfAttack());
+        dunesOfSunsear.add(new OrcAttack());
+        dunesOfSunsear.add(new StaminaPotionMerchant());
+        dunesOfSunsear.name = "Dunes of Sunsear";
+        locationArray[69] = dunesOfSunsear;
+
+        abandonedIronmine = new Location(9,6);
+        abandonedIronmine.add(new BanditAttack());
+        abandonedIronmine.add(new WolfAttack());
+        abandonedIronmine.add(new OrcAttack());
+        abandonedIronmine.add(new StaminaPotionMerchant());
+        abandonedIronmine.name = "Abandoned Iron Mine";
+        locationArray[70] = abandonedIronmine;
+
+
 
 
         cityThree = new Location(10,0);
@@ -401,8 +702,49 @@ public class Map {
         sirensCove.add(new BanditAttack());
         sirensCove.add(new WolfAttack());
         sirensCove.add(new StaminaPotionMerchant());
+        sirensCove.add(new WoundedTraveler());
         sirensCove.name = "Siren's Cove";
         locationArray[21] = sirensCove;
+
+        veridianTreeline = new Location(10,2);
+        veridianTreeline.add(new BanditAttack());
+        veridianTreeline.add(new WolfAttack());
+        veridianTreeline.add(new WoundedTraveler());
+        veridianTreeline.add(new StaminaPotionMerchant());
+        veridianTreeline.name = "Veridian Treeline";
+        locationArray[71] = veridianTreeline;
+
+        sandleafBorder = new Location(10,3);
+        sandleafBorder.add(new BanditAttack());
+        sandleafBorder.add(new WolfAttack());
+        sandleafBorder.add(new OrcAttack());
+        sandleafBorder.add(new StaminaPotionMerchant());
+        sandleafBorder.name = "Sandleaf Border";
+        locationArray[72] = sandleafBorder;
+
+        barrenSandlands = new Location(10,4);
+        barrenSandlands.add(new BanditAttack());
+        barrenSandlands.add(new WolfAttack());
+        barrenSandlands.add(new StaminaPotionMerchant());
+        barrenSandlands.add(new OrcAttack());
+        barrenSandlands.name = "Barren Sandlands";
+        locationArray[73] = barrenSandlands;
+
+        sandwormFeedingGrounds = new Location(10,5);
+        sandwormFeedingGrounds.add(new BanditAttack());
+        sandwormFeedingGrounds.add(new WolfAttack());
+        sandwormFeedingGrounds.add(new OrcAttack());
+        sandwormFeedingGrounds.add(new StaminaPotionMerchant());
+        sandwormFeedingGrounds.name = "Sandworm Feeding Grounds";
+        locationArray[74] = sandwormFeedingGrounds;
+
+        scorpionsPass = new Location(10,6);
+        scorpionsPass.add(new BanditAttack());
+        scorpionsPass.add(new WolfAttack());
+        scorpionsPass.add(new OrcAttack());
+        scorpionsPass.add(new StaminaPotionMerchant());
+        scorpionsPass.name = "Scorpion's Pass";
+        locationArray[75] = scorpionsPass;
 
 
 

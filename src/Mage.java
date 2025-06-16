@@ -78,6 +78,7 @@ public class Mage extends Player {
         }
 
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
+            System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
             int damage = random.nextInt(1, (finalAttack / 5) + 5);
             if (damage <= 1) {
                 damage = 1;

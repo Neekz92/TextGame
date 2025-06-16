@@ -95,6 +95,7 @@ public class Archer extends Player {
                 return;
             }
             else if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.defense / 5)) {
+                System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
                     int damage = (random.nextInt(1, (finalAttack / 5) + 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
@@ -117,6 +118,9 @@ public class Archer extends Player {
                 targetedEnemy.deathCheck();
                 selectAim = false;
                 }
+            else {
+                System.out.println("FAILURE! Rolled a " + roll + " + " + (finalAttack / 5));
+            }
             return;
         }
     }

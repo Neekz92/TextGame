@@ -33,7 +33,18 @@ public class JobBoardBandit extends SocialEncounter {
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;
                         } else {
-                            System.out.println("You already have a quest.");
+                            System.out.println("You abandoned your previous quest and accept the new one.");
+                            playerArray[0].wolvesToKill = 0;
+                            playerArray[0].banditsToKill = 0;
+                            playerArray[0].orcsToKill = 0;
+
+                            int banditsToKill = random.nextInt(3, 6);
+                            System.out.println("You have accepted a quest to subjugate " + banditsToKill + " bandits.");
+                            playerArray[0].quest = "Bandit Quest";
+                            playerArray[0].banditsToKill = banditsToKill;
+                            playerArray[0].didASocialEncounterThisturn = true;
+                            playerArray[0].getLocation().endSocialEncounter();
+                            selectChoice = false;
                         }
                         break;
                     case 2:

@@ -304,14 +304,7 @@ public class Player {
 
         int rng = random.nextInt(1,21);
 
-        if (rng + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
-            System.out.println("Success! Rolled a " + rng + " + " + (finalAttack / 5) + " to hit " + targetedEnemy);
-            return rng;
-        }
-        else {
-            System.out.println("Failure! Rolled a " + rng + " + " + (finalAttack / 5) + " to hit " + targetedEnemy);
-            return rng;
-        }
+        return rng;
     }
 
     public void deathCheck() {
@@ -374,6 +367,24 @@ public class Player {
                     break;
                 case 2:
                     int goldReward = random.nextInt(10,15);
+                    System.out.println(this + " completed their quest and received " + goldReward + " gold!");
+                    setGold(getGold() + goldReward);
+                    break;
+            }
+        }
+
+        if (quest.equals("Orc Quest") && orcsToKill <= 0) {
+            quest = "No Quest";
+
+            int rewardRng = random.nextInt(1,3);
+            switch (rewardRng) {
+                case 1:
+                    int xpReward = random.nextInt(15, 31);
+                    System.out.println(this + " completed their quest and received " + xpReward + " XP!");
+                    xp += xpReward;
+                    break;
+                case 2:
+                    int goldReward = random.nextInt(15,31);
                     System.out.println(this + " completed their quest and received " + goldReward + " gold!");
                     setGold(getGold() + goldReward);
                     break;
@@ -462,6 +473,7 @@ public class Player {
 
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
 
+            System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
             int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
@@ -481,6 +493,9 @@ public class Player {
                 deathCheck();
                 targetedEnemy.parryStance = false;
             }
+        }
+        else {
+            System.out.println("FAILURE! Rolled a " + roll + " + " + (finalAttack / 5));
         }
 
     }
@@ -505,6 +520,23 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public void rest() {
+
+        int restoredHp = random.nextInt(1,(finalHp / 4) + 2);
+        System.out.println(this + " restored " + restoredHp + " HP and 1 stamina!");
+        currentHp += restoredHp;
+        stamina ++;
+
+        if (stamina > maxStamina) {
+            stamina = maxStamina;
+        }
+
+        if (currentHp > finalHp) {
+            currentHp = finalHp;
+        }
+
     }
 
     public void marketPlaceOptions() {

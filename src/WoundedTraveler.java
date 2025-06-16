@@ -1,13 +1,11 @@
-public class JobBoardWolf extends SocialEncounter {
+public class WoundedTraveler extends SocialEncounter {
 
-
-    public JobBoardWolf() {
-
-    }
+    public WoundedTraveler() {}
 
     public void setup() {
 
-        System.out.println("You notice a sign posted on the quest board requesting the subjugation of wolves. Would you like to accept this quest?");
+        System.out.println("Along your travels, you come across a wounded man and a broken cart.");
+        System.out.println("\"You there..! Adventurer! I was sent on a quest to deliver a certain treasure to a noble, but alas, I was ambushed by Orcs. Please, go after the Orcs and retrieve the treasure...");
     }
 
     public void options() {
@@ -24,10 +22,10 @@ public class JobBoardWolf extends SocialEncounter {
                 switch (input) {
                     case 1:
                         if (playerArray[0].quest.equals("No Quest")) {
-                            int wolvesToKill = random.nextInt(3, 6);
-                            System.out.println("You have accepted a quest to subjugate " + wolvesToKill + " wolves.");
-                            playerArray[0].quest = "Wolf Quest";
-                            playerArray[0].wolvesToKill = wolvesToKill;
+                            int orcsToKill = random.nextInt(3, 6);
+                            System.out.println("You have accepted a quest to subjugate " + orcsToKill + " bandits.");
+                            playerArray[0].quest = "Orc Quest";
+                            playerArray[0].orcsToKill = orcsToKill;
                             playerArray[0].didASocialEncounterThisturn = true;
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;
@@ -37,10 +35,10 @@ public class JobBoardWolf extends SocialEncounter {
                             playerArray[0].banditsToKill = 0;
                             playerArray[0].orcsToKill = 0;
 
-                            int wolvesToKill = random.nextInt(3, 6);
-                            System.out.println("You have accepted a quest to subjugate " + wolvesToKill + " wolves.");
-                            playerArray[0].quest = "Wolf Quest";
-                            playerArray[0].wolvesToKill = wolvesToKill;
+                            int orcsToKill = random.nextInt(3, 6);
+                            System.out.println("You have accepted a quest to subjugate " + orcsToKill + " orcs.");
+                            playerArray[0].quest = "Orc Quest";
+                            playerArray[0].orcsToKill = orcsToKill;
                             playerArray[0].didASocialEncounterThisturn = true;
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;
@@ -49,6 +47,7 @@ public class JobBoardWolf extends SocialEncounter {
                     case 2:
                         System.out.println("I've got more important things to do.");
                         selectChoice = false;
+                        playerArray[0].rest();
                         playerArray[0].getLocation().endSocialEncounter();
                 }
             } catch (Exception e) {

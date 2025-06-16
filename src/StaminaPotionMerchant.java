@@ -46,18 +46,7 @@ public class StaminaPotionMerchant extends SocialEncounter {
                     case 2:
                         System.out.println("\"Find a different traveler to con.\"");
                         System.out.println("You send the merchant on his way, and you find a comfortable place to catch your breath.");
-                        int restoredHp = random.nextInt(1,(playerArray[0].finalHp / 4) + 2);
-                        System.out.println(playerArray[0] + " restored " + restoredHp + " HP and 1 stamina!");
-                        playerArray[0].currentHp += restoredHp;
-                        playerArray[0].stamina ++;
-
-                        if (playerArray[0].stamina > playerArray[0].maxStamina) {
-                            playerArray[0].stamina = playerArray[0].maxStamina;
-                        }
-
-                        if (playerArray[0].currentHp > playerArray[0].finalHp) {
-                            playerArray[0].currentHp = playerArray[0].finalHp;
-                        }
+                        playerArray[0].rest();
                         selectChoice = false;
                         playerArray[0].getLocation().endSocialEncounter();
                 }
