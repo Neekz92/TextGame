@@ -1,11 +1,11 @@
-public class WoundedTraveler extends SocialEncounter {
+public class WoundedAdventurer extends SocialEncounter {
 
-    public WoundedTraveler() {}
+    public WoundedAdventurer() {}
 
     public void setup() {
 
-        System.out.println("Along your travels, you come across a wounded man and a broken cart.");
-        System.out.println("\"You there..! Adventurer! I was sent on a quest to deliver a certain treasure to a noble, but alas, I was ambushed by Orcs. Please, go after the Orcs and retrieve the treasure...");
+        System.out.println("A woman's voice calls out to you.");
+        System.out.println("\"You there! You're an adventurer too, right? My party was attacked by goblins. I'm the only survivor. I can't face those monsters again, will you avenge my comrades?\"");
     }
 
     public void options() {
@@ -22,10 +22,10 @@ public class WoundedTraveler extends SocialEncounter {
                 switch (input) {
                     case 1:
                         if (playerArray[0].quest.equals("No Quest")) {
-                            int orcsToKill = random.nextInt(3, 6);
-                            System.out.println("You have accepted a quest to subjugate " + orcsToKill + " orcs.");
-                            playerArray[0].quest = "Orc Quest";
-                            playerArray[0].orcsToKill = orcsToKill;
+                            int goblinsToKill = random.nextInt(3, 6);
+                            System.out.println("You have accepted a quest to subjugate " + goblinsToKill + " goblins.");
+                            playerArray[0].quest = "Goblin Quest";
+                            playerArray[0].orcsToKill = goblinsToKill;
                             playerArray[0].didASocialEncounterThisturn = true;
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;
@@ -35,10 +35,10 @@ public class WoundedTraveler extends SocialEncounter {
                             playerArray[0].banditsToKill = 0;
                             playerArray[0].orcsToKill = 0;
 
-                            int orcsToKill = random.nextInt(3, 6);
-                            System.out.println("You have accepted a quest to subjugate " + orcsToKill + " orcs.");
-                            playerArray[0].quest = "Orc Quest";
-                            playerArray[0].orcsToKill = orcsToKill;
+                            int goblinsToKill = random.nextInt(3, 6);
+                            System.out.println("You have accepted a quest to subjugate " + goblinsToKill + " goblins.");
+                            playerArray[0].quest = "Goblin Quest";
+                            playerArray[0].goblinsToKill = goblinsToKill;
                             playerArray[0].didASocialEncounterThisturn = true;
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;

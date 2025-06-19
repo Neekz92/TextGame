@@ -60,6 +60,7 @@ public class Player {
     int banditsToKill;
 
     int orcsToKill;
+    int goblinsToKill;
 
 
     public Player(GameEngine gameEngine, String name) {
@@ -322,6 +323,20 @@ public class Player {
             if (this instanceof Bandit) {  // This is for the Wolf kill quest. I'm not really sure where else to place this logic, it makes sense to me to update it inside the method that controls an entity's death.
                 for (int i = 0; i < encounter.playerArray.length; i++) {
                     encounter.playerArray[i].banditsToKill --;
+                    encounter.playerArray[i].questReward();
+                }
+            }
+
+            if (this instanceof Orc) {  // This is for the Wolf kill quest. I'm not really sure where else to place this logic, it makes sense to me to update it inside the method that controls an entity's death.
+                for (int i = 0; i < encounter.playerArray.length; i++) {
+                    encounter.playerArray[i].orcsToKill --;
+                    encounter.playerArray[i].questReward();
+                }
+            }
+
+            if (this instanceof Goblin) {  // This is for the Wolf kill quest. I'm not really sure where else to place this logic, it makes sense to me to update it inside the method that controls an entity's death.
+                for (int i = 0; i < encounter.playerArray.length; i++) {
+                    encounter.playerArray[i].goblinsToKill --;
                     encounter.playerArray[i].questReward();
                 }
             }

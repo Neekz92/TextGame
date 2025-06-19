@@ -148,6 +148,10 @@ public class GameEngine {
                         else if (playerArray[i].orcsToKill > 0) {
                             System.out.println("Quest: Kill " + playerArray[i].orcsToKill + " orcs");
                         }
+
+                        else if (playerArray[i].goblinsToKill > 0) {
+                            System.out.println("Quest: Kill " + playerArray[i].orcsToKill + " goblins");
+                        }
                     }
 
 

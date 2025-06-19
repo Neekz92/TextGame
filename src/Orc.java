@@ -4,7 +4,7 @@ public class Orc extends Enemy {
 
         super(gameEngine);
         this.attack = 30;
-        this.defense = 10;
+        this.defense = 20;
         this.setHp(25);
         currentHp = getHp();
     }
@@ -71,6 +71,6 @@ public class Orc extends Enemy {
 
     @Override
     public void basicAttackDescription() {
-        System.out.println("The orc tries to cleave " + targetedEnemy + "with its axe!");
+        System.out.println("The orc tries to cleave " + targetedEnemy + " with its axe!");
     }
 }
