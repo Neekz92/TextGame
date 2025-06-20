@@ -5,7 +5,7 @@ public class Archer extends Player {
     Stunt stunt = new Stunt();
     int amountOfStunts = 0;
     Stunt[] stuntList = new Stunt[amountOfStunts];
-    Stunt[] allStunts = new Stunt[2];
+    Stunt[] allStunts = new Stunt[3];
 
     public Archer(GameEngine gameEngine, String name) {
         super(gameEngine, name);
@@ -19,10 +19,13 @@ public class Archer extends Player {
 
         Stunt criticalShot = new CriticalShot();
         Stunt rapidShot = new RapidShot();
+        Stunt igniteArrows = new IgniteArrows();
         allStunts[0] = criticalShot;
         allStunts[1] = rapidShot;
+        allStunts[2] = igniteArrows;
 
-        addStunt(allStunts[random.nextInt(0,2)]);
+
+        addStunt(allStunts[random.nextInt(0,3)]);
     }
 
     public void addStunt(Stunt stunt) {
@@ -130,7 +133,7 @@ public class Archer extends Player {
         for (int i = 0; i < stuntList.length; i++) {
             System.out.println("[ " + (i + 1) + " ] " + stuntList[i].name);
         }
-        System.out.println("[ 0 ] Exit]");
+        System.out.println("[ 0 ] Exit");
     }
 
     public void combatOptions() {
@@ -145,6 +148,14 @@ public class Archer extends Player {
 
         updateStats();
         combatOptions();
+
+        if (igniteArrowsTurnsRemaining > 0) {
+            System.out.println(this + "'s arrows are burning for " + igniteArrowsTurnsRemaining + " more turns.");
+            igniteArrowsTurnsRemaining --;
+        }
+        else {
+            attackSkillBuff = 0;
+        }
 
         boolean selectMove = true;
         while (selectMove) {
@@ -181,6 +192,13 @@ public class Archer extends Player {
                         }
                         else if (selectedStunt.name.equals("Rapid-Shot")) {
                             rapidShot();
+                            selectMove = false;
+                            break;
+                        }
+
+                        else if (selectedStunt.name.equals("Ignite Arrows")) {
+                            stamina--;
+                            igniteArrows();
                             selectMove = false;
                             break;
                         }
@@ -228,6 +246,17 @@ public class Archer extends Player {
             }
             System.out.println(this + " continues the Rapid-Shot combo!");
         }
+    }
+
+
+
+    public void igniteArrows() {
+
+        System.out.println(this + " ignites the tips of their arrows on fire!");
+        int rngAttackBuff = random.nextInt(1,(finalAttack / 5) + 1);
+        attackSkillBuff += rngAttackBuff;
+        igniteArrowsTurnsRemaining = 3;
+        System.out.println("For 3 turns, " + this + " increased their damage by " + rngAttackBuff + " due to the flaming arrows.");
     }
 
     @Override

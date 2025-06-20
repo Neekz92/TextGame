@@ -30,6 +30,7 @@ public class Encounter {
 
     Item shieldBashCombo = new ShieldBashCombo();
     Item perfectParry = new PerfectParry();
+    Item taunt = new Taunt();
 
     Item chainLightning = new ChainLightning();
     Item heal = new Heal();
@@ -37,6 +38,7 @@ public class Encounter {
 
     Item criticalShot = new CriticalShot();
     Item rapidShot = new RapidShot();
+    Item igniteArrows = new IgniteArrows();
 
     int amountOfMobs = 0;
     int xpBonus = 0;
@@ -48,7 +50,14 @@ public class Encounter {
     public void displayParticipants() {
 
         for (int i = 0; i < playerArray.length; i++) {
-            System.out.println(playerArray[i].getName() + " === " + playerArray[i].currentHp + " HP");
+            playerArray[i].amountOfTimesDisplayed = 0;
+        }
+
+        for (int i = 0; i < playerArray.length; i++) {
+            if (playerArray[i].amountOfTimesDisplayed == 0) {
+                System.out.println(playerArray[i].getName() + " === " + playerArray[i].currentHp + " HP");
+                playerArray[i].amountOfTimesDisplayed ++;
+            }
         }
     }
 

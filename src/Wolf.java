@@ -12,13 +12,15 @@ public class Wolf extends Enemy {
     @Override
     public void combat() {
 
-        if (findEnemies().length > 1) {
-            int rng = random.nextInt(0, findEnemies().length);
-            targetedEnemy = findEnemies()[rng];
+        enemyAITargetArray = findEnemies();
+
+        if (enemyAITargetArray.length > 1) {
+            int rng = random.nextInt(0, enemyAITargetArray.length);
+            targetedEnemy = enemyAITargetArray[rng];
             basicAttack();
         }
-        else if (findEnemies().length == 1){
-            targetedEnemy = findEnemies()[0];
+        else if (enemyAITargetArray.length == 1){
+            targetedEnemy = enemyAITargetArray[0];
             basicAttack();
         }
     }

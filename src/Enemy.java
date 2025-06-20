@@ -1,6 +1,6 @@
 public class Enemy extends Player {
 
-
+    int amountOfEnemies = 0;
     public Enemy(GameEngine gameEngine) {
 
         super(gameEngine);
@@ -19,6 +19,7 @@ public class Enemy extends Player {
     @Override
     public void movementPhase() {
     }
+
 
     public Player[] findEnemies() {
 

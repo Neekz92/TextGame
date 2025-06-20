@@ -6,13 +6,13 @@ public class Warrior extends Player {
     int amountOfSkills = 0;
 
     Skill[] skillList = new Skill[amountOfSkills];
-    Skill[] allSkills = new Skill[2];
+    Skill[] allSkills = new Skill[3];
 
     String shield = null;
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(2000);
+        setHp(20);
         currentHp = getHp();
         attack = 5;
         defense = 5;
@@ -22,11 +22,13 @@ public class Warrior extends Player {
 
         Skill shieldBashCombo = new ShieldBashCombo();
         Skill perfectParry = new PerfectParry();
+        Skill taunt = new Taunt();
 
         allSkills[0] = shieldBashCombo;
         allSkills[1] = perfectParry;
+        allSkills[2] = taunt;
 
-        addSkill(allSkills[random.nextInt(0,2)]);
+        addSkill(allSkills[random.nextInt(0,3)]);
     }
 
     public void combatOptions() {
@@ -77,6 +79,13 @@ public class Warrior extends Player {
                             selectMove = false;
                             break;
                         }
+
+                        else if (selectedSkill.name == "Taunt") {
+                            taunt();
+                            stamina--;
+                            selectMove = false;
+                            break;
+                        }
                         // Add more skills here
 
 
@@ -94,6 +103,31 @@ public class Warrior extends Player {
                     break;
             }
         }
+    }
+
+    public void taunt() {
+
+        int rng = random.nextInt(1,10);
+        switch (rng) {
+            case 1: System.out.println(this + " shouts, \"HEY ASSHOLE!! I'm right over here!! I'm " + name + "! Come and get me!!\""); break;
+            case 2: System.out.println(this + " shouts, \"COME ON! DO IT! Do it now!! Kill me!! I'm here!!! Kill me!! Come on, KILL ME!! I'm here! Come on! Do it now!! KILL ME!!!\""); break;
+            case 3: System.out.println("Smirking, " + this + " sticks their hand foward, gesturing for their enemies to advance. \"Come on...\""); break;
+            case 4: System.out.println(this + " yells, \"Come on, I want you to do it. I want you to do it. HIT ME!\""); break;
+            case 5: System.out.println(this + " shouts, \"I am your opponent!\""); break;
+            case 6: System.out.println(this + " shouts, \"Come get some!\""); break;
+            case 7: System.out.println(this + " shouts, \"I'm gonna kick your ass!!!\""); break;
+            case 8: System.out.println(this + " shouts, \"I eat pieces of shit like you for breakfast!\""); break;
+            case 9: System.out.println(this + " shouts, \"Fight me, or I'm gonna FUCK you up!!\""); break;
+        }
+
+        int rngDefenseBuff = random.nextInt(1, (finalDefense/5) + 1);
+        if (!usedTaunt) {
+            System.out.println(this + " raised their Damage Mitigation by " + rngDefenseBuff + " points!");
+            defenseSkillBuff += (rngDefenseBuff);
+            usedTaunt = true;
+        }
+        encounter.addPlayer(this);
+        tauntDuplicates++;
     }
 
     public void showSkills() {

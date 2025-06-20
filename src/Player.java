@@ -31,9 +31,13 @@ public class Player {
 
 
     int attack;
+    boolean usedIgniteArrows;
+    int attackSkillBuff;
     int finalAttack;
 
     int defense;
+    boolean usedTaunt;
+    int defenseSkillBuff;
     int finalDefense;
 
     int luck;
@@ -62,6 +66,14 @@ public class Player {
 
     int orcsToKill;
     int goblinsToKill;
+
+    int enemyTargetingIndex = 0;
+    Player[] enemyAITargetArray = new Player[enemyTargetingIndex];
+
+    int tauntDuplicates = 0;
+    int amountOfTimesDisplayed;
+
+    int igniteArrowsTurnsRemaining = 0;
 
 
     public Player(GameEngine gameEngine, String name) {
@@ -442,10 +454,17 @@ public class Player {
 
     public void showTargetOptions() {
 
+        for (int i = 0; i < encounter.playerArray.length; i++) {
+            encounter.playerArray[i].amountOfTimesDisplayed = 0;
+        }
+
         boolean targetSelect = true;
         while (targetSelect) {
             for (int i = 0; i < encounter.playerArray.length; i++) {
-                System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP");
+                if (encounter.playerArray[i].amountOfTimesDisplayed == 0) {
+                    System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP");
+                    encounter.playerArray[i].amountOfTimesDisplayed ++;
+                }
             }
             targetSelect = false;
         }
@@ -470,7 +489,7 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5) + (attackSkillBuff - targetedEnemy.defenseSkillBuff);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -496,7 +515,7 @@ public class Player {
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
 
             System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
-            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5) + (attackSkillBuff - defenseSkillBuff);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
@@ -722,5 +741,11 @@ public class Player {
         String returnMe = "";
         returnMe += name;
         return returnMe;
+    }
+
+
+
+    public void addPlayerToEnemyAITargetingArray(Player player) {
+
     }
 }

@@ -20,9 +20,11 @@ public class BanditAttack extends CombatEncounter {
 
         addItem(shieldBashCombo);
         addItem(perfectParry);
+        addItem(taunt);
 
         addItem(criticalShot);
         addItem(rapidShot);
+        addItem(igniteArrows);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;

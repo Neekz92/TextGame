@@ -12,15 +12,17 @@ public class Orc extends Enemy {
     @Override
     public void combat() {
 
-        if (findEnemies().length > 1) {
-            int rng = random.nextInt(0, findEnemies().length);
-            targetedEnemy = findEnemies()[rng];
+        enemyAITargetArray = findEnemies();
+
+        if (enemyAITargetArray.length > 1) {
+            int rng = random.nextInt(0, enemyAITargetArray.length);
+            targetedEnemy = enemyAITargetArray[rng];
             Player firstTarget = targetedEnemy;
 
             int orcChoice = random.nextInt(1,8);
             if (orcChoice == 1) {
                 shieldBash();
-                rng = random.nextInt(0, findEnemies().length);
+                rng = random.nextInt(0, enemyAITargetArray.length);
 
                 for (int i = 0; i < encounter.amountOfPlayers; i++) {  //  This loop goes through all the encounter's players,
                     if (!(encounter.playerArray[i] instanceof Enemy)) {  //  Ignores all instances of Enemies
@@ -38,10 +40,10 @@ public class Orc extends Enemy {
         }
 
 
-        else if (findEnemies().length == 1){
-            targetedEnemy = findEnemies()[0];
-            int rng = random.nextInt(0, findEnemies().length);
-            targetedEnemy = findEnemies()[rng];
+        else if (enemyAITargetArray.length == 1){
+            targetedEnemy = enemyAITargetArray[0];
+            int rng = random.nextInt(0, enemyAITargetArray.length);
+            targetedEnemy = enemyAITargetArray[rng];
 
             int orcChoice = random.nextInt(1,5);
             if (orcChoice == 1) {
