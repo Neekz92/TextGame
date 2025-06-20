@@ -34,6 +34,26 @@ public class Map {
     Location softsnowWoods;
     Location avalanchPath;
     Location shiverpeakMountainSummit;
+    Location cactusPassing;
+    Location shiverpeakForestSouth;
+    Location shiverpeakForest;
+    Location shiverpeakMountainsEast;
+    Location vulturesHaven;
+    Location leviCanyon;
+    Location darkwoodClearing;
+    Location zerasPath;
+    Location heatstrokeHills;
+    Location mirageCrossing;
+    Location slopesOfSorrow;
+    Location glacierRidge;
+    Location parchedDrylands;
+    Location camalsWay;
+    Location ancientRuins;
+    Location dreadsWay;
+    Location freshwaterOasis;
+    Location driedRiver;
+    Location buriedMausoleum;
+    Location scorchwyrmsLair;
 
     Location crabgrassHills;
     Location greatneckReach;
@@ -785,6 +805,42 @@ public class Map {
         smashstoneWastes.name = "Smashstone Wastes";
         locationArray[52] = smashstoneWastes;
 
+        cactusPassing = new Location(6,7);
+        cactusPassing.add(new WolfAttack());
+        cactusPassing.add(new BanditAttack());
+        cactusPassing.add(new OrcAttack());
+        cactusPassing.add(new GoblinAttack());
+        cactusPassing.add(new StaminaPotionMerchant());
+        cactusPassing.name = "Cactus Passing";
+        locationArray[100] = cactusPassing;
+
+        shiverpeakForestSouth = new Location(6,8);
+        shiverpeakForestSouth.add(new WolfAttack());
+        shiverpeakForestSouth.add(new BanditAttack());
+        shiverpeakForestSouth.add(new OrcAttack());
+        shiverpeakForestSouth.add(new GoblinAttack());
+        shiverpeakForestSouth.add(new StaminaPotionMerchant());
+        shiverpeakForestSouth.name = "Shiverpeak Forest (South)";
+        locationArray[101] = shiverpeakForestSouth;
+
+        shiverpeakForest = new Location(6,9);
+        shiverpeakForest.add(new WolfAttack());
+        shiverpeakForest.add(new BanditAttack());
+        shiverpeakForest.add(new OrcAttack());
+        shiverpeakForest.add(new GoblinAttack());
+        shiverpeakForest.add(new StaminaPotionMerchant());
+        shiverpeakForest.name = "Shiverpeak Forest";
+        locationArray[102] = shiverpeakForest;
+
+        shiverpeakMountainsEast = new Location(6,10);
+        shiverpeakMountainsEast.add(new WolfAttack());
+        shiverpeakMountainsEast.add(new GoblinAttack());
+        shiverpeakMountainsEast.add(new OrcAttack());
+        shiverpeakMountainsEast.add(new BanditAttack());
+        shiverpeakMountainsEast.add(new StaminaPotionMerchant());
+        shiverpeakMountainsEast.name = "Shiverpeak Mountains (East)";
+        locationArray[103] = shiverpeakMountainsEast;
+
 
 
         southShore = new Location(7,0);
@@ -850,6 +906,42 @@ public class Map {
         sunfireRidge.name = "Sunfire Ridge";
         locationArray[58] = sunfireRidge;
 
+        vulturesHaven = new Location(7,7);
+        vulturesHaven.add(new WolfAttack());
+        vulturesHaven.add(new BanditAttack());
+        vulturesHaven.add(new OrcAttack());
+        vulturesHaven.add(new GoblinAttack());
+        vulturesHaven.add(new StaminaPotionMerchant());
+        vulturesHaven.name = "Vulture's Haven";
+        locationArray[104] = vulturesHaven;
+
+        leviCanyon = new Location(7,8);
+        leviCanyon.add(new WolfAttack());
+        leviCanyon.add(new BanditAttack());
+        leviCanyon.add(new OrcAttack());
+        leviCanyon.add(new GoblinAttack());
+        leviCanyon.add(new StaminaPotionMerchant());
+        leviCanyon.name = "Levi Canyon";
+        locationArray[105] = leviCanyon;
+
+        darkwoodClearing = new Location(7,9);
+        darkwoodClearing.add(new WolfAttack());
+        darkwoodClearing.add(new BanditAttack());
+        darkwoodClearing.add(new OrcAttack());
+        darkwoodClearing.add(new GoblinAttack());
+        darkwoodClearing.add(new StaminaPotionMerchant());
+        darkwoodClearing.name = "Darkwood Clearing";
+        locationArray[106] = darkwoodClearing;
+
+        zerasPath = new Location(7,10);
+        zerasPath.add(new WolfAttack());
+        zerasPath.add(new BanditAttack());
+        zerasPath.add(new GoblinAttack());
+        zerasPath.add(new OrcAttack());
+        zerasPath.add(new StaminaPotionMerchant());
+        zerasPath.name = "Zera's Path";
+        locationArray[107] = zerasPath;
+
 
 
 
@@ -912,6 +1004,42 @@ public class Map {
         bonemanOutpost.add(new StaminaPotionMerchant());
         bonemanOutpost.name = "Boneman's Outpost";
         locationArray[64] = bonemanOutpost;
+
+        heatstrokeHills = new Location(8,7);
+        heatstrokeHills.add(new WolfAttack());
+        heatstrokeHills.add(new BanditAttack());
+        heatstrokeHills.add(new OrcAttack());
+        heatstrokeHills.add(new GoblinAttack());
+        heatstrokeHills.add(new StaminaPotionMerchant());
+        heatstrokeHills.name = "Heatstroke Hills";
+        locationArray[108] = heatstrokeHills;
+
+        mirageCrossing = new Location(8,8);
+        mirageCrossing.add(new WolfAttack());
+        mirageCrossing.add(new BanditAttack());
+        mirageCrossing.add(new OrcAttack());
+        mirageCrossing.add(new GoblinAttack());
+        mirageCrossing.add(new StaminaPotionMerchant());
+        mirageCrossing.name = "Mirage Crossing";
+        locationArray[109] = mirageCrossing;
+
+        slopesOfSorrow = new Location(8,9);
+        slopesOfSorrow.add(new WolfAttack());
+        slopesOfSorrow.add(new BanditAttack());
+        slopesOfSorrow.add(new GoblinAttack());
+        slopesOfSorrow.add(new OrcAttack());
+        slopesOfSorrow.add(new StaminaPotionMerchant());
+        slopesOfSorrow.name = "Slopes of Sorrow";
+        locationArray[110] = slopesOfSorrow;
+
+        glacierRidge = new Location(8,10);
+        glacierRidge.add(new WolfAttack());
+        glacierRidge.add(new BanditAttack());
+        glacierRidge.add(new OrcAttack());
+        glacierRidge.add(new GoblinAttack());
+        glacierRidge.add(new StaminaPotionMerchant());
+        glacierRidge.name = "Glacier Ridge";
+        locationArray[111] = glacierRidge;
 
 
 
@@ -976,6 +1104,40 @@ public class Map {
         abandonedIronmine.name = "Abandoned Iron Mine";
         locationArray[70] = abandonedIronmine;
 
+        parchedDrylands = new Location(9,7);
+        parchedDrylands.add(new WolfAttack());
+        parchedDrylands.add(new BanditAttack());
+        parchedDrylands.add(new OrcAttack());
+        parchedDrylands.add(new GoblinAttack());
+        parchedDrylands.add(new StaminaPotionMerchant());
+        locationArray[112] = parchedDrylands;
+
+        camalsWay = new Location(9,8);
+        camalsWay.add(new WolfAttack());
+        camalsWay.add(new BanditAttack());
+        camalsWay.add(new OrcAttack());
+        camalsWay.add(new GoblinAttack());
+        camalsWay.add(new StaminaPotionMerchant());
+        camalsWay.name = "Camal's Way";
+        locationArray[113] = camalsWay;
+
+        ancientRuins = new Location(9,9);
+        ancientRuins.add(new WolfAttack());
+        ancientRuins.add(new BanditAttack());
+        ancientRuins.add(new OrcAttack());
+        ancientRuins.add(new GoblinAttack());
+        ancientRuins.add(new StaminaPotionMerchant());
+        ancientRuins.name = "Ancient Ruins";
+        locationArray[114] = ancientRuins;
+
+        dreadsWay = new Location(9,10);
+        dreadsWay.add(new WolfAttack());
+        dreadsWay.add(new BanditAttack());
+        dreadsWay.add(new OrcAttack());
+        dreadsWay.add(new GoblinAttack());
+        dreadsWay.add(new StaminaPotionMerchant());
+        dreadsWay.name = "Dread's Way";
+        locationArray[115] = dreadsWay;
 
 
 
@@ -1037,7 +1199,37 @@ public class Map {
         scorpionsPass.name = "Scorpion's Pass";
         locationArray[75] = scorpionsPass;
 
+        freshwaterOasis = new Location(10,7);
+        freshwaterOasis.add(new WolfAttack());
+        freshwaterOasis.add(new BanditAttack());
+        freshwaterOasis.add(new OrcAttack());
+        freshwaterOasis.add(new GoblinAttack());
+        freshwaterOasis.add(new StaminaPotionMerchant());
+        freshwaterOasis.name = "Freshwater Oasis";
+        locationArray[116] = freshwaterOasis;
 
+        driedRiver = new Location(10,8);
+        driedRiver.add(new WolfAttack());
+        driedRiver.add(new BanditAttack());
+        driedRiver.add(new OrcAttack());
+        driedRiver.add(new GoblinAttack());
+        driedRiver.add(new StaminaPotionMerchant());
+        driedRiver.name = "Dried River";
+        locationArray[117] = driedRiver;
+
+        buriedMausoleum = new Location(10,9);
+        buriedMausoleum.add(new WolfAttack());
+        buriedMausoleum.add(new BanditAttack());
+        buriedMausoleum.add(new OrcAttack());
+        buriedMausoleum.add(new GoblinAttack());
+        buriedMausoleum.add(new StaminaPotionMerchant());
+        buriedMausoleum.name = "Buried Mausoleum";
+        locationArray[118] = buriedMausoleum;
+
+        scorchwyrmsLair = new Location(10,10);
+        scorchwyrmsLair.add(new CryingChild());
+        scorchwyrmsLair.name = "Scorchwyrm's Lair";
+        locationArray[119] = scorchwyrmsLair;
 
 
 
