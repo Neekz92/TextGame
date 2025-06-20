@@ -10,6 +10,30 @@ public class Map {
     Location stormpeakMountainsSouth;
     Location stormpeakMountainsSummit;
     Location stormpeakMountainsNorth;
+    Location stormpeakTrail;
+    Location frigidBirchwoods;
+    Location frozenPath;
+    Location cityTwo;
+    Location bonechillWoods;
+    Location thrashedCabin;
+    Location tepidTundra;
+    Location icyThreshold;
+    Location veilOfFrost;
+    Location icicleWay;
+    Location frozenPlateau;
+    Location frostwolfBreedingGrounds;
+    Location everwintersMouth;
+    Location northernHighlands;
+    Location kelvinsCave;
+    Location shiverpeakMountainsWest;
+    Location frostbiteTrail;
+    Location shiverpeakClimb;
+    Location shiverpeakCliffs;
+    Location shiverpeakMountains;
+    Location wintersEdge;
+    Location softsnowWoods;
+    Location avalanchPath;
+    Location shiverpeakMountainSummit;
 
     Location crabgrassHills;
     Location greatneckReach;
@@ -95,7 +119,7 @@ public class Map {
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[76];  //  75
+        locationArray = new Location[80];  //  79
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());
@@ -158,6 +182,38 @@ public class Map {
         stormpeakMountainsNorth.name = "Stormpeak Mountains (North)";
         locationArray[12] = stormpeakMountainsNorth;
 
+        stormpeakTrail = new Location(0,7);
+        stormpeakTrail.add(new WolfAttack());
+        stormpeakTrail.add(new BanditAttack());
+        stormpeakTrail.add(new OrcAttack());
+        stormpeakTrail.add(new GoblinAttack());
+        stormpeakTrail.add(new StaminaPotionMerchant());
+        stormpeakTrail.name = "Stormpeak Trail";
+        locationArray[76] = stormpeakTrail;
+
+        frigidBirchwoods = new Location(0,8);
+        frigidBirchwoods.add(new WolfAttack());
+        frigidBirchwoods.add(new BanditAttack());
+        frigidBirchwoods.add(new WoundedTraveler());
+        frigidBirchwoods.add(new StaminaPotionMerchant());
+        frigidBirchwoods.name = "Frigid Birchwoods";
+        locationArray[77] = frigidBirchwoods;
+
+        frozenPath = new Location(0,9);
+        frozenPath.add(new WolfAttack());
+        frozenPath.add(new BanditAttack());
+        frozenPath.add(new WoundedTraveler());
+        frozenPath.add(new StaminaPotionMerchant());
+        frozenPath.name = "Frozen Path";
+        locationArray[78] = frozenPath;
+
+        cityTwo = new Location(0,10);
+        cityTwo.add(new CryingChild());
+        cityTwo.add(new MysteriousWizard());
+        cityTwo.add(new JobBoardWolf());
+        cityTwo.add(new JobBoardBandit());
+        cityTwo.name = "City Two";
+        locationArray[79] = cityTwo;
 
 
 
@@ -221,7 +277,38 @@ public class Map {
         lakesideRest.name = "Lakeside Rest";
         locationArray[28] = lakesideRest;
 
+        bonechillWoods = new Location(1,7);
+        bonechillWoods.add(new WolfAttack());
+        bonechillWoods.add(new BanditAttack());
+        bonechillWoods.add(new OrcAttack());
+        bonechillWoods.add(new GoblinAttack());
+        bonechillWoods.add(new StaminaPotionMerchant());
+        bonechillWoods.name = "Bonechill Woods";
+        locationArray[80] = bonechillWoods;
 
+        thrashedCabin = new Location(1,8);
+        thrashedCabin.add(new WolfAttack());
+        thrashedCabin.add(new BanditAttack());
+        thrashedCabin.add(new StaminaPotionMerchant());
+        thrashedCabin.add(new WoundedTraveler());
+        thrashedCabin.name = "Thrashed Cabin";
+        locationArray[81] = thrashedCabin;
+
+        tepidTundra = new Location(1,9);
+        tepidTundra.add(new WolfAttack());
+        tepidTundra.add(new BanditAttack());
+        tepidTundra.add(new StaminaPotionMerchant());
+        tepidTundra.add(new WoundedTraveler());
+        tepidTundra.name = "Tepid Tundra";
+        locationArray[82] = tepidTundra;
+
+        icyThreshold = new Location(1,10);
+        icyThreshold.add(new WolfAttack());
+        icyThreshold.add(new BanditAttack());
+        icyThreshold.add(new WoundedTraveler());
+        icyThreshold.add(new StaminaPotionMerchant());
+        icyThreshold.name = "Icy Threshold";
+        locationArray[83] = icyThreshold;
 
 
 
@@ -285,6 +372,40 @@ public class Map {
         ronkomasThickBrush.add(new StaminaPotionMerchant());
         ronkomasThickBrush.name = "Ronkoma's Thickbrush";
         locationArray[32] = ronkomasThickBrush;
+
+        veilOfFrost = new Location(2,7);
+        veilOfFrost.add(new WolfAttack());
+        veilOfFrost.add(new BanditAttack());
+        veilOfFrost.add(new OrcAttack());
+        veilOfFrost.add(new GoblinAttack());
+        veilOfFrost.add(new StaminaPotionMerchant());
+        veilOfFrost.name = "Veil of Frost";
+        locationArray[84] = veilOfFrost;
+
+        icicleWay = new Location(2,8);
+        icicleWay.add(new WolfAttack());
+        icicleWay.add(new BanditAttack());
+        icicleWay.add(new WoundedTraveler());
+        icicleWay.add(new StaminaPotionMerchant());
+        icicleWay.name = "Icicle Way";
+        locationArray[85] = icicleWay;
+
+        frozenPlateau = new Location(2,9);
+        frozenPlateau.add(new WolfAttack());
+        frozenPlateau.add(new BanditAttack());
+        frozenPlateau.add(new StaminaPotionMerchant());
+        frozenPlateau.add(new WoundedTraveler());
+        frozenPlateau.name = "Frozen Plateau";
+        locationArray[86] = frozenPlateau;
+
+        frostwolfBreedingGrounds = new Location(2,10);
+        frostwolfBreedingGrounds.add(new WolfAttack());
+        frostwolfBreedingGrounds.add(new BanditAttack());
+        frostwolfBreedingGrounds.add(new StaminaPotionMerchant());
+        frostwolfBreedingGrounds.add(new WoundedTraveler());
+        frostwolfBreedingGrounds.name = "Frostwolf Breeding Grounds";
+        locationArray[87] = frostwolfBreedingGrounds;
+
 
 
 
@@ -353,6 +474,42 @@ public class Map {
         ronkomasLakeNorth.name = "Ronkoma's Lake (North)";
         locationArray[35] = ronkomasLakeNorth;
 
+        everwintersMouth = new Location(3,7);
+        everwintersMouth.add(new WolfAttack());
+        everwintersMouth.add(new BanditAttack());
+        everwintersMouth.add(new OrcAttack());
+        everwintersMouth.add(new GoblinAttack());
+        everwintersMouth.add(new StaminaPotionMerchant());
+        everwintersMouth.name = "Everwinter's Mouth";
+        locationArray[88] = everwintersMouth;
+
+        northernHighlands = new Location(3,8);
+        northernHighlands.add(new WolfAttack());
+        northernHighlands.add(new BanditAttack());
+        northernHighlands.add(new StaminaPotionMerchant());
+        northernHighlands.add(new OrcAttack());
+        northernHighlands.add(new GoblinAttack());
+        northernHighlands.name = "Northern Highlands";
+        locationArray[89] = northernHighlands;
+
+        kelvinsCave = new Location(3,9);
+        kelvinsCave.add(new WolfAttack());
+        kelvinsCave.add(new BanditAttack());
+        kelvinsCave.add(new StaminaPotionMerchant());
+        kelvinsCave.add(new OrcAttack());
+        kelvinsCave.add(new GoblinAttack());
+        kelvinsCave.name = "Kelvin's Cave";
+        locationArray[90] = kelvinsCave;
+
+        shiverpeakMountainsWest = new Location(3,10);
+        shiverpeakMountainsWest.add(new WolfAttack());
+        shiverpeakMountainsWest.add(new BanditAttack());
+        shiverpeakMountainsWest.add(new OrcAttack());
+        shiverpeakMountainsWest.add(new GoblinAttack());
+        shiverpeakMountainsWest.add(new StaminaPotionMerchant());
+        shiverpeakMountainsWest.name = "Shiverpeak Mountains (West)";
+        locationArray[91] = shiverpeakMountainsWest;
+
 
 
 
@@ -419,6 +576,42 @@ public class Map {
         maidensGrave.add(new StaminaPotionMerchant());
         maidensGrave.name = "Maiden's Grave";
         locationArray[43] = maidensGrave;
+
+        frostbiteTrail = new Location(4,7);
+        frostbiteTrail.add(new BanditAttack());
+        frostbiteTrail.add(new WolfAttack());
+        frostbiteTrail.add(new OrcAttack());
+        frostbiteTrail.add(new GoblinAttack());
+        frostbiteTrail.add(new StaminaPotionMerchant());
+        frostbiteTrail.name = "Frostbite Trail";
+        locationArray[92] = frostbiteTrail;
+
+        shiverpeakClimb = new Location(4,8);
+        shiverpeakClimb.add(new WolfAttack());
+        shiverpeakClimb.add(new BanditAttack());
+        shiverpeakClimb.add(new OrcAttack());
+        shiverpeakClimb.add(new GoblinAttack());
+        shiverpeakClimb.add(new StaminaPotionMerchant());
+        shiverpeakClimb.name = "Shiverpeak Climb";
+        locationArray[93] = shiverpeakClimb;
+
+        shiverpeakCliffs = new Location(4,9);
+        shiverpeakCliffs.add(new WolfAttack());
+        shiverpeakCliffs.add(new BanditAttack());
+        shiverpeakCliffs.add(new OrcAttack());
+        shiverpeakCliffs.add(new GoblinAttack());
+        shiverpeakCliffs.add(new StaminaPotionMerchant());
+        shiverpeakCliffs.name = "Shiverpeak Cliffs";
+        locationArray[94] = shiverpeakCliffs;
+
+        shiverpeakMountains = new Location(4,10);
+        shiverpeakMountains.add(new WolfAttack());
+        shiverpeakMountains.add(new BanditAttack());
+        shiverpeakMountains.add(new OrcAttack());
+        shiverpeakMountains.add(new GoblinAttack());
+        shiverpeakMountains.add(new StaminaPotionMerchant());
+        shiverpeakMountains.name = "Shiverpeak Mountains";
+        locationArray[95] = shiverpeakMountains;
 
 
 
@@ -487,6 +680,45 @@ public class Map {
         frostleafBrush.add(new StaminaPotionMerchant());
         frostleafBrush.name = "Frostleaf Brush";
         locationArray[46] = frostleafBrush;
+
+        wintersEdge = new Location(5,7);
+        wintersEdge.add(new WolfAttack());
+        wintersEdge.add(new BanditAttack());
+        wintersEdge.add(new OrcAttack());
+        wintersEdge.add(new GoblinAttack());
+        wintersEdge.add(new StaminaPotionMerchant());
+        wintersEdge.name = "Winter's Edge";
+        locationArray[96] = wintersEdge;
+
+        softsnowWoods = new Location(5,8);
+        softsnowWoods.add(new WolfAttack());
+        softsnowWoods.add(new BanditAttack());
+        softsnowWoods.add(new OrcAttack());
+        softsnowWoods.add(new GoblinAttack());
+        softsnowWoods.add(new StaminaPotionMerchant());
+        softsnowWoods.name = "Softsnow Woods";
+        locationArray[97] = softsnowWoods;
+
+        avalanchPath = new Location(5,9);
+        avalanchPath.add(new WolfAttack());
+        avalanchPath.add(new BanditAttack());
+        avalanchPath.add(new OrcAttack());
+        avalanchPath.add(new GoblinAttack());
+        avalanchPath.add(new StaminaPotionMerchant());
+        avalanchPath.name = "Avalanche Path";
+        locationArray[98] = avalanchPath;
+
+        shiverpeakMountainSummit = new Location(5,10);
+        shiverpeakMountainSummit.add(new WolfAttack());
+        shiverpeakMountainSummit.add(new BanditAttack());
+        shiverpeakMountainSummit.add(new OrcAttack());
+        shiverpeakMountainSummit.add(new GoblinAttack());
+        shiverpeakMountainSummit.add(new StaminaPotionMerchant());
+        shiverpeakMountainSummit.name = "Shiverpeak Mountain Summit";
+        locationArray[99] = shiverpeakMountainSummit;
+
+
+
 
 
 
