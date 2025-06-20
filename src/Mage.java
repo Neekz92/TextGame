@@ -5,24 +5,26 @@ public class Mage extends Player {
 
     int amountOfSpells;
     Spell[] spellBook = new Spell[amountOfSpells];
-    Spell[] allSpells = new Spell[2];
+    Spell[] allSpells = new Spell[3];
 
 
     public Mage(GameEngine gameEngine, String name) {
 
         super(gameEngine, name);
-        setHp(12);
+        setHp(1200);
         currentHp = getHp();
         attack = 5;
         defense = 5;
-        luck = 0;
+        luck = 200;
 
         Spell chainLightning = new ChainLightning();
         Spell heal = new Heal();
+        Spell haste = new Haste();
         allSpells[0] = chainLightning;
         allSpells[1] = heal;
+        allSpells[2] = haste;
 
-        addSpell(allSpells[random.nextInt(0,2)]);
+        addSpell(allSpells[random.nextInt(0,3)]);
 
         weapon = new Staff();
     }
@@ -105,6 +107,15 @@ public class Mage extends Player {
         targetedEnemy.adjustHp();
     }
 
+    public void haste() {
+
+        System.out.println("Select a target");
+        showTargetOptions();
+        targetSelect();
+        targetedEnemy.hasteTimer = (finalLuck / 5);
+        System.out.println(targetedEnemy + " begins moving with arcane speed!");
+    }
+
     private void combatOptions() {
         System.out.println("[ 1 ] Basic Attack");
         System.out.println("[ 2 ] Cast a Spell");
@@ -151,11 +162,19 @@ public class Mage extends Player {
                                 }
                             }
                         }
+
                         else if (selectedSpell.name == "Heal") {
                             System.out.println("A warm pulse of wound-mending magic surges from " + this);
                             heal();
                             stamina--;
                         }
+
+                        else if (selectedSpell.name == "Haste") {
+                            haste();
+                            stamina--;
+                        }
+
+
                         selectMove = false;
                         break;
                     }

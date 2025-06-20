@@ -16,6 +16,7 @@ public class WolfAttack extends CombatEncounter {
 
         addItem(chainLightning);
         addItem(heal);
+        addItem(haste);
 
         addItem(shieldBashCombo);
         addItem(perfectParry);

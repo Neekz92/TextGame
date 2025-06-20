@@ -139,7 +139,7 @@ public class Map {
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
-        locationArray = new Location[80];  //  79
+        locationArray = new Location[120];  //  119
 
         cityOne = new Location(0, 0);
         cityOne.add(new CryingChild());

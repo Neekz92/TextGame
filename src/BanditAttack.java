@@ -16,6 +16,7 @@ public class BanditAttack extends CombatEncounter {
 
         addItem(chainLightning);
         addItem(heal);
+        addItem(haste);
 
         addItem(shieldBashCombo);
         addItem(perfectParry);

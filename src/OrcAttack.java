@@ -34,6 +34,7 @@ public class OrcAttack extends CombatEncounter {
 
         addItem(chainLightning);
         addItem(heal);
+        addItem(haste);
 
         addItem(criticalShot);
         addItem(rapidShot);

@@ -51,6 +51,7 @@ public class Player {
     boolean hasEncounter = false;
     boolean isStunned = false;
     int stunTimer = 0;
+    int hasteTimer = 0;
     boolean didASocialEncounterThisturn = false;
 
     boolean parryStance = false;  //  This is responsible for the Warrior's perfectParry() logic
@@ -419,6 +420,12 @@ public class Player {
         encounter.displayParticipants();
         System.out.println("########################");
         System.out.println(this + "'s stamina: " + stamina);
+
+        if (hasteTimer > 0) {
+            System.out.println("Hasted actions remaining: " + hasteTimer);
+        }
+
+
         System.out.println("What do you do?");
         encounter.options();
     }
@@ -540,7 +547,9 @@ public class Player {
     public void rest() {
 
         int restoredHp = random.nextInt(1,(finalHp / 4) + 2);
+        System.out.println("DEBUG: Player.rest(): " + this + " has " + currentHp + " hp");
         System.out.println(this + " restored " + restoredHp + " HP and 1 stamina!");
+        System.out.println("DEBUG: Player.rest(): " + this + " has " + currentHp + " hp");
         currentHp += restoredHp;
         stamina ++;
 

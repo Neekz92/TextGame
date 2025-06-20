@@ -91,6 +91,7 @@ public class GameEngine {
                     player.inventory = new Inventory();
                     player.inventory.player = player;
                     addPlayer(player);
+                    player.updateStats();
                     //System.out.println("Debug from character creation: " + name);
                     break;
 
@@ -100,6 +101,7 @@ public class GameEngine {
                     player.inventory = new Inventory();
                     player.inventory.player = player;
                     addPlayer(player);
+                    player.updateStats();
                     break;
 
                 case 3:
@@ -108,6 +110,7 @@ public class GameEngine {
                     player.inventory = new Inventory();
                     player.inventory.player = player;
                     addPlayer(player);
+                    player.updateStats();
                     break;
 
                 default:
@@ -194,6 +197,8 @@ public class GameEngine {
                     }
                     player.encounterPhase();
                     player.parryStance = false;
+
+
                     if (player.stunTimer > 0) {  //  If the player is stunned, don't attack.
                         System.out.println(player.getName() + " is stunned for " + player.stunTimer + " turns!");
                         player.stunTimer --;
@@ -201,6 +206,13 @@ public class GameEngine {
                     else {
                         if (player.encounter instanceof CombatEncounter) {
                             player.combat();
+
+                            if (player.hasteTimer > 0 && player.encounter != null) {  //  player gets another action if they still have > 0 haste timer
+                                System.out.println(player + " is still empowered by Haste!");
+                                player.combat();
+                                player.hasteTimer--;
+                                System.out.println(player + " has " + player.hasteTimer + " hasted actions remaining.");
+                            }
                         }
                     }
                     if (player.didASocialEncounterThisturn == false && player.hasEncounter == false && player.getLocation().isTown) {

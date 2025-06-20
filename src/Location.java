@@ -57,6 +57,7 @@ public class Location {
 
         if (encounter.areHostilesDead() && !encounter.arePlayersDead()) {  //  This runs when the players kill all the enemies in an encounter
             for (int i = 0; i < encounter.playerArray.length; i++) {
+                encounter.playerArray[i].hasteTimer = 0;
                 encounter.playerArray[i].setEncounter(null);
                 encounter.playerArray[i].hasEncounter = false;
                 if (!encounter.distributedRewards) {  //  I was having an issue where every player involved was calling this reward distribution, so I made a boolean flag that only makes it trigger for the first player in the array.

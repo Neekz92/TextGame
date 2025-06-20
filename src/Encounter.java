@@ -33,6 +33,7 @@ public class Encounter {
 
     Item chainLightning = new ChainLightning();
     Item heal = new Heal();
+    Item haste = new Haste();
 
     Item criticalShot = new CriticalShot();
     Item rapidShot = new RapidShot();
