@@ -1,10 +1,14 @@
+import java.util.Random;
+
 public class Shop {
 
     int amountOfItems = 0;
     Item[] itemArray = new Item[amountOfItems];
+    Random random;
 
     public Shop() {
 
+        random = new Random();
     }
 
 
@@ -14,21 +18,30 @@ public class Shop {
         Item[] itemArrayClone = new Item[amountOfItems];
         itemArray = itemArrayClone;
 
-        Item potion = new Potion();
-        addItem(potion);
 
-        Item sword = new Sword();
-        addItem(sword);
+        for (int i = 0; i < 7; i++) {
+            int rng = random.nextInt(1,16);
+            switch (rng) {
+                case 1: addItem(new Potion()); break;
+                case 2: addItem(new Potion("Uncommon")); break;
+                case 3: addItem(new Sword()); break;
+                case 4: addItem(new Sword("Uncommon")); break;
+                case 5: addItem(new Staff()); break;
+                case 6: addItem(new Staff("Uncommon")); break;
+                case 7: addItem(new Bow()); break;
+                case 8: addItem(new Bow("Uncommon")); break;
+                case 9: addItem(new Armor()); break;
+                case 10: addItem(new Armor("Uncommon")); break;
 
-        Item staff = new Staff();
-        addItem(staff);
-
-        Item bow = new Bow();
-        addItem(bow);
-
-        Item armor = new Armor();
-        addItem(armor);
+                case 11:addItem(new Potion()); break;
+                case 12:addItem(new Sword()); break;
+                case 13:addItem(new Staff()); break;
+                case 14:addItem(new Bow()); break;
+                case 15:addItem(new Armor()); break;
+            }
+        }
     }
+
     public void addItem(Item item) {
 
         amountOfItems ++;

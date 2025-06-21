@@ -7,6 +7,7 @@ public class Bow extends Item {
 
     public Bow(String rarity) {
         super(rarity);
+        name = "Longbow";
     }
 
     @Override

@@ -60,13 +60,13 @@ public class Item {
                 price = random.nextInt(1, 11);
                 break;
             case "Uncommon":
-                price = random.nextInt(5, 21);
+                price = random.nextInt(20, 41);
                 break;
             case "Rare":
-                price = random.nextInt(10, 31);
+                price = random.nextInt(40, 61);
                 break;
             case "Legendary":
-                price = random.nextInt(15, 41);
+                price = random.nextInt(60, 81);
                 break;
         }
 

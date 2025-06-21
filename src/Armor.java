@@ -8,6 +8,7 @@ public class Armor extends Item {
 
     public Armor(String rarity) {
         super(rarity);
+        name = "Armor";
     }
 
     @Override

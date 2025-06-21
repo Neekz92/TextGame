@@ -16,16 +16,21 @@ public class Encounter {
 
     Item potion = new Potion();
     Item uncommonPotion = new Potion("Uncommon");
+    Item rarePotion = new Potion("Rare");
 
     Item sword = new Sword();
     Item uncommonSword = new Sword("Uncommon");
+    Item rareSword = new Sword("Rare");
     Item staff = new Staff();
     Item uncommonStaff = new Staff("Uncommon");
+    Item rareStaff = new Staff("Rare");
     Item bow = new Bow();
     Item uncommonBow = new Bow("Uncommon");
+    Item rareBow = new Bow("Rare");
 
     Item armor = new Armor();
     Item uncommonArmor = new Armor("Uncommon");
+    Item rareArmor = new Armor("Rare");
 
 
     Item shieldBashCombo = new ShieldBashCombo();

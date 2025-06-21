@@ -3,11 +3,12 @@ public class Potion extends Item {
     public Potion() {
 
         super();
-        setName("Potion");
+        name = "Potion";
     }
 
     public Potion(String rarity) {
         super(rarity);
+        name = "Potion";
     }
 
     @Override

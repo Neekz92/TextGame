@@ -7,6 +7,7 @@ public class Staff extends Item {
 
     public Staff(String rarity) {
         super(rarity);
+        name = "Staff";
     }
 
     @Override
