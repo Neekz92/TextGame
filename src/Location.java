@@ -14,6 +14,8 @@ public class Location {
     int amountOfEncounters = 0;
     String name;
 
+    boolean isScorched = false;
+
     boolean isTown = false;
 
     public Location(int x, int y) {
@@ -33,6 +35,18 @@ public class Location {
         this(0, 0);
     }
 
+    public void scorchTile() {
+
+        if (isScorched = true) {
+            for (int i = encounterArray.length; i >= 0; i--) {
+                if (encounterArray.length > 0) {
+                    remove(encounterArray[i - 1]);
+                }
+            }
+            add(new ScorchedLocation());
+        }
+    }
+
 
     public void add(Encounter encounter) {
 
@@ -43,6 +57,34 @@ public class Location {
         }
         encounterArrayClone[amountOfEncounters - 1] = encounter;
         encounterArray = encounterArrayClone;
+    }
+
+
+
+    public void remove(Encounter encounter) {
+
+        int indexToRemove = 0;
+
+        if (amountOfEncounters > 0) {
+            amountOfEncounters--;
+            Encounter[] encounterArrayClone = new Encounter[amountOfEncounters];
+
+            for (int i = 0; i < encounterArray.length; i++) {
+                if (encounter.equals(encounterArray[i])) {
+                    indexToRemove = i;
+                }
+            }
+
+
+            for (int i = indexToRemove; i < amountOfEncounters; i++) {
+                encounterArrayClone[i] = encounterArray[i + 1];
+            }
+
+            for (int i = 0; i < indexToRemove; i++) {
+                encounterArrayClone[i] = encounterArray[i];
+            }
+            encounterArray = encounterArrayClone;
+        }
     }
 
 

@@ -6,8 +6,10 @@ public class GameEngine {
 
     Player player;
     Player[] playerArray;
+    DragonToken dragonToken;
 
     Map map;
+
 
     int amountOfCharacters;
     int currentAmountOfPlayers;
@@ -20,6 +22,7 @@ public class GameEngine {
         currentAmountOfPlayers = 0;
         playerArray = new Player[amountOfCharacters];
 
+        dragonToken = new DragonToken();
         map = new Map(this);
         map.gameEngine = this;
 
@@ -135,6 +138,9 @@ public class GameEngine {
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
+                    dragonToken.movement();
+                    map.scorchLocation();
+
                     System.out.println("");
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
 

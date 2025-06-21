@@ -2,6 +2,7 @@ public class Map {
 
     GameEngine gameEngine;
 
+    DragonToken dragonToken;
 
     Location cityOne;
     Location southWestPlains;
@@ -139,6 +140,10 @@ public class Map {
     Location[] locationArray;
 
     public Map(GameEngine gameEngine) {
+
+        this.gameEngine = gameEngine;
+        dragonToken = gameEngine.dragonToken;
+
         locationArray = new Location[120];  //  119
 
         cityOne = new Location(0, 0);
@@ -1230,13 +1235,15 @@ public class Map {
         scorchwyrmsLair.add(new CryingChild());
         scorchwyrmsLair.name = "Scorchwyrm's Lair";
         locationArray[119] = scorchwyrmsLair;
+    }
 
+    public void scorchLocation() {
 
-
-
-
-
-
+        for (int i = 0; i < locationArray.length; i++) {
+            if (dragonToken.x == locationArray[i].x && dragonToken.y == locationArray[i].y) {
+                locationArray[i].scorchTile();
+            }
+        }
     }
 
     public Location findLocation(int x, int y) {
