@@ -179,6 +179,13 @@ public class Player {
 
     public void movementPhase() {
 
+        if (gameEngine.dragonToken.x == positionX && gameEngine.dragonToken.y == positionY) {
+
+        }
+            else if (Math.abs(gameEngine.dragonToken.x - positionX) <= 2 && Math.abs(gameEngine.dragonToken.y - positionY) <= 2) {
+                System.out.println("You hear the flapping of large wings, and a ferocious roar in the distance. A terrible sense of fear overwhelms you for a moment.");
+            }
+
         boolean movementPhase = true;
         movementPhaseOptions();
 
@@ -186,17 +193,25 @@ public class Player {
             try {
                 int input = scanner.nextInt();
                 scanner.nextLine();
-                if (input == 1) {
+                if (input == 1 && getY() < 10) {
                     setY(getY() + 1);
                     movementPhase = false;
                     System.out.println(this + " moved North. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                } else if (input == 2) {
+                }
+                else if (input == 1 && getY() >= 10) {
+                    System.out.println("You can't go any further North.");
+                }
+                else if (input == 2 && getX() < 10) {
                     setX(getX() + 1);
                     movementPhase = false;
                     System.out.println(this + " moved East. New map position is: (" + getX() + "," + getY() + ")");
                     break;
-                } else if (input == 3 && getY() > 0) {
+                }
+                else if (input == 2 && getX() >= 10) {
+                    System.out.println("You can't go any further East.");
+                }
+                else if (input == 3 && getY() > 0) {
                     setY(getY() - 1);
                     movementPhase = false;
                     System.out.println(this + " moved South. New map position is: (" + getX() + "," + getY() + ")");

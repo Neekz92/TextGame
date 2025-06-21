@@ -12,9 +12,9 @@ public class Warrior extends Player {
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(2000);
+        setHp(20);
         currentHp = getHp();
-        attack = 500;
+        attack = 5;
         defense = 5;
         luck = 0;
 
