@@ -197,26 +197,42 @@ public class GameEngine {
 
     public void turnOrder() {
 
+        int citiesDestroyed = 0;
+
         boolean roundManager = true;
         int round = 1;
-        while (roundManager) {
+        while (roundManager && gameOver() == false) {
             System.out.println("Round: " + round);
             round++;
-            if (round == 200){
+            if (round == Integer.MAX_VALUE){
                 roundManager = false;
             }
+
+            if (gameOver() == false) {
+                dragonToken.movement();
+                map.scorchLocation();
+                dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+                System.out.println("Tiles scorched: " + Map.tilesRemaining);
+                System.out.println("Cities remaining: " + citiesRemaining);
+                //System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
+                if (dragonToken.location.isTown) {
+                    System.out.println("");
+                    System.out.println("********");
+                    System.out.println("******** " + dragonToken.location.name + " has been razed to the ground, and all the people have been burned to ashes. ********");
+                    System.out.println("********");
+                    System.out.println("");
+                    map.findLocation(dragonToken.x, dragonToken.y).isTown = false;
+                    citiesRemaining--;
+                    if (gameOver()) {
+                        roundManager = false;
+                        break;
+                    }
+                }
+            }
+
+
             for (int i = 0; i < amountOfCharacters; i++) {
                     if (round % 1 == 0) {
-                        dragonToken.movement();
-                        map.scorchLocation();
-                        dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
-                        System.out.println("DEBUG: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
-                        if (dragonToken.location.isTown) {
-                            System.out.println(dragonToken.location.name + " has been razed to the ground, and all the people have been burned to ashes.");
-                            map.findLocation(dragonToken.x, dragonToken.y).isTown = false;
-                            citiesRemaining --;
-                            gameOver();
-                        }
 
                     }
 
@@ -319,9 +335,10 @@ public class GameEngine {
         return false;
     }
 
-    public void gameOver() {
-        if (citiesRemaining == 0 && !arePlayersAlive()) {
-            System.out.println("All cities have been destroyed. Game Over.");
+    public boolean gameOver() {
+        if (citiesRemaining == 0 || !arePlayersAlive()) {
+            return true;
         }
+        return false;
     }
 }

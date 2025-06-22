@@ -5,7 +5,7 @@ public class Wyvern extends Enemy {
         super(gameEngine);
         this.attack = 60;
         this.defense = 60;
-        this.setHp(100);
+        this.setHp(80);
         currentHp = getHp();
 
         setGold(5);

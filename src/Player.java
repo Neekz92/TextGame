@@ -371,6 +371,7 @@ public class Player {
             encounter.removePlayer(this);
             gameEngine.removePlayer(this);
             location.endEncounter();
+            gameEngine.gameOver();
         }
     }
 
