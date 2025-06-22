@@ -53,6 +53,7 @@ public class StaminaPotionMerchant extends SocialEncounter {
 
             } catch (Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
     }

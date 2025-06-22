@@ -47,6 +47,7 @@ public class CryingChild extends SocialEncounter {
             }
             catch(Exception e) {
                 System.out.println("Invalid option. Exception: " + e);
+                scanner.nextLine();
             }
         }
     }

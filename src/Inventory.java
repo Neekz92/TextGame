@@ -104,11 +104,11 @@ public class Inventory {
                         //selectedItem.name = "Chain-Lightning";
                         player.inventory.removeItem(selectedItem);
                         System.out.println(player + " learned how to cast " + selectedItem.name);
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                     else {
                         System.out.println("You are no Mage. You don't understand magic.");
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                 }
 
@@ -117,11 +117,11 @@ public class Inventory {
                         ((Warrior) player).addSkill((Skill) selectedItem);
                         player.inventory.removeItem(selectedItem);
                         System.out.println(player + " learned how to perform " + selectedItem.name);
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                     else {
                         System.out.println("You are no Warrior. You don't understand sword skills.");
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                 }
 
@@ -130,11 +130,11 @@ public class Inventory {
                         ((Archer) player).addStunt((Stunt) selectedItem);
                         player.inventory.removeItem(selectedItem);
                         System.out.println(player + " learned how to do " + selectedItem.name);
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                     else {
                         System.out.println("You are no Archer. You don't understand bow stunts.");
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                     }
                 }
 
@@ -147,7 +147,7 @@ public class Inventory {
                         player.updateStats();
                         System.out.println("You equipped " + player.armor);
                         removeItem(player.armor);
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                         return;
                     } else {
                         System.out.println("Do you want to swap these two armors?");
@@ -162,7 +162,7 @@ public class Inventory {
                                 player.updateStats();
                                 System.out.println("You equipped " + player.armor);
                                 player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                player.movementPhaseOptions();
+                                //player.movementPhaseOptions();
                                 return;
                         }
                     }
@@ -188,7 +188,7 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    player.movementPhaseOptions();
+                                    //player.movementPhaseOptions();
                                     return;
                             }
                         }
@@ -217,7 +217,7 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    player.movementPhaseOptions();
+                                    //player.movementPhaseOptions();
                                     return;
                             }
                         }
@@ -246,10 +246,10 @@ public class Inventory {
                                     player.updateStats();
                                     System.out.println("You equipped " + player.weapon);
                                     player.inventory.itemArray[itemSelect - 1] = tempItem;
-                                    player.movementPhaseOptions();
+                                    //player.movementPhaseOptions();
                                     return;
                                 case 2:
-                                    player.movementPhaseOptions();
+                                    //player.movementPhaseOptions();
                                     return;
                             }
                         }
@@ -266,7 +266,7 @@ public class Inventory {
                         if (player.stamina > player.maxStamina) {
                             player.stamina = player.maxStamina;
                         }
-                        player.movementPhaseOptions();
+                        //player.movementPhaseOptions();
                         removeItem(selectedItem);
                         return;
                     }
@@ -274,7 +274,7 @@ public class Inventory {
                     System.out.println("You drank a " + selectedItem + " and healed for " + selectedItem.healAmount + " hp!");
                     player.currentHp = player.currentHp + selectedItem.healAmount;
                     player.adjustHp();
-                    player.movementPhaseOptions();
+                    //player.movementPhaseOptions();
                     removeItem(selectedItem);
                     return;
                 }
@@ -282,7 +282,7 @@ public class Inventory {
             case 2:
                 System.out.println("Who would you like to gift [ " + selectedItem + " ] to?");
                 trade();
-            case 0: player.movementPhaseOptions();
+            case 0:;
         }
     }
 

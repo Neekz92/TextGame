@@ -54,6 +54,7 @@ public class JobBoardBandit extends SocialEncounter {
                 }
             } catch (Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
     }

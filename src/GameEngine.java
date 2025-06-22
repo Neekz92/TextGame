@@ -14,6 +14,8 @@ public class GameEngine {
     int amountOfCharacters;
     int currentAmountOfPlayers;
 
+    static int citiesRemaining = 3;
+
     public GameEngine() {
 
         scanner = new Scanner(System.in);
@@ -77,47 +79,70 @@ public class GameEngine {
 
     public void characterCreation() {
 
-        System.out.println("How many players?");
-        currentAmountOfPlayers = scanner.nextInt();
-        scanner.nextLine();
+        boolean howManyPlayers = true;
+        while (howManyPlayers) {
+            System.out.println("How many players?");
+            try {
+                currentAmountOfPlayers = scanner.nextInt();
+                scanner.nextLine();
+                howManyPlayers = false;
+            }
+            catch (Exception e) {
+                System.out.println("Invalid input. Try again, but this time with integers.");
+                scanner.nextLine();
+            }
+        }
+
         for (int i = 0; i < currentAmountOfPlayers; i++) {
             System.out.println("Player " + (1 + i) + ", what is your name?");
-            String name = scanner.next();
+            String name = scanner.nextLine();
 
-            System.out.println(name + ", what class are you?");
-            System.out.println("[ 1 ] Warrior\n[ 2 ] Mage\n[ 3 ] Archer");
-            int spec = scanner.nextInt();
-            switch (spec) {
-                case 1:
-                    System.out.println("You have selected the Warrior class.");
-                    player = new Warrior(this, name);
-                    player.inventory = new Inventory();
-                    player.inventory.player = player;
-                    addPlayer(player);
-                    player.updateStats();
-                    //System.out.println("Debug from character creation: " + name);
-                    break;
+            boolean classSelection = true;
+            while (classSelection) {
+                System.out.println(name + ", what class are you?");
+                System.out.println("[ 1 ] Warrior\n[ 2 ] Mage\n[ 3 ] Archer");
+                try {
+                    int spec = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (spec) {
+                        case 1:
+                            System.out.println("You have selected the Warrior class.");
+                            player = new Warrior(this, name);
+                            player.inventory = new Inventory();
+                            player.inventory.player = player;
+                            addPlayer(player);
+                            player.updateStats();
+                            classSelection = false;
+                            break;
 
-                case 2:
-                    System.out.println("You have selected the Mage class.");
-                    player = new Mage(this, name);
-                    player.inventory = new Inventory();
-                    player.inventory.player = player;
-                    addPlayer(player);
-                    player.updateStats();
-                    break;
+                        case 2:
+                            System.out.println("You have selected the Mage class.");
+                            player = new Mage(this, name);
+                            player.inventory = new Inventory();
+                            player.inventory.player = player;
+                            addPlayer(player);
+                            player.updateStats();
+                            classSelection = false;
+                            break;
 
-                case 3:
-                    System.out.println("You have selected the Archer class.");
-                    player = new Archer(this, name);
-                    player.inventory = new Inventory();
-                    player.inventory.player = player;
-                    addPlayer(player);
-                    player.updateStats();
-                    break;
+                        case 3:
+                            System.out.println("You have selected the Archer class.");
+                            player = new Archer(this, name);
+                            player.inventory = new Inventory();
+                            player.inventory.player = player;
+                            addPlayer(player);
+                            player.updateStats();
+                            classSelection = false;
+                            break;
 
-                default:
-                    System.out.println("Invalid option.");
+                        default:
+                            System.out.println("Invalid option.");
+                    }
+                }
+                catch (Exception e) {
+                    System.out.println("You have to use WHOLE NUMBERS, don't screw this up. You're better than that.");
+                    scanner.nextLine();
+                }
             }
         }
 
@@ -138,8 +163,19 @@ public class GameEngine {
                 roundManager = false;
             }
             for (int i = 0; i < amountOfCharacters; i++) {
-                    dragonToken.movement();
-                    map.scorchLocation();
+                    if (round % 1 == 0) {
+                        dragonToken.movement();
+                        map.scorchLocation();
+                        dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+                        System.out.println("DEBUG: " + dragonToken.location);
+                        if (dragonToken.location.isTown) {
+                            System.out.println(dragonToken.location.name + " has been razed to the ground, and all the people have been burned to ashes.");
+                            map.findLocation(dragonToken.x, dragonToken.y).isTown = false;
+                            citiesRemaining --;
+                            gameOver();
+                        }
+
+                    }
 
                     System.out.println("");
                     System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
@@ -221,12 +257,28 @@ public class GameEngine {
                             }
                         }
                     }
-                    if (player.didASocialEncounterThisturn == false && player.hasEncounter == false && player.getLocation().isTown) {
+                    if (player.didASocialEncounterThisturn == false && player.hasEncounter == false && player.getLocation().isTown && player.getLocation().isScorched == false) {
                         boolean rested = player.cityOptions();
                         if (rested) continue;
                     }
                     System.out.println("*************************************");
             }
+        }
+    }
+
+    public boolean arePlayersAlive() {
+
+        for (int i = 0; i < playerArray.length; i++) {
+            if (playerArray[i].currentHp > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void gameOver() {
+        if (citiesRemaining == 0 && !arePlayersAlive()) {
+            System.out.println("All cities have been destroyed. Game Over.");
         }
     }
 }

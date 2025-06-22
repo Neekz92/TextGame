@@ -187,9 +187,9 @@ public class Player {
             }
 
         boolean movementPhase = true;
-        movementPhaseOptions();
 
         while (movementPhase) {
+            movementPhaseOptions();
             try {
                 int input = scanner.nextInt();
                 scanner.nextLine();
@@ -255,7 +255,6 @@ public class Player {
 
         if (xp <= 0) {
             System.out.println("You have no XP to spend.");
-            movementPhaseOptions();
             return false;
         }
         return true;
@@ -310,7 +309,6 @@ public class Player {
                 System.out.println("You upgraded your " + chosenStatName + " by " + input + " points! Your " + chosenStatName + " is now " + chosenStat);
                 xp -= input;
                 inputAmountOfStatPoints = false;
-                movementPhaseOptions();
                 break;
             }
         }
@@ -487,11 +485,22 @@ public class Player {
 
     public Player targetSelect() {
 
-        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
-        scanner.nextLine();
+        boolean targetSelect = true;
+        while (targetSelect) {
+            try {
+                int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+                scanner.nextLine();
 
-        targetedEnemy = encounter.playerArray[input];
-        return encounter.playerArray[input];
+                targetedEnemy = encounter.playerArray[input];
+                targetSelect = false;
+                return encounter.playerArray[input];
+            }
+            catch (Exception e) {
+                System.out.println("Nope. You gotta type a valid integer.");
+                scanner.nextLine();
+            }
+        }
+        return null;
     }
 
     public void basicAttack() {
@@ -573,6 +582,7 @@ public class Player {
             }
             catch (Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
         return false;
@@ -581,9 +591,7 @@ public class Player {
     public void rest() {
 
         int restoredHp = random.nextInt(1,(finalHp / 4) + 2);
-        System.out.println("DEBUG: Player.rest(): " + this + " has " + currentHp + " hp");
         System.out.println(this + " restored " + restoredHp + " HP and 1 stamina!");
-        System.out.println("DEBUG: Player.rest(): " + this + " has " + currentHp + " hp");
         currentHp += restoredHp;
         stamina ++;
 
@@ -658,6 +666,7 @@ public class Player {
             }
             catch (Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
     }
@@ -700,19 +709,29 @@ public class Player {
             }
             catch (Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
     }
 
     public void sellItem() {
 
-        int input = scanner.nextInt();
-        scanner.nextLine();
+        boolean sellItem = true;
+        while (sellItem) {
+            try {
+                int input = scanner.nextInt();
+                scanner.nextLine();
 
-        selectedItem = inventory.itemArray[input - 1];
-        setGold(getGold() + selectedItem.price);
-        System.out.println("You sold " + selectedItem + " for " + selectedItem.price + " gold!");
-        inventory.removeItem(selectedItem);
+                selectedItem = inventory.itemArray[input - 1];
+                setGold(getGold() + selectedItem.price);
+                System.out.println("You sold " + selectedItem + " for " + selectedItem.price + " gold!");
+                inventory.removeItem(selectedItem);
+                sellItem = false;
+            } catch (Exception e) {
+                System.out.println("Invalid option. You gotta type an integer.");
+                scanner.nextLine();
+            }
+        }
     }
 
     public void basicAttackDescription() {}
@@ -729,7 +748,6 @@ public class Player {
         System.out.println("Stamina: " + stamina);
         System.out.println("Gold: " + getGold());
         System.out.println("");
-        movementPhaseOptions();
     }
 
     public void run() {
@@ -756,11 +774,5 @@ public class Player {
         String returnMe = "";
         returnMe += name;
         return returnMe;
-    }
-
-
-
-    public void addPlayerToEnemyAITargetingArray(Player player) {
-
     }
 }

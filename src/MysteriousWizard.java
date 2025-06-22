@@ -124,6 +124,7 @@ public class MysteriousWizard extends SocialEncounter {
             }
             catch(Exception e) {
                 System.out.println("Invalid option.");
+                scanner.nextLine();
             }
         }
     }

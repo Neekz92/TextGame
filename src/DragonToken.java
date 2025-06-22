@@ -5,6 +5,7 @@ public class DragonToken {
     int x;
     int y;
     Random random;
+    Location location;
 
     public DragonToken() {
 

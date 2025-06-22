@@ -20,7 +20,7 @@ public class Bandit extends Enemy {
             targetedEnemy = enemyAITargetArray[rng];
             basicAttack();  //  For future enemies with more complex move lists, I might add basicAttack() to an array, along with its other moves like breathWeapon() etc, and then use rng to determine which one gets used.
         }
-        else if (enemyAITargetArray.length == 1){
+        else if (enemyAITargetArray.length == 1) {
             targetedEnemy = enemyAITargetArray[0];
             basicAttack();
         }
