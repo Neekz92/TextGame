@@ -22,7 +22,7 @@ public class WoundedAdventurer extends SocialEncounter {
                 switch (input) {
                     case 1:
                         if (playerArray[0].quest.equals("No Quest")) {
-                            int goblinsToKill = random.nextInt(3, 6);
+                            int goblinsToKill = random.nextInt(1, gameEngine.amountOfCharacters + 1) + 1;
                             System.out.println("You have accepted a quest to subjugate " + goblinsToKill + " goblins.");
                             playerArray[0].quest = "Goblin Quest";
                             playerArray[0].orcsToKill = goblinsToKill;
@@ -35,7 +35,7 @@ public class WoundedAdventurer extends SocialEncounter {
                             playerArray[0].banditsToKill = 0;
                             playerArray[0].orcsToKill = 0;
 
-                            int goblinsToKill = random.nextInt(3, 6);
+                            int goblinsToKill = random.nextInt(1, gameEngine.amountOfCharacters + 1) + 1;
                             System.out.println("You have accepted a quest to subjugate " + goblinsToKill + " goblins.");
                             playerArray[0].quest = "Goblin Quest";
                             playerArray[0].goblinsToKill = goblinsToKill;

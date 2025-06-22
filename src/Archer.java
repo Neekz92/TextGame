@@ -9,11 +9,11 @@ public class Archer extends Player {
 
     public Archer(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(15);
+        setHp(20);
         currentHp = getHp();
-        attack = 5;
+        attack = 15;
         defense = 5;
-        luck = 0;
+        luck = 5;
 
         weapon = new Bow();
 

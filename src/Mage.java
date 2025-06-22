@@ -11,11 +11,11 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
 
         super(gameEngine, name);
-        setHp(12);
+        setHp(20);
         currentHp = getHp();
-        attack = 5;
+        attack = 15;
         defense = 5;
-        luck = 0;
+        luck = 5;
 
         Spell chainLightning = new ChainLightning();
         Spell heal = new Heal();

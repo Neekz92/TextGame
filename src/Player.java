@@ -514,10 +514,12 @@ public class Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(1, (finalAttack / 5) + 5) + (attackSkillBuff - targetedEnemy.defenseSkillBuff);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
+            damage += attackSkillBuff;
+            damage -= targetedEnemy.defenseSkillBuff;
             damage *= 2;
 
             if (targetedEnemy.parryStance == false) {
@@ -540,10 +542,12 @@ public class Player {
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
 
             System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
-            int damage = random.nextInt(1, (finalAttack / 5) + 5) + (attackSkillBuff - defenseSkillBuff);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 5) + 5);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
             }
+            damage += attackSkillBuff;
+            damage -= targetedEnemy.defenseSkillBuff;
 
             if (targetedEnemy.parryStance == false) {
                 targetedEnemy.currentHp -= damage;

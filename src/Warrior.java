@@ -14,9 +14,9 @@ public class Warrior extends Player {
         super(gameEngine, name);
         setHp(20);
         currentHp = getHp();
-        attack = 5;
+        attack = 15;
         defense = 5;
-        luck = 0;
+        luck = 5;
 
         weapon = new Sword();
 
@@ -94,6 +94,7 @@ public class Warrior extends Player {
                         selectMove = false;
                         break;
                 }
+                break;
             } catch (Exception e) {
                 System.out.println("Must. Enter. An. Integer. Not whatever the hell that was.");
                 scanner.nextLine();
