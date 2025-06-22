@@ -1,8 +1,10 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameEngine {
 
     Scanner scanner;
+    Random random;
 
     Player player;
     Player[] playerArray;
@@ -17,6 +19,8 @@ public class GameEngine {
     static int citiesRemaining = 3;
 
     public GameEngine() {
+
+        random = new Random();
 
         scanner = new Scanner(System.in);
 
@@ -100,7 +104,7 @@ public class GameEngine {
             boolean classSelection = true;
             while (classSelection) {
                 System.out.println(name + ", what class are you?");
-                System.out.println("[ 1 ] Warrior\n[ 2 ] Mage\n[ 3 ] Archer");
+                System.out.println("[ 1 ] Warrior\n[ 2 ] Mage\n[ 3 ] Archer\n[ 4 ] Random");
                 try {
                     int spec = scanner.nextInt();
                     scanner.nextLine();
@@ -135,6 +139,45 @@ public class GameEngine {
                             classSelection = false;
                             break;
 
+                        case 4:
+                            spec = random.nextInt(1,4);
+
+                            switch (spec) {
+                                case 1:
+                                    System.out.println("You have selected the Warrior class.");
+                                    player = new Warrior(this, name);
+                                    player.inventory = new Inventory();
+                                    player.inventory.player = player;
+                                    addPlayer(player);
+                                    player.updateStats();
+                                    classSelection = false;
+                                    break;
+
+                                case 2:
+                                    System.out.println("You have selected the Mage class.");
+                                    player = new Mage(this, name);
+                                    player.inventory = new Inventory();
+                                    player.inventory.player = player;
+                                    addPlayer(player);
+                                    player.updateStats();
+                                    classSelection = false;
+                                    break;
+
+                                case 3:
+                                    System.out.println("You have selected the Archer class.");
+                                    player = new Archer(this, name);
+                                    player.inventory = new Inventory();
+                                    player.inventory.player = player;
+                                    addPlayer(player);
+                                    player.updateStats();
+                                    classSelection = false;
+                                    break;
+                            }
+                            break;
+
+
+
+
                         default:
                             System.out.println("Invalid option.");
                     }
@@ -167,7 +210,7 @@ public class GameEngine {
                         dragonToken.movement();
                         map.scorchLocation();
                         dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
-                        System.out.println("DEBUG: " + dragonToken.location);
+                        System.out.println("DEBUG: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
                         if (dragonToken.location.isTown) {
                             System.out.println(dragonToken.location.name + " has been razed to the ground, and all the people have been burned to ashes.");
                             map.findLocation(dragonToken.x, dragonToken.y).isTown = false;

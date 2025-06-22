@@ -236,6 +236,7 @@ public class Map {
         cityTwo.add(new JobBoardBandit());
         cityTwo.name = "City Two";
         locationArray[79] = cityTwo;
+        cityTwo.isTown = true;
 
 
 
@@ -1031,6 +1032,7 @@ public class Map {
         parchedDrylands = new Location(9,7);
         parchedDrylands.add(new OrcAttack());
         parchedDrylands.add(new GoblinAttack());
+        parchedDrylands.name = "Parched Drylands";
         locationArray[112] = parchedDrylands;
 
         camalsWay = new Location(9,8);

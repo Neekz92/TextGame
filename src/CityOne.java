@@ -4,6 +4,5 @@ public class CityOne extends Location {
 
         description = "You are in the City One.";
         isTown = true;
-
     }
 }

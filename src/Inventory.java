@@ -81,7 +81,6 @@ public class Inventory {
         scanner.nextLine();
 
         if (itemSelect == 0) {
-            player.movementPhaseOptions();
             return;
         }
 
