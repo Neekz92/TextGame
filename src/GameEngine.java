@@ -18,6 +18,10 @@ public class GameEngine {
 
     static int citiesRemaining = 3;
 
+    Scorchwyrm dragon;
+
+    Encounter dragonAttack = new DragonAttack(this);
+
     public GameEngine() {
 
         random = new Random();
@@ -32,6 +36,8 @@ public class GameEngine {
         map = new Map(this);
         map.gameEngine = this;
 
+        dragon = new Scorchwyrm(this);
+        dragon.gameEngine = this;
     }
 
     public void addPlayer(Player player) {
@@ -203,18 +209,24 @@ public class GameEngine {
         int round = 1;
         while (roundManager && gameOver() == false) {
             System.out.println("Round: " + round);
+            System.out.println("Tiles scorched: " + Map.tilesRemaining);
+            System.out.println("Cities remaining: " + citiesRemaining);
+            System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
             round++;
             if (round == Integer.MAX_VALUE){
                 roundManager = false;
             }
 
-            if (gameOver() == false) {
-                dragonToken.movement();
-                map.scorchLocation();
+            if (gameOver() == false && !dragonToken.hasEncounter) {
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
-                System.out.println("Tiles scorched: " + Map.tilesRemaining);
-                System.out.println("Cities remaining: " + citiesRemaining);
-                //System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
+                dragonToken.location.remove(dragonAttack);
+                dragonToken.movement();
+                dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+                map.scorchLocation();
+                dragonToken.location.add(dragonAttack);
+
+
+
                 if (dragonToken.location.isTown) {
                     System.out.println("");
                     System.out.println("********");
@@ -254,12 +266,17 @@ public class GameEngine {
                         }
 
                         else if (playerArray[i].goblinsToKill > 0) {
-                            System.out.println("Quest: Kill " + playerArray[i].orcsToKill + " goblins");
+                            System.out.println("Quest: Kill " + playerArray[i].goblinsToKill + " goblins");
                         }
                     }
 
 
                     player = playerArray[i];     //  Set 'player' to the current player
+
+                    if (player.encounter == null && player.getLocation().encounter != null) {
+                        player.encounter = player.getLocation().encounter;
+                    }
+
                     player.gameEngine = this;   //  Set current player's GameEngine.
                     player.didASocialEncounterThisturn = false;
 
@@ -271,21 +288,24 @@ public class GameEngine {
                     }
 
                     if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
+
+                        player.encounter = null;
+                        player.hasEncounter = false;
                         player.movementPhase();  //  Allow the player to move
                         player.setLocation(map.findLocation(player.getX(), player.getY()));  //  set player's location after moving
-                        // System.out.println("DEBUG 2: " + player + "'s location has been assigned to " + player.getLocation());
                         player.getLocation().gameEngine = this;  // Set the location's game engine after moving
                     }
 
                     if (player.getLocation().encounter != null) {  //  If the location the player gets to has an encounter,
                         player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is
+
                         if (player.hasEncounter == false) {
                             player.encounter.addPlayer(player);  //  Adds the current player to the Encounter's player array.
                             player.hasEncounter = true;
                         }
-                    } else {  //  If the location has no encounter
-                        if (!(player instanceof Enemy)) {  // Bugs appeared that caused mobs to roll new encounters... I'm thinking this might fix it
-                            //System.out.println(player + " is calling rollEncounter() from the else block at (" + player.getX() + "," + player.getY() + " ) " + player.getLocation());+
+                    }
+                    else {  //  If the location has no encounter
+                        if (!(player instanceof Enemy) && !player.getLocation().equals(dragonToken.location)) {  // Bugs appeared that caused mobs to roll new encounters... I'm thinking this might fix it
                             player.getLocation().rollEncounter();  //  Randomly roll an encounter
                             player.encounter = player.getLocation().encounter;  //  Set the player's encounter to whatever the location's encounter is. Just like above.
                             player.encounter.gameEngine = this; // Set the Encounter's game engine
@@ -316,7 +336,7 @@ public class GameEngine {
                             }
                         }
                     }
-                    if (player.didASocialEncounterThisturn == false && player.hasEncounter == false && player.getLocation().isTown && player.getLocation().isScorched == false) {
+                    if (!player.didASocialEncounterThisturn && !player.hasEncounter && player.getLocation().isTown && !player.getLocation().isScorched) {
                         boolean rested = player.cityOptions();
                         if (rested) continue;
                     }

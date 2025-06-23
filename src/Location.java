@@ -37,15 +37,14 @@ public class Location {
 
     public void scorchTile() {
 
-        if (isScorched = true) {
             for (int i = encounterArray.length; i >= 0; i--) {
                 if (encounterArray.length > 0) {
                     remove(encounterArray[i - 1]);
+                    isScorched = true;
                 }
             }
             add(new ScorchedLocation());
         }
-    }
 
 
     public void add(Encounter encounter) {

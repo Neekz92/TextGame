@@ -6,13 +6,15 @@ public class DragonToken {
     int y;
     Random random;
     Location location;
+    boolean hasEncounter;
 
     public DragonToken() {
 
         random = new Random();
 
-        x = 10;
-        y = 10;
+        x = 0;
+        y = 5;
+        hasEncounter = false;
     }
 
     public void movement() {

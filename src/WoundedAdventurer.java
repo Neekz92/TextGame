@@ -25,11 +25,12 @@ public class WoundedAdventurer extends SocialEncounter {
                             int goblinsToKill = random.nextInt(1, gameEngine.amountOfCharacters + 1) + 1;
                             System.out.println("You have accepted a quest to subjugate " + goblinsToKill + " goblins.");
                             playerArray[0].quest = "Goblin Quest";
-                            playerArray[0].orcsToKill = goblinsToKill;
+                            playerArray[0].goblinsToKill = goblinsToKill;
                             playerArray[0].didASocialEncounterThisturn = true;
                             playerArray[0].getLocation().endSocialEncounter();
                             selectChoice = false;
-                        } else {
+                        }
+                        else {
                             System.out.println("You abandoned your previous quest and accept the new one.");
                             playerArray[0].wolvesToKill = 0;
                             playerArray[0].banditsToKill = 0;

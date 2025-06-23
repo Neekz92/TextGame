@@ -179,10 +179,15 @@ public class Player {
 
     public void movementPhase() {
 
-        if (gameEngine.dragonToken.x == positionX && gameEngine.dragonToken.y == positionY) {
+//        if (gameEngine.dragonToken.location.equals(getLocation())) {
+//            gameEngine.dragonToken.location.encounter = gameEngine.dragonAttack;
+//            encounter = gameEngine.dragonAttack;
+//            hasEncounter = true;
+//            encounter.addPlayer(this);
+//            System.out.println("Dragon fight is beiing called from Player.java -> movementPHase()");
+//        }
 
-        }
-            else if (Math.abs(gameEngine.dragonToken.x - positionX) <= 2 && Math.abs(gameEngine.dragonToken.y - positionY) <= 2) {
+            if (Math.abs(gameEngine.dragonToken.x - positionX) <= 2 && Math.abs(gameEngine.dragonToken.y - positionY) <= 2) {
                 System.out.println("You hear the flapping of large wings, and a ferocious roar in the distance. A terrible sense of fear overwhelms you for a moment.");
             }
 
@@ -441,6 +446,19 @@ public class Player {
 
 
     public void encounterPhase() {
+
+        if (encounter == null && location.equals(gameEngine.dragonToken.location)) {
+            encounter = gameEngine.dragonAttack;
+            if (DragonAttack.amountOfDragons == 0) {
+                encounter.setup();
+                encounter.addPlayer(this);
+                encounter = gameEngine.dragonAttack;
+                gameEngine.dragon.encounter = encounter;
+                gameEngine.dragon.hasEncounter = true;
+                hasEncounter = true;
+                gameEngine.dragonToken.hasEncounter = true;
+            }
+        }
 
         System.out.println("*** Encounter Phase ***");
         encounter.displayParticipants();
@@ -759,16 +777,20 @@ public class Player {
 
         System.out.println(this + " tries to escape the battle!");
         if (rollLuck() + (finalLuck / 5) > 10) {
-            for (int i = 0; i < encounter.playerArray.length; i++) {
+            for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                 if (encounter.playerArray[i] instanceof  Enemy) {
                     System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
                     encounter.playerArray[i].targetedEnemy = this;
                     encounter.playerArray[i].basicAttack();
+                    location.encounter = null;
+                    gameEngine.removePlayer(encounter.playerArray[i]);
+                    encounter.removePlayer(encounter.playerArray[i]);
                     System.out.println("");
                 }
             }
             encounter.removePlayer(this);
             hasEncounter = false;
+            encounter = null;
             movementPhase();
         }
     }
