@@ -1,5 +1,3 @@
-import com.sun.source.tree.Tree;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -242,7 +240,7 @@ public class GameEngine {
                 for (int i = 0; i < playerArray.length; i++) {  //  Check if the Dragon is on the same location as any other player after it moves
                     Player currentPlayer = playerArray[i];
 
-                    if (dragonToken.location.equals(currentPlayer.getLocation())) {
+                    if (dragonToken.location.equals(currentPlayer.getLocation()) && currentPlayer.getLocation().encounter != null) {
                         dragonToken.hasEncounter = true;
 
                         System.out.println("");
@@ -255,22 +253,19 @@ public class GameEngine {
                         System.out.println("**********");
                         System.out.println("");
 
-                        currentPlayer.getLocation().encounter.addPlayer(dragon);
-                        addPlayer(dragon);
-                        dragon.setX(player.getX());
-                        dragon.setY(player.getY());
-                        dragon.setLocation(map.findLocation(dragon.getX(), dragon.getY()));
-                        dragon.setName("Scorchwyrm, Destroyer of Realms" + " (" + dragon.getLocation() + ")");
-                        DragonAttack.amountOfDragons ++;
-                        break;
+                        if (!currentPlayer.getLocation().encounter.containsScorchwyrm()) {
+                            currentPlayer.getLocation().encounter.addPlayer(dragon);
+                            addPlayer(dragon);
+                            dragon.setX(player.getX());
+                            dragon.setY(player.getY());
+                            dragon.setLocation(map.findLocation(dragon.getX(), dragon.getY()));
+                            dragon.setName("Scorchwyrm, Destroyer of Realms" + " (" + dragon.getLocation() + ")");
+                            DragonAttack.amountOfDragons++;
+                            break;
+                        }
                     }
-
                 }
-
                 dragonToken.location.add(dragonAttack);
-                System.out.println("DEBUG: dragonAttack event should be added " + dragonToken.location.name + " | " + dragonToken.location.encounterArray.length);
-
-
 
                 if (dragonToken.location.isTown) {
                     System.out.println("");
@@ -332,7 +327,7 @@ public class GameEngine {
                         player.getLocation().shop.itemArray[j].assignStats2();
                     }
 
-                    if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,
+                    if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter.
 
                         player.encounter = null;
                         player.hasEncounter = false;

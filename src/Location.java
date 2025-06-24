@@ -44,7 +44,6 @@ public class Location {
                 }
             }
             add(new ScorchedLocation());
-            System.out.println("DEBUG from Location.scorchTile: " + encounterArray[0]);
         }
 
 
@@ -99,7 +98,7 @@ public class Location {
 
         Player currentPlayer;
 
-        if (encounter.areHostilesDead() && !encounter.arePlayersDead()) {  //  This runs when the players kill all the enemies in an encounter
+        if (encounter.areHostilesDead() && encounter.arePlayersInEncounter()) {  //  This runs when the players kill all the enemies in an encounter
 
 
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
@@ -133,7 +132,7 @@ public class Location {
             encounter.playerArray = new Player[encounter.amountOfPlayers];
             encounter = null;
             System.out.println("The battle is won!");
-        } else if (!encounter.areHostilesDead() && encounter.arePlayersDead()) {
+        } else if (!encounter.areHostilesDead() && !(encounter.arePlayersInEncounter())) {
             System.out.println("The battle is lost!");
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                 encounter.playerArray[i].gameEngine.removePlayer(encounter.playerArray[i]);  // Remove all entities from the gameEngine playerArray

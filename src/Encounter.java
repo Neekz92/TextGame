@@ -76,6 +76,12 @@ public class Encounter {
     }
 
     public void addPlayer(Player player) {
+
+        if (containsScorchwyrm() && player instanceof Scorchwyrm) {
+            return;
+        }
+
+
         amountOfPlayers++;
         Player[] playerArrayClone = new Player[amountOfPlayers];
         for (int i = 0; i < playerArray.length; i++) {
@@ -140,7 +146,7 @@ public class Encounter {
 
 
 
-    public boolean arePlayersDead() {
+    public boolean arePlayersInEncounter() {
 
         int amountOfPlayers = 0;
 
@@ -151,9 +157,9 @@ public class Encounter {
         }
 
         if (amountOfPlayers == 0) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -214,5 +220,15 @@ public class Encounter {
             }
         }
         return amountOfEnemies;
+    }
+
+    public boolean containsScorchwyrm() {
+
+        for (int i = 0; i < playerArray.length; i++) {
+            if (playerArray[i] instanceof Scorchwyrm) {
+                return true;
+            }
+        }
+        return false;
     }
 }

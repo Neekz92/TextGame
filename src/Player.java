@@ -179,14 +179,6 @@ public class Player {
 
     public void movementPhase() {
 
-//        if (gameEngine.dragonToken.location.equals(getLocation())) {
-//            gameEngine.dragonToken.location.encounter = gameEngine.dragonAttack;
-//            encounter = gameEngine.dragonAttack;
-//            hasEncounter = true;
-//            encounter.addPlayer(this);
-//            System.out.println("Dragon fight is beiing called from Player.java -> movementPHase()");
-//        }
-
             if (Math.abs(gameEngine.dragonToken.x - positionX) <= 2 && Math.abs(gameEngine.dragonToken.y - positionY) <= 2) {
                 System.out.println("You hear the flapping of large wings, and a ferocious roar in the distance. A terrible sense of fear overwhelms you for a moment.");
             }
@@ -777,35 +769,88 @@ public class Player {
 
         System.out.println(this + " tries to escape the battle!");
 
+        int rollLuck = rollLuck();
+        if (rollLuck + (finalLuck / 5) > 10) {
+            System.out.println("");
+            hasteTimer = 0;
 
-        if (encounter instanceof DragonAttack) {
-            System.out.println("The dragon will not let you escape!");
-        }
-
-
-        else if (rollLuck() + (finalLuck / 5) > 10) {
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
-                if (encounter.playerArray[i] instanceof  Enemy) {
+
+
+                if (encounter.playerArray[i] instanceof Enemy) {
                     System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
                     encounter.playerArray[i].targetedEnemy = this;
                     encounter.playerArray[i].basicAttack();
-
-                    if (location.encounter.arePlayersDead()) {
-                        System.out.println("location.encounter.arePlayersDead() is returning " + location.encounter.arePlayersDead());
-                        location.encounter = null;
-                        gameEngine.removePlayer(encounter.playerArray[i]);
-                        encounter.removePlayer(encounter.playerArray[i]);
-                        System.out.println("");
-                    }
+                    System.out.println("");
                 }
             }
-            encounter.removePlayer(this);
-            hasEncounter = false;
-            encounter = null;
-            movementPhase();
+            encounter.removePlayer(this);  //  this <- refers to the Player that is attempting to flee from battle.
+
+                if (location.encounter.arePlayersInEncounter() == false) {
+
+                    for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
+
+                        if (encounter.playerArray[i] instanceof Scorchwyrm) {
+                            DragonAttack.amountOfDragons --;
+                            gameEngine.dragonToken.hasEncounter = false;
+                        }
+                        gameEngine.removePlayer(encounter.playerArray[i]);
+                        encounter.removePlayer(encounter.playerArray[i]);
+                    }
+                    location.encounter = null;
+                    hasEncounter = false;
+                    encounter = null;
+                    System.out.println("");
+                }
+
+            System.out.println("(" + getX() + "," + getY() + ")");
+            System.out.println("*** Run Away ***");
+            System.out.println("[ 1 ] Travel North");
+            System.out.println("[ 2 ] Travel East");
+            System.out.println("[ 3 ] Travel South");
+            System.out.println("[ 4 ] Travel West");
+
+            boolean selectChoice = true;
+            while (selectChoice) {
+                try {
+                    int input = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (input == 1 && getY() < 10) {
+                        setY(getY() + 1);
+                        selectChoice = false;
+                        System.out.println(this + " moved North. New map position is: (" + getX() + "," + getY() + ")");
+                        break;
+                    } else if (input == 1 && getY() >= 10) {
+                        System.out.println("You can't go any further North.");
+                    } else if (input == 2 && getX() < 10) {
+                        setX(getX() + 1);
+                        selectChoice = false;
+                        System.out.println(this + " moved East. New map position is: (" + getX() + "," + getY() + ")");
+                        break;
+                    } else if (input == 2 && getX() >= 10) {
+                        System.out.println("You can't go any further East.");
+                    } else if (input == 3 && getY() > 0) {
+                        setY(getY() - 1);
+                        selectChoice = false;
+                        System.out.println(this + " moved South. New map position is: (" + getX() + "," + getY() + ")");
+                        break;
+                    } else if (input == 3 && getY() <= 0) {
+                        System.out.println("You can't go any further south.");
+                    } else if (input == 4 && getX() > 0) {
+                        setX(getX() - 1);
+                        selectChoice = false;
+                        System.out.println(this + " moved West. New map position is: (" + getX() + "," + getY() + ")");
+                        break;
+                    } else if (input == 4 && getX() <= 0) {
+                        System.out.println("You can't go any further West.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid.");
+                }
+            }
         }
     }
-
     @Override
     public String toString() {
 

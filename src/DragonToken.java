@@ -8,6 +8,7 @@ public class DragonToken {
     Location location;
     boolean hasEncounter;
     GameEngine gameEngine;
+    String name;
 
     public DragonToken(GameEngine gameEngine) {
 
