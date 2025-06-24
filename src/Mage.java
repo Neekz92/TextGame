@@ -11,9 +11,9 @@ public class Mage extends Player {
     public Mage(GameEngine gameEngine, String name) {
 
         super(gameEngine, name);
-        setHp(20000);
+        setHp(20);
         currentHp = getHp();
-        attack = 1500;
+        attack = 15;
         defense = 5;
         luck = 5;
 
