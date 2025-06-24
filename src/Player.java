@@ -738,7 +738,7 @@ public class Player {
                 }
 
                 selectedItem = location.shop.itemArray[input - 1];
-                Item purchasedItem = selectedItem.copy();  //  CURRENT ISSUE, NOTICE ME CHATGPT. the item should have already had its stats assigned before copy() runs, no?
+                Item purchasedItem = selectedItem.copy();
                 purchasedItem.attack = selectedItem.attack;
                 purchasedItem.defense = selectedItem.defense;
                 purchasedItem.luck = selectedItem.luck;
