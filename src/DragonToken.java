@@ -7,13 +7,16 @@ public class DragonToken {
     Random random;
     Location location;
     boolean hasEncounter;
+    GameEngine gameEngine;
 
-    public DragonToken() {
+    public DragonToken(GameEngine gameEngine) {
 
+        this.gameEngine = gameEngine;
         random = new Random();
 
         x = 10;
         y = 10;
+        location = gameEngine.map.scorchwyrmsLair;
         hasEncounter = false;
     }
 

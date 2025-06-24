@@ -32,7 +32,6 @@ public class GameEngine {
         currentAmountOfPlayers = 0;
         playerArray = new Player[amountOfCharacters];
 
-        dragonToken = new DragonToken();
         map = new Map(this);
         map.gameEngine = this;
 
@@ -195,6 +194,10 @@ public class GameEngine {
             }
         }
 
+        dragonToken = new DragonToken(this);
+        map.dragonToken = dragonToken;
+        dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+
         System.out.println("Character creation complete.\nYour party consists of:");
         for (int i = 0; i < playerArray.length; i++) {
             System.out.println(playerArray[i]);
@@ -209,6 +212,9 @@ public class GameEngine {
         int round = 1;
         while (roundManager && gameOver() == false) {
             System.out.println("Round: " + round);
+            System.out.println("Array length at Scorchwyrm's Lair: " + map.scorchwyrmsLair.encounterArray.length);
+            System.out.println("Array length at Cavern of Cadavers: " + map.cavernOfCadavers.encounterArray.length);
+            System.out.println("Which enccounter is at Scorchwyrm's Lair: " + map.scorchwyrmsLair.name + " " + map.scorchwyrmsLair.encounterArray[0].description);
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
             System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");

@@ -2,6 +2,7 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
 
     AncientBabyDragonMinibossTrigger() {
 
+        description = "Baby Dragon Social Encounter";
     }
 
     @Override
@@ -28,7 +29,8 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
                         System.out.println(playerArray[0] + " delves deeper into the cave, the cacophony of guttural growls and grunts grows louder. Heavy footsteps can be heard with an increase in their rhythm.");
                         System.out.println("Soon enough, a juvenile dragon emerges from the darkness. The walls of the cavern are illuminated by the embers rolling out of the sides of its jaws. It lets out a fierce roar and charges!");
                         playerArray[0].getLocation().endSocialEncounter();
-
+                        chooseOption = false;
+                        break;
                 }
             }
             catch (Exception e) {

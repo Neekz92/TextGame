@@ -1,4 +1,6 @@
 public class ScorchwyrmsLair extends Location {
 
-    public ScorchwyrmsLair() {}
+    public ScorchwyrmsLair() {
+        description = "Scorchwyrm's Lair";
+    }
 }
