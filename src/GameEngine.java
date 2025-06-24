@@ -215,7 +215,11 @@ public class GameEngine {
             System.out.println("Round: " + round);
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
-            System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
+
+            if (citiesRemaining == 1) {
+                System.out.println("Scorchwyrm was spotted at: " + dragonToken.location.name + " " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
+            }
+
             round++;
             if (round == Integer.MAX_VALUE){
                 roundManager = false;
@@ -268,7 +272,8 @@ public class GameEngine {
                         System.out.println("**********");
                         System.out.println("**********");
                         System.out.println("**********");
-                        System.out.println("Barreling down from from the sky, Scorchwyrm the Destroyer has revealed itself!");
+                        System.out.println("Barreling down from from the sky, Scorchwyrm, the Mighty Dragon has revealed itself!");
+                        System.out.println("Dirt, rock, and stone are scattered by the gusts of his powerful wings. He unleashes a roar so fierce your ears want to burst.");
                         System.out.println("**********");
                         System.out.println("**********");
                         System.out.println("**********");

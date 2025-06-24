@@ -12,7 +12,17 @@ public class DragonAttack extends CombatEncounter {
     public void setup() {
 
         if (amountOfDragons == 0) {
-            System.out.println("The clouds themselves spread, as an gigantic beast descends from the heavens. Scorchwyrm, the Realm's Destroyer reveals itself at " + gameEngine.player.getLocation());
+
+            System.out.println("");
+            System.out.println("**********");
+            System.out.println("**********");
+            System.out.println("**********");
+            System.out.println("The heavens themselves part, as a gigantic beast descends from the sky. Scorchwyrm, the Realm's Destroyer reveals itself at " + gameEngine.player.getLocation());
+            System.out.println("The Mighty Dragon unleashes a pillar of flame into the sky from his maw. He roars so fiercly, your bones quake beneath your flesh.");
+            System.out.println("**********");
+            System.out.println("**********");
+            System.out.println("**********");
+            System.out.println("");
 
             amountOfMobs++;
             Scorchwyrm dragon = gameEngine.dragon;
