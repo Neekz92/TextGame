@@ -12,8 +12,8 @@ public class DragonToken {
 
         random = new Random();
 
-        x = 0;
-        y = 5;
+        x = 10;
+        y = 10;
         hasEncounter = false;
     }
 

@@ -14,7 +14,7 @@ public class Warrior extends Player {
         super(gameEngine, name);
         setHp(20000);
         currentHp = getHp();
-        attack = 150;
+        attack = 1500;
         defense = 5;
         luck = 5;
 

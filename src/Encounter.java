@@ -17,20 +17,25 @@ public class Encounter {
     Item potion = new Potion();
     Item uncommonPotion = new Potion("Uncommon");
     Item rarePotion = new Potion("Rare");
+    Item legendaryPotion = new Potion("Legendary");
 
     Item sword = new Sword();
     Item uncommonSword = new Sword("Uncommon");
     Item rareSword = new Sword("Rare");
+    Item legendarySword = new Sword("Legendary");
     Item staff = new Staff();
     Item uncommonStaff = new Staff("Uncommon");
     Item rareStaff = new Staff("Rare");
+    Item legendaryStaff = new Staff("Legendary");
     Item bow = new Bow();
     Item uncommonBow = new Bow("Uncommon");
     Item rareBow = new Bow("Rare");
+    Item legendaryBow = new Bow("Legendary");
 
     Item armor = new Armor();
     Item uncommonArmor = new Armor("Uncommon");
     Item rareArmor = new Armor("Rare");
+    Item legendaryArmor = new Armor("Legendary");
 
 
     Item shieldBashCombo = new ShieldBashCombo();

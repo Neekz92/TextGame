@@ -194,9 +194,7 @@ public class Map {
         locationArray[4] = stormpeakMountainsSouth;
 
         stormpeakMountainsSummit = new Location(0,5);
-        stormpeakMountainsSummit.add(new OrcAttack());
-        stormpeakMountainsSummit.add(new GoblinAttack());
-        stormpeakMountainsSummit.add(new WyvernAttack());
+        stormpeakMountainsSummit.add(new AncientGiantMinibossTrigger());
         stormpeakMountainsSummit.name = "Stormpeak Mountain Summit";
         locationArray[5] = stormpeakMountainsSummit;
 
@@ -664,12 +662,7 @@ public class Map {
 
 
         templeOfLeaves = new Location(5,0);
-        templeOfLeaves.add(new BanditAttack());
-        templeOfLeaves.add(new WolfAttack());
-        templeOfLeaves.add(new OrcAttack());
-        templeOfLeaves.add(new GoblinAttack());
-        templeOfLeaves.add(new WyvernAttack());
-        templeOfLeaves.add(new StaminaPotionMerchant());
+        templeOfLeaves.add(new AncientTreeEntMinibossTrigger());
         templeOfLeaves.name = "Temple of Leaves";
         locationArray[55] = templeOfLeaves;
 
@@ -714,9 +707,7 @@ public class Map {
         locationArray[59] = rollingRivermouth;
 
         cavernOfCadavers = new Location(5,5);
-        cavernOfCadavers.add(new OrcAttack());
-        cavernOfCadavers.add(new GoblinAttack());
-        cavernOfCadavers.add(new WyvernAttack());
+        cavernOfCadavers.add(new AncientCavernMinibossTrigger());
         cavernOfCadavers.name = "Cavern of Cadavers";
         locationArray[60] = cavernOfCadavers;
 
@@ -1196,7 +1187,7 @@ public class Map {
         locationArray[119] = buriedMausoleum;
 
         scorchwyrmsLair = new Location(10,10);
-        scorchwyrmsLair.add(new CryingChild());
+        scorchwyrmsLair.add(new AncientBabyDragonMinibossTrigger());
         scorchwyrmsLair.name = "Scorchwyrm's Lair";
         locationArray[120] = scorchwyrmsLair;
     }

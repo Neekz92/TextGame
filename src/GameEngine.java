@@ -222,7 +222,10 @@ public class GameEngine {
                 dragonToken.location.remove(dragonAttack);
                 dragonToken.movement();
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
-                map.scorchLocation();
+
+                if (!isOnMiniboss()) {
+                    map.scorchLocation();
+                }
                 dragonToken.location.add(dragonAttack);
 
 
@@ -359,6 +362,31 @@ public class GameEngine {
         if (citiesRemaining == 0 || !arePlayersAlive()) {
             return true;
         }
+        return false;
+    }
+
+    public boolean isOnMiniboss() {
+
+        if (dragonToken.x == 0 && dragonToken.y == 5) {
+            return true;
+        }
+
+        if (dragonToken.x == 5 && dragonToken.y == 5) {
+            return true;
+        }
+
+        if (dragonToken.x == 5 && dragonToken.y == 0) {
+            return true;
+        }
+
+        if (dragonToken.x == 5 && dragonToken.y == 10) {
+            return true;
+        }
+
+        if (dragonToken.x == 10 && dragonToken.y == 10) {
+            return true;
+        }
+
         return false;
     }
 }

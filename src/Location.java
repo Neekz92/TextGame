@@ -89,10 +89,13 @@ public class Location {
 
     public Encounter rollEncounter() {
 
-        int rng = random.nextInt(0, encounterArray.length);
-        encounter = encounterArray[rng];
-        return encounter;
-    }
+//        if (encounterArray.length > 0) {
+            int rng = random.nextInt(0, encounterArray.length);
+            encounter = encounterArray[rng];
+            return encounter;
+        }
+//        return encounter;
+//    }
 
     public void endEncounter() {
 

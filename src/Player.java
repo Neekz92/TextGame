@@ -776,7 +776,14 @@ public class Player {
     public void run() {
 
         System.out.println(this + " tries to escape the battle!");
-        if (rollLuck() + (finalLuck / 5) > 10) {
+
+
+        if (encounter instanceof DragonAttack) {
+            System.out.println("The dragon will not let you escape!");
+        }
+
+
+        else if (rollLuck() + (finalLuck / 5) > 10) {
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
                 if (encounter.playerArray[i] instanceof  Enemy) {
                     System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
