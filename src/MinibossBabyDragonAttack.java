@@ -14,19 +14,10 @@ public class MinibossBabyDragonAttack extends CombatEncounter {
         addItem(legendaryStaff);
         addItem(legendaryBow);
 
-        System.out.println("The juvenile dragon charges forward at full speed, at " + gameEngine.player.getLocation() + "!");
-
-        amountOfMobs++;
-        Enemy babyDragon;
-        gameEngine.addPlayer(babyDragon = new BabyDragon(gameEngine));
-        babyDragon.setName("Juvenile Dragon" + " (" + gameEngine.player.getLocation() + ")");
-        addPlayer(babyDragon);
-        babyDragon.encounter = this;
-        babyDragon.hasEncounter = true;
-        babyDragon.setLocation(gameEngine.player.getLocation());
-        babyDragon.getLocation().encounter = this;
-        babyDragon.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
-        babyDragon.setY(gameEngine.player.getY());
+        System.out.println("*** Encounter Phase ***");
+        displayParticipants();
+        System.out.println("########################");
+        System.out.println(playerArray[1] + "'s stamina: " + playerArray[0].stamina);
+        System.out.println("What do you do?");
     }
 }
-

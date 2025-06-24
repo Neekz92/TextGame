@@ -4,6 +4,10 @@ public class ScorchedLocation extends SocialEncounter {
 
     }
 
+    public String toString() {
+        return "Scorched Tile";
+    }
+
     public void setup() {
 
         System.out.println("");

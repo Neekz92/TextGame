@@ -1196,7 +1196,7 @@ public class Map {
 
         for (int i = 0; i < locationArray.length; i++) {
             dragonToken.location = findLocation(dragonToken.x, dragonToken.y);
-            if (dragonToken.x == locationArray[i].x && dragonToken.y == locationArray[i].y && (!dragonToken.location.isScorched)) {
+            if (locationArray[i].equals(dragonToken.location) && (!dragonToken.location.isScorched)) {
                 locationArray[i].scorchTile();
                 Map.tilesRemaining ++;
             }

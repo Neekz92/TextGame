@@ -50,7 +50,7 @@ public class Item {
                 healAmount = random.nextInt(15, 31);
                 break;
             case "Legendary":
-                healAmount = Integer.MAX_VALUE;
+                healAmount = 9999999;
                 break;
         }
 

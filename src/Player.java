@@ -789,10 +789,14 @@ public class Player {
                     System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
                     encounter.playerArray[i].targetedEnemy = this;
                     encounter.playerArray[i].basicAttack();
-                    location.encounter = null;
-                    gameEngine.removePlayer(encounter.playerArray[i]);
-                    encounter.removePlayer(encounter.playerArray[i]);
-                    System.out.println("");
+
+                    if (location.encounter.arePlayersDead()) {
+                        System.out.println("location.encounter.arePlayersDead() is returning " + location.encounter.arePlayersDead());
+                        location.encounter = null;
+                        gameEngine.removePlayer(encounter.playerArray[i]);
+                        encounter.removePlayer(encounter.playerArray[i]);
+                        System.out.println("");
+                    }
                 }
             }
             encounter.removePlayer(this);

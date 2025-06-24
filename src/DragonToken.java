@@ -14,7 +14,7 @@ public class DragonToken {
         this.gameEngine = gameEngine;
         random = new Random();
 
-        x = 10;
+        x = 0;
         y = 10;
         location = gameEngine.map.scorchwyrmsLair;
         hasEncounter = false;
@@ -22,7 +22,7 @@ public class DragonToken {
 
     public void movement() {
 
-        int rng = random.nextInt(1,6);
+        int rng = random.nextInt(3,4);
 
         boolean dragonMustMove = true;
         while (dragonMustMove) {

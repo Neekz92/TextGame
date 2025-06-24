@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -37,6 +39,7 @@ public class GameEngine {
 
         dragon = new Scorchwyrm(this);
         dragon.gameEngine = this;
+        dragonAttack.description = "Dragon Attack";
     }
 
     public void addPlayer(Player player) {
@@ -212,9 +215,6 @@ public class GameEngine {
         int round = 1;
         while (roundManager && gameOver() == false) {
             System.out.println("Round: " + round);
-            System.out.println("Array length at Scorchwyrm's Lair: " + map.scorchwyrmsLair.encounterArray.length);
-            System.out.println("Array length at Cavern of Cadavers: " + map.cavernOfCadavers.encounterArray.length);
-            System.out.println("Which enccounter is at Scorchwyrm's Lair: " + map.scorchwyrmsLair.name + " " + map.scorchwyrmsLair.encounterArray[0].description);
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
             System.out.println("Scorchwyrm is at: " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
@@ -226,13 +226,49 @@ public class GameEngine {
             if (gameOver() == false && !dragonToken.hasEncounter) {
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
                 dragonToken.location.remove(dragonAttack);
-                dragonToken.movement();
-                dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
 
                 if (!isOnMiniboss()) {
                     map.scorchLocation();
                 }
+
+                if (map.scorchwyrmsLair.encounterArray.length == 0) {
+                    map.scorchwyrmsLair.add(new AncientBabyDragonMinibossTrigger());
+                }
+                dragonToken.movement();
+                dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+
+
+
+                for (int i = 0; i < playerArray.length; i++) {  //  Check if the Dragon is on the same location as any other player after it moves
+                    Player currentPlayer = playerArray[i];
+
+                    if (dragonToken.location.equals(currentPlayer.getLocation())) {
+                        dragonToken.hasEncounter = true;
+
+                        System.out.println("");
+                        System.out.println("**********");
+                        System.out.println("**********");
+                        System.out.println("**********");
+                        System.out.println("Barreling down from from the sky, Scorchwyrm the Destroyer has revealed itself!");
+                        System.out.println("**********");
+                        System.out.println("**********");
+                        System.out.println("**********");
+                        System.out.println("");
+
+                        currentPlayer.getLocation().encounter.addPlayer(dragon);
+                        addPlayer(dragon);
+                        dragon.setX(player.getX());
+                        dragon.setY(player.getY());
+                        dragon.setLocation(map.findLocation(dragon.getX(), dragon.getY()));
+                        dragon.setName("Scorchwyrm, Destroyer of Realms" + " (" + dragon.getLocation() + ")");
+                        DragonAttack.amountOfDragons ++;
+                        break;
+                    }
+
+                }
+
                 dragonToken.location.add(dragonAttack);
+                System.out.println("DEBUG: dragonAttack event should be added " + dragonToken.location.name + " | " + dragonToken.location.encounterArray.length);
 
 
 
@@ -293,7 +329,7 @@ public class GameEngine {
                     player.getLocation().gameEngine = this;  // Set the location's game engine
                     player.getLocation().shop.fillShop();
                     for (int j = 0; j < player.getLocation().shop.itemArray.length; j++) {  //  Reset the rolls on each item in the marketplace
-                        player.getLocation().shop.itemArray[j].assignStats2();  // CURRENT ISSUE, NOTICE ME CHATGPT It should assign stats at the beginning of each turn
+                        player.getLocation().shop.itemArray[j].assignStats2();
                     }
 
                     if (player.getLocation().encounter == null) {  //  If the player location is not currently engaged in an encounter,

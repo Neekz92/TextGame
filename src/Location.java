@@ -44,6 +44,7 @@ public class Location {
                 }
             }
             add(new ScorchedLocation());
+            System.out.println("DEBUG from Location.scorchTile: " + encounterArray[0]);
         }
 
 
@@ -89,13 +90,10 @@ public class Location {
 
     public Encounter rollEncounter() {
 
-//        if (encounterArray.length > 0) {
             int rng = random.nextInt(0, encounterArray.length);
             encounter = encounterArray[rng];
             return encounter;
         }
-//        return encounter;
-//    }
 
     public void endEncounter() {
 
