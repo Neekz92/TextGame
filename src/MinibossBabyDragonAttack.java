@@ -2,6 +2,7 @@ public class MinibossBabyDragonAttack extends CombatEncounter {
 
     public MinibossBabyDragonAttack() {
 
+        xpBonus = 40;
     }
 
     @Override

@@ -232,6 +232,27 @@ public class GameEngine {
                 if (map.scorchwyrmsLair.encounterArray.length == 0) {
                     map.scorchwyrmsLair.add(new AncientBabyDragonMinibossTrigger());
                 }
+
+                if (map.stormpeakMountainsSummit.encounterArray.length == 0) {
+                    map.stormpeakMountainsSummit.add(new AncientGiantMinibossTrigger());
+                }
+
+                if (map.cavernOfCadavers.encounterArray.length == 0) {
+                    map.cavernOfCadavers.add(new AncientCavernMinibossTrigger());
+                }
+
+                if (map.shiverpeakMountainSummit.encounterArray.length == 0) {
+                    map.shiverpeakMountainSummit.add(new AncientFrostWraithMinibossTrigger());
+                }
+
+                if (map.templeOfLeaves.encounterArray.length == 0) {
+                    map.templeOfLeaves.add(new AncientTreeEntMinibossTrigger());
+                }
+
+                if (map.sandwormFeedingGrounds.encounterArray.length == 0) {
+                    map.sandwormFeedingGrounds.add(new AncientSandwormMinibossTrigger());
+                }
+
                 dragonToken.movement();
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
 
@@ -307,6 +328,10 @@ public class GameEngine {
 
                         else if (playerArray[i].goblinsToKill > 0) {
                             System.out.println("Quest: Kill " + playerArray[i].goblinsToKill + " goblins");
+                        }
+
+                        else if (playerArray[i].wyvernsToKill > 0) {
+                            System.out.println("Quest: Kill " + playerArray[i].wyvernsToKill + " wyverns");
                         }
                     }
 

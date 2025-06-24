@@ -67,6 +67,8 @@ public class Player {
     int orcsToKill;
     int goblinsToKill;
 
+    int wyvernsToKill;
+
     int enemyTargetingIndex = 0;
     Player[] enemyAITargetArray = new Player[enemyTargetingIndex];
 
@@ -424,6 +426,42 @@ public class Player {
                     break;
                 case 2:
                     int goldReward = random.nextInt(15,31);
+                    System.out.println(this + " completed their quest and received " + goldReward + " gold!");
+                    setGold(getGold() + goldReward);
+                    break;
+            }
+        }
+
+        if (quest.equals("Goblin Quest") && goblinsToKill <= 0) {
+            quest = "No Quest";
+
+            int rewardRng = random.nextInt(1,3);
+            switch (rewardRng) {
+                case 1:
+                    int xpReward = random.nextInt(15, 31);
+                    System.out.println(this + " completed their quest and received " + xpReward + " XP!");
+                    xp += xpReward;
+                    break;
+                case 2:
+                    int goldReward = random.nextInt(15,31);
+                    System.out.println(this + " completed their quest and received " + goldReward + " gold!");
+                    setGold(getGold() + goldReward);
+                    break;
+            }
+        }
+
+        if (quest.equals("Wyvern Quest") && wyvernsToKill <= 0) {
+            quest = "No Quest";
+
+            int rewardRng = random.nextInt(1,3);
+            switch (rewardRng) {
+                case 1:
+                    int xpReward = random.nextInt(30, 51);
+                    System.out.println(this + " completed their quest and received " + xpReward + " XP!");
+                    xp += xpReward;
+                    break;
+                case 2:
+                    int goldReward = random.nextInt(30,51);
                     System.out.println(this + " completed their quest and received " + goldReward + " gold!");
                     setGold(getGold() + goldReward);
                     break;
