@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 public class GameEngine {
 
+    boolean gameOverMessage = false;
+
+    int round = 1;
+
     Scanner scanner;
     Random random;
 
@@ -210,14 +214,19 @@ public class GameEngine {
         int citiesDestroyed = 0;
 
         boolean roundManager = true;
-        int round = 1;
+
         while (roundManager && gameOver() == false) {
+
+            if (gameOver() == true) {
+                roundManager = false;
+                break;
+            }
             System.out.println("Round: " + round);
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
 
             if (citiesRemaining == 1) {
-                System.out.println("Scorchwyrm was spotted at: " + dragonToken.location.name + " " + dragonToken.location + "(" + dragonToken.x + "," + dragonToken.y + ")");
+                System.out.println("Scorchwyrm was spotted at: " + dragonToken.location.name + " " + "(" + dragonToken.x + "," + dragonToken.y + ")");
             }
 
             round++;
@@ -411,6 +420,10 @@ public class GameEngine {
                         if (rested) continue;
                     }
                     System.out.println("*************************************");
+
+                if (gameOver() == true) {
+                    System.out.println("GAME OVER!");
+                }
             }
         }
     }
@@ -426,7 +439,8 @@ public class GameEngine {
     }
 
     public boolean gameOver() {
-        if (citiesRemaining == 0 || !arePlayersAlive()) {
+        if (gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
+            gameOverMessage = true;
             return true;
         }
         return false;

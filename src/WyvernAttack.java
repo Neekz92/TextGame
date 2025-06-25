@@ -33,6 +33,12 @@ public class WyvernAttack extends CombatEncounter {
         addItem(rapidShot);
         addItem(igniteArrows);
 
+        addItem(giantsCrown);
+        addItem(irredescentFlower);
+        addItem(cursedFragment);
+        addItem(ancientDrumstick);
+        addItem(enchantedIcePick);
+
         int rng = random.nextInt(1, gameEngine.playerArray.length + 1);
         System.out.println("From the sky," + rng +  " wyverns descend upon you, at " + gameEngine.player.getLocation());
 

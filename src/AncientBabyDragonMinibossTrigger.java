@@ -22,11 +22,11 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
         while (chooseOption) {
             System.out.println("[ 1 ] Press further into the black abyss that lies ahead");
             System.out.println("[ 2 ] Exit the cave");
-//            try {
+            try {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                switch(choice) {
+                switch (choice) {
                     case 1:
                         Encounter babyDragonEncounter = new MinibossBabyDragonAttack();
                         babyDragonEncounter.gameEngine = playerArray[0].gameEngine;
@@ -67,10 +67,10 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
                     default:
                         System.out.println("invalid. default block");
                 }
+            } catch (Exception e) {
+                System.out.println("Invalid" + " " + e);
+                scanner.nextLine();
             }
-//            catch (Exception e) {
-//                System.out.println("Invalid" + " " + e);
-//                scanner.nextLine();
-//            }
         }
     }
+}

@@ -23,7 +23,7 @@ public class DragonToken {
 
     public void movement() {
 
-        int rng = random.nextInt(3,4);
+        int rng = random.nextInt(1,6);
 
         boolean dragonMustMove = true;
         while (dragonMustMove) {

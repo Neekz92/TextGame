@@ -122,6 +122,8 @@ public class Item {
 
     }
 
+    public void description() {}
+
     public Item copy() {
         return new Item(this.rarity);
     }

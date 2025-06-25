@@ -48,6 +48,15 @@ public class Inventory {
         itemArray = inventoryClone;
     }
 
+    public boolean contains(Item item) {
+        for (int i = 0; i < itemArray.length; i++) {
+            if (itemArray[i].name.equals(item.name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void displayInventory() {
 
         if (player.inventory.itemArray.length == 0) {
@@ -277,6 +286,13 @@ public class Inventory {
                     removeItem(selectedItem);
                     return;
                 }
+
+                else if (selectedItem instanceof Key) {
+                    selectedItem.description();
+                    return;
+                }
+
+
                 return;
             case 2:
                 System.out.println("Who would you like to gift [ " + selectedItem + " ] to?");

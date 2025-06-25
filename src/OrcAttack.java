@@ -27,8 +27,6 @@ public class OrcAttack extends CombatEncounter {
         addItem(uncommonArmor);
 
 
-
-
         addItem(shieldBashCombo);
         addItem(perfectParry);
         addItem(taunt);
@@ -40,6 +38,12 @@ public class OrcAttack extends CombatEncounter {
         addItem(criticalShot);
         addItem(rapidShot);
         addItem(igniteArrows);
+
+        addItem(giantsCrown);
+        addItem(irredescentFlower);
+        addItem(cursedFragment);
+        addItem(ancientDrumstick);
+        addItem(enchantedIcePick);
 
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;

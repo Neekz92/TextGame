@@ -50,6 +50,12 @@ public class Encounter {
     Item rapidShot = new RapidShot();
     Item igniteArrows = new IgniteArrows();
 
+    Item giantsCrown = new GiantsCrown();
+    Item irredescentFlower = new IrredescentFlower();
+    Item cursedFragment = new CursedFragment();
+    Item ancientDrumstick = new AncientDrumstick();
+    Item enchantedIcePick = new EnchantedIcePick();
+
     int amountOfMobs = 0;
     int xpBonus = 0;
 

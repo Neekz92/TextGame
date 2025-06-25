@@ -100,7 +100,7 @@ public class Mage extends Player {
         System.out.println("Select a target");
         showTargetOptions();
         targetSelect();
-        int restoreAmount = random.nextInt(1, 10 + (finalLuck / 10));
+        int restoreAmount = random.nextInt(1, 5 + (finalLuck));
         System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
         targetedEnemy.updateStats();
         targetedEnemy.currentHp += restoreAmount;

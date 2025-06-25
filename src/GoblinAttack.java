@@ -38,6 +38,12 @@ public class GoblinAttack extends CombatEncounter {
         addItem(rapidShot);
         addItem(igniteArrows);
 
+        addItem(giantsCrown);
+        addItem(irredescentFlower);
+        addItem(cursedFragment);
+        addItem(ancientDrumstick);
+        addItem(enchantedIcePick);
+
 
         int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
         System.out.println(rng + " Goblins attack you at " + gameEngine.player.getLocation());
