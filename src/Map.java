@@ -1190,6 +1190,9 @@ public class Map {
 
         cityThree = new Location(10,0);
         cityThree.add(new CryingChild());
+        cityThree.add(new MysteriousWizard());
+        cityThree.add(new JobBoardWolf());
+        cityThree.add(new JobBoardBandit());
         cityThree.name = "City Three";
         cityThree.isTown = true;
         locationArray[110] = cityThree;
