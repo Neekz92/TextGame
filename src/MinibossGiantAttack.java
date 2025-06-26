@@ -9,6 +9,8 @@ public class MinibossGiantAttack extends CombatEncounter {
     @Override
     public void setup() {
 
+        playerArray[1].allowedBossToSpawn = 1;
+        playerArray[0].allowedBossToSpawn = 2;
         distributedRewards = false;
         addItem(legendaryPotion);
         addItem(legendaryArmor);
@@ -16,10 +18,15 @@ public class MinibossGiantAttack extends CombatEncounter {
         addItem(legendaryStaff);
         addItem(legendaryBow);
 
-        System.out.println("*** Encounter Phase ***");
-        displayParticipants();
-        System.out.println("########################");
-        System.out.println(playerArray[1] + "'s stamina: " + playerArray[1].stamina);
-        System.out.println("What do you do?");
+        System.out.println("");
+        System.out.println("**********");
+        System.out.println("**********");
+        System.out.println("**********");
+        System.out.println(playerArray[1] + " faces off against " + playerArray[0]);
+        System.out.println("**********");
+        System.out.println("**********");
+        System.out.println("**********");
+        System.out.println("");
+
     }
 }

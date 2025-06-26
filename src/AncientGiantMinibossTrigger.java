@@ -51,8 +51,9 @@ public class AncientGiantMinibossTrigger extends SocialEncounter {
                     Enemy giantKing = new GiantKing(gameEngine);
                     minibossGiantAttack.gameEngine.addPlayer(giantKing);
                     giantKing.setName("Jörmungandr, the Giant King" + " (" + gameEngine.player.getLocation() + ")");
-                    minibossGiantAttack.addPlayer(playerArray[0]);
                     minibossGiantAttack.addPlayer(giantKing);
+                    minibossGiantAttack.addPlayer(playerArray[0]);
+
 
                     giantKing.encounter = minibossGiantAttack;
                     giantKing.hasEncounter = true;

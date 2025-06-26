@@ -221,6 +221,7 @@ public class GameEngine {
                 roundManager = false;
                 break;
             }
+
             System.out.println("Round: " + round);
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
@@ -323,8 +324,12 @@ public class GameEngine {
 
                     }
 
-                    System.out.println("");
-                    System.out.println(playerArray[i] + "'s turn");
+                    playerArray[i].allowedBossToSpawn --;
+                    if (playerArray[i].allowedBossToSpawn <= 0) {
+                        System.out.println("");
+                        System.out.println(playerArray[i] + "'s turn");
+                    }
+
                     if (!(playerArray[i] instanceof Enemy)) {
                         System.out.println("Location: " + playerArray[i].getLocation().name);
                         // fix the issue lol
@@ -399,9 +404,9 @@ public class GameEngine {
                             }
                         }
                     }
+
                     player.encounterPhase();
                     player.parryStance = false;
-
 
                     if (player.stunTimer > 0) {  //  If the player is stunned, don't attack.
                         System.out.println(player.getName() + " is stunned for " + player.stunTimer + " turns!");
@@ -409,7 +414,9 @@ public class GameEngine {
                     }
                     else {
                         if (player.encounter instanceof CombatEncounter) {
-                            player.combat();
+                            if (player.allowedBossToSpawn <= 0) {
+                                player.combat();
+                            }
 
                             if (player.hasteTimer > 0 && player.encounter != null) {  //  player gets another action if they still have > 0 haste timer
                                 System.out.println(player + " is still empowered by Haste!");

@@ -77,6 +77,8 @@ public class Player {
 
     int igniteArrowsTurnsRemaining = 0;
 
+    int allowedBossToSpawn = 0;
+
 
     public Player(GameEngine gameEngine, String name) {
         this.gameEngine = gameEngine;

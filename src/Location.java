@@ -100,7 +100,6 @@ public class Location {
 
         if (encounter.areHostilesDead() && encounter.arePlayersInEncounter()) {  //  This runs when the players kill all the enemies in an encounter
 
-
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
 
                 currentPlayer = encounter.playerArray[i];
@@ -132,6 +131,9 @@ public class Location {
             encounter.playerArray = new Player[encounter.amountOfPlayers];
             encounter = null;
             System.out.println("The battle is won!");
+
+
+
         } else if (!encounter.areHostilesDead() && !(encounter.arePlayersInEncounter())) {
             System.out.println("The battle is lost!");
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
