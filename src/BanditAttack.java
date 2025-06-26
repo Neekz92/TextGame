@@ -2,6 +2,7 @@ public class BanditAttack extends CombatEncounter {
 
     public BanditAttack() {
 
+        description = "Bandit Attack Encounter";
     }
 
     @Override

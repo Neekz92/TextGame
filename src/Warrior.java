@@ -12,11 +12,11 @@ public class Warrior extends Player {
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(20);
+        setHp(2000);
         currentHp = getHp();
-        attack = 15;
+        attack = 15000;
         defense = 5;
-        luck = 5;
+        luck = 5000;
 
         weapon = new Sword();
 
@@ -39,67 +39,71 @@ public class Warrior extends Player {
 
     @Override
     public void combat() {
+        int fart = 0;  ///////////////////////////////////////////////
 
         boolean selectMove = true;
         while (selectMove) {
             combatOptions();
-            try {
-                int input = scanner.nextInt();
-                scanner.nextLine();
-                switch (input) {
-                    case 1:
-                        System.out.println("Select a Target");
-                        showTargetOptions();
-                        basicAttack();
-                        selectMove = false;
-                        break;
-                    case 2:
-                        if (stamina >= 1) {
-                            System.out.println("Select a skill");
-                            showSkills();
-                            selectedSkill = skillSelect();
+            //try {
+            int input = scanner.nextInt();
+            fart = input;
+            scanner.nextLine();
+            switch (input) {
+                case 1:
+                    System.out.println("Select a Target");
+                    showTargetOptions();
+                    basicAttack();
+                    selectMove = false;
+                    break;
+                case 2:
+                    if (stamina >= 1) {
+                        System.out.println("Select a skill");
+                        showSkills();
+                        selectedSkill = skillSelect();
 
-                            if (selectedSkill == null) {
-                                combatOptions();
-                                continue;
-                            }
+                        if (selectedSkill == null) {
+                            combatOptions();
+                            continue;
+                        }
 
-                            if (selectedSkill.name == "Shield-Bash Combo") {
-                                System.out.println("Shield Bash Combo");
-                                showTargetOptions();
-                                shieldBash();
-                                stamina--;
-                                selectMove = false;
-                                break;
-                            } else if (selectedSkill.name == "Perfect-Parry") {
-                                System.out.println(this + " takes a defensive stance.");
-                                perfectParry();
-                                stamina--;
-                                selectMove = false;
-                                break;
-                            } else if (selectedSkill.name == "Taunt") {
-                                taunt();
-                                stamina--;
-                                selectMove = false;
-                                break;
-                            }
-                            // Add more skills here
-
-                        } else {
-                            System.out.println("Not enough stamina.");
+                        if (selectedSkill.name == "Shield-Bash Combo") {
+                            System.out.println("Shield Bash Combo");
+                            showTargetOptions();
+                            shieldBash();
+                            stamina--;
+                            selectMove = false;
+                            break;
+                        } else if (selectedSkill.name == "Perfect-Parry") {
+                            System.out.println(this + " takes a defensive stance.");
+                            perfectParry();
+                            stamina--;
+                            selectMove = false;
+                            break;
+                        } else if (selectedSkill.name == "Taunt") {
+                            taunt();
+                            stamina--;
+                            selectMove = false;
                             break;
                         }
-                    case 3:
-                        run();
-                        selectMove = false;
+                        // Add more skills here
+
+                    } else {
+                        System.out.println("Not enough stamina.");
                         break;
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println("Must. Enter. An. Integer. Not whatever the hell that was.");
-                scanner.nextLine();
+                    }
+                case 3:
+                    run();
+                    selectMove = false;
+                    break;
             }
+            break;
         }
+//                catch (Exception e) {
+//                //System.out.println("Must. Enter. An. Integer. Not whatever the hell that was.");
+//                System.out.println("DEBUG: Warrior.combat() ~~~ input = " + fart);
+//                System.out.println("Exception:" + e);
+//                scanner.nextLine();
+//            }
     }
 
     public void taunt() {

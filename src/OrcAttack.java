@@ -3,6 +3,7 @@ public class OrcAttack extends CombatEncounter {
     public OrcAttack() {
 
         xpBonus = 5;
+        description = "Orc Attack Encounter";
 
     }
 

@@ -3,6 +3,7 @@ public class MinibossGiantAttack extends CombatEncounter {
     public MinibossGiantAttack() {
 
         xpBonus = 40;
+        description = "Giant Attack Miniboss Encounter";
     }
 
     @Override

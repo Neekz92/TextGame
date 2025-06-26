@@ -3,6 +3,7 @@ public class GoblinAttack extends CombatEncounter {
     public GoblinAttack() {
 
         xpBonus = 5;
+        description = "Goblin Attack Encounter";
     }
 
     @Override

@@ -181,6 +181,8 @@ public class Encounter {
 
     public void distributeRewards() {
 
+        System.out.println("Encounter.distributedRewards ? : " + distributedRewards);
+
         for (int i = 0; i < amountOfPlayers; i++) {
             int xp = (amountOfMobs / amountOfPlayers) + xpBonus;  //  I made this variable to slip into the actual xp formula so I don't have to rewrite the entire formula, I can just add this to the xp and give each mob a different xp bonus!
 
@@ -210,6 +212,9 @@ public class Encounter {
             }
         }
         amountOfMobs = 0;
+
+        distributedRewards = true;
+        System.out.println("Encounter.distributedRewards ? : " + distributedRewards);
     }
 
 

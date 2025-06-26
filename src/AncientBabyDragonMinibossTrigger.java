@@ -37,6 +37,7 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
                         Enemy babyDragon = new BabyDragon(gameEngine);
                         minibossBabyDragonAttack.gameEngine.addPlayer(babyDragon);
                         babyDragon.setName("Juvenile Dragon" + " (" + gameEngine.player.getLocation() + ")");
+//                        playerArray[0].getLocation().encounter = minibossBabyDragonAttack;
                         minibossBabyDragonAttack.addPlayer(babyDragon);
                         babyDragon.encounter = minibossBabyDragonAttack;
                         babyDragon.hasEncounter = true;

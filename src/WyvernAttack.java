@@ -3,6 +3,7 @@ public class WyvernAttack extends CombatEncounter {
     public WyvernAttack() {
 
         xpBonus = 20;
+        description = "Wyvern Attack Encounter";
     }
 
     @Override

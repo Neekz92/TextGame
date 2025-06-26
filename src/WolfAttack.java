@@ -2,6 +2,8 @@ public class WolfAttack extends CombatEncounter {
 
     public WolfAttack() {
 
+        description = "Wolf Attack Encounter";
+
     }
 
     @Override

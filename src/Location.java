@@ -121,12 +121,12 @@ public class Location {
                 currentPlayer.usedTaunt = false;
                 currentPlayer.igniteArrowsTurnsRemaining = 0;
                 currentPlayer.hasteTimer = 0;
-                currentPlayer.setEncounter(null);
-                currentPlayer.hasEncounter = false;
                 if (!encounter.distributedRewards) {  //  I was having an issue where every player involved was calling this reward distribution, so I made a boolean flag that only makes it trigger for the first player in the array.
                     encounter.distributeRewards();
                     encounter.distributedRewards = true;
                 }
+                currentPlayer.setEncounter(null);
+                currentPlayer.hasEncounter = false;
             }
             encounter.amountOfPlayers = 0;
             encounter.playerArray = new Player[encounter.amountOfPlayers];

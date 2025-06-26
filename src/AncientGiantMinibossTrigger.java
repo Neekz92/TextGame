@@ -10,6 +10,7 @@ public class AncientGiantMinibossTrigger extends SocialEncounter {
         distributedRewards = false;
 
         System.out.println("Atop the crest of the Stormpeak Mountain Summit, you come across a massive statue of a humanoid with an enormous hammer. He was the King of the Giants.");
+        description = "Giant mini boss SOCIAL encounter";
 
     }
 
@@ -43,26 +44,21 @@ public class AncientGiantMinibossTrigger extends SocialEncounter {
                     System.out.println("");
 
                     Encounter minibossGiantAttack = new MinibossGiantAttack();
+                    playerArray[0].getLocation().encounter = minibossGiantAttack;
                     minibossGiantAttack.gameEngine = playerArray[0].gameEngine;
-                    Player[] playerArrayClone = playerArray;
-                    minibossGiantAttack.playerArray = playerArrayClone;
 
                     amountOfMobs++;
                     Enemy giantKing = new GiantKing(gameEngine);
                     minibossGiantAttack.gameEngine.addPlayer(giantKing);
                     giantKing.setName("Jörmungandr, the Giant King" + " (" + gameEngine.player.getLocation() + ")");
+                    minibossGiantAttack.addPlayer(playerArray[0]);
                     minibossGiantAttack.addPlayer(giantKing);
+
                     giantKing.encounter = minibossGiantAttack;
                     giantKing.hasEncounter = true;
                     giantKing.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
                     giantKing.setY(gameEngine.player.getY());
 
-
-                    minibossGiantAttack.addPlayer(playerArray[0]);
-                    playerArray[0].getLocation().endSocialEncounter();
-
-                    playerArray = playerArrayClone;
-                    playerArray[0].getLocation().encounter = minibossGiantAttack;
                     playerArray[0].encounter = minibossGiantAttack;
                     playerArray[0].hasEncounter = true;
                     minibossGiantAttack.setup();

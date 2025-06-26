@@ -334,6 +334,9 @@ public class Player {
     }
 
     public void deathCheck() {
+
+        Encounter cachedEncounter = encounter;
+
         if (currentHp <= 0) {
             isAlive = false;
             System.out.println(this + " has been slain!");
@@ -366,15 +369,15 @@ public class Player {
                 }
             }
 
-
             encounter.removePlayer(this);
             gameEngine.removePlayer(this);
+
+            location.encounter = cachedEncounter;
+
             location.endEncounter();
             gameEngine.gameOver();
         }
     }
-
-
 
     public void questReward() {
 
@@ -472,8 +475,6 @@ public class Player {
 
 
     }
-
-
 
     public void encounterPhase() {
 
