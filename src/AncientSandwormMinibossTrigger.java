@@ -38,7 +38,7 @@ public class AncientSandwormMinibossTrigger extends SocialEncounter {
                 case 1:
                     System.out.println("With full force, you smash the drum with the drum stick.");
                     System.out.println("You feel the sand shifting beneath your feet.");
-                    System.out.println("Scorpions and vultures that were in the area begin quickly fleeing.");
+                    System.out.println("Scorpions and vultures that were in the area rush to flee for safety.");
                     System.out.println("One of the nearby sand dunes explodes, and a super colossal Sandworm reveals itself!");
                     playerArray[0].getLocation().endSocialEncounter();
                     choice = false;
