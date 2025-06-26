@@ -11,7 +11,7 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
         distributedRewards = false;
 
 
-        System.out.println("You stumple upon a cave that spirals downward underground. You hear low rumbling growls of some unknown creature from within.");
+        System.out.println("You stumble upon a cave that spirals downward underground. You hear low rumbling growls of some unknown creature from within.");
         System.out.println("Do you want to proceed deeper into the cavern?");
     }
 

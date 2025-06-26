@@ -3,7 +3,7 @@ public class IrredescentFlower extends Key {
     public IrredescentFlower() {
 
         super();
-        name = "Irredescent Flower";
+        name = "Iridescent Flower";
     }
 
     @Override
@@ -16,7 +16,7 @@ public class IrredescentFlower extends Key {
     @Override
     public Item copy() {
         Item irredescentFlower = new IrredescentFlower();
-        irredescentFlower.name = "Ancient Giant's Crown";
+        irredescentFlower.name = "Iridescent Flower";
         irredescentFlower.rarity = "(Key)";
         return irredescentFlower;
     }
