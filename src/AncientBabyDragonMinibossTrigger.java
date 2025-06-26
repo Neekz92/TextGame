@@ -28,22 +28,22 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
 
                 switch (choice) {
                     case 1:
-                        Encounter babyDragonEncounter = new MinibossBabyDragonAttack();
-                        babyDragonEncounter.gameEngine = playerArray[0].gameEngine;
+                        Encounter minibossBabyDragonAttack = new MinibossBabyDragonAttack();
+                        minibossBabyDragonAttack.gameEngine = playerArray[0].gameEngine;
                         Player[] playerArrayClone = playerArray;
-                        babyDragonEncounter.playerArray = playerArrayClone;
+                        minibossBabyDragonAttack.playerArray = playerArrayClone;
 
                         amountOfMobs++;
                         Enemy babyDragon = new BabyDragon(gameEngine);
-                        babyDragonEncounter.gameEngine.addPlayer(babyDragon);
+                        minibossBabyDragonAttack.gameEngine.addPlayer(babyDragon);
                         babyDragon.setName("Juvenile Dragon" + " (" + gameEngine.player.getLocation() + ")");
-                        babyDragonEncounter.addPlayer(babyDragon);
-                        babyDragon.encounter = babyDragonEncounter;
+                        minibossBabyDragonAttack.addPlayer(babyDragon);
+                        babyDragon.encounter = minibossBabyDragonAttack;
                         babyDragon.hasEncounter = true;
                         babyDragon.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
                         babyDragon.setY(gameEngine.player.getY());
 
-                        babyDragonEncounter.addPlayer(playerArray[0]);
+                        minibossBabyDragonAttack.addPlayer(playerArray[0]);
 
                         playerArray[0].getLocation().endSocialEncounter();
 
@@ -52,10 +52,10 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
                         System.out.println("");
 
                         playerArray = playerArrayClone;
-                        playerArray[0].getLocation().encounter = babyDragonEncounter;
-                        playerArray[0].encounter = babyDragonEncounter;
+                        playerArray[0].getLocation().encounter = minibossBabyDragonAttack;
+                        playerArray[0].encounter = minibossBabyDragonAttack;
                         playerArray[0].hasEncounter = true;
-                        babyDragonEncounter.setup();
+                        minibossBabyDragonAttack.setup();
                         chooseOption = false;
                         return;
 

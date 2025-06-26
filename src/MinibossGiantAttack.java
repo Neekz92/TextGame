@@ -1,6 +1,6 @@
-public class MinibossBabyDragonAttack extends CombatEncounter {
+public class MinibossGiantAttack extends CombatEncounter {
 
-    public MinibossBabyDragonAttack() {
+    public MinibossGiantAttack() {
 
         xpBonus = 40;
     }

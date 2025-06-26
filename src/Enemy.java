@@ -41,4 +41,9 @@ public class Enemy extends Player {
         }
         return enemyArray;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

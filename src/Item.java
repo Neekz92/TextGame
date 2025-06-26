@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Random;
 
 public class Item {
@@ -146,5 +147,14 @@ public class Item {
     public String displayItem() {
 
         return this + " === " + "Attack: " + attack + " | Defense: " + defense + " | " + "Luck: " + luck + " | " + "HP: " + hp;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Item item = (Item) obj;
+        return Objects.equals(this.name, item.name);
     }
 }

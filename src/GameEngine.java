@@ -324,7 +324,10 @@ public class GameEngine {
                     }
 
                     System.out.println("");
-                    System.out.println(playerArray[i] + "'s turn. Location: " + playerArray[i].getLocation());
+                    System.out.println(playerArray[i] + "'s turn");
+                    if (!(playerArray[i] instanceof Enemy)) {
+                        System.out.println("Location: " + playerArray[i].getLocation().name);
+                    }
 
                     if (!playerArray[i].quest.equals("No Quest")) {
 
