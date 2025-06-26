@@ -18,7 +18,6 @@ public class AncientFrostWraithMinibossTrigger extends SocialEncounter {
     public void options() {
 
         if (playerArray[0].inventory.contains(giantsCrown)) {
-            System.out.println("What do you do?");
         }
         else {
             System.out.println("You cannot interact with this monolith.");
@@ -40,14 +39,35 @@ public class AncientFrostWraithMinibossTrigger extends SocialEncounter {
                     System.out.println("CRACK! Another swing, and the cracks multiply. It begins to look like the web of a great spider.");
                     System.out.println("Another swing, and then comes the noise similar to the sound of a thousand mirrors being shattered.");
                     System.out.println("The ice wall explodes, and a floating specter wreathed in a dark aura flies forward.");
-                    playerArray[0].getLocation().endSocialEncounter();
+                    System.out.println("");
+
+                    Encounter minibossFrostWraithAttack = new MinibossFrostWraithAttack();
+                    playerArray[0].getLocation().encounter = minibossFrostWraithAttack;
+                    minibossFrostWraithAttack.gameEngine = playerArray[0].gameEngine;
+
+                    amountOfMobs++;
+                    Enemy frostWraith = new GiantKing(gameEngine);
+                    minibossFrostWraithAttack.gameEngine.addPlayer(frostWraith);
+                    frostWraith.setName("Coldshade, the Banished One" + " (" + gameEngine.player.getLocation() + ")");
+                    minibossFrostWraithAttack.addPlayer(frostWraith);
+                    minibossFrostWraithAttack.addPlayer(playerArray[0]);
+
+
+                    frostWraith.encounter = minibossFrostWraithAttack;
+                    frostWraith.hasEncounter = true;
+                    frostWraith.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
+                    frostWraith.setY(gameEngine.player.getY());
+
+                    playerArray[0].encounter = minibossFrostWraithAttack;
+                    playerArray[0].hasEncounter = true;
+                    minibossFrostWraithAttack.setup();
                     choice = false;
-                    break;
+                    return;
                 case 2:
                     System.out.println("\"I'm getting the hell out of here.\"");
                     playerArray[0].getLocation().endSocialEncounter();
                     choice = false;
-                    break;
+                    return;
             }
         }
     }

@@ -19,7 +19,7 @@ public class Orc extends Enemy {
             targetedEnemy = enemyAITargetArray[rng];
             Player firstTarget = targetedEnemy;
 
-            int orcChoice = random.nextInt(1,8);
+            int orcChoice = random.nextInt(2,8);
             if (orcChoice == 1) {
                 shieldBash();
                 rng = random.nextInt(0, enemyAITargetArray.length);

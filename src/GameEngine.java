@@ -430,7 +430,10 @@ public class GameEngine {
                         boolean rested = player.cityOptions();
                         if (rested) continue;
                     }
+
+                if (playerArray[i].allowedBossToSpawn <= 0) {
                     System.out.println("*************************************");
+                }
 
                 if (gameOver() == true) {
                     System.out.println("GAME OVER!");
@@ -476,6 +479,10 @@ public class GameEngine {
         }
 
         if (dragonToken.x == 10 && dragonToken.y == 10) {
+            return true;
+        }
+
+        if (dragonToken.x == 10 && dragonToken.y == 5) {
             return true;
         }
 

@@ -1,3 +1,5 @@
+import com.sun.source.tree.Tree;
+
 public class AncientTreeEntMinibossTrigger extends SocialEncounter {
 
     public AncientTreeEntMinibossTrigger() {
@@ -18,7 +20,6 @@ public class AncientTreeEntMinibossTrigger extends SocialEncounter {
     public void options() {
 
         if (playerArray[0].inventory.contains(irredescentFlower)) {
-            System.out.println("What do you do?");
         }
         else {
             System.out.println("You cannot interact with this monolith.");
@@ -40,14 +41,35 @@ public class AncientTreeEntMinibossTrigger extends SocialEncounter {
                     System.out.println("You hear a rustling sound, and notice leaves fluttering to the ground");
                     System.out.println("Suddenly, the large tree lets out a loud, blood curdling shriek.");
                     System.out.println("It tries to whip " + playerArray[0] + " with its mighty branches!");
-                    playerArray[0].getLocation().endSocialEncounter();
+                    System.out.println("");
+
+                    Encounter minibossTreeEntAttack = new MinibossTreeEntAttack();
+                    playerArray[0].getLocation().encounter = minibossTreeEntAttack;
+                    minibossTreeEntAttack.gameEngine = playerArray[0].gameEngine;
+
+                    amountOfMobs++;
+                    Enemy treeEnt = new TreeEnt(gameEngine);
+                    minibossTreeEntAttack.gameEngine.addPlayer(treeEnt);
+                    treeEnt.setName("Elderblight, Lord of the Forest" + " (" + gameEngine.player.getLocation() + ")");
+                    minibossTreeEntAttack.addPlayer(treeEnt);
+                    minibossTreeEntAttack.addPlayer(playerArray[0]);
+
+
+                    treeEnt.encounter = minibossTreeEntAttack;
+                    treeEnt.hasEncounter = true;
+                    treeEnt.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
+                    treeEnt.setY(gameEngine.player.getY());
+
+                    playerArray[0].encounter = minibossTreeEntAttack;
+                    playerArray[0].hasEncounter = true;
+                    minibossTreeEntAttack.setup();
                     choice = false;
-                    break;
+                    return;
                 case 2:
                     System.out.println("\"I'm getting the hell out of here.\"");
                     playerArray[0].getLocation().endSocialEncounter();
                     choice = false;
-                    break;
+                    return;
             }
         }
     }

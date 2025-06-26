@@ -19,7 +19,6 @@ public class AncientCavernMinibossTrigger extends SocialEncounter {
     public void options() {
 
         if (playerArray[0].inventory.contains(cursedFragment)) {
-            System.out.println("What do you do?");
         }
         else {
             System.out.println("You cannot interact with this monolith.");
@@ -41,14 +40,51 @@ public class AncientCavernMinibossTrigger extends SocialEncounter {
                     System.out.println("Before long, you hear the shifting of dirt.");
                     System.out.println("Several long-decayed bodies of deceased men unearth themselves.");
                     System.out.println(playerArray[0] + " is surrounded by flesh-less corpses who have somehow been given new life.");
-                    playerArray[0].getLocation().endSocialEncounter();
+                    System.out.println("");
+
+                    Encounter minibossUndeadAttack = new MinibossUndeadAttack();
+                    playerArray[0].getLocation().encounter = minibossUndeadAttack;
+                    minibossUndeadAttack.gameEngine = playerArray[0].gameEngine;
+
+                    amountOfMobs++;
+                    Enemy deathKnight = new DeathKnight(gameEngine);
+                    minibossUndeadAttack.gameEngine.addPlayer(deathKnight);
+                    deathKnight.setName("Valrick the Oathbreaker" + " (" + gameEngine.player.getLocation() + ")");
+                    minibossUndeadAttack.addPlayer(deathKnight);
+
+                    int nameCounter = 1; //  This is the counter for each Wolf spawned. it will help identify them when players need to see them in the list of enemies.
+                    for (int i = 0; i < 5; i++) {
+                        Enemy undeadMinion = new UndeadMinion(gameEngine);
+                        minibossUndeadAttack.gameEngine.addPlayer(undeadMinion);
+                        undeadMinion.setName(("Minion of Valrick # " + nameCounter + " (" + gameEngine.player.getLocation() + ")"));
+                        nameCounter++;
+                        minibossUndeadAttack.addPlayer(undeadMinion);
+
+                        undeadMinion.encounter = minibossUndeadAttack;
+                        undeadMinion.hasEncounter = true;
+                        undeadMinion.setX(gameEngine.player.getX());
+                        undeadMinion.setY(gameEngine.player.getY());
+                    }
+
+                    minibossUndeadAttack.addPlayer(playerArray[0]);
+
+
+                    deathKnight.encounter = minibossUndeadAttack;
+                    deathKnight.hasEncounter = true;
+                    deathKnight.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
+                    deathKnight.setY(gameEngine.player.getY());
+
+                    playerArray[0].encounter = minibossUndeadAttack;
+                    playerArray[0].hasEncounter = true;
+
+                    minibossUndeadAttack.setup();
                     choice = false;
-                    break;
+                    return;
                 case 2:
                     System.out.println("\"I'm getting the hell out of here.\"");
                     playerArray[0].getLocation().endSocialEncounter();
                     choice = false;
-                    break;
+                    return;
             }
         }
     }
