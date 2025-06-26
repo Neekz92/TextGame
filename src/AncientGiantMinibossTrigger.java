@@ -32,7 +32,6 @@ public class AncientGiantMinibossTrigger extends SocialEncounter {
 //            try {
             int input = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("DEBUG: input was: " + input);
 
             switch (input) {
                 case 1:

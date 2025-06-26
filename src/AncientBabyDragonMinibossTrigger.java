@@ -28,32 +28,27 @@ public class AncientBabyDragonMinibossTrigger extends SocialEncounter {
 
                 switch (choice) {
                     case 1:
+                        System.out.println(playerArray[0] + " delves deeper into the cave, the cacophony of guttural growls and grunts grows louder. Heavy footsteps can be heard with an increase in their rhythm.");
+                        System.out.println("Soon enough, a juvenile dragon emerges from the darkness. The walls of the cavern are illuminated by the embers rolling out of the sides of its open jaw. It lets out a fierce roar and charges!");
+                        System.out.println("");
+
                         Encounter minibossBabyDragonAttack = new MinibossBabyDragonAttack();
+                        playerArray[0].getLocation().encounter = minibossBabyDragonAttack;
                         minibossBabyDragonAttack.gameEngine = playerArray[0].gameEngine;
-                        Player[] playerArrayClone = playerArray;
-                        minibossBabyDragonAttack.playerArray = playerArrayClone;
 
                         amountOfMobs++;
                         Enemy babyDragon = new BabyDragon(gameEngine);
                         minibossBabyDragonAttack.gameEngine.addPlayer(babyDragon);
                         babyDragon.setName("Juvenile Dragon" + " (" + gameEngine.player.getLocation() + ")");
-//                        playerArray[0].getLocation().encounter = minibossBabyDragonAttack;
                         minibossBabyDragonAttack.addPlayer(babyDragon);
+                        minibossBabyDragonAttack.addPlayer(playerArray[0]);
+
+
                         babyDragon.encounter = minibossBabyDragonAttack;
                         babyDragon.hasEncounter = true;
                         babyDragon.setX(gameEngine.player.getX()); //  REMEMBER: just because I assign a LOCATION, doesn't mean i assign X,Y coordinates!
                         babyDragon.setY(gameEngine.player.getY());
 
-                        minibossBabyDragonAttack.addPlayer(playerArray[0]);
-
-                        playerArray[0].getLocation().endSocialEncounter();
-
-                        System.out.println(playerArrayClone[0] + " delves deeper into the cave, the cacophony of guttural growls and grunts grows louder. Heavy footsteps can be heard with an increase in their rhythm.");
-                        System.out.println("Soon enough, a juvenile dragon emerges from the darkness. The walls of the cavern are illuminated by the embers rolling out of the sides of its open jaw. It lets out a fierce roar and charges!");
-                        System.out.println("");
-
-                        playerArray = playerArrayClone;
-                        playerArray[0].getLocation().encounter = minibossBabyDragonAttack;
                         playerArray[0].encounter = minibossBabyDragonAttack;
                         playerArray[0].hasEncounter = true;
                         minibossBabyDragonAttack.setup();
