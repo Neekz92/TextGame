@@ -17,6 +17,7 @@ public class Location {
     int roundsSinceDragon = 0;
 
     boolean isScorched = false;
+    boolean revealedScorch = false;
 
     boolean isTown = false;
 
@@ -88,6 +89,16 @@ public class Location {
             }
             encounterArray = encounterArrayClone;
         }
+    }
+
+    public boolean contains(Encounter encounter) {
+
+        for (int i = 0; i < encounterArray.length; i++) {
+            if (encounter.description.equals(encounterArray[i].description)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

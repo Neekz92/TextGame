@@ -294,7 +294,12 @@ public class Player {
                 }
 
                 if (hasPlayer == false) {
-                    System.out.print("■  ");
+                    if (gameEngine.map.findLocation(j, i).revealedScorch == true) {
+                        System.out.print("X  ");
+                    }
+                    else {
+                        System.out.print("■  ");
+                    }
                 }
                 else {
                     System.out.print((poop + 1) + "  " );
