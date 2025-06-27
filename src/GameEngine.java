@@ -6,6 +6,8 @@ public class GameEngine {
     boolean gameOverMessage = false;
     boolean youWinMessage = false;
 
+    int cachedAmountOfPlayers = 0;
+
     int round = 1;
 
     Scanner scanner;
@@ -99,6 +101,7 @@ public class GameEngine {
             System.out.println("How many players?");
             try {
                 currentAmountOfPlayers = scanner.nextInt();
+                cachedAmountOfPlayers = currentAmountOfPlayers;
                 scanner.nextLine();
                 howManyPlayers = false;
             }
@@ -452,6 +455,8 @@ public class GameEngine {
 
                 if (gameOver() == true) {
                     System.out.println("GAME OVER!");
+                    System.out.println("The heros of the Realm have all fallen. RIP.");
+                    System.out.println("Better luck next time, Chump");
                 }
             }
         }
@@ -468,7 +473,7 @@ public class GameEngine {
     }
 
     public boolean gameOver() {
-        if (youWin() == false && gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
+        if (gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
             gameOverMessage = true;
             return true;
         }

@@ -191,7 +191,7 @@ public class Encounter {
             playerArray[i].setXp(playerArray[i].getXp() + xp);
 
 
-            for (int j = 0; j < (playerArray[i].finalLuck / 5) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
+            for (int j = 0; j < (playerArray[i].finalLuck / 10) + 1; j++) {  //  Every 4 points in luck, will give a 2nd "tick" to maybe find an item drop.
 
                 int rng = random.nextInt(1, 6);  //  There's a 1 in 5 chance the current player will receive an item drop.
                 if (rng == 5) {

@@ -40,7 +40,7 @@ public class WyvernAttack extends CombatEncounter {
         addItem(ancientDrumstick);
         addItem(enchantedIcePick);
 
-        int rng = random.nextInt(1, gameEngine.playerArray.length + 1);
+        int rng = random.nextInt(1, gameEngine.cachedAmountOfPlayers + 1);
         System.out.println("From the sky," + rng +  " wyverns descend upon you, at " + gameEngine.player.getLocation());
 
         int nameCounter = 1; //  This is the counter for each Wolf spawned. it will help identify them when players need to see them in the list of enemies.

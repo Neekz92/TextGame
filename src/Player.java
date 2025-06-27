@@ -268,9 +268,17 @@ public class Player {
                 System.out.println(currentPlayer + " | Location: " + currentPlayer.getLocation() + " (" + currentPlayer.getX() + "," + currentPlayer.getY() + ")");
             }
         }
+        System.out.println("");
     }
 
     public void map() {
+
+        System.out.println("");
+        for (int i = 0; i < gameEngine.amountOfCharacters; i++) {
+            if (!(gameEngine.playerArray[i] instanceof Enemy)) {
+                System.out.println("[ " + (i + 1) + " ] " + gameEngine.playerArray[i] + " | HP: " + gameEngine.playerArray[i].currentHp + " | Engaged In Battle: " + gameEngine.playerArray[i].hasEncounter);
+            }
+        }
 
         for (int i = 10; i >= 0; i--) {
             System.out.println("");
@@ -864,6 +872,16 @@ public class Player {
 
         int rollLuck = rollLuck();
         if (rollLuck + (finalLuck / 5) > 10) {
+
+
+            if (tauntDuplicates > 0) {
+                for (int i = tauntDuplicates - 1; i >= 0; i--) {
+                    encounter.removePlayer(this);
+                }
+            }
+
+
+
             System.out.println("");
             hasteTimer = 0;
 

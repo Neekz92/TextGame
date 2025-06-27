@@ -28,7 +28,7 @@ public class WolfAttack extends CombatEncounter {
         addItem(rapidShot);
         addItem(igniteArrows);
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
+        int rng = random.nextInt(0, gameEngine.cachedAmountOfPlayers + 1) + 1;
         System.out.println("You are surrounded by " + (rng) + " wolves at " + gameEngine.player.getLocation());
 
         int nameCounter = 1; //  This is the counter for each Wolf spawned. it will help identify them when players need to see them in the list of enemies.

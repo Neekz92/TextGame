@@ -28,7 +28,7 @@ public class BanditAttack extends CombatEncounter {
         addItem(igniteArrows);
 
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
+        int rng = random.nextInt(0, gameEngine.cachedAmountOfPlayers + 1) + 1;
         System.out.println("You are ambushed by " + (rng) + " bandits at " + gameEngine.player.getLocation() + "!");
 
         int nameCounter = 1;  //  This will increase each time a mob gets added, to help label them.

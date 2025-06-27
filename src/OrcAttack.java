@@ -47,7 +47,7 @@ public class OrcAttack extends CombatEncounter {
         addItem(enchantedIcePick);
 
 
-        int rng = random.nextInt(0, gameEngine.playerArray.length + 1) + 1;
+        int rng = random.nextInt(0, gameEngine.cachedAmountOfPlayers + 1) + 1;
         System.out.println(rng + " snarling orcs draw their axes and charge toward you, at " + gameEngine.player.getLocation());
 
         int nameCounter = 1; //  This is the counter for each Orc spawned. it will help identify them when players need to see them in the list of enemies.
