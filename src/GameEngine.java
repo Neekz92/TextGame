@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class GameEngine {
 
     boolean gameOverMessage = false;
+    boolean youWinMessage = false;
 
     int round = 1;
 
@@ -215,7 +216,7 @@ public class GameEngine {
 
         boolean roundManager = true;
 
-        while (roundManager && gameOver() == false) {
+        while (roundManager && gameOver() == false && youWin() == false) {
 
             if (gameOver() == true) {
                 roundManager = false;
@@ -269,6 +270,8 @@ public class GameEngine {
 
                 dragonToken.movement();
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
+                dragonToken.location.gameEngine = this;
+                dragonToken.location.turnsSinceDragon = 0;
 
 
 
@@ -318,8 +321,18 @@ public class GameEngine {
                 }
             }
 
-
             for (int i = 0; i < amountOfCharacters; i++) {
+
+                Player currentPlayer = playerArray[i];
+
+
+                for (int j = 0; j < map.locationArray.length; j++) {
+                    if (map.locationArray[j].isScorched) {
+                        map.locationArray[j].turnsSinceDragon ++;
+                    }
+                }
+
+
                     if (round % 1 == 0) {
 
                     }
@@ -431,7 +444,7 @@ public class GameEngine {
                         if (rested) continue;
                     }
 
-                if (playerArray[i].allowedBossToSpawn <= 0) {
+                if (currentPlayer.allowedBossToSpawn <= 0) {
                     System.out.println("*************************************");
                 }
 
@@ -455,6 +468,16 @@ public class GameEngine {
     public boolean gameOver() {
         if (gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
             gameOverMessage = true;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean youWin() {
+        if (dragon.isAlive == false && youWinMessage == false) {
+            youWinMessage = true;
+            System.out.println("Congratulations, you killed Scorchwyrm, the Destroyer!");
+            System.out.println("The realm is saved, you win!!!");
             return true;
         }
         return false;

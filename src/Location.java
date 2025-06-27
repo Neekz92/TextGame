@@ -14,6 +14,8 @@ public class Location {
     int amountOfEncounters = 0;
     String name;
 
+    int turnsSinceDragon = 0;
+
     boolean isScorched = false;
 
     boolean isTown = false;
@@ -43,7 +45,9 @@ public class Location {
                     isScorched = true;
                 }
             }
-            add(new ScorchedLocation());
+            Encounter scorchedLocation = new ScorchedLocation();
+            add(scorchedLocation);
+            scorchedLocation.location = gameEngine.dragonToken.location;
         }
 
 

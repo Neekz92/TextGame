@@ -179,6 +179,7 @@ public class Player {
         System.out.println("[ 6 ] Display Stats");
         System.out.println("[ 7 ] Spend XP");
         System.out.println("[ 8 ] Inventory");
+        System.out.println("[ 9 ] Show Party Locations");
     }
 
     public void movementPhase() {
@@ -241,6 +242,9 @@ public class Player {
                 } else if (input == 8) {
                     inventory.openInventory();
                 }
+                else if (input == 9) {
+                    showPartyLocations();
+                }
                 else {
                     System.out.println("Invalid option. DEBUG: player.movementPhase() input is an int, but not 1-8");
                 }
@@ -248,6 +252,16 @@ public class Player {
             catch (Exception e) {
                 System.out.println("Invalid option. DEBUG: this is from the catch (Exception) block " + e);
                 scanner.nextLine();
+            }
+        }
+    }
+
+    public void showPartyLocations() {
+
+        for (int i = 0; i < gameEngine.playerArray.length; i++) {
+            if (!(gameEngine.playerArray[i] instanceof Enemy)) {
+                Player currentPlayer = gameEngine.playerArray[i];
+                System.out.println(currentPlayer + " | Location: " + currentPlayer.getLocation() + " (" + currentPlayer.getX() + "," + currentPlayer.getY() + ")");
             }
         }
     }
@@ -376,7 +390,9 @@ public class Player {
 
             location.encounter = cachedEncounter;
 
+
             location.endEncounter();
+            gameEngine.youWin();
             gameEngine.gameOver();
         }
     }
@@ -711,9 +727,10 @@ public class Player {
                                     System.out.println("[ " + (i + 1) + " ] " + inventory.itemArray[i] + " === Attack: " + inventory.itemArray[i].attack + " | " + "Defense: " + inventory.itemArray[i].defense + " | " + "Luck: " + inventory.itemArray[i].luck + " | " + "HP: " + inventory.itemArray[i].hp + " === " + inventory.itemArray[i].price + " gold");
                                 }
                             }
+                            System.out.println("[ 0 ] Exit");
                             sellItem();
                             marketPlaceOptions();
-                            break;
+                            continue;
                         }
                     case 0:
                         marketplaceChoice = false;
@@ -721,7 +738,7 @@ public class Player {
                 }
             }
             catch (Exception e) {
-                System.out.println("Invalid option.");
+                System.out.println("Invalid option." + e);
                 scanner.nextLine();
             }
         }
@@ -777,6 +794,9 @@ public class Player {
             try {
                 int input = scanner.nextInt();
                 scanner.nextLine();
+                if (input == 0) {
+                    return;
+                }
 
                 selectedItem = inventory.itemArray[input - 1];
                 setGold(getGold() + selectedItem.price);
@@ -817,15 +837,21 @@ public class Player {
 
             for (int i = encounter.playerArray.length - 1; i >= 0; i--) {
 
-
                 if (encounter.playerArray[i] instanceof Enemy) {
                     System.out.println(encounter.playerArray[i] + " attempts to strike " + this + " while they are fleeing!");
                     encounter.playerArray[i].targetedEnemy = this;
                     encounter.playerArray[i].basicAttack();
+                    if (!isAlive) {
+                        return;
+                    }
                     System.out.println("");
                 }
             }
             encounter.removePlayer(this);  //  this <- refers to the Player that is attempting to flee from battle.
+
+                System.out.println("DEBUG: Player.location: " + location);
+                location.encounter = encounter;
+                System.out.println("DEBUG: location.encounter: " + location.encounter);
 
                 if (location.encounter.arePlayersInEncounter() == false) {
 

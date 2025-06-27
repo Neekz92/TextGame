@@ -12,11 +12,11 @@ public class Warrior extends Player {
 
     public Warrior(GameEngine gameEngine, String name) {
         super(gameEngine, name);
-        setHp(2000);
+        setHp(20000);
         currentHp = getHp();
         attack = 15000;
         defense = 5;
-        luck = 5000;
+        luck = 500;
 
         weapon = new Sword();
 
@@ -92,6 +92,8 @@ public class Warrior extends Player {
                         break;
                     }
                 case 3:
+                    System.out.println("DEBUG: Warrior.combat(): this.location = " + getLocation());
+                    System.out.println("DEBUG: Warrior.combat(): this.location.encounter = " + getLocation().encounter.description);
                     run();
                     selectMove = false;
                     break;

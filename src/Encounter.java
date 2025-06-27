@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Encounter {
 
+    Location location;
     Scanner scanner = new Scanner(System.in);
     GameEngine gameEngine;
     Random random;
