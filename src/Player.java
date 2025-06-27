@@ -237,7 +237,6 @@ public class Player {
                     displayStats();
                 } else if (input == 7) {
                     if (youHaveXpToSpend()) {  //  Only allow player to enter the Upgrade Stat menu if they have XP
-                        //System.out.println("DEBUG: youHaveXpToSpend() is " + youHaveXpToSpend() + ", calling spendXp()");
                         spendXp();
                     }
                 } else if (input == 8) {
@@ -276,7 +275,7 @@ public class Player {
         System.out.println("");
         for (int i = 0; i < gameEngine.amountOfCharacters; i++) {
             if (!(gameEngine.playerArray[i] instanceof Enemy)) {
-                System.out.println("[ " + (i + 1) + " ] " + gameEngine.playerArray[i] + " | HP: " + gameEngine.playerArray[i].currentHp + " | Engaged In Battle: " + gameEngine.playerArray[i].hasEncounter);
+                System.out.println("[ " + (i + 1) + " ] " + gameEngine.playerArray[i] + " | HP: " + gameEngine.playerArray[i].currentHp + " | Engaged in Battle: " + gameEngine.playerArray[i].hasEncounter);
             }
         }
 
@@ -324,7 +323,6 @@ public class Player {
             System.out.println("[ 2 ] Defense");
             System.out.println("[ 3 ] Luck");
             System.out.println("[ 4 ] Max HP");
-            System.out.println("[ 5 ] Stamina");
 
             int input = scanner.nextInt();
             scanner.nextLine();
@@ -632,6 +630,7 @@ public class Player {
             if (targetedEnemy.parryStance == false) {
                 targetedEnemy.currentHp -= damage;
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
+                System.out.println("");
                 targetedEnemy.deathCheck();
                 return;
             } else {  //  This else block runs if the player warrior used Perfect-Parry
@@ -640,6 +639,7 @@ public class Player {
                 System.out.println("DEFLECT!!!");
                 System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
                 System.out.println(this + " takes " + damage + " + " + parryDamage +" damage!");
+                System.out.println("");
                 deathCheck();
                 targetedEnemy.parryStance = false;
                 return;
@@ -659,6 +659,7 @@ public class Player {
             if (targetedEnemy.parryStance == false) {
                 targetedEnemy.currentHp -= damage;
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
+                System.out.println("");
                 targetedEnemy.deathCheck();
             }
             else {
@@ -667,12 +668,14 @@ public class Player {
                 System.out.println("DEFLECT!!!");
                 System.out.println("In one motion, " + targetedEnemy + " blocks the strike and delivers a counter attack!");
                 System.out.println(this + " takes " + damage + " + " + parryDamage +" damage!");
+                System.out.println("");
                 deathCheck();
                 targetedEnemy.parryStance = false;
             }
         }
         else {
             System.out.println("FAILURE! Rolled a " + roll + " + " + (finalAttack / 5));
+            System.out.println("");
         }
 
     }
@@ -899,9 +902,7 @@ public class Player {
             }
             encounter.removePlayer(this);  //  this <- refers to the Player that is attempting to flee from battle.
 
-                System.out.println("DEBUG: Player.location: " + location);
                 location.encounter = encounter;
-                System.out.println("DEBUG: location.encounter: " + location.encounter);
 
                 if (location.encounter.arePlayersInEncounter() == false) {
 

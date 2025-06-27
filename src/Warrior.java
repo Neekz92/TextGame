@@ -192,15 +192,17 @@ public class Warrior extends Player {
             System.out.println(name + " tries to bash " + shieldBashTarget1.getName());
 
             int roll = rollAttack();
-            if (roll + (finalAttack / 5) > 10 + (shieldBashTarget1.finalDefense / 5)) {
+            if (roll + (finalAttack / 5) >= 10 + (shieldBashTarget1.finalDefense / 5)) {
                 System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
                 shieldBashTarget1.stunTimer = 2;
                 shieldBashTarget1.isStunned = true;
                 System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");
+                System.out.println("");
                 return;
             }
             else {
                 System.out.println(this + " failed to connect with the shield bash!");
+                System.out.println("");
             }
         }
 
@@ -219,14 +221,16 @@ public class Warrior extends Player {
                 else {
                     System.out.println(name + " tries to bash " + shieldBashTarget1.getName() + " and " + shieldBashTarget2.getName());
                     targetedEnemy = shieldBashTarget1;
-                    if (roll + (finalAttack / 5) >=+ 10 + (shieldBashTarget1.finalDefense / 5)) {
+                    if (roll + (finalAttack / 5) >= 10 + (shieldBashTarget1.finalDefense / 5)) {
                         shieldBashTarget1.stunTimer = 2;
                         shieldBashTarget1.isStunned = true;
                         System.out.println(shieldBashTarget1 + " is dazed from the shield bash!");
                         System.out.println("");
+                        System.out.println("");
                     }
                     else {
                         System.out.println(this + " failed to connect with the shield bash!");
+                        System.out.println("");
                     }
 
                     roll = rollAttack();
@@ -236,9 +240,11 @@ public class Warrior extends Player {
                         shieldBashTarget2.stunTimer = 2;
                         shieldBashTarget2.isStunned = true;
                         System.out.println(shieldBashTarget2 + " is dazed from the shield bash!");
+                        System.out.println("");
                     }
                     else {
                         System.out.println(this + " failed to connect with the shield bash!");
+                        System.out.println("");
                     }
                     mustChooseADifferentTarget = false;
                 }

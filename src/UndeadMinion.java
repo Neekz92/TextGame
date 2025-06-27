@@ -4,8 +4,8 @@ public class UndeadMinion extends Enemy {
 
         super(gameEngine);
         this.attack = 40;
-        this.defense = 0;
-        this.setHp(8);
+        this.defense = 25;
+        this.setHp(25);
         currentHp = getHp();
 
         setGold(5);

@@ -12,48 +12,59 @@ public class Orc extends Enemy {
     @Override
     public void combat() {
 
-        enemyAITargetArray = findEnemies();
+//        enemyAITargetArray = findEnemies();
+//
+//        if (enemyAITargetArray.length > 1) {
+//            int rng = random.nextInt(0, enemyAITargetArray.length);
+//            targetedEnemy = enemyAITargetArray[rng];
+//            Player firstTarget = targetedEnemy;
+//
+//            int orcChoice = random.nextInt(2,8);
+//            if (orcChoice == 1) {
+//                shieldBash();
+//                rng = random.nextInt(0, enemyAITargetArray.length);
+//
+//                for (int i = 0; i < encounter.amountOfPlayers; i++) {  //  This loop goes through all the encounter's players,
+//                    if (!(encounter.playerArray[i] instanceof Enemy)) {  //  Ignores all instances of Enemies
+//                        if (!firstTarget.equals(encounter.playerArray[i])) {  //  Ignores the previously selected target
+//                            targetedEnemy = encounter.playerArray[i];
+//                            break;
+//                        }
+//                    }
+//                }
+//                shieldBash();
+//            }
+//            else {
+//                basicAttack();
+//            }
+//        }
+//
+//
+//        else if (enemyAITargetArray.length == 1){
+//            targetedEnemy = enemyAITargetArray[0];
+//            int rng = random.nextInt(0, enemyAITargetArray.length);
+//            targetedEnemy = enemyAITargetArray[rng];
+//
+//            int orcChoice = random.nextInt(1,5);
+//            if (orcChoice == 1) {
+//                shieldBash();
+//                shieldBash();
+//            }
+//            else {
+//                basicAttack();
+//            }
+//
+//        }
 
+        enemyAITargetArray = findEnemies();
         if (enemyAITargetArray.length > 1) {
             int rng = random.nextInt(0, enemyAITargetArray.length);
             targetedEnemy = enemyAITargetArray[rng];
-            Player firstTarget = targetedEnemy;
-
-            int orcChoice = random.nextInt(2,8);
-            if (orcChoice == 1) {
-                shieldBash();
-                rng = random.nextInt(0, enemyAITargetArray.length);
-
-                for (int i = 0; i < encounter.amountOfPlayers; i++) {  //  This loop goes through all the encounter's players,
-                    if (!(encounter.playerArray[i] instanceof Enemy)) {  //  Ignores all instances of Enemies
-                        if (!firstTarget.equals(encounter.playerArray[i])) {  //  Ignores the previously selected target
-                            targetedEnemy = encounter.playerArray[i];
-                            break;
-                        }
-                    }
-                }
-                shieldBash();
-            }
-            else {
-                basicAttack();
-            }
+            basicAttack();
         }
-
-
         else if (enemyAITargetArray.length == 1){
             targetedEnemy = enemyAITargetArray[0];
-            int rng = random.nextInt(0, enemyAITargetArray.length);
-            targetedEnemy = enemyAITargetArray[rng];
-
-            int orcChoice = random.nextInt(1,5);
-            if (orcChoice == 1) {
-                shieldBash();
-                shieldBash();
-            }
-            else {
-                basicAttack();
-            }
-
+            basicAttack();
         }
     }
 

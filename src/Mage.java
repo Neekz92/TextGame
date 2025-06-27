@@ -75,6 +75,7 @@ public class Mage extends Player {
 
             targetedEnemy.currentHp -= damage;
             System.out.println(targetedEnemy + " is struck by Chain Lightning and took " + damage + " damage!");
+            System.out.println("");
             targetedEnemy.deathCheck();
             return;
         }
@@ -102,6 +103,7 @@ public class Mage extends Player {
         targetSelect();
         int restoreAmount = random.nextInt(1, 5 + (finalLuck));
         System.out.println(targetedEnemy + " restores " + restoreAmount + " HP!");
+        System.out.println("");
         targetedEnemy.updateStats();
         targetedEnemy.currentHp += restoreAmount;
         targetedEnemy.adjustHp();
@@ -114,6 +116,7 @@ public class Mage extends Player {
         targetSelect();
         targetedEnemy.hasteTimer = (finalLuck / 5);
         System.out.println(targetedEnemy + " begins moving with arcane speed!");
+        System.out.println("");
     }
 
     private void combatOptions() {

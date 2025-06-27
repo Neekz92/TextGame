@@ -81,6 +81,7 @@ public class Archer extends Player {
                     damage *= 2;
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
+                    System.out.println("");
                     targetedEnemy.deathCheck();
                     selectAim = false;
                     return;
@@ -93,6 +94,7 @@ public class Archer extends Player {
                 damage *= 2;
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
+                System.out.println("");
                 targetedEnemy.deathCheck();
                 selectAim = false;
                 return;
@@ -107,6 +109,7 @@ public class Archer extends Player {
                     }
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
+                    System.out.println("");
                     targetedEnemy.deathCheck();
                     selectAim = false;
                     return;
@@ -118,11 +121,13 @@ public class Archer extends Player {
                 }
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
+                System.out.println("");
                 targetedEnemy.deathCheck();
                 selectAim = false;
                 }
             else {
                 System.out.println("FAILURE! Rolled a " + roll + " + " + (finalAttack / 5));
+                System.out.println("");
             }
             return;
         }
