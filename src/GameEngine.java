@@ -227,6 +227,16 @@ public class GameEngine {
             System.out.println("Tiles scorched: " + Map.tilesRemaining);
             System.out.println("Cities remaining: " + citiesRemaining);
 
+
+            for (int j = 0; j < map.locationArray.length; j++) {
+                if (map.locationArray[j].isScorched) {
+                    map.locationArray[j].roundsSinceDragon ++;
+                }
+            }
+
+
+
+
             if (citiesRemaining == 1) {
                 System.out.println("Scorchwyrm was spotted at: " + dragonToken.location.name + " " + "(" + dragonToken.x + "," + dragonToken.y + ")");
             }
@@ -271,7 +281,7 @@ public class GameEngine {
                 dragonToken.movement();
                 dragonToken.location = map.findLocation(dragonToken.x, dragonToken.y);
                 dragonToken.location.gameEngine = this;
-                dragonToken.location.turnsSinceDragon = 0;
+                dragonToken.location.roundsSinceDragon = 0;
 
 
 
@@ -324,14 +334,6 @@ public class GameEngine {
             for (int i = 0; i < amountOfCharacters; i++) {
 
                 Player currentPlayer = playerArray[i];
-
-
-                for (int j = 0; j < map.locationArray.length; j++) {
-                    if (map.locationArray[j].isScorched) {
-                        map.locationArray[j].turnsSinceDragon ++;
-                    }
-                }
-
 
                     if (round % 1 == 0) {
 
@@ -466,7 +468,7 @@ public class GameEngine {
     }
 
     public boolean gameOver() {
-        if (gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
+        if (youWin() == false && gameOverMessage == false && citiesRemaining == 0 || !arePlayersAlive()) {
             gameOverMessage = true;
             return true;
         }

@@ -180,6 +180,7 @@ public class Player {
         System.out.println("[ 7 ] Spend XP");
         System.out.println("[ 8 ] Inventory");
         System.out.println("[ 9 ] Show Party Locations");
+        System.out.println("[ 10 ] Show \"Map\" lol");
     }
 
     public void movementPhase() {
@@ -245,6 +246,9 @@ public class Player {
                 else if (input == 9) {
                     showPartyLocations();
                 }
+                else if (input == 10) {
+                    map();
+                }
                 else {
                     System.out.println("Invalid option. DEBUG: player.movementPhase() input is an int, but not 1-8");
                 }
@@ -264,6 +268,34 @@ public class Player {
                 System.out.println(currentPlayer + " | Location: " + currentPlayer.getLocation() + " (" + currentPlayer.getX() + "," + currentPlayer.getY() + ")");
             }
         }
+    }
+
+    public void map() {
+
+        for (int i = 10; i >= 0; i--) {
+            System.out.println("");
+            for (int j = 0; j < 11; j++) {
+
+                boolean hasPlayer = false;
+                int poop = 0;
+                for (int n = 0; n < gameEngine.amountOfCharacters; n++) {
+                    poop = n;
+                    if (gameEngine.playerArray[n].getX() == j && gameEngine.playerArray[n].getY() == i) {
+                        hasPlayer = true;
+                        break;
+                    }
+                }
+
+                if (hasPlayer == false) {
+                    System.out.print("■  ");
+                }
+                else {
+                    System.out.print((poop + 1) + "  " );
+                }
+            }
+        }
+        System.out.println("");
+        System.out.println("");
     }
 
     public boolean youHaveXpToSpend() {

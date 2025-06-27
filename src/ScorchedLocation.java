@@ -12,7 +12,7 @@ public class ScorchedLocation extends SocialEncounter {
 
         System.out.println("");
         System.out.println("You aren't sure what happened here. The land is scorched. Completely desolate. This is a barren hellscape. You cannot even find rest in this place.");
-        System.out.println("Analyzing the devastation here, you can tell. This place was destroyed " + location.turnsSinceDragon + " turns ago.");
+        System.out.println("Analyzing the devastation here, you can tell. This place was destroyed " + location.roundsSinceDragon + " rounds ago.");
         System.out.println("");
     }
 

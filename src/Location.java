@@ -14,7 +14,7 @@ public class Location {
     int amountOfEncounters = 0;
     String name;
 
-    int turnsSinceDragon = 0;
+    int roundsSinceDragon = 0;
 
     boolean isScorched = false;
 

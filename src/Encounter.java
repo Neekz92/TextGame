@@ -88,7 +88,6 @@ public class Encounter {
             return;
         }
 
-
         amountOfPlayers++;
         Player[] playerArrayClone = new Player[amountOfPlayers];
         for (int i = 0; i < playerArray.length; i++) {
@@ -183,7 +182,7 @@ public class Encounter {
     public void distributeRewards() {
 
         for (int i = 0; i < amountOfPlayers; i++) {
-            int xp = (amountOfMobs / amountOfPlayers) + xpBonus;  //  I made this variable to slip into the actual xp formula so I don't have to rewrite the entire formula, I can just add this to the xp and give each mob a different xp bonus!
+            int xp = (amountOfMobs + xpBonus);  //  I made this variable to slip into the actual xp formula so I don't have to rewrite the entire formula, I can just add this to the xp and give each mob a different xp bonus!
 
             if (xp <= 0) {
                 xp = 1;

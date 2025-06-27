@@ -23,8 +23,7 @@ public class Scorchwyrm extends Enemy {
             int rng = random.nextInt(0, enemyAITargetArray.length);
             targetedEnemy = enemyAITargetArray[rng];
             basicAttack();  //  For future enemies with more complex move lists, I might add basicAttack() to an array, along with its other moves like breathWeapon() etc, and then use rng to determine which one gets used.
-        }
-        else if (enemyAITargetArray.length == 1) {
+        } else if (enemyAITargetArray.length == 1) {
             targetedEnemy = enemyAITargetArray[0];
             basicAttack();
         }
@@ -33,5 +32,25 @@ public class Scorchwyrm extends Enemy {
     @Override
     public void basicAttackDescription() {
         System.out.println("Scorchwyrm tries to slash " + targetedEnemy + " with its claws!");
+    }
+
+
+    @Override
+    public void deathCheck() {
+
+        Encounter cachedEncounter = encounter;
+
+        if (currentHp <= 0) {
+            isAlive = false;
+            System.out.println(this + " has been slain!");
+
+            for (int i = 0; i < gameEngine.playerArray.length; i++) {
+                gameEngine.removePlayer(gameEngine.playerArray[i]);
+            }
+            gameEngine.removePlayer(this);
+
+            getLocation().endEncounter();
+            gameEngine.youWin();
+        }
     }
 }
