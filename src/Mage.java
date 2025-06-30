@@ -50,14 +50,22 @@ public class Mage extends Player {
 
     public Spell spellSelect() {
 
-        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
-        scanner.nextLine();
+        boolean selectSpell = true;
+        while (selectSpell) {
+            try {
+                int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+                scanner.nextLine();
 
-        if (input == -1) {
-            return null;
+                if (input == -1) {
+                    return null;
+                }
+                selectSpell = false;
+                return spellBook[input];
+            } catch (Exception e) {
+                System.out.println("Try again.");
+            }
         }
-
-        return spellBook[input];
+        return null;
     }
 
     public void chainLightning() {
@@ -67,9 +75,16 @@ public class Mage extends Player {
 
         if (roll == 20) {
             System.out.println("NATURAL 20!");
-            int damage = random.nextInt(1, (finalAttack / 5) + 1);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
+            int damage = random.nextInt(1, (finalAttack / 10) + 1);  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
             if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
                 damage = 1;
+            }
+
+            damage += attackSkillBuff;
+            damage -= targetedEnemy.defenseSkillBuff;
+
+            if (damage <= 1) {
+                damage = 5;
             }
             damage *= 2;
 
@@ -82,9 +97,16 @@ public class Mage extends Player {
 
         if (roll + (finalAttack / 5) >= 10 + (targetedEnemy.finalDefense / 5)) {
             System.out.println("SUCCESS! Rolled a " + roll + " + " + (finalAttack / 5));
-            int damage = random.nextInt(1, (finalAttack / 5) + 1);
+            int damage = random.nextInt(1, (finalAttack / 10) + 1);
             if (damage <= 1) {
                 damage = 1;
+            }
+
+            damage += attackSkillBuff;
+            damage -= targetedEnemy.defenseSkillBuff;
+
+            if (damage <= 1) {
+                damage = 5;
             }
             //targetedEnemy.setHp(targetedEnemy.getHp() - damage);
             targetedEnemy.currentHp -= damage;

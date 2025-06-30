@@ -41,14 +41,23 @@ public class Archer extends Player {
 
     public Stunt stuntSelect() {
 
-        int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
-        scanner.nextLine();
+        boolean selection = true;
+        while (selection) {
+            try {
 
-        if (input == -1) {
-            return null;
+                int input = scanner.nextInt() - 1;  //  If the input is 1, that needs to correspond to the first position in the encounter.playerArray which is [0]. It's n - 1
+                scanner.nextLine();
+
+                if (input == -1) {
+                    return null;
+                }
+                selection = false;
+                return stuntList[input];
+            } catch (Exception e) {
+                System.out.println("DEBUG: Archer.stuntSelect ~ Invalid.");
+            }
         }
-
-        return stuntList[input];
+        return null;
     }
 
 
@@ -75,9 +84,17 @@ public class Archer extends Player {
                 if (input == rng) {
                     System.out.println("BULL'S EYE! " + this + " delivered a critical shot to " + targetedEnemy);
                     int damage = (random.nextInt(1, (finalAttack / 5) + 5)) * 5;  // Damage works by rolling a random number from 1 to Attack stat, and adding it to Attack stat / 4. Then subtract (enemy defense / 4)
-                    if (damage >= 1) {
+                    if (damage <= 1) {
                         damage = 5;
                     }
+                    damage += attackSkillBuff;
+                    damage -= targetedEnemy.defenseSkillBuff;
+
+                    if (damage <= 1) {
+                        damage = 5;
+                    }
+
+
                     damage *= 2;
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -91,6 +108,14 @@ public class Archer extends Player {
                 if (damage <= 1) {
                     damage = 2;
                 }
+
+                damage += attackSkillBuff;
+                damage -= targetedEnemy.defenseSkillBuff;
+
+                if (damage <= 1) {
+                    damage = 5;
+                }
+
                 damage *= 2;
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -107,6 +132,14 @@ public class Archer extends Player {
                     if (damage <= 1) {
                         damage = 5;
                     }
+
+                    damage += attackSkillBuff;
+                    damage -= targetedEnemy.defenseSkillBuff;
+
+                    if (damage <= 1) {
+                        damage = 5;
+                    }
+
                     targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                     System.out.println(targetedEnemy + " took " + damage + " damage!");
                     System.out.println("");
@@ -118,6 +151,13 @@ public class Archer extends Player {
                 int damage = random.nextInt(1, (finalAttack / 5) + 5);
                 if (damage <= 0) {
                     damage = 1;
+                }
+
+                damage += attackSkillBuff;
+                damage -= targetedEnemy.defenseSkillBuff;
+
+                if (damage <= 1) {
+                    damage = 5;
                 }
                 targetedEnemy.setHp(targetedEnemy.currentHp -= damage);
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
@@ -258,7 +298,7 @@ public class Archer extends Player {
     public void igniteArrows() {
 
         System.out.println(this + " ignites the tips of their arrows on fire!");
-        int rngAttackBuff = random.nextInt(1,(finalAttack / 5) + 1);
+        int rngAttackBuff = random.nextInt(5,(finalAttack / 5) + 5);
         attackSkillBuff += rngAttackBuff;
         igniteArrowsTurnsRemaining = 3;
         System.out.println("For 3 turns, " + this + " increased their damage by " + rngAttackBuff + " due to the flaming arrows.");

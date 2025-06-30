@@ -661,6 +661,10 @@ public class Player {
             damage += attackSkillBuff;
             damage -= targetedEnemy.defenseSkillBuff;
 
+            if (damage <= 0) {  //  Damage can't be below 0. Can't heal them with an attack lol
+                damage = 1;
+            }
+
             if (targetedEnemy.parryStance == false) {
                 targetedEnemy.currentHp -= damage;
                 System.out.println(targetedEnemy + " took " + damage + " damage!");
