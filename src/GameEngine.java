@@ -44,6 +44,7 @@ public class GameEngine {
 
         dragon = new Scorchwyrm(this);
         dragon.gameEngine = this;
+        dragon.isAlive = true;
         dragonAttack.description = "Dragon Attack";
     }
 

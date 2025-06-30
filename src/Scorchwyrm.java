@@ -3,9 +3,9 @@ public class Scorchwyrm extends Enemy {
     public Scorchwyrm(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.attack = 80;
-        this.defense = 80;
-        this.setHp(350);
+        this.attack = 125;
+        this.defense = 125;
+        this.setHp(500);
         currentHp = getHp();
 
         setGold(5);

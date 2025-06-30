@@ -3,9 +3,9 @@ public class BabyDragon extends Enemy {
     public BabyDragon(GameEngine gameEngine) {
 
         super(gameEngine);
-        this.attack = 80;
-        this.defense = 80;
-        this.setHp(250);
+        this.attack = 90;
+        this.defense = 90;
+        this.setHp(350);
         currentHp = getHp();
 
         setGold(5);

@@ -89,11 +89,10 @@ public class Warrior extends Player {
 
                         } else {
                             System.out.println("Not enough stamina.");
-                            break;
+                            continue;
                         }
+                        break;
                     case 3:
-                        System.out.println("DEBUG: Warrior.combat(): this.location = " + getLocation());
-                        System.out.println("DEBUG: Warrior.combat(): this.location.encounter = " + getLocation().encounter.description);
                         run();
                         selectMove = false;
                         break;

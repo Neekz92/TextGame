@@ -5,7 +5,7 @@ public class Sandworm extends Enemy {
         super(gameEngine);
         this.attack = 80;
         this.defense = 80;
-        this.setHp(175);
+        this.setHp(225);
         currentHp = getHp();
 
         setGold(5);
