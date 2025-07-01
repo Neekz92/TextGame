@@ -1278,6 +1278,13 @@ public class Map {
         locationArray[120] = scorchwyrmsLair;
     }
 
+    public void restoreMiniBoss() {
+
+        for (int i = 0; i < locationArray.length; i++) {
+
+        }
+    }
+
     public void scorchLocation() {
 
         for (int i = 0; i < locationArray.length; i++) {

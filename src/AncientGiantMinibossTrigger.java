@@ -20,7 +20,12 @@ public class AncientGiantMinibossTrigger extends SocialEncounter {
 
         } else {
             System.out.println("You cannot interact with this monolith.");
-            playerArray[0].getLocation().endSocialEncounter();
+            if (playerArray[0].getLocation().encounterArray.length > 0) {
+                playerArray[0].getLocation().endSocialEncounter();
+            }
+            else {
+                System.out.println("DEBUG from AncientGiantMiniBossTrigger.options(): some weird shit goin on here, encounter seems to be null.");
+            }
             return;
         }
 

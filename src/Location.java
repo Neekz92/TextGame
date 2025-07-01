@@ -165,10 +165,15 @@ public class Location {
     }
 
     public void endSocialEncounter() {
-        encounter.playerArray[0].setEncounter(null);
-        encounter.playerArray[0].hasEncounter = false;
-        encounter.amountOfPlayers = 0;
-        encounter.playerArray = new Player[encounter.amountOfPlayers];
-        encounter = null;
+        if (encounter != null) {
+            encounter.playerArray[0].setEncounter(null);
+            encounter.playerArray[0].hasEncounter = false;
+            encounter.amountOfPlayers = 0;
+            encounter.playerArray = new Player[encounter.amountOfPlayers];
+            encounter = null;
+        }
+        else {
+            System.out.println("DEBUG from Location.endSocialEncounbter(): some weird shit goin on here, encounter must be null.");
+        }
     }
 }
