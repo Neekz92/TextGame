@@ -16,7 +16,7 @@ public class AncientSandwormMinibossTrigger extends SocialEncounter {
     @Override
     public void options() {
 
-        if (playerArray[0].inventory.contains(giantsCrown)) {
+        if (playerArray[0].inventory.contains(ancientDrumstick)) {
 
         } else {
             System.out.println("You cannot interact with this monolith.");

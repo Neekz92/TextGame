@@ -323,11 +323,19 @@ public class Player {
 
         boolean chooseStat = true;
         while (chooseStat) {
+
+            if (!youHaveXpToSpend()) {
+                return;
+            }
+
+            displayStats();
+
             System.out.println("You have " + xp + " XP to spend. Choose a stat to upgrade.");
             System.out.println("[ 1 ] Attack");
             System.out.println("[ 2 ] Defense");
             System.out.println("[ 3 ] Luck");
             System.out.println("[ 4 ] Max HP");
+            System.out.println("[ 0 ] Exit");
 
             int input = scanner.nextInt();
             scanner.nextLine();
@@ -337,6 +345,7 @@ public class Player {
                 case 2: chosenStat = defense; chosenStatName = "Defense"; chooseStat = false; upgradeStat(); break;
                 case 3: chosenStat = luck; chosenStatName = "Luck"; chooseStat = false; upgradeStat(); break;
                 case 4: chosenStat = hp; chosenStatName = "Max HP"; chooseStat = false; upgradeStat(); break;
+                case 0: chooseStat = false; return;
                 default: System.out.println("Invalid option.");
             }
         }
@@ -346,13 +355,15 @@ public class Player {
 
         boolean inputAmountOfStatPoints = true;
         while (inputAmountOfStatPoints) {
-            System.out.println(xp + " XP available. How many points would you like to add to " + chosenStatName);
+            System.out.println(xp + " XP available.");
 
             int input = scanner.nextInt();
             scanner.nextLine();
 
             if (input > xp) {
                 System.out.println("You don't have that much XP.");
+                inputAmountOfStatPoints = false;
+                spendXp();
             }
             else {
                 chosenStat += input;
@@ -367,7 +378,8 @@ public class Player {
                 System.out.println("You upgraded your " + chosenStatName + " by " + input + " points! Your " + chosenStatName + " is now " + chosenStat);
                 xp -= input;
                 inputAmountOfStatPoints = false;
-                break;
+                spendXp();
+
             }
         }
     }
