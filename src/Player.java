@@ -357,7 +357,7 @@ public class Player {
 
         boolean inputAmountOfStatPoints = true;
         while (inputAmountOfStatPoints) {
-            System.out.println(xp + " XP available.");
+            System.out.println(xp + " XP available. How much XP are you putting into " + chosenStatName + "?");
 
             int input = scanner.nextInt();
             scanner.nextLine();
