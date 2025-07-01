@@ -347,6 +347,9 @@ public class GameEngine {
                     if (playerArray[i].allowedBossToSpawn <= 0) {
                         System.out.println("");
                         System.out.println(playerArray[i] + "'s turn");
+                        if (playerArray[i].stunTimer <= 0) {
+                            playerArray[i].isStunned = false;
+                        }
                     }
 
                     if (!(playerArray[i] instanceof Enemy)) {

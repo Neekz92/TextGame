@@ -21,6 +21,8 @@ public class Player {
     Item[] inventory2 = new Item[amountOfItems];
 
     protected String name;
+    String originalName;
+    String statusName;
     int currentHp;
     private int positionX;
     private int positionY;
@@ -598,7 +600,12 @@ public class Player {
         while (targetSelect) {
             for (int i = 0; i < encounter.playerArray.length; i++) {
                 if (encounter.playerArray[i].amountOfTimesDisplayed == 0) {
-                    System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP");
+                    if (encounter.playerArray[i].isStunned) {
+                        System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP | *** STUNNED ***");
+                    }
+                    else {
+                        System.out.println("[ " + (i + 1) + " ] " + encounter.playerArray[i].getName() + " === " + encounter.playerArray[i].currentHp + " HP");
+                    }
                     encounter.playerArray[i].amountOfTimesDisplayed ++;
                 }
             }
